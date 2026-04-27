@@ -263,7 +263,7 @@ h3 { font-size: 1.35rem; }
   overflow-wrap: anywhere;
 }
 
-.profile-layout {
+ .profile-layout {
   display: grid;
   grid-template-columns: minmax(0, 1.6fr) minmax(280px, 0.8fr);
   gap: 1rem;
@@ -438,6 +438,14 @@ h3 { font-size: 1.35rem; }
   border-radius: 18px;
   background: rgba(255,255,255,0.82);
   box-shadow: 0 12px 28px rgba(11, 31, 51, 0.12);
+}
+
+.organization-logo-wide {
+  width: 180px;
+  height: auto;
+  max-width: min(42vw, 180px);
+  border-radius: 14px;
+  padding: 0.25rem;
 }
 
 @media (max-width: 880px) {
