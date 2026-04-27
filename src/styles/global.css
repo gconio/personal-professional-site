@@ -202,6 +202,20 @@ h3 { font-size: 1.35rem; }
 .feature-band .card { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.14); box-shadow: none; }
 .feature-band .card h3, .feature-band .card a { color: #fff; }
 
+.teaching-emblem-frame {
+  margin: 0 0 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.teaching-emblem {
+  display: block;
+  width: min(100%, 220px);
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 18px 38px rgba(0, 0, 0, 0.28));
+}
+
 .article-page {
   max-width: 860px;
 }
