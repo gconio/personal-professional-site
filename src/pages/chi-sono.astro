@@ -3,42 +3,162 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 ---
-<BaseLayout title="Chi sono — Giovanni CONIO" description="Profilo professionale, aree di competenza e attività didattiche.">
+<BaseLayout
+  title="Chi sono — Giovanni CONIO"
+  description="Profilo professionale di Giovanni CONIO: intelligence analysis, OSINT, tecniche analitiche strutturate, formazione specialistica e cultura strategica."
+>
   <Hero
     eyebrow="Profilo"
     title="Esperienza professionale, metodo analitico e vocazione didattica"
-    description="Profilo pubblico di Giovanni CONIO e del laboratorio Lab4Int: attività didattiche, metodo analitico, pubblicazioni, progetti e iniziative dedicate alla cultura dell’intelligence analysis."
+    description="Giovanni CONIO è Colonnello dell’Esercito Italiano in ausiliaria, esperto di intelligence analysis, OSINT, tecniche analitiche strutturate e formazione specialistica. Attraverso Lab4Int sviluppa attività didattiche, progetti culturali e strumenti metodologici dedicati all’analisi intelligence e alla comprensione degli scenari complessi."
     primaryHref="/contatti/"
     primaryLabel="Contattami"
     secondaryHref="/pubblicazioni/"
     secondaryLabel="Pubblicazioni"
   />
 
-  <section class="page-section">
+  <section class="page-section compact-section">
     <SectionHeading eyebrow="Sintesi" title="Profilo professionale" />
-    <div class="grid-two">
-      <div class="panel">
-        <h3>Bio breve</h3>
-        <p>Mi occupo di analisi intelligence, formazione specialistica e sviluppo di percorsi didattici dedicati alla comprensione degli scenari complessi. La mia attività integra esperienza professionale, approccio metodologico e attenzione alla dimensione formativa dell’analisi.</p>
-      </div>
-      <div class="panel">
-        <h3>Aree di competenza</h3>
-        <p>Intelligence analysis, Structured Analytic Techniques, OSINT, HUMINT, conflict analysis, early warning, terrorismo e sicurezza internazionale, simulazioni didattiche e cultura strategica.</p>
+    <div class="profile-layout">
+      <article class="panel profile-main">
+        <p>
+          Giovanni CONIO è un ufficiale dell’Esercito Italiano, Colonnello in ausiliaria, con una lunga esperienza nei settori dell’intelligence, della formazione specialistica, dell’analisi delle informazioni e della dottrina militare.
+        </p>
+        <p>
+          Il suo percorso professionale integra incarichi di comando, staff, studio, pianificazione e formazione, con particolare attenzione all’intelligence analysis, alle fonti aperte, alle tecniche analitiche strutturate e alla produzione di conoscenza utile al supporto decisionale.
+        </p>
+        <p>
+          Lab4Int nasce come spazio professionale e culturale dedicato alla formazione, alla riflessione metodologica e allo sviluppo di progetti orientati alla comprensione degli scenari complessi, della sicurezza internazionale e dei processi decisionali in condizioni di incertezza.
+        </p>
+      </article>
+      <aside class="panel profile-sidebar" aria-label="Informazioni sintetiche">
+        <h3>In breve</h3>
+        <ul class="clean-list">
+          <li><strong>Profilo:</strong> Colonnello dell’Esercito Italiano in ausiliaria</li>
+          <li><strong>Ambito:</strong> intelligence analysis, formazione, studi e dottrina</li>
+          <li><strong>Focus:</strong> OSINT, SAT, ACH, ciclo intelligence, produzione intelligence</li>
+          <li><strong>Lingua:</strong> spagnolo, profilo SLP 4-3-4-3</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <SectionHeading eyebrow="Percorso" title="Esperienza professionale" />
+    <div class="timeline-list">
+      <article class="panel timeline-item">
+        <p class="card-meta">Formazione militare e incarichi di comando</p>
+        <h3>Dall’Accademia agli incarichi di reparto</h3>
+        <p>
+          Ha frequentato il 165° Corso “Fierezza” dell’Accademia Militare di Modena, la Scuola di Applicazione di Torino e il 122° Corso di Stato Maggiore presso la Scuola di Guerra di Civitavecchia. Ha prestato servizio presso il 130° Reggimento fanteria “Perugia” e ha comandato il 2° battaglione addestrativo “M.O. Fasil” presso la Scuola di Fanteria in Cesano.
+        </p>
+      </article>
+
+      <article class="panel timeline-item">
+        <p class="card-meta">Intelligence e analisi</p>
+        <h3>Centro Intelligence Interforze</h3>
+        <p>
+          In ambito intelligence ha operato presso il Centro Intelligence Interforze dello Stato Maggiore della Difesa/Reparto Informazioni e Sicurezza, prima nella Sezione OSINT e successivamente come Capo Sezione Valutazione e Analisi, con attività orientate alla raccolta, valorizzazione e analisi delle informazioni.
+        </p>
+      </article>
+
+      <article class="panel timeline-item">
+        <p class="card-meta">Formazione intelligence</p>
+        <h3>Centro Interforze di Formazione Intelligence/G.E.</h3>
+        <p>
+          Presso il Centro Interforze di Formazione Intelligence/G.E. ha ricoperto incarichi relativi a web e corsi a distanza, pianificazione e programmi, studi e sviluppo dell’offerta formativa. In questo ambito si è occupato della revisione dell’iter formativo per il personale impiegato o di previsto impiego nella branca intelligence della Difesa.
+        </p>
+      </article>
+
+      <article class="panel timeline-item">
+        <p class="card-meta">Studi, normativa e dottrina</p>
+        <h3>Formazione, specializzazione e dottrina dell’Esercito</h3>
+        <p>
+          Dal 2014 al 2025 ha servito presso il Comando per la Formazione, Specializzazione e Dottrina dell’Esercito nell’ambito degli studi e della normativa, consolidando un’esperienza specifica nel rapporto tra formazione, dottrina, metodo e sviluppo professionale.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="feature-band">
+    <div class="page-section">
+      <SectionHeading eyebrow="Didattica" title="Formazione intelligence e progettazione didattica" />
+      <div class="grid-two">
+        <article class="card">
+          <h3>Progettazione formativa</h3>
+          <p>
+            Presso il Centro Interforze di Formazione Intelligence/G.E. ha curato e contribuito allo sviluppo di corsi dedicati a OSINT, intelligence di base e avanzata, analisi delle informazioni e produzione intelligence.
+          </p>
+        </article>
+        <article class="card">
+          <h3>Docenza specialistica</h3>
+          <p>
+            Ha svolto attività didattica su ciclo intelligence, principi dell’intelligence, IRM &amp; CM, IPOE, fonti e discipline intelligence, bias cognitivi, critical thinking, creative thinking, critical reading, strumenti analitici, tecniche di analisi strutturata e intelligence production.
+          </p>
+        </article>
       </div>
     </div>
   </section>
 
   <section class="page-section">
-    <SectionHeading eyebrow="Metodo" title="Approccio didattico e analitico" />
+    <SectionHeading eyebrow="Competenze" title="Aree di specializzazione" />
+    <div class="pill-list" aria-label="Aree di competenza">
+      <span>Intelligence analysis</span>
+      <span>Ciclo intelligence</span>
+      <span>OSINT</span>
+      <span>Structured Analytic Techniques</span>
+      <span>Analysis of Competing Hypotheses</span>
+      <span>Bias cognitivi</span>
+      <span>Critical thinking</span>
+      <span>Creative thinking</span>
+      <span>Intelligence production</span>
+      <span>Conflict analysis</span>
+      <span>Early warning</span>
+      <span>IRM &amp; CM</span>
+      <span>IPOE</span>
+      <span>Progettazione didattica</span>
+      <span>Cultura strategica</span>
+    </div>
+  </section>
+
+  <section class="page-section compact-section">
+    <SectionHeading eyebrow="Collaborazioni" title="Attività accademica e culturale" />
     <div class="grid-two">
-      <div class="panel">
-        <h3>Metodo</h3>
-        <p>L’approccio proposto valorizza il rigore metodologico, la consapevolezza dei bias cognitivi, l’impiego delle tecniche analitiche strutturate e la capacità di trasformare informazioni incomplete in valutazioni motivate.</p>
+      <article class="panel">
+        <h3>Docenze e corsi</h3>
+        <p>
+          Collabora come docente con Domìni – Scuola di analisi geopolitica del Centro Studi AMIStaDeS APS e con diversi Atenei, Istituti e Scuole di specializzazione, tra cui Università degli Studi Link di Roma, Università Cattolica del Sacro Cuore di Milano – ASERI, Università degli Studi Mediterranea di Reggio Calabria e LUM School of Management di Bari.
+        </p>
+      </article>
+      <article class="panel">
+        <h3>Associazionismo e cultura intelligence</h3>
+        <p>
+          Già Coordinatore del Consiglio Scientifico e di Indirizzo dell’Associazione Italiana Analisti di Intelligence e Geopolitica, collabora attualmente con l’associazione in qualità di membro. È autore di articoli e paper di carattere dottrinale, anche nell’ambito della cultura dell’intelligence e della sicurezza nazionale.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="page-section compact-section">
+    <SectionHeading eyebrow="Pubblicazioni" title="Manuale per l’analisi intelligence" />
+    <article class="panel bio-highlight">
+      <div>
+        <p class="card-meta">Libro</p>
+        <h3>Manuale per l’analisi intelligence. Teorie, metodi e sfide del XXI secolo</h3>
+        <p>
+          Ha pubblicato con Youcanprint il volume dedicato ai fondamenti teorici, metodologici e operativi dell’analisi intelligence contemporanea, con attenzione alle sfide cognitive, tecnologiche, organizzative e geopolitiche che caratterizzano il lavoro analitico nel XXI secolo.
+        </p>
       </div>
-      <div class="panel">
-        <h3>Formazione</h3>
-        <p>Le attività didattiche sono progettate per combinare lezione frontale, esercitazione guidata, simulazione, discussione critica e produzione di output analitici.</p>
-      </div>
+      <a class="button secondary" href="/pubblicazioni/">Vai alle pubblicazioni</a>
+    </article>
+  </section>
+
+  <section class="page-section compact-section">
+    <SectionHeading eyebrow="Bio breve" title="Per eventi, locandine e presentazioni" />
+    <div class="panel">
+      <p>
+        Giovanni CONIO è Colonnello dell’Esercito Italiano in ausiliaria, esperto di intelligence analysis, OSINT, tecniche analitiche strutturate e formazione specialistica. Ha ricoperto incarichi in ambito intelligence, formazione, studi e dottrina, contribuendo alla progettazione di percorsi formativi per il personale della Difesa. È docente in corsi universitari e specialistici su intelligence, analisi delle informazioni, conflict analysis e intelligence production. È autore del volume <em>Manuale per l’analisi intelligence. Teorie, metodi e sfide del XXI secolo</em>.
+      </p>
     </div>
   </section>
 </BaseLayout>

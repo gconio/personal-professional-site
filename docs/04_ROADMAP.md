@@ -3,7 +3,7 @@
 ## Fase 1 — MVP pubblicabile
 
 - Confermare nome e sottotitolo del sito.
-- Sostituire `Nome Cognome` nei file.
+- Sostituire `Giovanni CONIO` nei file.
 - Aggiornare email nella pagina Contatti.
 - Inserire bio definitiva.
 - Inserire copertina pubblicazione principale.
