@@ -518,6 +518,39 @@ h3 { font-size: 1.35rem; }
   margin-bottom: 0.55rem;
 }
 
+
+.contact-method {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.contact-method p {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.contact-method a {
+  color: var(--secondary);
+  font-weight: 700;
+}
+
+.social-link-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  border-radius: 22px;
+}
+
+.social-linkedin-image {
+  display: block;
+  width: 120px;
+  height: auto;
+  border-radius: 22px;
+  box-shadow: 0 16px 34px rgba(11, 31, 51, 0.16);
+}
+
 @media (max-width: 880px) {
   .visual-identity-layout { grid-template-columns: 1fr; }
 }
