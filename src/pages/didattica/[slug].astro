@@ -1,0 +1,24 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const corsi = await getCollection('corso');
+  return corsi.map((corso) => ({ params: { slug: corso.id }, props: { corso } }));
+}
+
+const { corso } = Astro.props;
+const { Content } = await render(corso);
+---
+<BaseLayout title={`${corso.data.title} — Didattica`} description={corso.data.description}>
+  <article class="article-page">
+    <header class="article-header">
+      <p class="eyebrow">Didattica</p>
+      <h1>{corso.data.title}</h1>
+      <p class="article-meta">{corso.data.level} · {corso.data.duration} · {corso.data.format}</p>
+    </header>
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

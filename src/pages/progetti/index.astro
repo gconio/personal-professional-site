@@ -1,0 +1,31 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import Card from '../../components/Card.astro';
+
+const progetti = (await getCollection('progetto')).sort((a, b) => a.data.order - b.data.order);
+---
+<BaseLayout title="Progetti — Intelligence Analysis Lab" description="Progetti didattici, culturali e digitali.">
+  <Hero
+    eyebrow="Progetti"
+    title="Piattaforme, simulazioni e iniziative metodologiche"
+    description="Una sezione dedicata ai progetti in sviluppo, attivi o proposti: strumenti didattici, suite analitiche, simulazioni e percorsi culturali."
+    primaryHref="/contatti/"
+    primaryLabel="Proponi una collaborazione"
+    secondaryHref="/analisi/"
+    secondaryLabel="Leggi le analisi"
+  />
+  <section class="page-section">
+    <div class="grid-three">
+      {progetti.map((progetto) => (
+        <Card
+          href={`/progetti/${progetto.id}/`}
+          title={progetto.data.title}
+          meta={`${progetto.data.status} · ${progetto.data.category}`}
+          description={progetto.data.description}
+        />
+      ))}
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,12 @@
+---
+const { eyebrow, title, description, primaryHref = '/didattica/', primaryLabel = 'Scopri la didattica', secondaryHref = '/progetti/', secondaryLabel = 'Consulta i progetti' } = Astro.props;
+---
+<section class="hero">
+  {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+  <h1>{title}</h1>
+  <p class="hero-text">{description}</p>
+  <div class="hero-actions">
+    <a class="button primary" href={primaryHref}>{primaryLabel}</a>
+    <a class="button secondary" href={secondaryHref}>{secondaryLabel}</a>
+  </div>
+</section>

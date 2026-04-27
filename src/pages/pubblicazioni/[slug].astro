@@ -1,0 +1,29 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const pubblicazioni = await getCollection('pubblicazione');
+  return pubblicazioni.map((pubblicazione) => ({ params: { slug: pubblicazione.id }, props: { pubblicazione } }));
+}
+
+const { pubblicazione } = Astro.props;
+const { Content } = await render(pubblicazione);
+---
+<BaseLayout title={`${pubblicazione.data.title} — Pubblicazioni`} description={pubblicazione.data.description}>
+  <article class="article-page">
+    <header class="article-header">
+      <p class="eyebrow">Pubblicazione</p>
+      <h1>{pubblicazione.data.title}</h1>
+      <p class="article-meta">{pubblicazione.data.type} · {pubblicazione.data.year}</p>
+    </header>
+    <div class="prose">
+      <Content />
+    </div>
+    {pubblicazione.data.link && (
+      <div class="inline-actions">
+        <a class="button primary" href={pubblicazione.data.link}>Vai alla scheda esterna</a>
+      </div>
+    )}
+  </article>
+</BaseLayout>

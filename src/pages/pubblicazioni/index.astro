@@ -1,0 +1,31 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import Card from '../../components/Card.astro';
+
+const pubblicazioni = (await getCollection('pubblicazione')).sort((a, b) => b.data.year - a.data.year || a.data.order - b.data.order);
+---
+<BaseLayout title="Pubblicazioni — Intelligence Analysis Lab" description="Libri, articoli, paper e materiali didattici.">
+  <Hero
+    eyebrow="Pubblicazioni"
+    title="Libri, articoli e materiali per la cultura dell’analisi"
+    description="Una raccolta ordinata di pubblicazioni, materiali didattici, contributi culturali e risorse metodologiche."
+    primaryHref="/contatti/"
+    primaryLabel="Richiedi informazioni"
+    secondaryHref="/analisi/"
+    secondaryLabel="Leggi le analisi"
+  />
+  <section class="page-section">
+    <div class="grid-three">
+      {pubblicazioni.map((pubblicazione) => (
+        <Card
+          href={`/pubblicazioni/${pubblicazione.id}/`}
+          title={pubblicazione.data.title}
+          meta={`${pubblicazione.data.type} · ${pubblicazione.data.year}`}
+          description={pubblicazione.data.description}
+        />
+      ))}
+    </div>
+  </section>
+</BaseLayout>

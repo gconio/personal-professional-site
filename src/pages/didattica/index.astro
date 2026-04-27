@@ -1,0 +1,31 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import Card from '../../components/Card.astro';
+
+const corsi = (await getCollection('corso')).sort((a, b) => a.data.order - b.data.order);
+---
+<BaseLayout title="Didattica — Intelligence Analysis Lab" description="Corsi, seminari, workshop e simulazioni didattiche.">
+  <Hero
+    eyebrow="Didattica"
+    title="Corsi, seminari e workshop per l’analisi intelligence"
+    description="Un catalogo modulare di attività formative adattabili a università, centri studi, enti pubblici, organizzazioni e comunità professionali."
+    primaryHref="/contatti/"
+    primaryLabel="Richiedi informazioni"
+    secondaryHref="/progetti/"
+    secondaryLabel="Vedi i progetti"
+  />
+  <section class="page-section">
+    <div class="grid-three">
+      {corsi.map((corso) => (
+        <Card
+          href={`/didattica/${corso.id}/`}
+          title={corso.data.title}
+          meta={`${corso.data.level} · ${corso.data.duration} · ${corso.data.format}`}
+          description={corso.data.description}
+        />
+      ))}
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,25 @@
+---
+const navItems = [
+  { href: '/', label: 'Home' },
+  { href: '/chi-sono/', label: 'Chi sono' },
+  { href: '/didattica/', label: 'Didattica' },
+  { href: '/progetti/', label: 'Progetti' },
+  { href: '/pubblicazioni/', label: 'Pubblicazioni' },
+  { href: '/analisi/', label: 'Analisi' },
+  { href: '/contatti/', label: 'Contatti' },
+];
+---
+<header class="site-header">
+  <a class="brand" href="/" aria-label="Vai alla home">
+    <span class="brand-mark">IA</span>
+    <span>
+      <strong>Nome Cognome</strong>
+      <small>Intelligence Analysis Lab</small>
+    </span>
+  </a>
+  <nav class="main-nav" aria-label="Navigazione principale">
+    {navItems.map((item) => (
+      <a href={item.href}>{item.label}</a>
+    ))}
+  </nav>
+</header>

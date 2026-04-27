@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+---
+<BaseLayout title="Chi sono — Nome Cognome" description="Profilo professionale, aree di competenza e attività didattiche.">
+  <Hero
+    eyebrow="Profilo"
+    title="Esperienza professionale, metodo analitico e vocazione didattica"
+    description="Questa pagina è impostata come profilo pubblico: sintetica nella prima parte, più articolata nelle sezioni successive. Sostituisci i testi provvisori con la bio definitiva."
+    primaryHref="/contatti/"
+    primaryLabel="Contattami"
+    secondaryHref="/pubblicazioni/"
+    secondaryLabel="Pubblicazioni"
+  />
+
+  <section class="page-section">
+    <SectionHeading eyebrow="Sintesi" title="Profilo professionale" />
+    <div class="grid-two">
+      <div class="panel">
+        <h3>Bio breve</h3>
+        <p>Mi occupo di analisi intelligence, formazione specialistica e sviluppo di percorsi didattici dedicati alla comprensione degli scenari complessi. La mia attività integra esperienza professionale, approccio metodologico e attenzione alla dimensione formativa dell’analisi.</p>
+      </div>
+      <div class="panel">
+        <h3>Aree di competenza</h3>
+        <p>Intelligence analysis, Structured Analytic Techniques, OSINT, HUMINT, conflict analysis, early warning, terrorismo e sicurezza internazionale, simulazioni didattiche e cultura strategica.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <SectionHeading eyebrow="Metodo" title="Approccio didattico e analitico" />
+    <div class="grid-two">
+      <div class="panel">
+        <h3>Metodo</h3>
+        <p>L’approccio proposto valorizza il rigore metodologico, la consapevolezza dei bias cognitivi, l’impiego delle tecniche analitiche strutturate e la capacità di trasformare informazioni incomplete in valutazioni motivate.</p>
+      </div>
+      <div class="panel">
+        <h3>Formazione</h3>
+        <p>Le attività didattiche sono progettate per combinare lezione frontale, esercitazione guidata, simulazione, discussione critica e produzione di output analitici.</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

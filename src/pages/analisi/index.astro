@@ -1,0 +1,34 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import Card from '../../components/Card.astro';
+
+const posts = (await getCollection('analisi'))
+  .filter((entry) => !entry.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+<BaseLayout title="Analisi — Intelligence Analysis Lab" description="Note analitiche, riflessioni metodologiche e approfondimenti.">
+  <Hero
+    eyebrow="Analisi"
+    title="Note analitiche e riflessioni metodologiche"
+    description="Una sezione editoriale pensata per pubblicare contributi su intelligence analysis, SAT, OSINT, conflitti, sicurezza e formazione analitica."
+    primaryHref="/didattica/"
+    primaryLabel="Vedi la didattica"
+    secondaryHref="/contatti/"
+    secondaryLabel="Contattami"
+  />
+  <section class="page-section">
+    <div class="grid-three">
+      {posts.map((post) => (
+        <Card
+          href={`/analisi/${post.id}/`}
+          title={post.data.title}
+          meta={`${post.data.category} · ${post.data.date.toLocaleDateString('it-IT')}`}
+          description={post.data.description}
+          cta="Leggi"
+        />
+      ))}
+    </div>
+  </section>
+</BaseLayout>
