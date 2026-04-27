@@ -17,8 +17,8 @@ docs/backups/index-home-originale.astro
 Nel file `src/pages/index.astro` sostituire:
 
 ```text
-Nome Cognome
-email@example.com
+Giovanni CONIO
+giovanni.conio@proton.me
 ```
 
 con i dati reali.

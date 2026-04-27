@@ -4,7 +4,7 @@ import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 
 const {
-  title = 'Giovanni CONIO — Intelligence Analysis Lab',
+  title = 'Giovanni CONIO — Lab4Int - Intelligence Analysis Laboratory',
   description = 'Analisi intelligence, formazione avanzata e cultura strategica.',
 } = Astro.props;
 ---
@@ -14,6 +14,12 @@ const {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <meta name="author" content="Giovanni CONIO" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
     <title>{title}</title>
   </head>
   <body>

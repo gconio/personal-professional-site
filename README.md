@@ -1,6 +1,6 @@
-# Personal Professional Site — Astro + Cloudflare Pages
+# Lab4Int - Intelligence Analysis Laboratory
 
-Starter kit per un sito personale professionale dedicato a didattica, pubblicazioni, progetti e analisi.
+Sito personale professionale di Giovanni CONIO dedicato ad analisi intelligence, formazione avanzata, cultura strategica, pubblicazioni e progetti.
 
 ## Stack
 

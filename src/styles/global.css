@@ -50,7 +50,7 @@ main { min-height: 70vh; }
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  min-width: max-content;
+  min-width: 0;
 }
 
 .brand-logo {
@@ -62,9 +62,9 @@ main { min-height: 70vh; }
   filter: drop-shadow(0 8px 16px rgba(11, 31, 51, 0.14));
 }
 
-.brand-text { display: block; }
+.brand-text { display: block; min-width: 0; }
 .brand strong { display: block; line-height: 1.2; }
-.brand small { display: block; color: var(--text-muted); line-height: 1.2; }
+.brand small { display: block; max-width: 360px; color: var(--text-muted); line-height: 1.2; }
 
 .main-nav {
   display: flex;
@@ -243,4 +243,22 @@ h3 { font-size: 1.35rem; }
   .main-nav { justify-content: flex-start; }
   .grid, .grid-three, .grid-two { grid-template-columns: 1fr; }
   .site-footer { flex-direction: column; }
+}
+
+.compact-section {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.contact-method p {
+  margin-bottom: 0.75rem;
+  color: var(--text-muted);
+}
+
+.contact-method a {
+  color: var(--primary);
+  font-weight: 900;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  overflow-wrap: anywhere;
 }

@@ -3,16 +3,32 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 ---
-<BaseLayout title="Contatti — Intelligence Analysis Lab" description="Contatti per docenze, seminari, collaborazioni e progetti formativi.">
+<BaseLayout title="Contatti — Lab4Int - Intelligence Analysis Laboratory" description="Contatti per docenze, seminari, collaborazioni e progetti formativi.">
   <Hero
     eyebrow="Contatti"
-    title="Docenze, seminari, collaborazioni e progetti culturali"
-    description="Pagina pensata per offrire un canale diretto e sobrio a università, centri studi, organizzazioni, enti e realtà culturali interessate ad attività formative o progettuali."
+    title="Contatti per docenze, seminari e collaborazioni"
+    description="Canali diretti per università, centri studi, organizzazioni, enti e realtà culturali interessate ad attività formative, progettuali, editoriali o culturali."
     primaryHref="mailto:giovanni.conio@proton.me"
     primaryLabel="Scrivi una email"
     secondaryHref="/didattica/"
     secondaryLabel="Vedi le attività"
   />
+
+  <section class="page-section compact-section">
+    <SectionHeading eyebrow="Canali diretti" title="Scrivi a Giovanni CONIO" />
+    <div class="grid-two">
+      <div class="panel contact-method">
+        <h3>Email</h3>
+        <p>Per richieste su docenze, seminari, collaborazioni culturali e progetti formativi.</p>
+        <a href="mailto:giovanni.conio@proton.me">giovanni.conio@proton.me</a>
+      </div>
+      <div class="panel contact-method">
+        <h3>LinkedIn</h3>
+        <p>Profilo professionale e aggiornamenti sulle attività pubbliche.</p>
+        <a href="https://www.linkedin.com/in/giovanni-conio-624b82b0" rel="me noopener noreferrer" target="_blank">linkedin.com/in/giovanni-conio-624b82b0</a>
+      </div>
+    </div>
+  </section>
 
   <section class="page-section">
     <SectionHeading eyebrow="Disponibilità" title="Aree di collaborazione" />

@@ -8,7 +8,7 @@ const posts = (await getCollection('analisi'))
   .filter((entry) => !entry.data.draft)
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
-<BaseLayout title="Analisi — Intelligence Analysis Lab" description="Note analitiche, riflessioni metodologiche e approfondimenti.">
+<BaseLayout title="Analisi — Lab4Int - Intelligence Analysis Laboratory" description="Note analitiche, riflessioni metodologiche e approfondimenti.">
   <Hero
     eyebrow="Analisi"
     title="Note analitiche e riflessioni metodologiche"

@@ -6,7 +6,7 @@ import Card from '../../components/Card.astro';
 
 const pubblicazioni = (await getCollection('pubblicazione')).sort((a, b) => b.data.year - a.data.year || a.data.order - b.data.order);
 ---
-<BaseLayout title="Pubblicazioni — Intelligence Analysis Lab" description="Libri, articoli, paper e materiali didattici.">
+<BaseLayout title="Pubblicazioni — Lab4Int - Intelligence Analysis Laboratory" description="Libri, articoli, paper e materiali didattici.">
   <Hero
     eyebrow="Pubblicazioni"
     title="Libri, articoli e materiali per la cultura dell’analisi"

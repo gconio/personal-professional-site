@@ -1,16 +1,18 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const siteTitle = 'Sito in costruzione — Giovanni CONIO';
+const siteTitle = 'Sito in costruzione — Giovanni CONIO | Lab4Int';
 const siteDescription = 'Sito in costruzione. A breve saranno disponibili informazioni su attività didattiche, pubblicazioni, progetti e iniziative culturali.';
 ---
 
 <BaseLayout title={siteTitle} description={siteDescription}>
   <section class="construction-page" aria-labelledby="construction-title">
     <div class="construction-card">
-      <p class="eyebrow">Sito personale</p>
+      <p class="eyebrow">Lab4Int - Intelligence Analysis Laboratory</p>
 
       <h1 id="construction-title">Sito in costruzione</h1>
+
+      <p class="construction-brand">Giovanni CONIO</p>
 
       <p class="lead">
         Sto preparando questo spazio per presentare attività didattiche, pubblicazioni,
@@ -71,6 +73,15 @@ const siteDescription = 'Sito in costruzione. A breve saranno disponibili inform
     margin-top: 0.4rem;
     font-size: clamp(3rem, 8vw, 6rem);
     letter-spacing: -0.04em;
+  }
+
+  .construction-brand {
+    margin: 0.5rem 0 0;
+    color: var(--primary);
+    font-size: clamp(1.15rem, 2vw, 1.45rem);
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
   }
 
   .lead {
