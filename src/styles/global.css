@@ -283,13 +283,13 @@ h3 { font-size: 1.35rem; }
 
 .profile-photo {
   width: min(100%, 260px);
-  aspect-ratio: 1 / 1;
+  height: auto;
   display: block;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 6px solid rgba(47, 72, 88, 0.18);
-  box-shadow: 0 18px 48px rgba(11, 31, 51, 0.16);
-  background: var(--surface-muted);
+  border-radius: 0;
+  object-fit: contain;
+  border: 0;
+  box-shadow: none;
+  background: transparent;
 }
 
 .profile-sidebar {
