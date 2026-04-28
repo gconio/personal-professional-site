@@ -9,21 +9,61 @@ export async function getStaticPaths() {
 
 const { pubblicazione } = Astro.props;
 const { Content } = await render(pubblicazione);
+const hasFacts = pubblicazione.data.publisher || pubblicazione.data.isbnPrint || pubblicazione.data.isbnEbook || pubblicazione.data.link;
 ---
 <BaseLayout title={`${pubblicazione.data.title} — Pubblicazioni`} description={pubblicazione.data.description}>
-  <article class="article-page">
+  <article class="article-page publication-page">
     <header class="article-header">
       <p class="eyebrow">Pubblicazione</p>
       <h1>{pubblicazione.data.title}</h1>
       <p class="article-meta">{pubblicazione.data.type} · {pubblicazione.data.year}</p>
     </header>
+
+    {(pubblicazione.data.cover || hasFacts) && (
+      <section class="publication-detail-grid" aria-label="Dati principali della pubblicazione">
+        {pubblicazione.data.cover && (
+          <aside class="panel publication-media-panel">
+            <img
+              src={pubblicazione.data.cover}
+              alt={`Copertina di ${pubblicazione.data.title}`}
+              class="publication-detail-cover"
+              loading="eager"
+              decoding="async"
+            />
+            {pubblicazione.data.formatsImage && (
+              <img
+                src={pubblicazione.data.formatsImage}
+                alt="Formati disponibili del Manuale per l’analisi intelligence"
+                class="publication-formats-image"
+                loading="lazy"
+                decoding="async"
+              />
+            )}
+          </aside>
+        )}
+
+        {hasFacts && (
+          <aside class="panel publication-facts">
+            <h2>Dati editoriali</h2>
+            <dl>
+              {pubblicazione.data.publisher && <dt>Editore</dt>}
+              {pubblicazione.data.publisher && <dd>{pubblicazione.data.publisher}</dd>}
+              <dt>Anno</dt><dd>{pubblicazione.data.year}</dd>
+              {pubblicazione.data.isbnPrint && <dt>ISBN cartaceo</dt>}
+                {pubblicazione.data.isbnPrint && <dd>{pubblicazione.data.isbnPrint}</dd>}
+              {pubblicazione.data.isbnEbook && <dt>ISBN ebook</dt>}
+                {pubblicazione.data.isbnEbook && <dd>{pubblicazione.data.isbnEbook}</dd>}
+            </dl>
+            {pubblicazione.data.link && (
+              <a class="button primary" href={pubblicazione.data.link} target="_blank" rel="noopener noreferrer">Acquista su Youcanprint</a>
+            )}
+          </aside>
+        )}
+      </section>
+    )}
+
     <div class="prose">
       <Content />
     </div>
-    {pubblicazione.data.link && (
-      <div class="inline-actions">
-        <a class="button primary" href={pubblicazione.data.link}>Vai alla scheda esterna</a>
-      </div>
-    )}
   </article>
 </BaseLayout>

@@ -35,6 +35,11 @@ const pubblicazione = defineCollection({
     description: z.string(),
     year: z.number(),
     type: z.string(),
+    publisher: z.string().optional(),
+    isbnPrint: z.string().optional(),
+    isbnEbook: z.string().optional(),
+    cover: z.string().optional(),
+    formatsImage: z.string().optional(),
     link: z.string().optional(),
     featured: z.boolean().default(false),
     order: z.number().default(99)

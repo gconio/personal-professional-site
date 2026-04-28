@@ -2,7 +2,6 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Hero from '../../components/Hero.astro';
-import Card from '../../components/Card.astro';
 
 const pubblicazioni = (await getCollection('pubblicazione')).sort((a, b) => b.data.year - a.data.year || a.data.order - b.data.order);
 ---
@@ -17,14 +16,29 @@ const pubblicazioni = (await getCollection('pubblicazione')).sort((a, b) => b.da
     secondaryLabel="Leggi le analisi"
   />
   <section class="page-section">
-    <div class="grid-three">
+    <div class="publication-grid">
       {pubblicazioni.map((pubblicazione) => (
-        <Card
-          href={`/pubblicazioni/${pubblicazione.id}/`}
-          title={pubblicazione.data.title}
-          meta={`${pubblicazione.data.type} · ${pubblicazione.data.year}`}
-          description={pubblicazione.data.description}
-        />
+        <article class="panel publication-card">
+          {pubblicazione.data.cover && (
+            <a class="publication-card-cover" href={`/pubblicazioni/${pubblicazione.id}/`} aria-label={`Apri la scheda ${pubblicazione.data.title}`}>
+              <img src={pubblicazione.data.cover} alt={`Copertina di ${pubblicazione.data.title}`} loading="lazy" decoding="async" />
+            </a>
+          )}
+          <div class="publication-card-content">
+            <p class="card-meta">{pubblicazione.data.type} · {pubblicazione.data.year}</p>
+            <h3><a href={`/pubblicazioni/${pubblicazione.id}/`}>{pubblicazione.data.title}</a></h3>
+            <p>{pubblicazione.data.description}</p>
+            {(pubblicazione.data.isbnPrint || pubblicazione.data.isbnEbook) && (
+              <dl class="publication-card-data">
+                {pubblicazione.data.isbnPrint && <dt>ISBN cartaceo</dt>}
+                {pubblicazione.data.isbnPrint && <dd>{pubblicazione.data.isbnPrint}</dd>}
+                {pubblicazione.data.isbnEbook && <dt>ISBN ebook</dt>}
+                {pubblicazione.data.isbnEbook && <dd>{pubblicazione.data.isbnEbook}</dd>}
+              </dl>
+            )}
+            <a class="card-link" href={`/pubblicazioni/${pubblicazione.id}/`}>Approfondisci</a>
+          </div>
+        </article>
       ))}
     </div>
   </section>
