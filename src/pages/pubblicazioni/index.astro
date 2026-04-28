@@ -3,47 +3,337 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Hero from '../../components/Hero.astro';
 
-const pubblicazioni = (await getCollection('pubblicazione')).sort((a, b) => b.data.year - a.data.year || a.data.order - b.data.order);
+const pubblicazioni = await getCollection('pubblicazione');
+
+const normalize = (value = '') => value.toLowerCase();
+
+const categoryDefinitions = [
+  {
+    id: 'libri',
+    title: 'Libri',
+    description: 'Volumi e pubblicazioni monografiche dedicate all’analisi intelligence, ai metodi e alla cultura strategica.',
+    match: (type) => normalize(type).includes('libro')
+  },
+  {
+    id: 'paper',
+    title: 'Paper e contributi dottrinali',
+    description: 'Contributi pubblicati su siti istituzionali, riviste specialistiche e piattaforme di approfondimento.',
+    match: (type) => normalize(type).includes('paper') || normalize(type).includes('articolo') || normalize(type).includes('contributo')
+  },
+  {
+    id: 'progetti',
+    title: 'Progetti editoriali',
+    description: 'Materiali in preparazione, progetti editoriali e linee di sviluppo future.',
+    match: (type) => normalize(type).includes('progetto')
+  },
+  {
+    id: 'altri',
+    title: 'Altre pubblicazioni',
+    description: 'Ulteriori materiali, risorse e contenuti collegati alle attività di Lab4Int.',
+    match: () => true
+  }
+];
+
+const usedIds = new Set();
+const groups = categoryDefinitions
+  .map((category) => {
+    const items = pubblicazioni
+      .filter((pubblicazione) => {
+        if (usedIds.has(pubblicazione.id)) return false;
+        return category.match(pubblicazione.data.type);
+      })
+      .sort((a, b) => a.data.order - b.data.order || b.data.year - a.data.year || a.data.title.localeCompare(b.data.title, 'it'));
+
+    items.forEach((item) => usedIds.add(item.id));
+    return { ...category, items };
+  })
+  .filter((category) => category.items.length > 0);
+
+const getActionLabel = (pubblicazione) => {
+  const type = normalize(pubblicazione.data.type);
+  if (type.includes('libro')) return 'Apri scheda libro';
+  if (pubblicazione.data.link) return 'Vai alla scheda';
+  return 'Approfondisci';
+};
 ---
 <BaseLayout title="Pubblicazioni — Lab4Int - Intelligence Analysis Laboratory" description="Libri, articoli, paper e materiali didattici.">
   <Hero
     eyebrow="Pubblicazioni"
-    title="Libri, articoli e materiali per la cultura dell’analisi"
-    description="Una raccolta ordinata di pubblicazioni, materiali didattici, contributi culturali e risorse metodologiche."
+    title="Libri, paper e materiali per la cultura dell’analisi"
+    description="Una raccolta ordinata di pubblicazioni, contributi dottrinali, materiali editoriali e risorse metodologiche dedicate all’intelligence analysis."
     primaryHref="/contatti/"
     primaryLabel="Richiedi informazioni"
     secondaryHref="/analisi/"
     secondaryLabel="Leggi le analisi"
   />
-  <section class="page-section">
-    <div class="publication-grid">
-      {pubblicazioni.map((pubblicazione) => (
-        <article class="panel publication-card">
-          {pubblicazione.data.cover && (
-            <a class="publication-card-cover" href={`/pubblicazioni/${pubblicazione.id}/`} aria-label={`Apri la scheda ${pubblicazione.data.title}`}>
-              <img src={pubblicazione.data.cover} alt={`Copertina di ${pubblicazione.data.title}`} loading="lazy" decoding="async" />
-            </a>
-          )}
-          <div class="publication-card-content">
-            <p class="card-meta">{pubblicazione.data.type} · {pubblicazione.data.year}</p>
-            <h3><a href={`/pubblicazioni/${pubblicazione.id}/`}>{pubblicazione.data.title}</a></h3>
-            <p>{pubblicazione.data.description}</p>
-            {(pubblicazione.data.publisher || pubblicazione.data.theme || pubblicazione.data.isbnPrint || pubblicazione.data.isbnEbook) && (
-              <dl class="publication-card-data">
-                {pubblicazione.data.publisher && <dt>Sede/Editore</dt>}
-                {pubblicazione.data.publisher && <dd>{pubblicazione.data.publisher}</dd>}
-                {pubblicazione.data.theme && <dt>Tema</dt>}
-                {pubblicazione.data.theme && <dd>{pubblicazione.data.theme}</dd>}
-                {pubblicazione.data.isbnPrint && <dt>ISBN cartaceo</dt>}
-                {pubblicazione.data.isbnPrint && <dd>{pubblicazione.data.isbnPrint}</dd>}
-                {pubblicazione.data.isbnEbook && <dt>ISBN ebook</dt>}
-                {pubblicazione.data.isbnEbook && <dd>{pubblicazione.data.isbnEbook}</dd>}
-              </dl>
-            )}
-            <a class="card-link" href={`/pubblicazioni/${pubblicazione.id}/`}>Approfondisci</a>
+
+  <section class="page-section publications-catalog">
+    {groups.map((group) => (
+      <section class="publication-section" aria-labelledby={`publication-section-${group.id}`}>
+        <header class="publication-section-header">
+          <p class="eyebrow">{group.items.length} {group.items.length === 1 ? 'elemento' : 'elementi'}</p>
+          <div>
+            <h2 id={`publication-section-${group.id}`}>{group.title}</h2>
+            <p>{group.description}</p>
           </div>
-        </article>
-      ))}
-    </div>
+        </header>
+
+        <div class="publication-list">
+          {group.items.map((pubblicazione) => (
+            <article class="publication-item panel">
+              <a class="publication-media" href={`/pubblicazioni/${pubblicazione.id}/`} aria-label={`Apri la scheda ${pubblicazione.data.title}`}>
+                {pubblicazione.data.cover ? (
+                  <img src={pubblicazione.data.cover} alt={`Copertina di ${pubblicazione.data.title}`} loading="lazy" decoding="async" />
+                ) : (
+                  <span class="publication-placeholder" aria-hidden="true">
+                    <strong>{pubblicazione.data.type}</strong>
+                    <small>{pubblicazione.data.year}</small>
+                  </span>
+                )}
+              </a>
+
+              <div class="publication-body">
+                <div class="publication-kicker">
+                  <span>{pubblicazione.data.type}</span>
+                  <span>{pubblicazione.data.year}</span>
+                  {pubblicazione.data.featured && <span>In evidenza</span>}
+                </div>
+
+                <h3><a href={`/pubblicazioni/${pubblicazione.id}/`}>{pubblicazione.data.title}</a></h3>
+                <p>{pubblicazione.data.description}</p>
+
+                <dl class="publication-metadata">
+                  {pubblicazione.data.publisher && <><dt>Sede/Editore</dt><dd>{pubblicazione.data.publisher}</dd></>}
+                  {pubblicazione.data.theme && <><dt>Tema</dt><dd>{pubblicazione.data.theme}</dd></>}
+                  {pubblicazione.data.isbnPrint && <><dt>ISBN cartaceo</dt><dd>{pubblicazione.data.isbnPrint}</dd></>}
+                  {pubblicazione.data.isbnEbook && <><dt>ISBN ebook</dt><dd>{pubblicazione.data.isbnEbook}</dd></>}
+                </dl>
+              </div>
+
+              <div class="publication-action">
+                <a class="publication-button" href={`/pubblicazioni/${pubblicazione.id}/`}>{getActionLabel(pubblicazione)}</a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+    ))}
   </section>
+
+  <style>
+    .publications-catalog {
+      display: grid;
+      gap: 3rem;
+      padding-top: 2.5rem;
+    }
+
+    .publication-section {
+      display: grid;
+      gap: 1.15rem;
+    }
+
+    .publication-section-header {
+      display: grid;
+      grid-template-columns: minmax(120px, 0.22fr) minmax(0, 1fr);
+      gap: 1rem;
+      align-items: start;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .publication-section-header h2 {
+      margin-bottom: 0.45rem;
+      font-size: clamp(1.65rem, 3vw, 2.45rem);
+    }
+
+    .publication-section-header p:last-child {
+      max-width: 780px;
+      margin: 0;
+      color: var(--text-muted);
+    }
+
+    .publication-list {
+      display: grid;
+      gap: 0.95rem;
+    }
+
+    .publication-item {
+      display: grid;
+      grid-template-columns: 112px minmax(0, 1fr) auto;
+      gap: 1rem;
+      align-items: start;
+      padding: 1rem;
+    }
+
+    .publication-media {
+      display: block;
+      width: 112px;
+      min-height: 140px;
+      color: var(--primary);
+    }
+
+    .publication-media img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 148px;
+      object-fit: contain;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--surface-muted);
+      box-shadow: 0 12px 30px rgba(11, 31, 51, 0.12);
+    }
+
+    .publication-placeholder {
+      display: flex;
+      min-height: 112px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(184, 155, 94, 0.18), rgba(47, 72, 88, 0.08));
+      text-align: center;
+      box-shadow: 0 12px 30px rgba(11, 31, 51, 0.08);
+    }
+
+    .publication-placeholder strong {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--primary);
+    }
+
+    .publication-placeholder small {
+      color: var(--text-muted);
+      font-weight: 800;
+    }
+
+    .publication-body {
+      display: grid;
+      gap: 0.6rem;
+      min-width: 0;
+    }
+
+    .publication-kicker {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      align-items: center;
+    }
+
+    .publication-kicker span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      background: rgba(184, 155, 94, 0.12);
+      color: var(--accent);
+      font-size: 0.75rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .publication-body h3 {
+      max-width: 720px;
+      font-size: clamp(1.28rem, 2vw, 1.7rem);
+      line-height: 1.05;
+    }
+
+    .publication-body h3 a:hover {
+      color: var(--secondary);
+    }
+
+    .publication-body > p {
+      max-width: 760px;
+      margin: 0;
+      color: var(--text-muted);
+    }
+
+    .publication-metadata {
+      display: grid;
+      grid-template-columns: max-content minmax(0, 1fr);
+      gap: 0.25rem 0.75rem;
+      margin: 0.2rem 0 0;
+      color: var(--text-muted);
+      font-size: 0.93rem;
+    }
+
+    .publication-metadata dt {
+      color: var(--primary);
+      font-weight: 900;
+    }
+
+    .publication-metadata dd {
+      margin: 0;
+    }
+
+    .publication-action {
+      display: flex;
+      align-self: stretch;
+      align-items: flex-end;
+      justify-content: flex-end;
+    }
+
+    .publication-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 0.55rem 0.85rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--primary);
+      font-weight: 900;
+      white-space: nowrap;
+      background: rgba(255, 255, 255, 0.62);
+    }
+
+    .publication-button:hover {
+      border-color: var(--accent);
+      color: var(--primary);
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 880px) {
+      .publication-section-header {
+        grid-template-columns: 1fr;
+      }
+
+      .publication-item {
+        grid-template-columns: 92px minmax(0, 1fr);
+      }
+
+      .publication-media {
+        width: 92px;
+        min-height: 92px;
+      }
+
+      .publication-media img {
+        max-height: 122px;
+      }
+
+      .publication-action {
+        grid-column: 1 / -1;
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .publication-item {
+        grid-template-columns: 1fr;
+      }
+
+      .publication-media {
+        width: min(180px, 100%);
+      }
+
+      .publication-metadata {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </BaseLayout>
