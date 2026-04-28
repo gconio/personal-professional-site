@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+---
+
+<BaseLayout
+  title="Commento inviato — Lab4Int"
+  description="Conferma di invio del commento sul Manuale per l’analisi intelligence."
+>
+  <Hero
+    eyebrow="Grazie"
+    title="Commento inviato"
+    description="Il tuo messaggio è stato inviato. Se sarà coerente con il profilo editoriale del sito, potrà essere valutato per una pubblicazione moderata nella pagina del Manuale."
+    primaryHref="/pubblicazioni/manuale-analisi-intelligence/"
+    primaryLabel="Torna al Manuale"
+    secondaryHref="/pubblicazioni/"
+    secondaryLabel="Pubblicazioni"
+  />
+</BaseLayout>

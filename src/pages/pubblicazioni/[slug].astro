@@ -11,6 +11,7 @@ const { pubblicazione } = Astro.props;
 const { Content } = await render(pubblicazione);
 const hasFacts = pubblicazione.data.publisher || pubblicazione.data.theme || pubblicazione.data.isbnPrint || pubblicazione.data.isbnEbook || pubblicazione.data.link;
 const linkLabel = pubblicazione.data.type.toLowerCase().includes('libro') ? 'Acquista su Youcanprint' : 'Leggi alla fonte originale';
+const isManuale = pubblicazione.id === 'manuale-analisi-intelligence' || pubblicazione.data.title.toLowerCase().includes('manuale per l’analisi intelligence') || pubblicazione.data.title.toLowerCase().includes("manuale per l'analisi intelligence");
 ---
 <BaseLayout title={`${pubblicazione.data.title} — Pubblicazioni`} description={pubblicazione.data.description}>
   <article class="article-page publication-page">
@@ -68,5 +69,48 @@ const linkLabel = pubblicazione.data.type.toLowerCase().includes('libro') ? 'Acq
     <div class="prose">
       <Content />
     </div>
+
+    {isManuale && (
+      <section class="panel reader-feedback-callout" aria-labelledby="reader-feedback-title">
+        <div>
+          <p class="card-meta">Lettori</p>
+          <h2 id="reader-feedback-title">Commenti sul Manuale</h2>
+          <p>
+            Hai letto il volume o vuoi condividere una riflessione sul tema dell’analisi intelligence?
+            Puoi inviare un commento, una breve recensione o un feedback. I contributi più significativi
+            potranno essere pubblicati previa moderazione.
+          </p>
+        </div>
+        <a class="button primary" href="/commenti-manuale/">Lascia un commento</a>
+      </section>
+    )}
+
+    <style>
+      .reader-feedback-callout {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.25rem;
+        margin-top: 2rem;
+      }
+
+      .reader-feedback-callout h2 {
+        font-size: clamp(1.8rem, 3vw, 2.35rem);
+        margin-bottom: 0.65rem;
+      }
+
+      .reader-feedback-callout p {
+        color: var(--text-muted);
+        margin-bottom: 0;
+      }
+
+      @media (max-width: 880px) {
+        .reader-feedback-callout {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+      }
+    </style>
+
   </article>
 </BaseLayout>

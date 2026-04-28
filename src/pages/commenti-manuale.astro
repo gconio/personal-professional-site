@@ -1,0 +1,167 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+---
+
+<BaseLayout
+  title="Commenti sul Manuale — Lab4Int"
+  description="Invia un commento, una recensione o una riflessione sul Manuale per l’analisi intelligence."
+>
+  <Hero
+    eyebrow="Lettori"
+    title="Commenti sul Manuale"
+    description="Uno spazio moderato per raccogliere commenti, recensioni e riflessioni sul volume Manuale per l’analisi intelligence. I contributi più significativi potranno essere pubblicati previa valutazione e consenso."
+    primaryHref="/pubblicazioni/manuale-analisi-intelligence/"
+    primaryLabel="Torna al libro"
+    secondaryHref="/contatti/"
+    secondaryLabel="Contatti"
+  />
+
+  <section class="page-section compact-section">
+    <SectionHeading
+      eyebrow="Invia un contributo"
+      title="Lascia un commento o una breve recensione"
+      description="Il messaggio arriverà direttamente all’indirizzo giovanni.conio@proton.me. L’email non sarà pubblicata; servirà solo per eventuale contatto o verifica."
+    />
+
+    <div class="feedback-layout">
+      <form
+        class="panel feedback-form"
+        action="https://formsubmit.co/giovanni.conio@proton.me"
+        method="POST"
+      >
+        <input type="hidden" name="_subject" value="Nuovo commento sul Manuale per l’analisi intelligence" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_captcha" value="true" />
+        <input type="hidden" name="_next" value="https://giovanni.conio.lab4int.com/commento-inviato/" />
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="feedback-honeypot" aria-hidden="true" />
+
+        <label>
+          Nome e cognome
+          <input type="text" name="nome" autocomplete="name" required />
+        </label>
+
+        <label>
+          Email
+          <input type="email" name="email" autocomplete="email" required />
+        </label>
+
+        <label>
+          Ruolo / organizzazione <span>opzionale</span>
+          <input type="text" name="ruolo_organizzazione" />
+        </label>
+
+        <label>
+          Commento
+          <textarea name="commento" rows="8" required placeholder="Scrivi qui il tuo commento, la tua recensione o una riflessione sul volume."></textarea>
+        </label>
+
+        <label class="feedback-checkbox">
+          <input type="checkbox" name="consenso_pubblicazione" value="sì" required />
+          <span>Autorizzo la possibile pubblicazione del commento, previa moderazione. L’email non sarà pubblicata.</span>
+        </label>
+
+        <label class="feedback-checkbox">
+          <input type="checkbox" name="consenso_trattamento" value="sì" required />
+          <span>Confermo di aver compreso che i dati saranno usati solo per ricevere, valutare e gestire il commento inviato.</span>
+        </label>
+
+        <button class="button primary" type="submit">Invia commento</button>
+      </form>
+
+      <aside class="panel feedback-note">
+        <h3>Moderazione</h3>
+        <p>
+          I commenti non vengono pubblicati automaticamente. Questo consente di mantenere il sito ordinato,
+          coerente con il profilo professionale di Lab4Int e protetto da spam o contenuti non pertinenti.
+        </p>
+        <h3>Cosa puoi inviare</h3>
+        <ul>
+          <li>una breve recensione del volume;</li>
+          <li>una riflessione metodologica sull’analisi intelligence;</li>
+          <li>un feedback didattico o professionale;</li>
+          <li>una proposta di approfondimento.</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <style>
+    .feedback-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .feedback-form {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .feedback-form label {
+      display: grid;
+      gap: 0.4rem;
+      color: var(--primary);
+      font-weight: 800;
+    }
+
+    .feedback-form label span {
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .feedback-form input,
+    .feedback-form textarea {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 0.85rem 0.95rem;
+      font: inherit;
+      color: var(--text);
+      background: #fff;
+    }
+
+    .feedback-form textarea {
+      resize: vertical;
+      min-height: 180px;
+    }
+
+    .feedback-checkbox {
+      grid-template-columns: auto 1fr !important;
+      align-items: start;
+      color: var(--text-muted) !important;
+      font-weight: 500 !important;
+    }
+
+    .feedback-checkbox input {
+      width: auto;
+      margin-top: 0.35rem;
+    }
+
+    .feedback-note h3 {
+      margin-top: 1rem;
+      margin-bottom: 0.45rem;
+    }
+
+    .feedback-note h3:first-child {
+      margin-top: 0;
+    }
+
+    .feedback-note p,
+    .feedback-note li {
+      color: var(--text-muted);
+    }
+
+    .feedback-honeypot {
+      display: none !important;
+    }
+
+    @media (max-width: 880px) {
+      .feedback-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</BaseLayout>
