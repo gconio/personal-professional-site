@@ -10,11 +10,17 @@ export async function getStaticPaths() {
 const { pubblicazione } = Astro.props;
 const { Content: PublicationContent } = await render(pubblicazione);
 
-const hasFacts = pubblicazione.data.publisher || pubblicazione.data.theme || pubblicazione.data.isbnPrint || pubblicazione.data.isbnEbook || pubblicazione.data.link || pubblicazione.data.pdfUrl;
-const linkLabel = pubblicazione.data.type.toLowerCase().includes('libro') ? 'Acquista su Youcanprint' : 'Leggi alla fonte originale';
+const hasFacts = pubblicazione.data.publisher || pubblicazione.data.theme || pubblicazione.data.isbnPrint || pubblicazione.data.isbnEbook || pubblicazione.data.link || pubblicazione.data.pdfUrl || pubblicazione.data.sourceStatus || pubblicazione.data.license;
 const publisherName = (pubblicazione.data.publisher || '').toLowerCase();
 const isPublisherOffline = publisherName.includes('alpha institute') || publisherName.includes('analytica');
+const isAiaig = publisherName.includes('associazione italiana analisti di intelligence') || publisherName.includes('aiaig');
+const linkLabel = pubblicazione.data.type.toLowerCase().includes('libro')
+  ? 'Acquista su Youcanprint'
+  : isAiaig
+    ? 'Vai al sito AIAIG'
+    : 'Leggi alla fonte originale';
 const isManuale = pubblicazione.id === 'manuale-analisi-intelligence' || pubblicazione.data.title.toLowerCase().includes('manuale per l’analisi intelligence') || pubblicazione.data.title.toLowerCase().includes("manuale per l'analisi intelligence");
+const availability = pubblicazione.data.sourceStatus || (isPublisherOffline ? 'Il sito dell’editore non è più online; il PDF è quindi reso disponibile in download locale.' : '');
 
 const formatCommentDate = (date: Date) =>
   new Intl.DateTimeFormat('it-IT', {
@@ -80,14 +86,16 @@ const commentiManualeRenderizzati = await Promise.all(
               <dt>Anno</dt><dd>{pubblicazione.data.year}</dd>
               {pubblicazione.data.theme && <dt>Tema</dt>}
               {pubblicazione.data.theme && <dd>{pubblicazione.data.theme}</dd>}
+              {pubblicazione.data.license && <dt>Licenza</dt>}
+              {pubblicazione.data.license && <dd>{pubblicazione.data.license}</dd>}
               {pubblicazione.data.isbnPrint && <dt>ISBN cartaceo</dt>}
               {pubblicazione.data.isbnPrint && <dd>{pubblicazione.data.isbnPrint}</dd>}
               {pubblicazione.data.isbnEbook && <dt>ISBN ebook</dt>}
               {pubblicazione.data.isbnEbook && <dd>{pubblicazione.data.isbnEbook}</dd>}
               {pubblicazione.data.pdfUrl && <dt>PDF</dt>}
               {pubblicazione.data.pdfUrl && <dd>Download disponibile</dd>}
-              {isPublisherOffline && <dt>Disponibilità</dt>}
-              {isPublisherOffline && <dd>Il sito dell’editore non è più online; il PDF è quindi reso disponibile in download locale.</dd>}
+              {availability && <dt>Disponibilità</dt>}
+              {availability && <dd>{availability}</dd>}
             </dl>
             {pubblicazione.data.link && (
               <a class="button primary" href={pubblicazione.data.link} target="_blank" rel="noopener noreferrer">{linkLabel}</a>

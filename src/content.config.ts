@@ -37,6 +37,9 @@ const pubblicazione = defineCollection({
     type: z.string(),
     publisher: z.string().optional(),
     theme: z.string().optional(),
+    sourceStatus: z.string().optional(),
+    license: z.string().optional(),
+    tags: z.array(z.string()).default([]),
     isbnPrint: z.string().optional(),
     isbnEbook: z.string().optional(),
     cover: z.string().optional(),
@@ -47,7 +50,6 @@ const pubblicazione = defineCollection({
     order: z.number().default(99)
   })
 });
-
 
 const commentiManuale = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/commenti-manuale' }),
@@ -62,24 +64,4 @@ const commentiManuale = defineCollection({
   })
 });
 
-const analisi = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/analisi' }),
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    date: z.coerce.date(),
-    category: z.string(),
-    publisher: z.string().optional(),
-    sourceStatus: z.string().optional(),
-    externalUrl: z.string().optional(),
-    pdfUrl: z.string().optional(),
-    cover: z.string().optional(),
-    license: z.string().optional(),
-    tags: z.array(z.string()).default([]),
-    featured: z.boolean().default(false),
-    draft: z.boolean().default(false),
-    order: z.number().default(99)
-  })
-});
-
-export const collections = { corso, progetto, pubblicazione, commentiManuale, analisi };
+export const collections = { corso, progetto, pubblicazione, commentiManuale };

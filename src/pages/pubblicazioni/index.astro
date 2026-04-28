@@ -15,22 +15,22 @@ const categoryDefinitions = [
     match: (type) => normalize(type).includes('libro')
   },
   {
-    id: 'paper',
-    title: 'Paper e contributi dottrinali',
-    description: 'Contributi pubblicati su siti istituzionali, riviste specialistiche e piattaforme di approfondimento.',
-    match: (type) => normalize(type).includes('paper') || normalize(type).includes('articolo') || normalize(type).includes('contributo')
-  },
-  {
-    id: 'progetti',
+    id: 'progetti-editoriali',
     title: 'Progetti editoriali',
     description: 'Materiali in preparazione, progetti editoriali e linee di sviluppo future.',
     match: (type) => normalize(type).includes('progetto')
   },
   {
-    id: 'altri',
-    title: 'Altre pubblicazioni',
-    description: 'Ulteriori materiali, risorse e contenuti collegati alle attività di Lab4Int.',
-    match: () => true
+    id: 'paper',
+    title: 'Paper e contributi dottrinali',
+    description: 'Contributi pubblicati su siti istituzionali, associazioni, centri studi e piattaforme di approfondimento specialistico.',
+    match: (type) => normalize(type).includes('paper') || normalize(type).includes('contributo dottrinale')
+  },
+  {
+    id: 'articoli-online',
+    title: 'Articoli e contributi online',
+    description: 'Articoli, post e contributi pubblicati online, inclusi i contenuti divulgativi pubblicati su LinkedIn.',
+    match: (type) => normalize(type).includes('articolo online') || normalize(type).includes('post') || normalize(type).includes('linkedin') || normalize(type).includes('contributo online')
   }
 ];
 
@@ -59,16 +59,22 @@ const isPublisherOffline = (pubblicazione) => {
   const publisher = normalize(pubblicazione.data.publisher || '');
   return publisher.includes('alpha institute') || publisher.includes('analytica');
 };
+
+const getAvailability = (pubblicazione) => {
+  if (pubblicazione.data.sourceStatus) return pubblicazione.data.sourceStatus;
+  if (isPublisherOffline(pubblicazione)) return 'Sito editore non più online; PDF locale nella scheda';
+  return '';
+};
 ---
-<BaseLayout title="Pubblicazioni — Lab4Int - Intelligence Analysis Laboratory" description="Libri, articoli, paper e materiali didattici.">
+<BaseLayout title="Pubblicazioni — Lab4Int - Intelligence Analysis Laboratory" description="Libri, paper, contributi dottrinali e articoli online.">
   <Hero
     eyebrow="Pubblicazioni"
-    title="Libri, paper e materiali per la cultura dell’analisi"
-    description="Una raccolta ordinata di pubblicazioni, contributi dottrinali, materiali editoriali e risorse metodologiche dedicate all’intelligence analysis."
+    title="Libri, paper e contributi per la cultura dell’analisi"
+    description="Una raccolta ordinata di libri, progetti editoriali, paper dottrinali e contributi online dedicati all’intelligence analysis."
     primaryHref="/contatti/"
     primaryLabel="Richiedi informazioni"
-    secondaryHref="/analisi/"
-    secondaryLabel="Leggi le analisi"
+    secondaryHref="/didattica/"
+    secondaryLabel="Scopri la didattica"
   />
 
   <section class="page-section publications-catalog">
@@ -83,44 +89,48 @@ const isPublisherOffline = (pubblicazione) => {
         </header>
 
         <div class="publication-list">
-          {group.items.map((pubblicazione) => (
-            <article class="publication-item panel">
-              <a class="publication-media" href={`/pubblicazioni/${pubblicazione.id}/`} aria-label={`Apri la scheda ${pubblicazione.data.title}`}>
-                {pubblicazione.data.cover ? (
-                  <img src={pubblicazione.data.cover} alt={`Copertina di ${pubblicazione.data.title}`} loading="lazy" decoding="async" />
-                ) : (
-                  <span class="publication-placeholder" aria-hidden="true">
-                    <strong>{pubblicazione.data.type}</strong>
-                    <small>{pubblicazione.data.year}</small>
-                  </span>
-                )}
-              </a>
+          {group.items.map((pubblicazione) => {
+            const availability = getAvailability(pubblicazione);
+            return (
+              <article class="publication-item panel">
+                <a class="publication-media" href={`/pubblicazioni/${pubblicazione.id}/`} aria-label={`Apri la scheda ${pubblicazione.data.title}`}>
+                  {pubblicazione.data.cover ? (
+                    <img src={pubblicazione.data.cover} alt={`Copertina di ${pubblicazione.data.title}`} loading="lazy" decoding="async" />
+                  ) : (
+                    <span class="publication-placeholder" aria-hidden="true">
+                      <strong>{pubblicazione.data.type}</strong>
+                      <small>{pubblicazione.data.year}</small>
+                    </span>
+                  )}
+                </a>
 
-              <div class="publication-body">
-                <div class="publication-kicker">
-                  <span>{pubblicazione.data.type}</span>
-                  <span>{pubblicazione.data.year}</span>
-                  {pubblicazione.data.featured && <span>In evidenza</span>}
-                  {pubblicazione.data.pdfUrl && <span>PDF</span>}
+                <div class="publication-body">
+                  <div class="publication-kicker">
+                    <span>{pubblicazione.data.type}</span>
+                    <span>{pubblicazione.data.year}</span>
+                    {pubblicazione.data.featured && <span>In evidenza</span>}
+                    {pubblicazione.data.pdfUrl && <span>PDF</span>}
+                  </div>
+
+                  <h3><a href={`/pubblicazioni/${pubblicazione.id}/`}>{pubblicazione.data.title}</a></h3>
+                  <p>{pubblicazione.data.description}</p>
+
+                  <dl class="publication-metadata">
+                    {pubblicazione.data.publisher && <><dt>Sede/Editore</dt><dd>{pubblicazione.data.publisher}</dd></>}
+                    {pubblicazione.data.theme && <><dt>Tema</dt><dd>{pubblicazione.data.theme}</dd></>}
+                    {availability && <><dt>Disponibilità</dt><dd>{availability}</dd></>}
+                    {pubblicazione.data.license && <><dt>Licenza</dt><dd>{pubblicazione.data.license}</dd></>}
+                    {pubblicazione.data.isbnPrint && <><dt>ISBN cartaceo</dt><dd>{pubblicazione.data.isbnPrint}</dd></>}
+                    {pubblicazione.data.isbnEbook && <><dt>ISBN ebook</dt><dd>{pubblicazione.data.isbnEbook}</dd></>}
+                  </dl>
                 </div>
 
-                <h3><a href={`/pubblicazioni/${pubblicazione.id}/`}>{pubblicazione.data.title}</a></h3>
-                <p>{pubblicazione.data.description}</p>
-
-                <dl class="publication-metadata">
-                  {pubblicazione.data.publisher && <><dt>Sede/Editore</dt><dd>{pubblicazione.data.publisher}</dd></>}
-                  {pubblicazione.data.theme && <><dt>Tema</dt><dd>{pubblicazione.data.theme}</dd></>}
-                  {isPublisherOffline(pubblicazione) && <><dt>Disponibilità</dt><dd>Sito editore non più online; PDF locale nella scheda</dd></>}
-                  {pubblicazione.data.isbnPrint && <><dt>ISBN cartaceo</dt><dd>{pubblicazione.data.isbnPrint}</dd></>}
-                  {pubblicazione.data.isbnEbook && <><dt>ISBN ebook</dt><dd>{pubblicazione.data.isbnEbook}</dd></>}
-                </dl>
-              </div>
-
-              <div class="publication-action">
-                <a class="publication-button" href={`/pubblicazioni/${pubblicazione.id}/`}>{getActionLabel(pubblicazione)}</a>
-              </div>
-            </article>
-          ))}
+                <div class="publication-action">
+                  <a class="publication-button" href={`/pubblicazioni/${pubblicazione.id}/`}>{getActionLabel(pubblicazione)}</a>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </section>
     ))}
@@ -303,17 +313,6 @@ const isPublisherOffline = (pubblicazione) => {
       background: var(--primary);
       color: white;
       transform: translateY(-1px);
-    }
-
-    .publication-button-secondary {
-      border-color: var(--accent);
-      color: var(--accent);
-      background: rgba(184, 155, 94, 0.08);
-    }
-
-    .publication-button-secondary:hover {
-      background: var(--accent);
-      color: white;
     }
 
     @media (max-width: 760px) {
