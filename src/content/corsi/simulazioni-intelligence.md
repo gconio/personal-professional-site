@@ -9,9 +9,9 @@ featured: false
 order: 4
 ---
 
-<figure class="course-image-block">
-  <img src="/images/courses/simulazioni-intelligence-crisis-management.png" alt="Schermata della piattaforma Intel Sim Platform per simulazioni intelligence e crisis management" />
-  <figcaption>Ambiente digitale per simulazioni intelligence, training analitico e gestione di scenari controllati.</figcaption>
+<figure style="text-align: center; margin: 1.5rem 0;">
+  <img src="/images/courses/simulazioni-intelligence-crisis-management.png" alt="Schermata della piattaforma Intel Sim Platform per simulazioni intelligence e crisis management" style="display: block; width: 50%; max-width: 100%; height: auto; margin: 0 auto; border-radius: 14px; box-shadow: 0 14px 36px rgba(11, 31, 51, 0.18);" />
+  <figcaption style="margin-top: 0.75rem; color: #5b6473; font-size: 0.95rem;">Ambiente digitale per simulazioni intelligence, training analitico e gestione di scenari controllati.</figcaption>
 </figure>
 
 ## Obiettivo
