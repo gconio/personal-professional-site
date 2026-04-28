@@ -1,173 +1,130 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Card from '../components/Card.astro';
+import SectionHeading from '../components/SectionHeading.astro';
 
-const siteTitle = 'Sito in costruzione — Giovanni CONIO | Lab4Int';
-const siteDescription = 'Sito in costruzione. A breve saranno disponibili informazioni su attività didattiche, pubblicazioni, progetti e iniziative culturali.';
+const corsi = (await getCollection('corso'))
+  .filter((entry) => entry.data.featured)
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 3);
+
+const progetti = (await getCollection('progetto'))
+  .filter((entry) => entry.data.featured)
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 3);
+
+const pubblicazioni = (await getCollection('pubblicazione'))
+  .filter((entry) => entry.data.featured)
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 3);
 ---
+<BaseLayout
+  title="Giovanni CONIO — Lab4Int - Intelligence Analysis Laboratory"
+  description="Analisi intelligence, formazione avanzata, pubblicazioni e progetti dedicati alla cultura strategica."
+>
+  <Hero
+    eyebrow="Formazione · Analisi · Cultura strategica"
+    title="Analisi intelligence, formazione avanzata e cultura strategica"
+    description="Lab4Int raccoglie attività didattiche, pubblicazioni, progetti e iniziative dedicate all’intelligence analysis, alle metodologie strutturate e alla comprensione degli scenari complessi."
+    primaryHref="/chi-sono/"
+    primaryLabel="Chi sono"
+    secondaryHref="/pubblicazioni/"
+    secondaryLabel="Pubblicazioni"
+  />
 
-<BaseLayout title={siteTitle} description={siteDescription}>
-  <section class="construction-page" aria-labelledby="construction-title">
-    <div class="construction-card">
-      <p class="eyebrow">Lab4Int - Intelligence Analysis Laboratory</p>
+  <section class="page-section">
+    <SectionHeading
+      eyebrow="Aree di attività"
+      title="Didattica, ricerca applicata e divulgazione qualificata"
+      description="Il sito è pensato come archivio professionale e laboratorio culturale: corsi, seminari, pubblicazioni, strumenti didattici e progetti metodologici rivolti a università, centri di formazione, enti, professionisti e comunità interessate all’analisi strategica."
+    />
+    <div class="grid-three">
+      <article class="card">
+        <p class="card-meta">Didattica</p>
+        <h3>Corsi e workshop</h3>
+        <p>Percorsi formativi su intelligence analysis, tecniche analitiche strutturate, conflict analysis, produzione intelligence e simulazioni operative.</p>
+        <a class="card-link" href="/didattica/">Vedi la didattica</a>
+      </article>
+      <article class="card">
+        <p class="card-meta">Pubblicazioni</p>
+        <h3>Libri, paper e articoli</h3>
+        <p>Archivio ordinato di libri, paper dottrinali, contributi online e materiali scaricabili pubblicati su piattaforme istituzionali, associative e professionali.</p>
+        <a class="card-link" href="/pubblicazioni/">Vedi le pubblicazioni</a>
+      </article>
+      <article class="card">
+        <p class="card-meta">Progetti</p>
+        <h3>Laboratori e piattaforme</h3>
+        <p>Progetti digitali, simulazioni geopolitiche, strumenti metodologici e iniziative dedicate alla formazione avanzata degli analisti.</p>
+        <a class="card-link" href="/progetti/">Vedi i progetti</a>
+      </article>
+    </div>
+  </section>
 
-      <h1 id="construction-title">Sito in costruzione</h1>
-
-      <p class="construction-brand">Giovanni CONIO</p>
-
-      <p class="lead">
-        Sto preparando questo spazio per presentare attività didattiche, pubblicazioni,
-        progetti culturali e iniziative dedicate all’analisi intelligence, alla formazione
-        specialistica e alla cultura strategica.
-      </p>
-
-      <div class="status-panel" aria-label="Contenuti in preparazione">
-        <span class="status-dot" aria-hidden="true"></span>
-        <span>Nuovi contenuti in preparazione</span>
-      </div>
-
-      <div class="preview-grid" aria-label="Sezioni previste del sito">
-        <article>
-          <strong>Didattica</strong>
-          <span>Corsi, seminari, workshop e simulazioni formative.</span>
-        </article>
-        <article>
-          <strong>Pubblicazioni</strong>
-          <span>Libri, articoli, materiali didattici e contributi culturali.</span>
-        </article>
-        <article>
-          <strong>Progetti</strong>
-          <span>Iniziative dedicate ad analisi, formazione e strumenti metodologici.</span>
-        </article>
-      </div>
-
-      <div class="contact-box">
-        <p>Per informazioni, collaborazioni o attività didattiche:</p>
-        <a href="mailto:giovanni.conio@proton.me">giovanni.conio@proton.me</a>
+  <section class="feature-band">
+    <div class="page-section">
+      <SectionHeading
+        eyebrow="In evidenza"
+        title="Progetti e percorsi principali"
+        description="Una selezione di iniziative dedicate alla formazione, alla simulazione e allo sviluppo metodologico."
+      />
+      <div class="grid-three">
+        {progetti.map((progetto) => (
+          <Card
+            href={`/progetti/${progetto.id}/`}
+            title={progetto.data.title}
+            meta={`${progetto.data.status} · ${progetto.data.category}`}
+            description={progetto.data.description}
+          />
+        ))}
       </div>
     </div>
   </section>
+
+  <section class="page-section">
+    <SectionHeading
+      eyebrow="Didattica"
+      title="Percorsi formativi modulari"
+      description="Le schede corso sono pensate per lezioni universitarie, seminari brevi, workshop specialistici e simulazioni operative."
+    />
+    <div class="grid-three">
+      {corsi.map((corso) => (
+        <Card
+          href={`/didattica/${corso.id}/`}
+          title={corso.data.title}
+          meta={`${corso.data.level} · ${corso.data.duration}`}
+          description={corso.data.description}
+        />
+      ))}
+    </div>
+  </section>
+
+  <section class="page-section">
+    <SectionHeading
+      eyebrow="Pubblicazioni"
+      title="Libri, paper e contributi online"
+      description="Una selezione di pubblicazioni e materiali dedicati all’analisi intelligence, alla metodologia e alla cultura strategica."
+    />
+    <div class="grid-three">
+      {pubblicazioni.map((pubblicazione) => (
+        <Card
+          href={`/pubblicazioni/${pubblicazione.id}/`}
+          title={pubblicazione.data.title}
+          meta={`${pubblicazione.data.type} · ${pubblicazione.data.year}`}
+          description={pubblicazione.data.description}
+          cta="Apri scheda"
+        />
+      ))}
+    </div>
+  </section>
+
+  <section class="page-section">
+    <article class="card">
+      <p class="card-meta">Contatti</p>
+      <h3>Collaborazioni, docenze e iniziative culturali</h3>
+      <p>Per proposte didattiche, seminari, workshop, progetti editoriali o attività culturali collegate all’intelligence analysis e alla cultura strategica.</p>
+      <a class="card-link" href="/contatti/">Vai ai contatti</a>
+    </article>
+  </section>
 </BaseLayout>
-
-<style>
-  .construction-page {
-    min-height: calc(100vh - 190px);
-    display: grid;
-    place-items: center;
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 5rem 1.25rem;
-  }
-
-  .construction-card {
-    width: min(100%, 920px);
-    background:
-      radial-gradient(circle at top right, rgba(184, 155, 94, 0.18), transparent 34%),
-      linear-gradient(135deg, #ffffff 0%, #f9f7f1 100%);
-    border: 1px solid var(--border);
-    border-radius: 32px;
-    box-shadow: var(--shadow);
-    padding: clamp(2rem, 5vw, 4.25rem);
-  }
-
-  .construction-card h1 {
-    margin-top: 0.4rem;
-    font-size: clamp(3rem, 8vw, 6rem);
-    letter-spacing: -0.04em;
-  }
-
-  .construction-brand {
-    margin: 0.5rem 0 0;
-    color: var(--primary);
-    font-size: clamp(1.15rem, 2vw, 1.45rem);
-    font-weight: 900;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-
-  .lead {
-    max-width: 760px;
-    margin: 1.25rem 0 0;
-    color: var(--text-muted);
-    font-size: clamp(1.1rem, 2vw, 1.35rem);
-  }
-
-  .status-panel {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.7rem;
-    margin-top: 2rem;
-    padding: 0.75rem 1rem;
-    border: 1px solid rgba(184, 155, 94, 0.45);
-    border-radius: 999px;
-    background: rgba(184, 155, 94, 0.1);
-    color: var(--primary);
-    font-weight: 800;
-  }
-
-  .status-dot {
-    width: 0.7rem;
-    height: 0.7rem;
-    border-radius: 999px;
-    background: var(--accent);
-    box-shadow: 0 0 0 6px rgba(184, 155, 94, 0.18);
-  }
-
-  .preview-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1rem;
-    margin-top: 2.25rem;
-  }
-
-  .preview-grid article {
-    padding: 1.2rem;
-    border: 1px solid var(--border);
-    border-radius: 22px;
-    background: rgba(255, 255, 255, 0.72);
-  }
-
-  .preview-grid strong {
-    display: block;
-    color: var(--primary);
-    font-family: Georgia, 'Times New Roman', serif;
-    font-size: 1.25rem;
-    line-height: 1.2;
-  }
-
-  .preview-grid span {
-    display: block;
-    margin-top: 0.55rem;
-    color: var(--text-muted);
-  }
-
-  .contact-box {
-    margin-top: 2.25rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--border);
-  }
-
-  .contact-box p {
-    margin: 0;
-    color: var(--text-muted);
-  }
-
-  .contact-box a {
-    display: inline-flex;
-    margin-top: 0.35rem;
-    color: var(--primary);
-    font-weight: 900;
-    text-decoration: underline;
-    text-underline-offset: 4px;
-  }
-
-  @media (max-width: 760px) {
-    .construction-page {
-      padding-top: 2.5rem;
-      padding-bottom: 2.5rem;
-    }
-
-    .preview-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-</style>
