@@ -55,8 +55,10 @@ const getActionLabel = (pubblicazione) => {
   return 'Apri scheda';
 };
 
-const isAlphaInstitutePaper = (pubblicazione) =>
-  normalize(pubblicazione.data.publisher || '').includes('alpha institute');
+const isPublisherOffline = (pubblicazione) => {
+  const publisher = normalize(pubblicazione.data.publisher || '');
+  return publisher.includes('alpha institute') || publisher.includes('analytica');
+};
 ---
 <BaseLayout title="Pubblicazioni — Lab4Int - Intelligence Analysis Laboratory" description="Libri, articoli, paper e materiali didattici.">
   <Hero
@@ -108,7 +110,7 @@ const isAlphaInstitutePaper = (pubblicazione) =>
                 <dl class="publication-metadata">
                   {pubblicazione.data.publisher && <><dt>Sede/Editore</dt><dd>{pubblicazione.data.publisher}</dd></>}
                   {pubblicazione.data.theme && <><dt>Tema</dt><dd>{pubblicazione.data.theme}</dd></>}
-                  {isAlphaInstitutePaper(pubblicazione) && <><dt>Disponibilità</dt><dd>Sito editore non più online; PDF locale nella scheda</dd></>}
+                  {isPublisherOffline(pubblicazione) && <><dt>Disponibilità</dt><dd>Sito editore non più online; PDF locale nella scheda</dd></>}
                   {pubblicazione.data.isbnPrint && <><dt>ISBN cartaceo</dt><dd>{pubblicazione.data.isbnPrint}</dd></>}
                   {pubblicazione.data.isbnEbook && <><dt>ISBN ebook</dt><dd>{pubblicazione.data.isbnEbook}</dd></>}
                 </dl>
