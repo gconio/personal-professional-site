@@ -16,6 +16,14 @@ const corsi = (await getCollection('corso')).sort((a, b) => a.data.order - b.dat
     secondaryHref="/progetti/"
     secondaryLabel="Vedi i progetti"
   />
+  <section class="page-section compact-section">
+    <div class="panel didattica-intro">
+      <p>
+        Le attività formative di Lab4Int sono progettate per sviluppare competenze analitiche, metodologiche e operative nel campo dell’intelligence analysis, dell’OSINT, delle tecniche analitiche strutturate e della produzione intelligence. I percorsi possono essere adattati a contesti universitari, specialistici, istituzionali e professionali.
+      </p>
+    </div>
+  </section>
+
   <section class="page-section">
     <div class="grid-three">
       {corsi.map((corso) => (

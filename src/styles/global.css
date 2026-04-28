@@ -569,3 +569,10 @@ h3 { font-size: 1.35rem; }
 @media (max-width: 880px) {
   .visual-identity-layout { grid-template-columns: 1fr; }
 }
+
+
+.didattica-intro p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 1.05rem;
+}
