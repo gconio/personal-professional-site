@@ -96,16 +96,6 @@ La disputa coinvolge diversi attori regionali, tra cui Cina, Vietnam, Filippine,
 
 Il corso combina lezioni teoriche frontali, discussioni di gruppo, esame di case studies ed esercitazioni pratiche. L’impostazione didattica è orientata a coinvolgere i partecipanti e a consentire loro di applicare le conoscenze acquisite a situazioni reali o simulate.
 
-## Requisiti consigliati
-
-Per una più completa visione delle tematiche proposte è consigliata, ove disponibile, la frequenza preventiva di moduli dedicati a sovranità degli Stati e risorse, regole e attori internazionali, scenari d’analisi nelle relazioni internazionali.
-
-## Attestato e riconoscimenti
-
-Ai partecipanti che, nell’elaborato finale realizzato nel corso delle attività pratiche, avranno ottenuto un giudizio almeno pari a “sufficiente”, potrà essere rilasciato un attestato di partecipazione.
-
-Il corso è indicato come compatibile con il riconoscimento di **8,5 CFU AIAIG**, adatto ai livelli di attestazione A1, A2 e B.
-
 ## Output formativo
 
 Al termine del percorso i partecipanti avranno acquisito un quadro metodologico per analizzare un conflitto, mappare attori e interessi, individuare fattori alimentanti e formulare strategie di gestione o risoluzione. Le attività pratiche consentono inoltre di applicare gli strumenti a un caso di studio reale, producendo un elaborato finale di sintesi.
