@@ -6,7 +6,7 @@ duration: "10 ore"
 format: "Online sincrono o in presenza"
 audience: ["professionisti intelligence", "professionisti sicurezza", "analisti geopolitici", "studenti relazioni internazionali", "decisori", "manager", "professionisti interessati all’analisi delle informazioni"]
 featured: false
-order: 6
+order: 3
 ---
 
 ## Descrizione generale
