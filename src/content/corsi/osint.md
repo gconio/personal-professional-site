@@ -6,7 +6,7 @@ duration: "6–10 ore"
 format: "Lezione + laboratorio"
 audience: ["studenti", "analisti", "giornalisti", "ricercatori"]
 featured: false
-order: 4
+order: 5
 ---
 
 ## Obiettivo

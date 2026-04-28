@@ -6,7 +6,7 @@ duration: "4–8 ore"
 format: "Laboratorio metodologico"
 audience: ["analisti", "studenti avanzati", "team di valutazione"]
 featured: true
-order: 3
+order: 4
 ---
 
 ## Obiettivo

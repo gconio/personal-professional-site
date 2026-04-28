@@ -6,7 +6,7 @@ duration: "8 ore"
 format: "Simulazione"
 audience: ["classi universitarie", "team formativi", "enti", "professionisti"]
 featured: false
-order: 6
+order: 7
 ---
 
 ## Obiettivo

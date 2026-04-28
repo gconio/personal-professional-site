@@ -6,7 +6,7 @@ duration: "8 ore"
 format: "Seminario + scenario exercise"
 audience: ["studenti", "analisti", "operatori sicurezza", "ricercatori"]
 featured: false
-order: 5
+order: 6
 ---
 
 ## Obiettivo

@@ -6,7 +6,7 @@ duration: "8–12 ore"
 format: "Workshop"
 audience: ["analisti", "studenti avanzati", "ricercatori", "professionisti sicurezza"]
 featured: true
-order: 2
+order: 3
 ---
 
 ## Obiettivo

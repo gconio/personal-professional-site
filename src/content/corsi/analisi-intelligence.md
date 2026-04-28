@@ -1,62 +1,58 @@
 ---
-title: "Fondamenti di intelligence"
-description: "Corso introduttivo sui principi, le definizioni, le procedure e il ciclo intelligence, con focus su supporto decisionale, discipline informative e fonti aperte."
-level: "Base"
-duration: "7 ore"
-format: "Lezione frontale + discussione guidata"
-audience: ["studenti", "personale di staff", "analisti junior", "professionisti sicurezza", "enti"]
+title: "Analisi intelligence"
+description: "Corso dedicato allo sviluppo di capacità di analisi delle informazioni, con focus su critical thinking, creative thinking, tecniche strutturate e supporto al processo decisionale."
+level: "Intermedio"
+duration: "Durata modulare"
+format: "Lezione + laboratorio metodologico"
+audience: ["studenti universitari", "professionisti intelligence", "professionisti sicurezza", "analisti geopolitici", "decisori", "manager", "operatori ONG", "giornalisti"]
 featured: true
-order: 1
+order: 2
 ---
 
 ## Descrizione generale
 
-Il corso **Fondamenti di intelligence** fornisce le conoscenze essenziali per comprendere il ruolo della funzione intelligence nell’ambito di uno staff dedicato, a supporto del processo decisionale e, più in generale, della pianificazione e condotta di operazioni.
+Lo scopo del corso **Analisi intelligence** è fornire ai discenti una capacità minima di analisi delle informazioni, tale da consentire loro di operare a supporto del processo decisionale e, più in generale, a sostegno di operazioni.
 
-Il percorso introduce il lessico di base, i principi dell’attività informativa, il ciclo intelligence, le principali discipline informative e il ruolo delle fonti aperte. L’obiettivo è offrire ai partecipanti una base concettuale e metodologica utile per orientarsi nei processi di raccolta, elaborazione, analisi e disseminazione dell’informazione.
+Il percorso è orientato allo sviluppo di competenze analitiche di base e intermedie, con attenzione alla lettura dei problemi, alla formulazione di inferenze, alla qualità dell’informazione, alla generazione di ipotesi e all’impiego di strumenti e tecniche di analisi strutturata.
 
 ## Destinatari
 
-Il corso è rivolto a studenti, analisti junior, personale inserito o di previsto inserimento in staff intelligence, professionisti della sicurezza, operatori di enti e organizzazioni interessati a comprendere i fondamenti della funzione intelligence e il suo contributo al supporto decisionale.
+Il corso è rivolto a studenti universitari, professionisti nel campo dell’intelligence o della sicurezza, analisti di geopolitica, decisori, manager e responsabili del supporto al processo decisionale o di pianificazione, operatori di ONG e giornalisti interessati a perfezionare e standardizzare le proprie conoscenze nell’ambito dell’intelligence.
 
-## Obiettivi formativi
+## Obiettivo formativo
 
-Al termine del corso i partecipanti avranno acquisito:
+L’obiettivo è sviluppare una capacità minima di analisi delle informazioni, sia situazionale sia previsionale, in un’ottica di comprehensive approach, attraverso:
 
-- consapevolezza circa il ruolo della funzione intelligence nel processo decisionale e nella pianificazione e condotta di operazioni;
-- conoscenza del ciclo intelligence, delle definizioni, dei principi e delle procedure alla base dell’attività informativa;
-- una panoramica delle principali discipline dell’intelligence;
-- un primo approfondimento sulle cosiddette fonti aperte e sul ruolo dell’OSINT nel quadro delle attività informative.
+- la comprensione dei meccanismi cognitivi e delle potenzialità del pensiero critico e creativo;
+- l’utilizzo di tecniche di analisi strutturata necessarie per mitigare pregiudizi, preconcetti e schemi mentali;
+- la conoscenza delle principali metodologie di analisi finalizzate a una corretta elaborazione delle informazioni.
 
 ## Struttura del corso
 
-### Modulo I — Generalità sull’intelligence
-
-**Durata:** 2 ore
+### Modulo I — Principi di analisi
 
 Contenuti principali:
 
-- introduzione all’intelligence;
-- definizioni essenziali: dato, notizia, informazione e concetti correlati;
-- livelli, tipologie e principi dell’intelligence;
-- ciclo intelligence: generalità, definizione e scopo.
+- analisi del problema: definizione del problema e comprensione delle necessità del decisore;
+- pensare e logica: inferire, leggi del pensare, che cos’è un’inferenza, ricostruire un’inferenza e riconoscere le fallacie;
+- il concetto di modello: modello fisico descrittivo e modello concettuale, descrittivo e normativo;
+- creazione di un modello;
+- tecniche diagnostiche: verifica della fonte, qualità dell’informazione, pertinenza dell’informazione e deception & denial.
 
-### Modulo II — Ciclo intelligence
-
-**Durata:** 5 ore
+### Modulo II — Strumenti e tecniche di analisi
 
 Contenuti principali:
 
-- la direzione: CCRM, Intelligence Requirements, PIR e Collection Plan;
-- la raccolta: generalità, principali discipline e fonti dell’intelligence;
-- OSINT: quadro generale e ruolo delle fonti aperte;
-- elaborazione: collazione, valutazione, analisi, integrazione e interpretazione;
-- disseminazione: scopo, principi, forme e intelligence products.
+- generazione di ipotesi: pensiero divergente e convergente, revisione delle ipotesi e critical thinking;
+- indicatori e indicazioni: cosa si intende per warning, livello dell’attività strategica, intenzione vs capacità;
+- metodo analitico: compilare la lista degli indicatori, analizzare gli indizi, stato e monitoraggio degli indicatori;
+- tecniche di analisi strutturata: brainstorming, devil advocacy, SWOT, PESTEL e ACH;
+- strumenti e tecniche di analisi: mappe concettuali, time-event chart, link analysis, matrix analysis e pattern analysis.
 
 ## Metodologia didattica
 
-Il corso combina esposizione frontale, chiarimento terminologico, esempi applicativi e discussione guidata. La struttura è pensata per accompagnare progressivamente i partecipanti dalla comprensione dei concetti di base alla lettura organica del ciclo intelligence e delle sue principali funzioni.
+Il corso combina spiegazione teorica, esempi applicativi, discussione guidata e attività metodologiche. L’impostazione è pensata per accompagnare i partecipanti dalla comprensione del problema analitico alla costruzione di giudizi più espliciti, controllabili e comunicabili.
 
 ## Output formativo
 
-I partecipanti acquisiscono una mappa concettuale dei fondamenti della funzione intelligence, una comprensione operativa delle fasi del ciclo intelligence e un quadro introduttivo delle principali discipline informative, con particolare attenzione alle fonti aperte.
+Al termine del corso i partecipanti dispongono di una base metodologica per impostare un processo di analisi delle informazioni, valutare la qualità delle fonti e delle evidenze, generare ipotesi, costruire indicatori e applicare alcune tecniche strutturate a supporto del giudizio analitico.
