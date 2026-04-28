@@ -42,6 +42,7 @@ const pubblicazione = defineCollection({
     cover: z.string().optional(),
     formatsImage: z.string().optional(),
     link: z.string().optional(),
+    pdfUrl: z.string().optional(),
     featured: z.boolean().default(false),
     order: z.number().default(99)
   })

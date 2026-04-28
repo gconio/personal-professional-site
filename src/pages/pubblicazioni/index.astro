@@ -52,8 +52,7 @@ const groups = categoryDefinitions
 const getActionLabel = (pubblicazione) => {
   const type = normalize(pubblicazione.data.type);
   if (type.includes('libro')) return 'Apri scheda libro';
-  if (pubblicazione.data.link) return 'Vai alla scheda';
-  return 'Approfondisci';
+  return 'Apri scheda';
 };
 ---
 <BaseLayout title="Pubblicazioni — Lab4Int - Intelligence Analysis Laboratory" description="Libri, articoli, paper e materiali didattici.">
@@ -97,6 +96,7 @@ const getActionLabel = (pubblicazione) => {
                   <span>{pubblicazione.data.type}</span>
                   <span>{pubblicazione.data.year}</span>
                   {pubblicazione.data.featured && <span>In evidenza</span>}
+                  {pubblicazione.data.pdfUrl && <span>PDF</span>}
                 </div>
 
                 <h3><a href={`/pubblicazioni/${pubblicazione.id}/`}>{pubblicazione.data.title}</a></h3>
@@ -112,6 +112,9 @@ const getActionLabel = (pubblicazione) => {
 
               <div class="publication-action">
                 <a class="publication-button" href={`/pubblicazioni/${pubblicazione.id}/`}>{getActionLabel(pubblicazione)}</a>
+                {pubblicazione.data.pdfUrl && (
+                  <a class="publication-button publication-button-secondary" href={pubblicazione.data.pdfUrl} download>Scarica PDF</a>
+                )}
               </div>
             </article>
           ))}
@@ -258,81 +261,93 @@ const getActionLabel = (pubblicazione) => {
       grid-template-columns: max-content minmax(0, 1fr);
       gap: 0.25rem 0.75rem;
       margin: 0.2rem 0 0;
-      color: var(--text-muted);
-      font-size: 0.93rem;
+      font-size: 0.95rem;
     }
 
     .publication-metadata dt {
-      color: var(--primary);
       font-weight: 900;
+      color: var(--primary);
     }
 
     .publication-metadata dd {
       margin: 0;
+      color: var(--text-muted);
     }
 
     .publication-action {
       display: flex;
-      align-self: stretch;
-      align-items: flex-end;
-      justify-content: flex-end;
+      flex-direction: column;
+      gap: 0.55rem;
+      align-items: stretch;
+      justify-content: flex-start;
+      min-width: 144px;
     }
 
     .publication-button {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 40px;
-      padding: 0.55rem 0.85rem;
-      border: 1px solid var(--border);
       border-radius: 999px;
+      border: 1px solid var(--primary);
+      padding: 0.65rem 0.9rem;
       color: var(--primary);
       font-weight: 900;
-      white-space: nowrap;
-      background: rgba(255, 255, 255, 0.62);
+      text-align: center;
+      transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
     }
 
     .publication-button:hover {
-      border-color: var(--accent);
-      color: var(--primary);
+      background: var(--primary);
+      color: white;
       transform: translateY(-1px);
     }
 
-    @media (max-width: 880px) {
+    .publication-button-secondary {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(184, 155, 94, 0.08);
+    }
+
+    .publication-button-secondary:hover {
+      background: var(--accent);
+      color: white;
+    }
+
+    @media (max-width: 760px) {
       .publication-section-header {
         grid-template-columns: 1fr;
       }
 
       .publication-item {
-        grid-template-columns: 92px minmax(0, 1fr);
+        grid-template-columns: 88px minmax(0, 1fr);
       }
 
       .publication-media {
-        width: 92px;
-        min-height: 92px;
-      }
-
-      .publication-media img {
-        max-height: 122px;
+        width: 88px;
+        min-height: 104px;
       }
 
       .publication-action {
         grid-column: 1 / -1;
-        justify-content: flex-start;
+        flex-direction: row;
+        flex-wrap: wrap;
+        min-width: 0;
       }
     }
 
-    @media (max-width: 560px) {
+    @media (max-width: 520px) {
       .publication-item {
         grid-template-columns: 1fr;
       }
 
       .publication-media {
-        width: min(180px, 100%);
+        width: 100%;
+        min-height: 0;
       }
 
-      .publication-metadata {
-        grid-template-columns: 1fr;
+      .publication-media img,
+      .publication-placeholder {
+        max-width: 160px;
       }
     }
   </style>
