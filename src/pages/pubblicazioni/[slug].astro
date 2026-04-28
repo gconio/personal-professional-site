@@ -12,6 +12,7 @@ const { Content: PublicationContent } = await render(pubblicazione);
 
 const hasFacts = pubblicazione.data.publisher || pubblicazione.data.theme || pubblicazione.data.isbnPrint || pubblicazione.data.isbnEbook || pubblicazione.data.link || pubblicazione.data.pdfUrl;
 const linkLabel = pubblicazione.data.type.toLowerCase().includes('libro') ? 'Acquista su Youcanprint' : 'Leggi alla fonte originale';
+const isAlphaInstitutePaper = (pubblicazione.data.publisher || '').toLowerCase().includes('alpha institute');
 const isManuale = pubblicazione.id === 'manuale-analisi-intelligence' || pubblicazione.data.title.toLowerCase().includes('manuale per l’analisi intelligence') || pubblicazione.data.title.toLowerCase().includes("manuale per l'analisi intelligence");
 
 const formatCommentDate = (date: Date) =>
@@ -84,6 +85,8 @@ const commentiManualeRenderizzati = await Promise.all(
               {pubblicazione.data.isbnEbook && <dd>{pubblicazione.data.isbnEbook}</dd>}
               {pubblicazione.data.pdfUrl && <dt>PDF</dt>}
               {pubblicazione.data.pdfUrl && <dd>Download disponibile</dd>}
+              {isAlphaInstitutePaper && <dt>Disponibilità</dt>}
+              {isAlphaInstitutePaper && <dd>Il sito dell’editore non è più online; il PDF è quindi reso disponibile in download locale.</dd>}
             </dl>
             {pubblicazione.data.link && (
               <a class="button primary" href={pubblicazione.data.link} target="_blank" rel="noopener noreferrer">{linkLabel}</a>
