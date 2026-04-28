@@ -15,12 +15,6 @@ const categoryDefinitions = [
     match: (type) => normalize(type).includes('libro')
   },
   {
-    id: 'progetti-editoriali',
-    title: 'Progetti editoriali',
-    description: 'Materiali in preparazione, progetti editoriali e linee di sviluppo future.',
-    match: (type) => normalize(type).includes('progetto')
-  },
-  {
     id: 'paper',
     title: 'Paper e contributi dottrinali',
     description: 'Contributi pubblicati su siti istituzionali, associazioni, centri studi e piattaforme di approfondimento specialistico.',
@@ -69,8 +63,8 @@ const getAvailability = (pubblicazione) => {
 <BaseLayout title="Pubblicazioni — Lab4Int - Intelligence Analysis Laboratory" description="Libri, paper, contributi dottrinali e articoli online.">
   <Hero
     eyebrow="Pubblicazioni"
-    title="Libri, paper e contributi per la cultura dell’analisi"
-    description="Una raccolta ordinata di libri, progetti editoriali, paper dottrinali e contributi online dedicati all’intelligence analysis."
+    title="Libri, paper e articoli per la cultura dell’analisi"
+    description="Una raccolta ordinata di libri, paper dottrinali, articoli e contributi online dedicati all’intelligence analysis."
     primaryHref="/contatti/"
     primaryLabel="Richiedi informazioni"
     secondaryHref="/didattica/"
