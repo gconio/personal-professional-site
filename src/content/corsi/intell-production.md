@@ -121,8 +121,3 @@ Al termine del corso i partecipanti dispongono di:
 - strumenti per comunicare giudizi, probabilità, confidence level e incertezze;
 - un modello operativo per trasformare analisi complesse in prodotti chiari, sintetici e orientati alla decisione.
 
-## Informazioni e iscrizione
-
-Quando il corso è erogato tramite Domìni – Scuola di analisi geopolitica, le informazioni operative e l’eventuale pagina di iscrizione sono disponibili sul sito della scuola:
-
-[Corso INTEL Production — Domìni](https://www.scuoladigeopolitica.it/product-page/corso-realizzare-prodotto-intelligence-efficace)
