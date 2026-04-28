@@ -9,7 +9,7 @@ sourceStatus: "Pubblicato su LinkedIn il 25 settembre 2025; copia PDF disponibil
 cover: "/images/publications/linkedin/formazione-analisti-dialogo-irene-piccolo-cover.png"
 pdfUrl: "/docs/pubblicazioni/linkedin/formazione-analisti-dialogo-irene-piccolo.pdf"
 featured: false
-order: 58
+order: 59
 tags:
   - Formazione
   - Analista intelligence
