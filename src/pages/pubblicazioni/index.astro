@@ -28,8 +28,12 @@ const pubblicazioni = (await getCollection('pubblicazione')).sort((a, b) => b.da
             <p class="card-meta">{pubblicazione.data.type} · {pubblicazione.data.year}</p>
             <h3><a href={`/pubblicazioni/${pubblicazione.id}/`}>{pubblicazione.data.title}</a></h3>
             <p>{pubblicazione.data.description}</p>
-            {(pubblicazione.data.isbnPrint || pubblicazione.data.isbnEbook) && (
+            {(pubblicazione.data.publisher || pubblicazione.data.theme || pubblicazione.data.isbnPrint || pubblicazione.data.isbnEbook) && (
               <dl class="publication-card-data">
+                {pubblicazione.data.publisher && <dt>Sede/Editore</dt>}
+                {pubblicazione.data.publisher && <dd>{pubblicazione.data.publisher}</dd>}
+                {pubblicazione.data.theme && <dt>Tema</dt>}
+                {pubblicazione.data.theme && <dd>{pubblicazione.data.theme}</dd>}
                 {pubblicazione.data.isbnPrint && <dt>ISBN cartaceo</dt>}
                 {pubblicazione.data.isbnPrint && <dd>{pubblicazione.data.isbnPrint}</dd>}
                 {pubblicazione.data.isbnEbook && <dt>ISBN ebook</dt>}

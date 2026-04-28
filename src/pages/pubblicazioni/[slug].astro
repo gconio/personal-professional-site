@@ -9,7 +9,8 @@ export async function getStaticPaths() {
 
 const { pubblicazione } = Astro.props;
 const { Content } = await render(pubblicazione);
-const hasFacts = pubblicazione.data.publisher || pubblicazione.data.isbnPrint || pubblicazione.data.isbnEbook || pubblicazione.data.link;
+const hasFacts = pubblicazione.data.publisher || pubblicazione.data.theme || pubblicazione.data.isbnPrint || pubblicazione.data.isbnEbook || pubblicazione.data.link;
+const linkLabel = pubblicazione.data.type.toLowerCase().includes('libro') ? 'Acquista su Youcanprint' : 'Leggi alla fonte originale';
 ---
 <BaseLayout title={`${pubblicazione.data.title} — Pubblicazioni`} description={pubblicazione.data.description}>
   <article class="article-page publication-page">
@@ -49,13 +50,15 @@ const hasFacts = pubblicazione.data.publisher || pubblicazione.data.isbnPrint ||
               {pubblicazione.data.publisher && <dt>Editore</dt>}
               {pubblicazione.data.publisher && <dd>{pubblicazione.data.publisher}</dd>}
               <dt>Anno</dt><dd>{pubblicazione.data.year}</dd>
+              {pubblicazione.data.theme && <dt>Tema</dt>}
+              {pubblicazione.data.theme && <dd>{pubblicazione.data.theme}</dd>}
               {pubblicazione.data.isbnPrint && <dt>ISBN cartaceo</dt>}
                 {pubblicazione.data.isbnPrint && <dd>{pubblicazione.data.isbnPrint}</dd>}
               {pubblicazione.data.isbnEbook && <dt>ISBN ebook</dt>}
                 {pubblicazione.data.isbnEbook && <dd>{pubblicazione.data.isbnEbook}</dd>}
             </dl>
             {pubblicazione.data.link && (
-              <a class="button primary" href={pubblicazione.data.link} target="_blank" rel="noopener noreferrer">Acquista su Youcanprint</a>
+              <a class="button primary" href={pubblicazione.data.link} target="_blank" rel="noopener noreferrer">{linkLabel}</a>
             )}
           </aside>
         )}

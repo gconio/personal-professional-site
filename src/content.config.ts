@@ -36,6 +36,7 @@ const pubblicazione = defineCollection({
     year: z.number(),
     type: z.string(),
     publisher: z.string().optional(),
+    theme: z.string().optional(),
     isbnPrint: z.string().optional(),
     isbnEbook: z.string().optional(),
     cover: z.string().optional(),
