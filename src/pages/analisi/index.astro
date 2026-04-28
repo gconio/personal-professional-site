@@ -3,200 +3,327 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Hero from '../../components/Hero.astro';
 
-const posts = (await getCollection('analisi'))
-  .filter((entry) => !entry.data.draft)
-  .sort((a, b) => {
-    const orderDelta = (a.data.order ?? 99) - (b.data.order ?? 99);
-    if (orderDelta !== 0) return orderDelta;
-    return b.data.date.getTime() - a.data.date.getTime();
-  });
+const analisi = (await getCollection('analisi')).filter((entry) => !entry.data.draft);
+
+const normalize = (value = '') => value.toLowerCase();
+
+const categoryDefinitions = [
+  {
+    id: 'aiaig',
+    title: 'Documenti AIAIG',
+    description: 'Contributi analitici e metodologici pubblicati nell’ambito dell’Associazione Italiana Analisti di Intelligence e Geopolitica, con rimando alla fonte associativa e PDF locale nella scheda.',
+    match: (entry) => normalize(entry.data.publisher || '').includes('associazione italiana analisti di intelligence') || normalize(entry.data.category || '').includes('aiaig')
+  },
+  {
+    id: 'altri',
+    title: 'Altre analisi',
+    description: 'Ulteriori documenti di analisi, note metodologiche e materiali di approfondimento.',
+    match: () => true
+  }
+];
+
+const usedIds = new Set();
+const groups = categoryDefinitions
+  .map((category) => {
+    const items = analisi
+      .filter((post) => {
+        if (usedIds.has(post.id)) return false;
+        return category.match(post);
+      })
+      .sort((a, b) => {
+        const orderDelta = (a.data.order ?? 99) - (b.data.order ?? 99);
+        if (orderDelta !== 0) return orderDelta;
+        return b.data.date.getTime() - a.data.date.getTime() || a.data.title.localeCompare(b.data.title, 'it');
+      });
+
+    items.forEach((item) => usedIds.add(item.id));
+    return { ...category, items };
+  })
+  .filter((category) => category.items.length > 0);
+
+const getActionLabel = () => 'Apri scheda';
+
+const hasLocalPdf = (post) => Boolean(post.data.pdfUrl);
 ---
 <BaseLayout title="Analisi — Lab4Int - Intelligence Analysis Laboratory" description="Documenti di analisi, note metodologiche e contributi pubblicati su AIAIG.">
   <Hero
     eyebrow="Analisi"
     title="Analisi e note metodologiche"
-    description="Documenti pubblicati su AIAIG e contributi dedicati al metodo analitico, alla cultura intelligence e alla responsabilità professionale dell’analista."
+    description="Documenti pubblicati in ambito AIAIG e contributi dedicati al metodo analitico, alla cultura intelligence e alla responsabilità professionale dell’analista."
     primaryHref="/pubblicazioni/"
     primaryLabel="Vedi le pubblicazioni"
     secondaryHref="/contatti/"
     secondaryLabel="Contattami"
   />
 
-  <section class="page-section analysis-library">
-    <div class="analysis-intro">
-      <p>
-        Questa sezione raccoglie contributi analitici e metodologici pubblicati nell’ambito dell’Associazione Italiana Analisti di Intelligence e Geopolitica. Ogni scheda rimanda alla fonte associativa disponibile e conserva una copia PDF consultabile localmente.
-      </p>
-    </div>
-
-    <div class="analysis-grid">
-      {posts.map((post) => (
-        <article class="analysis-card">
-          <a class="analysis-card-cover" href={`/analisi/${post.id}/`} aria-label={`Apri la scheda ${post.data.title}`}>
-            {post.data.cover ? (
-              <img src={post.data.cover} alt={`Copertina: ${post.data.title}`} loading="lazy" />
-            ) : (
-              <span>{post.data.category}</span>
-            )}
-          </a>
-          <div class="analysis-card-content">
-            <p class="analysis-card-meta">{post.data.category} · {post.data.date.getFullYear()}</p>
-            <h2><a href={`/analisi/${post.id}/`}>{post.data.title}</a></h2>
-            <p>{post.data.description}</p>
-            <dl>
-              {post.data.publisher && (
-                <>
-                  <dt>Editore</dt>
-                  <dd>{post.data.publisher}</dd>
-                </>
-              )}
-              {post.data.sourceStatus && (
-                <>
-                  <dt>Disponibilità</dt>
-                  <dd>{post.data.sourceStatus}</dd>
-                </>
-              )}
-            </dl>
-            <div class="analysis-actions">
-              <a class="button primary" href={`/analisi/${post.id}/`}>Apri scheda</a>
-              {post.data.externalUrl && <a class="button secondary" href={post.data.externalUrl} target="_blank" rel="noopener noreferrer">Sito AIAIG</a>}
-            </div>
+  <section class="page-section publications-catalog">
+    {groups.map((group) => (
+      <section class="publication-section" aria-labelledby={`analysis-section-${group.id}`}>
+        <header class="publication-section-header">
+          <p class="eyebrow">{group.items.length} {group.items.length === 1 ? 'elemento' : 'elementi'}</p>
+          <div>
+            <h2 id={`analysis-section-${group.id}`}>{group.title}</h2>
+            <p>{group.description}</p>
           </div>
-        </article>
-      ))}
-    </div>
+        </header>
+
+        <div class="publication-list">
+          {group.items.map((post) => (
+            <article class="publication-item panel">
+              <a class="publication-media" href={`/analisi/${post.id}/`} aria-label={`Apri la scheda ${post.data.title}`}>
+                {post.data.cover ? (
+                  <img src={post.data.cover} alt={`Copertina di ${post.data.title}`} loading="lazy" decoding="async" />
+                ) : (
+                  <span class="publication-placeholder" aria-hidden="true">
+                    <strong>{post.data.category}</strong>
+                    <small>{post.data.date.getFullYear()}</small>
+                  </span>
+                )}
+              </a>
+
+              <div class="publication-body">
+                <div class="publication-kicker">
+                  <span>{post.data.category}</span>
+                  <span>{post.data.date.getFullYear()}</span>
+                  {post.data.featured && <span>In evidenza</span>}
+                  {hasLocalPdf(post) && <span>PDF</span>}
+                </div>
+
+                <h3><a href={`/analisi/${post.id}/`}>{post.data.title}</a></h3>
+                <p>{post.data.description}</p>
+
+                <dl class="publication-metadata">
+                  {post.data.publisher && <><dt>Sede/Editore</dt><dd>{post.data.publisher}</dd></>}
+                  {post.data.license && <><dt>Licenza</dt><dd>{post.data.license}</dd></>}
+                  {post.data.sourceStatus && <><dt>Disponibilità</dt><dd>{post.data.sourceStatus}</dd></>}
+                </dl>
+              </div>
+
+              <div class="publication-action">
+                <a class="publication-button" href={`/analisi/${post.id}/`}>{getActionLabel(post)}</a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+    ))}
   </section>
-</BaseLayout>
 
-<style>
-  .analysis-library {
-    display: grid;
-    gap: 1.5rem;
-  }
-
-  .analysis-intro {
-    max-width: 900px;
-    color: var(--muted);
-    font-size: 1.02rem;
-    line-height: 1.75;
-  }
-
-  .analysis-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-    gap: 1.25rem;
-  }
-
-  .analysis-card {
-    display: grid;
-    grid-template-columns: 150px 1fr;
-    gap: 1.15rem;
-    padding: 1.1rem;
-    border: 1px solid var(--border);
-    border-radius: 22px;
-    background: #fff;
-    box-shadow: var(--shadow-soft);
-  }
-
-  .analysis-card-cover {
-    display: block;
-    align-self: start;
-    border-radius: 16px;
-    overflow: hidden;
-    border: 1px solid var(--border);
-    background: #0b1f33;
-    min-height: 205px;
-  }
-
-  .analysis-card-cover img {
-    display: block;
-    width: 100%;
-    height: 205px;
-    object-fit: cover;
-    object-position: top center;
-  }
-
-  .analysis-card-cover span {
-    min-height: 205px;
-    display: grid;
-    place-items: center;
-    padding: 1rem;
-    color: white;
-    text-align: center;
-    font-weight: 800;
-  }
-
-  .analysis-card-content {
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-  }
-
-  .analysis-card-meta {
-    margin: 0 0 .45rem;
-    color: var(--accent);
-    font-size: .78rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: .13em;
-  }
-
-  .analysis-card h2 {
-    margin: 0 0 .6rem;
-    font-size: clamp(1.25rem, 2vw, 1.65rem);
-    line-height: 1.05;
-  }
-
-  .analysis-card h2 a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  .analysis-card-content > p:not(.analysis-card-meta) {
-    margin: 0 0 .85rem;
-    color: var(--muted);
-    line-height: 1.65;
-  }
-
-  .analysis-card dl {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: .35rem .75rem;
-    margin: 0 0 1rem;
-    font-size: .92rem;
-  }
-
-  .analysis-card dt {
-    font-weight: 800;
-    color: var(--ink);
-  }
-
-  .analysis-card dd {
-    margin: 0;
-    color: var(--muted);
-  }
-
-  .analysis-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: .65rem;
-    margin-top: auto;
-  }
-
-  .analysis-actions .button {
-    padding: .72rem 1rem;
-  }
-
-  @media (max-width: 700px) {
-    .analysis-card {
-      grid-template-columns: 1fr;
+  <style>
+    .publications-catalog {
+      display: grid;
+      gap: 3rem;
+      padding-top: 2.5rem;
     }
 
-    .analysis-card-cover img,
-    .analysis-card-cover span {
+    .publication-section {
+      display: grid;
+      gap: 1.15rem;
+    }
+
+    .publication-section-header {
+      display: grid;
+      grid-template-columns: minmax(120px, 0.22fr) minmax(0, 1fr);
+      gap: 1rem;
+      align-items: start;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .publication-section-header h2 {
+      margin-bottom: 0.45rem;
+      font-size: clamp(1.65rem, 3vw, 2.45rem);
+    }
+
+    .publication-section-header p:last-child {
+      max-width: 780px;
+      margin: 0;
+      color: var(--text-muted);
+    }
+
+    .publication-list {
+      display: grid;
+      gap: 0.95rem;
+    }
+
+    .publication-item {
+      display: grid;
+      grid-template-columns: 112px minmax(0, 1fr) auto;
+      gap: 1rem;
+      align-items: start;
+      padding: 1rem;
+    }
+
+    .publication-media {
+      display: block;
+      width: 112px;
+      min-height: 140px;
+      color: var(--primary);
+    }
+
+    .publication-media img {
+      display: block;
+      width: 100%;
       height: auto;
-      min-height: 0;
-      max-height: 360px;
+      max-height: 148px;
+      object-fit: contain;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--surface-muted);
+      box-shadow: 0 12px 30px rgba(11, 31, 51, 0.12);
     }
-  }
-</style>
+
+    .publication-placeholder {
+      display: flex;
+      min-height: 112px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(184, 155, 94, 0.18), rgba(47, 72, 88, 0.08));
+      text-align: center;
+      box-shadow: 0 12px 30px rgba(11, 31, 51, 0.08);
+    }
+
+    .publication-placeholder strong {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--primary);
+    }
+
+    .publication-placeholder small {
+      color: var(--text-muted);
+      font-weight: 800;
+    }
+
+    .publication-body {
+      display: grid;
+      gap: 0.6rem;
+      min-width: 0;
+    }
+
+    .publication-kicker {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      align-items: center;
+    }
+
+    .publication-kicker span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      background: rgba(184, 155, 94, 0.12);
+      color: var(--accent);
+      font-size: 0.75rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .publication-body h3 {
+      max-width: 720px;
+      font-size: clamp(1.28rem, 2vw, 1.7rem);
+      line-height: 1.05;
+    }
+
+    .publication-body h3 a:hover {
+      color: var(--secondary);
+    }
+
+    .publication-body > p {
+      max-width: 760px;
+      margin: 0;
+      color: var(--text-muted);
+    }
+
+    .publication-metadata {
+      display: grid;
+      grid-template-columns: max-content minmax(0, 1fr);
+      gap: 0.25rem 0.75rem;
+      margin: 0.2rem 0 0;
+      font-size: 0.95rem;
+    }
+
+    .publication-metadata dt {
+      font-weight: 900;
+      color: var(--primary);
+    }
+
+    .publication-metadata dd {
+      margin: 0;
+      color: var(--text-muted);
+    }
+
+    .publication-action {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      align-items: stretch;
+      justify-content: flex-start;
+      min-width: 144px;
+    }
+
+    .publication-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      border: 1px solid var(--primary);
+      padding: 0.65rem 0.9rem;
+      color: var(--primary);
+      font-weight: 900;
+      text-align: center;
+      transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
+    }
+
+    .publication-button:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 760px) {
+      .publication-section-header {
+        grid-template-columns: 1fr;
+      }
+
+      .publication-item {
+        grid-template-columns: 88px minmax(0, 1fr);
+      }
+
+      .publication-media {
+        width: 88px;
+        min-height: 104px;
+      }
+
+      .publication-action {
+        grid-column: 1 / -1;
+        flex-direction: row;
+        flex-wrap: wrap;
+        min-width: 0;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .publication-item {
+        grid-template-columns: 1fr;
+      }
+
+      .publication-media {
+        width: 100%;
+        min-height: 0;
+      }
+
+      .publication-media img,
+      .publication-placeholder {
+        max-width: 160px;
+      }
+    }
+  </style>
+</BaseLayout>
