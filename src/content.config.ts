@@ -47,6 +47,20 @@ const pubblicazione = defineCollection({
   })
 });
 
+
+const commentiManuale = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/commenti-manuale' }),
+  schema: z.object({
+    name: z.string(),
+    role: z.string().optional().default(''),
+    date: z.coerce.date(),
+    published: z.boolean().default(true),
+    featured: z.boolean().default(false),
+    source: z.string().optional().default('Modulo commenti Manuale'),
+    consent: z.boolean().default(true)
+  })
+});
+
 const analisi = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/analisi' }),
   schema: z.object({
@@ -60,4 +74,4 @@ const analisi = defineCollection({
   })
 });
 
-export const collections = { corso, progetto, pubblicazione, analisi };
+export const collections = { corso, progetto, pubblicazione, commentiManuale, analisi };

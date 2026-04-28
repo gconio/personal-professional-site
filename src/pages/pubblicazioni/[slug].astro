@@ -8,10 +8,35 @@ export async function getStaticPaths() {
 }
 
 const { pubblicazione } = Astro.props;
-const { Content } = await render(pubblicazione);
+const { Content: PublicationContent } = await render(pubblicazione);
+
 const hasFacts = pubblicazione.data.publisher || pubblicazione.data.theme || pubblicazione.data.isbnPrint || pubblicazione.data.isbnEbook || pubblicazione.data.link;
 const linkLabel = pubblicazione.data.type.toLowerCase().includes('libro') ? 'Acquista su Youcanprint' : 'Leggi alla fonte originale';
 const isManuale = pubblicazione.id === 'manuale-analisi-intelligence' || pubblicazione.data.title.toLowerCase().includes('manuale per l’analisi intelligence') || pubblicazione.data.title.toLowerCase().includes("manuale per l'analisi intelligence");
+
+const formatCommentDate = (date: Date) =>
+  new Intl.DateTimeFormat('it-IT', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric'
+  }).format(date);
+
+const commentiManuale = isManuale
+  ? (await getCollection('commentiManuale', ({ data }) => data.published && data.consent))
+      .sort((a, b) => {
+        if (a.data.featured !== b.data.featured) {
+          return Number(b.data.featured) - Number(a.data.featured);
+        }
+        return b.data.date.getTime() - a.data.date.getTime();
+      })
+  : [];
+
+const commentiManualeRenderizzati = await Promise.all(
+  commentiManuale.map(async (commento) => {
+    const { Content: CommentContent } = await render(commento);
+    return { commento, CommentContent };
+  })
+);
 ---
 <BaseLayout title={`${pubblicazione.data.title} — Pubblicazioni`} description={pubblicazione.data.description}>
   <article class="article-page publication-page">
@@ -54,9 +79,9 @@ const isManuale = pubblicazione.id === 'manuale-analisi-intelligence' || pubblic
               {pubblicazione.data.theme && <dt>Tema</dt>}
               {pubblicazione.data.theme && <dd>{pubblicazione.data.theme}</dd>}
               {pubblicazione.data.isbnPrint && <dt>ISBN cartaceo</dt>}
-                {pubblicazione.data.isbnPrint && <dd>{pubblicazione.data.isbnPrint}</dd>}
+              {pubblicazione.data.isbnPrint && <dd>{pubblicazione.data.isbnPrint}</dd>}
               {pubblicazione.data.isbnEbook && <dt>ISBN ebook</dt>}
-                {pubblicazione.data.isbnEbook && <dd>{pubblicazione.data.isbnEbook}</dd>}
+              {pubblicazione.data.isbnEbook && <dd>{pubblicazione.data.isbnEbook}</dd>}
             </dl>
             {pubblicazione.data.link && (
               <a class="button primary" href={pubblicazione.data.link} target="_blank" rel="noopener noreferrer">{linkLabel}</a>
@@ -67,7 +92,7 @@ const isManuale = pubblicazione.id === 'manuale-analisi-intelligence' || pubblic
     )}
 
     <div class="prose">
-      <Content />
+      <PublicationContent />
     </div>
 
     {isManuale && (
@@ -85,6 +110,35 @@ const isManuale = pubblicazione.id === 'manuale-analisi-intelligence' || pubblic
       </section>
     )}
 
+    {isManuale && commentiManualeRenderizzati.length > 0 && (
+      <section class="reader-comments-section" aria-labelledby="reader-comments-title">
+        <div class="section-heading">
+          <p class="eyebrow">Commenti dei lettori</p>
+          <h2 id="reader-comments-title">Feedback pubblicati</h2>
+          <p>
+            Una selezione di commenti e riflessioni ricevuti sul volume, pubblicati previa moderazione e consenso.
+          </p>
+        </div>
+
+        <div class="reader-comments-grid">
+          {commentiManualeRenderizzati.map(({ commento, CommentContent }) => (
+            <article class:list={['panel', 'reader-comment-card', { featured: commento.data.featured }]}>
+              <div class="reader-comment-content">
+                <CommentContent />
+              </div>
+              <footer class="reader-comment-footer">
+                <strong>{commento.data.name}</strong>
+                <span>
+                  {commento.data.role ? `${commento.data.role} · ` : ''}
+                  {formatCommentDate(commento.data.date)}
+                </span>
+              </footer>
+            </article>
+          ))}
+        </div>
+      </section>
+    )}
+
     <style>
       .reader-feedback-callout {
         display: flex;
@@ -94,14 +148,67 @@ const isManuale = pubblicazione.id === 'manuale-analisi-intelligence' || pubblic
         margin-top: 2rem;
       }
 
-      .reader-feedback-callout h2 {
+      .reader-feedback-callout h2,
+      .reader-comments-section h2 {
         font-size: clamp(1.8rem, 3vw, 2.35rem);
         margin-bottom: 0.65rem;
       }
 
-      .reader-feedback-callout p {
+      .reader-feedback-callout p,
+      .reader-comments-section .section-heading p {
         color: var(--text-muted);
         margin-bottom: 0;
+      }
+
+      .reader-comments-section {
+        margin-top: 3rem;
+      }
+
+      .reader-comments-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1rem;
+      }
+
+      .reader-comment-card {
+        display: flex;
+        flex-direction: column;
+        gap: 1.1rem;
+        border-left: 4px solid var(--accent);
+      }
+
+      .reader-comment-card.featured {
+        background: linear-gradient(180deg, rgba(184, 155, 94, 0.10), var(--surface));
+      }
+
+      .reader-comment-content {
+        color: var(--text);
+        font-size: 1.02rem;
+      }
+
+      .reader-comment-content p:first-child {
+        margin-top: 0;
+      }
+
+      .reader-comment-content p:last-child {
+        margin-bottom: 0;
+      }
+
+      .reader-comment-footer {
+        margin-top: auto;
+        padding-top: 0.95rem;
+        border-top: 1px solid var(--border);
+        display: grid;
+        gap: 0.2rem;
+      }
+
+      .reader-comment-footer strong {
+        color: var(--primary);
+      }
+
+      .reader-comment-footer span {
+        color: var(--text-muted);
+        font-size: 0.95rem;
       }
 
       @media (max-width: 880px) {
