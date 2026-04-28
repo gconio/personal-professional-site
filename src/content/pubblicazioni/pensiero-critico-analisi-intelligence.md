@@ -4,6 +4,7 @@ description: "Paper dedicato al ruolo del critical thinking nei processi di anal
 year: 2018
 type: "Paper"
 publisher: "Sistema di Informazione per la Sicurezza della Repubblica"
+cover: "/images/publications/sisr/logo-sisr-thumbnail.png"
 theme: "Critical thinking"
 link: "https://www.sicurezzanazionale.gov.it/contenuti/il-pensiero-critico-nellanalisi-intelligence"
 featured: true

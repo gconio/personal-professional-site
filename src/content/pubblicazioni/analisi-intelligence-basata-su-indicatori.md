@@ -4,6 +4,7 @@ description: "Paper dedicato all’impiego degli indicatori nei processi di moni
 year: 2017
 type: "Paper"
 publisher: "Sistema di Informazione per la Sicurezza della Repubblica"
+cover: "/images/publications/sisr/logo-sisr-thumbnail.png"
 theme: "Indicator analysis"
 link: "https://www.sicurezzanazionale.gov.it/contenuti/lanalisi-intelligence-basata-su-indicatori"
 featured: true
