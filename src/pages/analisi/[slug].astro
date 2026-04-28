@@ -11,14 +11,129 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 <BaseLayout title={`${post.data.title} — Analisi`} description={post.data.description}>
-  <article class="article-page">
+  <article class="article-page analysis-detail">
     <header class="article-header">
       <p class="eyebrow">{post.data.category}</p>
       <h1>{post.data.title}</h1>
       <p class="article-meta">{post.data.date.toLocaleDateString('it-IT')} · {post.data.tags.join(', ')}</p>
     </header>
+
+    <section class="analysis-detail-grid">
+      {post.data.cover && (
+        <div class="analysis-detail-media">
+          <img src={post.data.cover} alt={`Copertina: ${post.data.title}`} />
+        </div>
+      )}
+
+      <aside class="analysis-facts" aria-label="Dati del documento">
+        <h2>Dati del documento</h2>
+        <dl>
+          <dt>Categoria</dt>
+          <dd>{post.data.category}</dd>
+          {post.data.publisher && (
+            <>
+              <dt>Editore</dt>
+              <dd>{post.data.publisher}</dd>
+            </>
+          )}
+          <dt>Data</dt>
+          <dd>{post.data.date.toLocaleDateString('it-IT')}</dd>
+          {post.data.license && (
+            <>
+              <dt>Licenza</dt>
+              <dd>{post.data.license}</dd>
+            </>
+          )}
+          {post.data.sourceStatus && (
+            <>
+              <dt>Disponibilità</dt>
+              <dd>{post.data.sourceStatus}</dd>
+            </>
+          )}
+        </dl>
+        <div class="analysis-detail-actions">
+          {post.data.externalUrl && <a class="button secondary" href={post.data.externalUrl} target="_blank" rel="noopener noreferrer">Vai al sito AIAIG</a>}
+          {post.data.pdfUrl && <a class="button primary" href={post.data.pdfUrl} download>Scarica PDF</a>}
+        </div>
+      </aside>
+    </section>
+
     <div class="prose">
       <Content />
     </div>
   </article>
 </BaseLayout>
+
+<style>
+  .analysis-detail-grid {
+    display: grid;
+    grid-template-columns: minmax(220px, 320px) 1fr;
+    gap: 1.5rem;
+    align-items: start;
+    margin: 1.5rem 0 2rem;
+  }
+
+  .analysis-detail-media,
+  .analysis-facts {
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    background: #fff;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .analysis-detail-media {
+    overflow: hidden;
+  }
+
+  .analysis-detail-media img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .analysis-facts {
+    padding: 1.2rem;
+  }
+
+  .analysis-facts h2 {
+    margin: 0 0 1rem;
+    font-size: 1.35rem;
+  }
+
+  .analysis-facts dl {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: .55rem .9rem;
+    margin: 0 0 1.25rem;
+  }
+
+  .analysis-facts dt {
+    font-weight: 800;
+    color: var(--ink);
+  }
+
+  .analysis-facts dd {
+    margin: 0;
+    color: var(--muted);
+  }
+
+  .analysis-detail-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+  }
+
+  .analysis-detail-actions .button {
+    padding: .78rem 1rem;
+  }
+
+  @media (max-width: 780px) {
+    .analysis-detail-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .analysis-detail-media {
+      max-width: 340px;
+    }
+  }
+</style>

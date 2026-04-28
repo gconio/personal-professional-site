@@ -2,33 +2,201 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Hero from '../../components/Hero.astro';
-import Card from '../../components/Card.astro';
 
 const posts = (await getCollection('analisi'))
   .filter((entry) => !entry.data.draft)
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+  .sort((a, b) => {
+    const orderDelta = (a.data.order ?? 99) - (b.data.order ?? 99);
+    if (orderDelta !== 0) return orderDelta;
+    return b.data.date.getTime() - a.data.date.getTime();
+  });
 ---
-<BaseLayout title="Analisi — Lab4Int - Intelligence Analysis Laboratory" description="Note analitiche, riflessioni metodologiche e approfondimenti.">
+<BaseLayout title="Analisi — Lab4Int - Intelligence Analysis Laboratory" description="Documenti di analisi, note metodologiche e contributi pubblicati su AIAIG.">
   <Hero
     eyebrow="Analisi"
-    title="Note analitiche e riflessioni metodologiche"
-    description="Una sezione editoriale pensata per pubblicare contributi su intelligence analysis, SAT, OSINT, conflitti, sicurezza e formazione analitica."
-    primaryHref="/didattica/"
-    primaryLabel="Vedi la didattica"
+    title="Analisi e note metodologiche"
+    description="Documenti pubblicati su AIAIG e contributi dedicati al metodo analitico, alla cultura intelligence e alla responsabilità professionale dell’analista."
+    primaryHref="/pubblicazioni/"
+    primaryLabel="Vedi le pubblicazioni"
     secondaryHref="/contatti/"
     secondaryLabel="Contattami"
   />
-  <section class="page-section">
-    <div class="grid-three">
+
+  <section class="page-section analysis-library">
+    <div class="analysis-intro">
+      <p>
+        Questa sezione raccoglie contributi analitici e metodologici pubblicati nell’ambito dell’Associazione Italiana Analisti di Intelligence e Geopolitica. Ogni scheda rimanda alla fonte associativa disponibile e conserva una copia PDF consultabile localmente.
+      </p>
+    </div>
+
+    <div class="analysis-grid">
       {posts.map((post) => (
-        <Card
-          href={`/analisi/${post.id}/`}
-          title={post.data.title}
-          meta={`${post.data.category} · ${post.data.date.toLocaleDateString('it-IT')}`}
-          description={post.data.description}
-          cta="Leggi"
-        />
+        <article class="analysis-card">
+          <a class="analysis-card-cover" href={`/analisi/${post.id}/`} aria-label={`Apri la scheda ${post.data.title}`}>
+            {post.data.cover ? (
+              <img src={post.data.cover} alt={`Copertina: ${post.data.title}`} loading="lazy" />
+            ) : (
+              <span>{post.data.category}</span>
+            )}
+          </a>
+          <div class="analysis-card-content">
+            <p class="analysis-card-meta">{post.data.category} · {post.data.date.getFullYear()}</p>
+            <h2><a href={`/analisi/${post.id}/`}>{post.data.title}</a></h2>
+            <p>{post.data.description}</p>
+            <dl>
+              {post.data.publisher && (
+                <>
+                  <dt>Editore</dt>
+                  <dd>{post.data.publisher}</dd>
+                </>
+              )}
+              {post.data.sourceStatus && (
+                <>
+                  <dt>Disponibilità</dt>
+                  <dd>{post.data.sourceStatus}</dd>
+                </>
+              )}
+            </dl>
+            <div class="analysis-actions">
+              <a class="button primary" href={`/analisi/${post.id}/`}>Apri scheda</a>
+              {post.data.externalUrl && <a class="button secondary" href={post.data.externalUrl} target="_blank" rel="noopener noreferrer">Sito AIAIG</a>}
+            </div>
+          </div>
+        </article>
       ))}
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .analysis-library {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .analysis-intro {
+    max-width: 900px;
+    color: var(--muted);
+    font-size: 1.02rem;
+    line-height: 1.75;
+  }
+
+  .analysis-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .analysis-card {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 1.15rem;
+    padding: 1.1rem;
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    background: #fff;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .analysis-card-cover {
+    display: block;
+    align-self: start;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: #0b1f33;
+    min-height: 205px;
+  }
+
+  .analysis-card-cover img {
+    display: block;
+    width: 100%;
+    height: 205px;
+    object-fit: cover;
+    object-position: top center;
+  }
+
+  .analysis-card-cover span {
+    min-height: 205px;
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    color: white;
+    text-align: center;
+    font-weight: 800;
+  }
+
+  .analysis-card-content {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .analysis-card-meta {
+    margin: 0 0 .45rem;
+    color: var(--accent);
+    font-size: .78rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .13em;
+  }
+
+  .analysis-card h2 {
+    margin: 0 0 .6rem;
+    font-size: clamp(1.25rem, 2vw, 1.65rem);
+    line-height: 1.05;
+  }
+
+  .analysis-card h2 a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .analysis-card-content > p:not(.analysis-card-meta) {
+    margin: 0 0 .85rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  .analysis-card dl {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: .35rem .75rem;
+    margin: 0 0 1rem;
+    font-size: .92rem;
+  }
+
+  .analysis-card dt {
+    font-weight: 800;
+    color: var(--ink);
+  }
+
+  .analysis-card dd {
+    margin: 0;
+    color: var(--muted);
+  }
+
+  .analysis-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .65rem;
+    margin-top: auto;
+  }
+
+  .analysis-actions .button {
+    padding: .72rem 1rem;
+  }
+
+  @media (max-width: 700px) {
+    .analysis-card {
+      grid-template-columns: 1fr;
+    }
+
+    .analysis-card-cover img,
+    .analysis-card-cover span {
+      height: auto;
+      min-height: 0;
+      max-height: 360px;
+    }
+  }
+</style>

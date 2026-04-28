@@ -69,9 +69,16 @@ const analisi = defineCollection({
     description: z.string(),
     date: z.coerce.date(),
     category: z.string(),
+    publisher: z.string().optional(),
+    sourceStatus: z.string().optional(),
+    externalUrl: z.string().optional(),
+    pdfUrl: z.string().optional(),
+    cover: z.string().optional(),
+    license: z.string().optional(),
     tags: z.array(z.string()).default([]),
     featured: z.boolean().default(false),
-    draft: z.boolean().default(false)
+    draft: z.boolean().default(false),
+    order: z.number().default(99)
   })
 });
 
