@@ -174,3 +174,10 @@ Il suo valore risiede nella capacità di integrare:
 - valutazione strutturata del processo e del prodotto.
 
 In questo senso, il progetto rappresenta uno strumento formativo completo per sviluppare competenze analitiche, operative e comunicative in contesti complessi, avvicinando i partecipanti alle pressioni e alle responsabilità tipiche del lavoro intelligence.
+
+## La piattaforma in sintesi
+
+<figure style="text-align: center; margin: 2rem 0 0;">
+  <img src="/images/courses/simulazioni-intelligence-crisis-management.png" alt="Schermata della piattaforma per simulazioni intelligence e crisis management" style="display: block; width: 100%; max-width: 100%; height: auto; margin: 0 auto; border-radius: 14px; box-shadow: 0 14px 36px rgba(11, 31, 51, 0.18);" />
+  <figcaption style="margin-top: 0.75rem; color: #5b6473; font-size: 0.95rem;">Ambiente digitale per simulazioni intelligence, training analitico e gestione di scenari controllati.</figcaption>
+</figure>
