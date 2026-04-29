@@ -21,6 +21,9 @@ const linkLabel = pubblicazione.data.type.toLowerCase().includes('libro')
     : 'Leggi alla fonte originale';
 const isManuale = pubblicazione.id === 'manuale-analisi-intelligence' || pubblicazione.data.title.toLowerCase().includes('manuale per l’analisi intelligence') || pubblicazione.data.title.toLowerCase().includes("manuale per l'analisi intelligence");
 const availability = pubblicazione.data.sourceStatus || (isPublisherOffline ? 'Il sito dell’editore non è più online; il PDF è quindi reso disponibile in download locale.' : '');
+const manualPreviewIndexPdf = pubblicazione.data.previewIndexPdf;
+const manualPreviewSamplePdf = pubblicazione.data.previewSamplePdf;
+const hasManualPreview = isManuale && (manualPreviewIndexPdf || manualPreviewSamplePdf);
 
 const formatCommentDate = (date: Date) =>
   new Intl.DateTimeFormat('it-IT', {
@@ -112,6 +115,55 @@ const commentiManualeRenderizzati = await Promise.all(
       <PublicationContent />
     </div>
 
+    {hasManualPreview && (
+      <section class="manual-preview-section" id="estratto-manuale" aria-labelledby="manual-preview-title">
+        <div class="section-heading manual-preview-heading">
+          <p class="eyebrow">Estratto dimostrativo</p>
+          <h2 id="manual-preview-title">Sfoglia un estratto del Manuale</h2>
+          <p>
+            Consulta l’indice del volume e alcune pagine selezionate. L’estratto è pubblicato a solo scopo informativo
+            e non sostituisce l’edizione completa disponibile presso l’editore.
+          </p>
+        </div>
+
+        <div class="manual-preview-grid">
+          {manualPreviewIndexPdf && (
+            <article class="panel manual-preview-card manual-preview-card-index">
+              <header>
+                <p class="card-meta">Da visualizzare per primo</p>
+                <h3>Indice del volume</h3>
+                <p>La struttura completa del Manuale: parti, capitoli, sezioni e bibliografia.</p>
+              </header>
+              <iframe
+                class="manual-pdf-viewer"
+                src={`${manualPreviewIndexPdf}#toolbar=1&navpanes=0&view=FitH`}
+                title="Indice del Manuale per l’analisi intelligence"
+                loading="lazy"
+              ></iframe>
+              <a class="button secondary" href={manualPreviewIndexPdf} target="_blank" rel="noopener noreferrer">Apri l’indice in nuova scheda</a>
+            </article>
+          )}
+
+          {manualPreviewSamplePdf && (
+            <article class="panel manual-preview-card">
+              <header>
+                <p class="card-meta">Pagine selezionate</p>
+                <h3>Estratto di lettura</h3>
+                <p>Alcune pagine dimostrative tratte dal volume, incluse prefazione, introduzione e sezioni iniziali.</p>
+              </header>
+              <iframe
+                class="manual-pdf-viewer"
+                src={`${manualPreviewSamplePdf}#toolbar=1&navpanes=0&view=FitH`}
+                title="Estratto del Manuale per l’analisi intelligence"
+                loading="lazy"
+              ></iframe>
+              <a class="button secondary" href={manualPreviewSamplePdf} target="_blank" rel="noopener noreferrer">Apri l’estratto in nuova scheda</a>
+            </article>
+          )}
+        </div>
+      </section>
+    )}
+
     {isManuale && (
       <section class="panel reader-feedback-callout" aria-labelledby="reader-feedback-title">
         <div>
@@ -157,6 +209,76 @@ const commentiManualeRenderizzati = await Promise.all(
     )}
 
     <style>
+
+      .manual-preview-section {
+        margin-top: 3rem;
+      }
+
+      .manual-preview-heading {
+        margin-bottom: 1.15rem;
+      }
+
+      .manual-preview-heading p:last-child {
+        max-width: 840px;
+        color: var(--text-muted);
+      }
+
+      .manual-preview-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+        align-items: start;
+      }
+
+      .manual-preview-card {
+        display: grid;
+        gap: 1rem;
+        padding: 1rem;
+      }
+
+      .manual-preview-card header {
+        display: grid;
+        gap: 0.35rem;
+      }
+
+      .manual-preview-card h3 {
+        font-size: clamp(1.35rem, 2vw, 1.8rem);
+      }
+
+      .manual-preview-card p {
+        color: var(--text-muted);
+        margin: 0;
+      }
+
+      .manual-preview-card-index {
+        border-left: 4px solid var(--accent);
+      }
+
+      .manual-pdf-viewer {
+        width: 100%;
+        min-height: 620px;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        background: var(--surface-muted);
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+      }
+
+      @media (max-width: 980px) {
+        .manual-preview-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .manual-pdf-viewer {
+          min-height: 560px;
+        }
+      }
+
+      @media (max-width: 620px) {
+        .manual-pdf-viewer {
+          min-height: 480px;
+        }
+      }
+
       .reader-feedback-callout {
         display: flex;
         align-items: center;

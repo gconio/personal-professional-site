@@ -44,6 +44,8 @@ const pubblicazione = defineCollection({
     isbnEbook: z.string().optional(),
     cover: z.string().optional(),
     formatsImage: z.string().optional(),
+    previewIndexPdf: z.string().optional(),
+    previewSamplePdf: z.string().optional(),
     link: z.string().optional(),
     pdfUrl: z.string().optional(),
     featured: z.boolean().default(false),

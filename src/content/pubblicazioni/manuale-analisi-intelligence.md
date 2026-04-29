@@ -8,6 +8,8 @@ isbnPrint: "9791224018452"
 isbnEbook: "9791224018469"
 cover: "/images/publications/manuale-analisi-intelligence.png"
 formatsImage: "/images/publications/manuale-analisi-intelligence-formati.png"
+previewIndexPdf: "/docs/pubblicazioni/manuale-preview/manuale-indice.pdf"
+previewSamplePdf: "/docs/pubblicazioni/manuale-preview/manuale-estratto-pagine.pdf"
 link: "https://store.youcanprint.it/manuale-per-lanalisi-intelligence/b/668ffb08-c9b9-5762-85bf-a2cf09d01538"
 featured: true
 order: 1
