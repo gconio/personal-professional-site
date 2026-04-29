@@ -6,7 +6,7 @@
 - Brand: Lab4Int - Intelligence Analysis Laboratory
 - Sottotitolo: Analisi intelligence, formazione avanzata e cultura strategica
 - Lingua principale: Italiano
-- Email pubblica: giovanni.conio@proton.me
+- Email pubblica: info@lab4int.com
 - LinkedIn: https://www.linkedin.com/in/giovanni-conio-624b82b0
 
 
