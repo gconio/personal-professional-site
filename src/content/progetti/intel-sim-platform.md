@@ -61,6 +61,29 @@ La simulazione non è impostata come competizione diretta tra team contrapposti.
 
 La piattaforma prevede una distinzione funzionale tra più ruoli operativi.
 
+## Viste amministrative della piattaforma
+
+Le schermate seguenti mostrano alcune aree di configurazione e gestione disponibili per il profilo amministratore: setup del workspace, costruzione dello scenario, catalogo dei team e parametri di valutazione.
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+  <figure style="margin: 0;">
+    <img src="/images/projects/intelsim/intelsim-admin-platform-setup.png" alt="Vista Admin della sezione Platform Setup della piattaforma Intel Sim" style="display: block; width: 100%; height: auto; border-radius: 14px; box-shadow: 0 12px 32px rgba(11, 31, 51, 0.16);" />
+    <figcaption style="margin-top: 0.65rem; color: #5b6473; font-size: 0.92rem;">Platform Setup: configurazione di naming, messaggi operativi e impostazioni del workspace.</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/images/projects/intelsim/intelsim-admin-scenario-builder.png" alt="Vista Admin dello Scenario Builder della piattaforma Intel Sim" style="display: block; width: 100%; height: auto; border-radius: 14px; box-shadow: 0 12px 32px rgba(11, 31, 51, 0.16);" />
+    <figcaption style="margin-top: 0.65rem; color: #5b6473; font-size: 0.92rem;">Scenario Builder: ambiente di authoring per creare overview, fasi, attivazioni, timeline e validazioni.</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/images/projects/intelsim/intelsim-admin-team-catalog.png" alt="Vista Admin del Team Catalog della piattaforma Intel Sim" style="display: block; width: 100%; height: auto; border-radius: 14px; box-shadow: 0 12px 32px rgba(11, 31, 51, 0.16);" />
+    <figcaption style="margin-top: 0.65rem; color: #5b6473; font-size: 0.92rem;">Team Catalog: gestione del catalogo globale dei team e dei relativi stati di attivazione.</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/images/projects/intelsim/intelsim-admin-evaluation.png" alt="Vista Admin della sezione Valutazione della piattaforma Intel Sim" style="display: block; width: 100%; height: auto; border-radius: 14px; box-shadow: 0 12px 32px rgba(11, 31, 51, 0.16);" />
+    <figcaption style="margin-top: 0.65rem; color: #5b6473; font-size: 0.92rem;">Valutazione: configurazione dei profili standard, delle policy QVA/VDR e dei checkpoint.</figcaption>
+  </figure>
+</div>
+
 ### Amministratore
 
 Configura scenari, partecipanti, sessioni, documenti, team, parametri di valutazione e risorse disponibili.
@@ -68,6 +91,11 @@ Configura scenari, partecipanti, sessioni, documenti, team, parametri di valutaz
 ### Game Control / Controller
 
 Gestisce lo scenario durante l’esercitazione, distribuisce inject e aggiornamenti, interpreta attori esterni, decisore, ambiente operativo e Red Team, valuta le richieste dei team e controlla la progressione temporale.
+
+<figure style="text-align: center; margin: 1.5rem 0;">
+  <img src="/images/projects/intelsim/intelsim-controller-overview.png" alt="Vista Controller dell'overview sessione nella piattaforma Intel Sim" style="display: block; width: 100%; max-width: 100%; height: auto; margin: 0 auto; border-radius: 14px; box-shadow: 0 14px 36px rgba(11, 31, 51, 0.18);" />
+  <figcaption style="margin-top: 0.75rem; color: #5b6473; font-size: 0.95rem;">Controller Overview: quadro di sessione, banner live, team partecipanti e sintesi operativa.</figcaption>
+</figure>
 
 ### Team partecipanti
 
@@ -91,6 +119,17 @@ Durante l’attività i team ricevono inject secondo una timeline controllata. G
 - comunicazioni del Game Control.
 
 Ogni inject può contenere informazioni pertinenti, incomplete, fuorvianti, contraddittorie, strumentali o deliberatamente false. Una parte del flusso informativo può essere costruita come rumore, deception o disinformazione, così da verificare la capacità dei team di non reagire impulsivamente, evitare salti logici e controllare coerenza delle fonti, narrativa e indicatori.
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+  <figure style="margin: 0;">
+    <img src="/images/projects/intelsim/intelsim-controller-timeline.png" alt="Vista Controller della timeline scenario nella piattaforma Intel Sim" style="display: block; width: 100%; height: auto; border-radius: 14px; box-shadow: 0 12px 32px rgba(11, 31, 51, 0.16);" />
+    <figcaption style="margin-top: 0.65rem; color: #5b6473; font-size: 0.92rem;">Timeline scenario: visualizzazione delle fasi, degli inject e dei checkpoint lungo la progressione temporale.</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/images/projects/intelsim/intelsim-controller-injects.png" alt="Vista Controller degli inject schedulati nella piattaforma Intel Sim" style="display: block; width: 100%; height: auto; border-radius: 14px; box-shadow: 0 12px 32px rgba(11, 31, 51, 0.16);" />
+    <figcaption style="margin-top: 0.65rem; color: #5b6473; font-size: 0.92rem;">Inject schedulati: monitoraggio e rilascio controllato degli input informativi ai team.</figcaption>
+  </figure>
+</div>
 
 ## Output richiesti
 
@@ -143,6 +182,11 @@ Il QVA valuta la qualità dei prodotti consegnati, prendendo in considerazione:
 - gestione dell’incertezza.
 
 Ogni prodotto può essere valutato su una scala complessiva, associando punteggi e descrittori qualitativi. L’obiettivo non è soltanto assegnare un risultato finale, ma rendere la valutazione una componente attiva dell’apprendimento.
+
+<figure style="text-align: center; margin: 1.5rem 0;">
+  <img src="/images/projects/intelsim/intelsim-controller-evaluation.png" alt="Vista Controller della valutazione sessione nella piattaforma Intel Sim" style="display: block; width: 100%; max-width: 100%; height: auto; margin: 0 auto; border-radius: 14px; box-shadow: 0 14px 36px rgba(11, 31, 51, 0.18);" />
+  <figcaption style="margin-top: 0.75rem; color: #5b6473; font-size: 0.95rem;">Valutazione sessione: controllo delle risorse VDR, degli output da valutare e dei checkpoint.</figcaption>
+</figure>
 
 ## Debriefing finale
 
