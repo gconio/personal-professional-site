@@ -68,15 +68,6 @@ const commentiManualeRenderizzati = await Promise.all(
               loading="eager"
               decoding="async"
             />
-            {pubblicazione.data.formatsImage && (
-              <img
-                src={pubblicazione.data.formatsImage}
-                alt="Formati disponibili del Manuale per l’analisi intelligence"
-                class="publication-formats-image"
-                loading="lazy"
-                decoding="async"
-              />
-            )}
           </aside>
         )}
 
