@@ -15,6 +15,11 @@ Il progetto nasce dall’esigenza di offrire uno strumento strutturato per simul
 
 La piattaforma non è concepita come semplice contenitore di materiali didattici, ma come **ambiente operativo di esercitazione**, nel quale scenari, inject, documenti, richieste informative, checkpoint e valutazioni concorrono a riprodurre in modo realistico le dinamiche dell’analisi intelligence applicata a crisi politiche, geopolitiche, ibride, cyber, infrastrutturali o securitarie.
 
+<figure style="text-align: center; margin: 1.75rem 0 2rem;">
+  <img src="/images/courses/simulazioni-intelligence-crisis-management.png" alt="Schermata di accesso alla piattaforma per simulazioni intelligence e crisis management" style="display: block; width: 100%; max-width: 100%; height: auto; margin: 0 auto; border-radius: 14px; box-shadow: 0 14px 36px rgba(11, 31, 51, 0.18);" />
+  <figcaption style="margin-top: 0.75rem; color: #5b6473; font-size: 0.95rem;">Accesso alla piattaforma Intel Sim: ambiente digitale per simulazioni intelligence, training analitico e gestione di scenari controllati.</figcaption>
+</figure>
+
 ## Finalità
 
 La finalità principale è supportare attività formative basate su simulazione, consentendo ai partecipanti di sperimentare in modo guidato l’intero ciclo del lavoro analitico:
@@ -234,10 +239,3 @@ Il suo valore risiede nella capacità di integrare:
 - valutazione strutturata del processo e del prodotto.
 
 In questo senso, il progetto rappresenta uno strumento formativo completo per sviluppare competenze analitiche, operative e comunicative in contesti complessi, avvicinando i partecipanti alle pressioni e alle responsabilità tipiche del lavoro intelligence.
-
-## La piattaforma in sintesi
-
-<figure style="text-align: center; margin: 2rem 0 0;">
-  <img src="/images/courses/simulazioni-intelligence-crisis-management.png" alt="Schermata della piattaforma per simulazioni intelligence e crisis management" style="display: block; width: 100%; max-width: 100%; height: auto; margin: 0 auto; border-radius: 14px; box-shadow: 0 14px 36px rgba(11, 31, 51, 0.18);" />
-  <figcaption style="margin-top: 0.75rem; color: #5b6473; font-size: 0.95rem;">Ambiente digitale per simulazioni intelligence, training analitico e gestione di scenari controllati.</figcaption>
-</figure>
