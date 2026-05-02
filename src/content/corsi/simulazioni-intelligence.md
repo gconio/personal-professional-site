@@ -10,7 +10,9 @@ order: 4
 ---
 
 <figure style="text-align: center; margin: 1.5rem 0; max-width: 100%;">
-  <img src="/images/courses/simulazioni-intelligence-crisis-management-login.png" alt="Schermata della piattaforma Intel Sim Platform per simulazioni intelligence e crisis management" style="display: block; width: 100%; max-width: 100%; height: auto; margin: 0 auto; border-radius: 14px; box-shadow: 0 14px 36px rgba(11, 31, 51, 0.18);" />
+  <a href="/images/courses/simulazioni-intelligence-crisis-management-workspace.png" target="_blank" rel="noopener noreferrer" aria-label="Apri l’immagine della piattaforma Intel Sim a dimensione piena">
+    <img src="/images/courses/simulazioni-intelligence-crisis-management-workspace.png" alt="Analista al lavoro sulla piattaforma Intel Sim Platform per simulazioni intelligence e crisis management" style="display: block; width: 100%; max-width: 100%; height: auto; margin: 0 auto; border-radius: 14px; box-shadow: 0 14px 36px rgba(11, 31, 51, 0.18);" />
+  </a>
   <figcaption style="margin-top: 0.75rem; color: #5b6473; font-size: 0.95rem;">Ambiente digitale per simulazioni intelligence, training analitico e gestione di scenari controllati.</figcaption>
 </figure>
 
