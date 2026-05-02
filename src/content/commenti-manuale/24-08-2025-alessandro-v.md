@@ -1,7 +1,7 @@
 ---
 name: "Alessandro Vivaldi"
 role: ""
-date: "2025-08-22"
+date: "2025-08-24"
 published: true
 featured: false
 source: "Modulo commenti Manuale"
