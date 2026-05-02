@@ -16,7 +16,7 @@ Il progetto nasce dall’esigenza di offrire uno strumento strutturato per simul
 La piattaforma non è concepita come semplice contenitore di materiali didattici, ma come **ambiente operativo di esercitazione**, nel quale scenari, inject, documenti, richieste informative, checkpoint e valutazioni concorrono a riprodurre in modo realistico le dinamiche dell’analisi intelligence applicata a crisi politiche, geopolitiche, ibride, cyber, infrastrutturali o securitarie.
 
 <figure style="text-align: center; margin: 1.75rem 0 2rem;">
-  <img src="/images/courses/simulazioni-intelligence-crisis-management.png" alt="Schermata di accesso alla piattaforma per simulazioni intelligence e crisis management" style="display: block; width: 100%; max-width: 100%; height: auto; margin: 0 auto; border-radius: 14px; box-shadow: 0 14px 36px rgba(11, 31, 51, 0.18);" />
+  <img src="/images/projects/intelsim/intelsim-login-access.png" alt="Schermata di accesso alla piattaforma per simulazioni intelligence e crisis management" style="display: block; width: 100%; max-width: 100%; height: auto; margin: 0 auto; border-radius: 14px; box-shadow: 0 14px 36px rgba(11, 31, 51, 0.18);" />
   <figcaption style="margin-top: 0.75rem; color: #5b6473; font-size: 0.95rem;">Accesso alla piattaforma Intel Sim: ambiente digitale per simulazioni intelligence, training analitico e gestione di scenari controllati.</figcaption>
 </figure>
 
