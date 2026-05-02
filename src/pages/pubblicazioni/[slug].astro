@@ -35,10 +35,9 @@ const formatCommentDate = (date: Date) =>
 const commentiManuale = isManuale
   ? (await getCollection('commentiManuale', ({ data }) => data.published && data.consent))
       .sort((a, b) => {
-        if (a.data.featured !== b.data.featured) {
-          return Number(b.data.featured) - Number(a.data.featured);
-        }
-        return b.data.date.getTime() - a.data.date.getTime();
+        const dateDelta = b.data.date.getTime() - a.data.date.getTime();
+        if (dateDelta !== 0) return dateDelta;
+        return b.id.localeCompare(a.id, 'it');
       })
   : [];
 
@@ -296,13 +295,13 @@ const commentiManualeRenderizzati = await Promise.all(
 
       .reader-comments-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 1rem;
+        grid-template-columns: 1fr;
+        gap: 1.15rem;
       }
 
       .reader-comment-card {
-        display: flex;
-        flex-direction: column;
+        width: 100%;
+        display: grid;
         gap: 1.1rem;
         border-left: 4px solid var(--accent);
       }
@@ -325,7 +324,7 @@ const commentiManualeRenderizzati = await Promise.all(
       }
 
       .reader-comment-footer {
-        margin-top: auto;
+        margin-top: 0.25rem;
         padding-top: 0.95rem;
         border-top: 1px solid var(--border);
         display: grid;
