@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://giovanni.conio.lab4int.com/sitemap-index.xml
