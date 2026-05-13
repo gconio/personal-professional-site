@@ -66,4 +66,24 @@ const commentiManuale = defineCollection({
   })
 });
 
-export const collections = { corso, progetto, pubblicazione, commentiManuale };
+
+const risorsa = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/risorse' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    type: z.string(),
+    author: z.string().optional().default(''),
+    institution: z.string().optional().default(''),
+    year: z.number().optional(),
+    category: z.string(),
+    level: z.string(),
+    language: z.string(),
+    link: z.string().url().optional(),
+    tags: z.array(z.string()).default([]),
+    featured: z.boolean().default(false),
+    order: z.number().default(99)
+  })
+});
+
+export const collections = { corso, progetto, pubblicazione, commentiManuale, risorsa };
