@@ -14,15 +14,15 @@ import SectionHeading from '../components/SectionHeading.astro';
     description="Uno spazio moderato per raccogliere commenti, recensioni e riflessioni sul volume Manuale per l’analisi intelligence. I contributi più significativi potranno essere pubblicati previa valutazione e consenso."
     primaryHref="/pubblicazioni/manuale-analisi-intelligence/"
     primaryLabel="Torna al libro"
-    secondaryHref="/contatti/"
-    secondaryLabel="Contatti"
+    secondaryHref="/privacy-cookie-policy/"
+    secondaryLabel="Privacy & Cookie Policy"
   />
 
   <section class="page-section compact-section">
     <SectionHeading
       eyebrow="Invia un contributo"
       title="Lascia un commento o una breve recensione"
-      description="Il messaggio arriverà direttamente all’indirizzo info@lab4int.com. L’email non sarà pubblicata; servirà solo per eventuale contatto o verifica."
+      description="Il messaggio arriverà all’indirizzo info@lab4int.com tramite FormSubmit. L’email non sarà pubblicata; sarà usata solo per eventuale contatto, verifica o gestione della richiesta."
     />
 
     <div class="feedback-layout">
@@ -35,10 +35,17 @@ import SectionHeading from '../components/SectionHeading.astro';
         <input type="hidden" name="_template" value="table" />
         <input type="hidden" name="_captcha" value="true" />
         <input type="hidden" name="_next" value="https://giovanni.conio.lab4int.com/commento-inviato/" />
+        <input type="hidden" name="origine" value="Modulo commenti Manuale - giovanni.conio.lab4int.com" />
         <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="feedback-honeypot" aria-hidden="true" />
 
+        <p class="form-note">
+          I commenti sono soggetti a moderazione prima dell’eventuale pubblicazione.
+          L’indirizzo email non sarà pubblicato. Saranno eventualmente visibili solo il nome indicato,
+          l’eventuale ruolo/organizzazione e il testo del commento.
+        </p>
+
         <label>
-          Nome e cognome
+          Nome visualizzato / nome e cognome
           <input type="text" name="nome" autocomplete="name" required />
         </label>
 
@@ -59,12 +66,19 @@ import SectionHeading from '../components/SectionHeading.astro';
 
         <label class="feedback-checkbox">
           <input type="checkbox" name="consenso_pubblicazione" value="sì" required />
-          <span>Autorizzo la possibile pubblicazione del commento, previa moderazione. L’email non sarà pubblicata.</span>
+          <span>
+            Autorizzo la possibile pubblicazione del commento sul sito, previa moderazione editoriale.
+            Sono consapevole che l’email non sarà pubblicata.
+          </span>
         </label>
 
         <label class="feedback-checkbox">
-          <input type="checkbox" name="consenso_trattamento" value="sì" required />
-          <span>Confermo di aver compreso che i dati saranno usati solo per ricevere, valutare e gestire il commento inviato.</span>
+          <input type="checkbox" name="presa_visione_privacy" value="sì" required />
+          <span>
+            Ho letto la <a href="/privacy-cookie-policy/" target="_blank" rel="noopener noreferrer">Privacy & Cookie Policy</a>
+            e autorizzo il trattamento dei dati inseriti per l’invio, la ricezione, la valutazione,
+            la moderazione e l’eventuale pubblicazione del commento.
+          </span>
         </label>
 
         <button class="button primary" type="submit">Invia commento</button>
@@ -75,6 +89,11 @@ import SectionHeading from '../components/SectionHeading.astro';
         <p>
           I commenti non vengono pubblicati automaticamente. Questo consente di mantenere il sito ordinato,
           coerente con il profilo professionale di Lab4Int e protetto da spam o contenuti non pertinenti.
+        </p>
+        <h3>Dati visibili</h3>
+        <p>
+          In caso di pubblicazione saranno visibili solo il nome indicato, l’eventuale ruolo/organizzazione
+          e il testo del commento. L’indirizzo email resterà riservato.
         </p>
         <h3>Cosa puoi inviare</h3>
         <ul>
@@ -98,6 +117,15 @@ import SectionHeading from '../components/SectionHeading.astro';
     .feedback-form {
       display: grid;
       gap: 1rem;
+    }
+
+    .form-note {
+      margin: 0;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 0.85rem 0.95rem;
+      color: var(--text-muted);
+      background: rgba(15, 23, 42, 0.03);
     }
 
     .feedback-form label {
@@ -138,6 +166,10 @@ import SectionHeading from '../components/SectionHeading.astro';
     .feedback-checkbox input {
       width: auto;
       margin-top: 0.35rem;
+    }
+
+    .feedback-checkbox a {
+      font-weight: 800;
     }
 
     .feedback-note h3 {

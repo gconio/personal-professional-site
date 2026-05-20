@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+---
+
+<BaseLayout
+  title="Note legali — Lab4Int"
+  description="Note legali, disclaimer e condizioni d’uso dei contenuti pubblicati sul sito personale/professionale Lab4Int."
+>
+  <Hero
+    eyebrow="Trasparenza"
+    title="Note legali"
+    description="Indicazioni sull’uso dei contenuti, responsabilità, fonti, collegamenti esterni e proprietà intellettuale."
+    primaryHref="/privacy-cookie-policy/"
+    primaryLabel="Privacy & Cookie Policy"
+    secondaryHref="/contatti/"
+    secondaryLabel="Contatti"
+  />
+
+  <section class="page-section compact-section legal-page">
+    <SectionHeading
+      eyebrow="Condizioni d’uso"
+      title="Uso del sito e dei contenuti"
+      description="Il sito raccoglie materiali, pubblicazioni, informazioni professionali e contributi dedicati all’analisi intelligence, alla formazione avanzata e alla cultura strategica."
+    />
+
+    <article class="panel legal-panel">
+      <h2>1. Natura del sito</h2>
+      <p>
+        giovanni.conio.lab4int.com è un sito personale/professionale riconducibile a Giovanni CONIO —
+        Lab4Int - Intelligence Analysis Laboratory. I contenuti pubblicati hanno finalità informative,
+        didattiche, divulgative, culturali e professionali.
+      </p>
+
+      <h2>2. Assenza di consulenza specifica</h2>
+      <p>
+        I materiali presenti sul sito non costituiscono consulenza legale, finanziaria, operativa,
+        istituzionale o di sicurezza. Le analisi, gli articoli, i materiali didattici e le riflessioni pubblicate
+        devono essere intesi come contributi culturali e professionali, non come indicazioni vincolanti
+        o istruzioni operative applicabili a casi concreti senza adeguata valutazione specialistica.
+      </p>
+
+      <h2>3. Opinioni e responsabilità</h2>
+      <p>
+        Salvo diversa indicazione, opinioni, valutazioni e interpretazioni espresse nei contenuti del sito
+        sono personali dell’autore e non rappresentano necessariamente posizioni ufficiali di enti,
+        istituzioni, organizzazioni, università, associazioni o soggetti terzi con cui l’autore abbia avuto
+        o abbia rapporti professionali, accademici, culturali o collaborativi.
+      </p>
+
+      <h2>4. Proprietà intellettuale</h2>
+      <p>
+        Salvo diversa indicazione, testi, materiali, schede, articoli, elaborati, immagini, documenti e contenuti
+        pubblicati sul sito sono protetti dal diritto d’autore. È consentita la citazione di brevi estratti con
+        indicazione dell’autore e link alla fonte. Non è consentita la riproduzione integrale, la distribuzione
+        sistematica, la modifica o l’uso commerciale dei contenuti senza preventiva autorizzazione.
+      </p>
+
+      <h2>5. Materiali di terzi, loghi e marchi</h2>
+      <p>
+        Eventuali marchi, loghi, denominazioni, immagini, riferimenti bibliografici o contenuti di terzi
+        appartengono ai rispettivi titolari. Il loro eventuale richiamo ha finalità descrittiva, informativa,
+        didattica o di corretta attribuzione e non implica sponsorizzazione, approvazione o endorsement,
+        salvo espressa indicazione contraria.
+      </p>
+
+      <h2>6. Collegamenti esterni</h2>
+      <p>
+        Il sito può contenere collegamenti a pagine, documenti o servizi esterni. Tali collegamenti sono forniti
+        per utilità informativa o documentale. Il titolare non è responsabile dei contenuti, della disponibilità,
+        dell’aggiornamento, delle policy privacy o delle condizioni d’uso dei siti esterni.
+      </p>
+
+      <h2>7. Accuratezza e aggiornamento</h2>
+      <p>
+        I contenuti sono predisposti con attenzione e finalità di accuratezza, ma possono contenere errori,
+        omissioni o informazioni superate. Il titolare si riserva di modificare, aggiornare, rimuovere o integrare
+        i contenuti in qualsiasi momento, senza obbligo di preavviso.
+      </p>
+
+      <h2>8. Commenti e contributi degli utenti</h2>
+      <p>
+        I commenti inviati attraverso il modulo dedicato al Manuale sono soggetti a moderazione e non vengono
+        pubblicati automaticamente. Il titolare si riserva di non pubblicare o di rimuovere commenti non pertinenti,
+        offensivi, diffamatori, promozionali, lesivi di diritti di terzi o non coerenti con il profilo editoriale del sito.
+      </p>
+
+      <h2>9. Contatti</h2>
+      <p>
+        Per richieste di chiarimento, segnalazioni, autorizzazioni all’uso dei materiali o richieste di rimozione
+        di contenuti, è possibile scrivere a <a href="mailto:info@lab4int.com">info@lab4int.com</a>.
+      </p>
+
+      <h2>10. Aggiornamenti</h2>
+      <p>
+        Le presenti note legali possono essere aggiornate in funzione dell’evoluzione del sito, dei contenuti
+        pubblicati o del quadro organizzativo. Ultimo aggiornamento: maggio 2026.
+      </p>
+    </article>
+  </section>
+
+  <style>
+    .legal-page .legal-panel {
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .legal-panel h2 {
+      margin-top: 1rem;
+      margin-bottom: 0.15rem;
+      color: var(--primary);
+    }
+
+    .legal-panel h2:first-child {
+      margin-top: 0;
+    }
+
+    .legal-panel p,
+    .legal-panel li {
+      color: var(--text-muted);
+    }
+  </style>
+</BaseLayout>
