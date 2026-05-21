@@ -17,8 +17,49 @@ const courseCtaText = isSimulationCourse
   ? 'Possiamo definire insieme scenario, durata, ruoli, inject, RFI, output attesi e criteri di valutazione per un corso universitario, un centro studi o un gruppo professionale.'
   : 'Il modulo può essere calibrato per corsi universitari, workshop specialistici, seminari brevi o percorsi formativi interni, adattando durata, livello, destinatari e obiettivi didattici.';
 const courseCtaPrimaryLabel = isSimulationCourse ? 'Richiedi una simulazione' : 'Richiedi una proposta formativa';
+const siteUrl = 'https://giovanni.conio.lab4int.com';
+const pageUrl = `${siteUrl}/didattica/${corso.id}/`;
+const pageTitle = `${corso.data.title} — Didattica | Lab4Int`;
+const courseStructuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Course',
+    name: corso.data.title,
+    description: corso.data.description,
+    url: pageUrl,
+    inLanguage: 'it-IT',
+    educationalLevel: corso.data.level,
+    timeRequired: corso.data.duration,
+    teaches: corso.data.audience || [],
+    provider: {
+      '@type': 'Organization',
+      name: 'Lab4Int - Intelligence Analysis Laboratory',
+      url: siteUrl
+    },
+    creator: {
+      '@type': 'Person',
+      name: 'Giovanni CONIO',
+      url: `${siteUrl}/chi-sono/`
+    }
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${siteUrl}/` },
+      { '@type': 'ListItem', position: 2, name: 'Didattica', item: `${siteUrl}/didattica/` },
+      { '@type': 'ListItem', position: 3, name: corso.data.title, item: pageUrl }
+    ]
+  }
+];
 ---
-<BaseLayout title={`${corso.data.title} — Didattica`} description={corso.data.description}>
+<BaseLayout
+  title={pageTitle}
+  description={corso.data.description}
+  image={isSimulationCourse ? '/images/courses/simulazioni-intelligence-crisis-management-workspace.png' : '/images/logo-gc.png'}
+  type="article"
+  structuredData={courseStructuredData}
+>
   <article class="article-page">
     <header class="article-header">
       <p class="eyebrow">Didattica</p>

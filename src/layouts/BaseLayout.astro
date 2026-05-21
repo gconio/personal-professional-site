@@ -3,10 +3,30 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 
+const siteUrl = 'https://giovanni.conio.lab4int.com';
+const defaultTitle = 'Giovanni CONIO — Lab4Int - Intelligence Analysis Laboratory';
+const defaultDescription = 'Analisi intelligence, formazione avanzata e cultura strategica.';
+const defaultImage = '/images/logo-gc.png';
+
 const {
-  title = 'Giovanni CONIO — Lab4Int - Intelligence Analysis Laboratory',
-  description = 'Analisi intelligence, formazione avanzata e cultura strategica.',
+  title = defaultTitle,
+  description = defaultDescription,
+  image = defaultImage,
+  type = 'website',
+  canonical,
+  noindex = false,
+  structuredData = [],
 } = Astro.props;
+
+const canonicalUrl = canonical
+  ? new URL(canonical, siteUrl).toString()
+  : new URL(Astro.url.pathname, siteUrl).toString();
+const imageUrl = image.startsWith('http') ? image : new URL(image, siteUrl).toString();
+const jsonLdItems = Array.isArray(structuredData)
+  ? structuredData.filter(Boolean)
+  : structuredData
+    ? [structuredData]
+    : [];
 ---
 <!doctype html>
 <html lang="it">
@@ -15,12 +35,29 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="author" content="Giovanni CONIO" />
+    <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <meta property="og:site_name" content="Lab4Int - Intelligence Analysis Laboratory" />
+    <meta property="og:locale" content="it_IT" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:alt" content="Lab4Int - Intelligence Analysis Laboratory" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <title>{title}</title>
+
+    {jsonLdItems.map((item) => (
+      <script type="application/ld+json" set:html={JSON.stringify(item)} />
+    ))}
   </head>
   <body>
     <Header />

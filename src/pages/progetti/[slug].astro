@@ -17,8 +17,49 @@ const projectCtaText = isIntelSimProject
   ? 'Il progetto può essere presentato o sperimentato in contesti didattici, universitari e professionali interessati a simulazioni intelligence, crisis management e valutazione del processo analitico.'
   : 'Per collaborazioni, sperimentazioni didattiche, iniziative culturali o approfondimenti progettuali è possibile avviare un confronto diretto.';
 const projectCtaPrimaryLabel = isIntelSimProject ? 'Proponi una sperimentazione' : 'Proponi una collaborazione';
+const siteUrl = 'https://giovanni.conio.lab4int.com';
+const pageUrl = `${siteUrl}/progetti/${progetto.id}/`;
+const pageTitle = `${progetto.data.title} — Progetti | Lab4Int`;
+const projectImage = isIntelSimProject ? '/images/projects/intelsim/intelsim-login-access.png' : '/images/logo-gc.png';
+const projectStructuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': isIntelSimProject ? 'SoftwareApplication' : 'CreativeWork',
+    name: progetto.data.title,
+    description: progetto.data.description,
+    url: pageUrl,
+    inLanguage: 'it-IT',
+    applicationCategory: isIntelSimProject ? 'EducationalApplication' : undefined,
+    operatingSystem: isIntelSimProject ? 'Web' : undefined,
+    creator: {
+      '@type': 'Person',
+      name: 'Giovanni CONIO',
+      url: `${siteUrl}/chi-sono/`
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Lab4Int - Intelligence Analysis Laboratory',
+      url: siteUrl
+    }
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${siteUrl}/` },
+      { '@type': 'ListItem', position: 2, name: 'Progetti', item: `${siteUrl}/progetti/` },
+      { '@type': 'ListItem', position: 3, name: progetto.data.title, item: pageUrl }
+    ]
+  }
+];
 ---
-<BaseLayout title={`${progetto.data.title} — Progetti`} description={progetto.data.description}>
+<BaseLayout
+  title={pageTitle}
+  description={progetto.data.description}
+  image={projectImage}
+  type="article"
+  structuredData={projectStructuredData}
+>
   <article class="article-page">
     <header class="article-header">
       <p class="eyebrow">Progetto</p>

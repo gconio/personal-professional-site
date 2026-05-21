@@ -2,10 +2,51 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import SectionHeading from '../components/SectionHeading.astro';
+
+const siteUrl = 'https://giovanni.conio.lab4int.com';
+const pageTitle = 'Chi sono — Giovanni CONIO | Lab4Int';
+const pageDescription = 'Profilo professionale di Giovanni CONIO: intelligence analysis, OSINT, tecniche analitiche strutturate, formazione specialistica, simulazioni e cultura strategica.';
+const personStructuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Giovanni CONIO',
+    url: `${siteUrl}/chi-sono/`,
+    image: `${siteUrl}/images/profile/giovanni-conio.png`,
+    jobTitle: 'Intelligence analyst e formatore',
+    description: pageDescription,
+    worksFor: {
+      '@type': 'Organization',
+      name: 'Lab4Int - Intelligence Analysis Laboratory',
+      url: siteUrl
+    },
+    knowsAbout: [
+      'Intelligence analysis',
+      'OSINT',
+      'Structured Analytic Techniques',
+      'Analysis of Competing Hypotheses',
+      'Intelligence production',
+      'Crisis management',
+      'Cultura strategica'
+    ],
+    mainEntityOfPage: `${siteUrl}/chi-sono/`
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${siteUrl}/` },
+      { '@type': 'ListItem', position: 2, name: 'Chi sono', item: `${siteUrl}/chi-sono/` }
+    ]
+  }
+];
 ---
 <BaseLayout
-  title="Chi sono — Giovanni CONIO"
-  description="Profilo professionale di Giovanni CONIO: intelligence analysis, OSINT, tecniche analitiche strutturate, formazione specialistica e cultura strategica."
+  title={pageTitle}
+  description={pageDescription}
+  image="/images/profile/giovanni-conio.png"
+  type="profile"
+  structuredData={personStructuredData}
 >
   <Hero
     eyebrow="Profilo"

@@ -53,8 +53,70 @@ const commentiManualeRenderizzati = await Promise.all(
     return { commento, CommentContent };
   })
 );
+
+const siteUrl = 'https://giovanni.conio.lab4int.com';
+const pageUrl = `${siteUrl}/pubblicazioni/${pubblicazione.id}/`;
+const pageTitle = `${pubblicazione.data.title} — Pubblicazioni | Lab4Int`;
+const publicationType = pubblicazione.data.type.toLowerCase();
+const isBook = isManuale || publicationType.includes('libro') || pubblicazione.data.isbnPrint || pubblicazione.data.isbnEbook;
+const isArticle = publicationType.includes('articolo') || publicationType.includes('paper') || publicationType.includes('contributo');
+const publicationSchemaType = isBook ? 'Book' : isArticle ? 'Article' : 'CreativeWork';
+const publicationImage = pubblicazione.data.cover || pubblicazione.data.formatsImage || '/images/logo-gc.png';
+const publicationStructuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': publicationSchemaType,
+    name: pubblicazione.data.title,
+    headline: isArticle ? pubblicazione.data.title : undefined,
+    description: pubblicazione.data.description,
+    url: pageUrl,
+    image: publicationImage.startsWith('http') ? publicationImage : `${siteUrl}${publicationImage}`,
+    inLanguage: 'it-IT',
+    datePublished: `${pubblicazione.data.year}`,
+    author: {
+      '@type': 'Person',
+      name: 'Giovanni CONIO',
+      url: `${siteUrl}/chi-sono/`
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: pubblicazione.data.publisher || 'Lab4Int - Intelligence Analysis Laboratory',
+      url: siteUrl,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${siteUrl}/images/logo-gc.png`
+      }
+    },
+    isbn: pubblicazione.data.isbnPrint || pubblicazione.data.isbnEbook || undefined,
+    bookFormat: isBook ? 'https://schema.org/Paperback' : undefined,
+    keywords: pubblicazione.data.tags?.join(', ') || pubblicazione.data.theme || undefined,
+    sameAs: pubblicazione.data.link || undefined,
+    encoding: pubblicazione.data.pdfUrl
+      ? {
+          '@type': 'MediaObject',
+          contentUrl: pubblicazione.data.pdfUrl.startsWith('http') ? pubblicazione.data.pdfUrl : `${siteUrl}${pubblicazione.data.pdfUrl}`,
+          encodingFormat: 'application/pdf'
+        }
+      : undefined
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${siteUrl}/` },
+      { '@type': 'ListItem', position: 2, name: 'Pubblicazioni', item: `${siteUrl}/pubblicazioni/` },
+      { '@type': 'ListItem', position: 3, name: pubblicazione.data.title, item: pageUrl }
+    ]
+  }
+];
 ---
-<BaseLayout title={`${pubblicazione.data.title} — Pubblicazioni`} description={pubblicazione.data.description}>
+<BaseLayout
+  title={pageTitle}
+  description={pubblicazione.data.description}
+  image={publicationImage}
+  type={isArticle ? 'article' : 'book'}
+  structuredData={publicationStructuredData}
+>
   <article class="article-page publication-page">
     <header class="article-header">
       <p class="eyebrow">Pubblicazione</p>
