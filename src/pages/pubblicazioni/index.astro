@@ -130,7 +130,62 @@ const getAvailability = (pubblicazione) => {
     ))}
   </section>
 
+
+  <section class="page-section compact-section">
+    <div class="panel publications-cta">
+      <div>
+        <p class="card-meta">Presentazioni e approfondimenti</p>
+        <h2>Vuoi discutere un contributo o organizzare una presentazione?</h2>
+        <p>
+          Le pubblicazioni possono essere collegate a seminari, lezioni, incontri culturali,
+          presentazioni del Manuale o percorsi formativi sull’analisi intelligence.
+        </p>
+      </div>
+      <div class="publications-cta-actions">
+        <a class="button primary" href="/contatti/">Richiedi informazioni</a>
+        <a class="button secondary" href="/didattica/">Scopri la didattica</a>
+      </div>
+    </div>
+  </section>
+
   <style>
+
+    .publications-cta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .publications-cta h2 {
+      font-size: clamp(1.55rem, 3vw, 2.15rem);
+      margin-bottom: 0.55rem;
+    }
+
+    .publications-cta p {
+      max-width: 780px;
+      margin: 0;
+      color: var(--text-muted);
+    }
+
+    .publications-cta-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      justify-content: flex-end;
+    }
+
+    @media (max-width: 860px) {
+      .publications-cta {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .publications-cta-actions {
+        justify-content: flex-start;
+      }
+    }
+
     .publications-catalog {
       display: grid;
       gap: 3rem;

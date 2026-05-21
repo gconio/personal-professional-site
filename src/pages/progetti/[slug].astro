@@ -9,6 +9,14 @@ export async function getStaticPaths() {
 
 const { progetto } = Astro.props;
 const { Content } = await render(progetto);
+const isIntelSimProject = progetto.id === 'intel-sim-platform';
+const projectCtaTitle = isIntelSimProject
+  ? 'Approfondire la piattaforma Intel Sim'
+  : 'Approfondire il progetto';
+const projectCtaText = isIntelSimProject
+  ? 'Il progetto può essere presentato o sperimentato in contesti didattici, universitari e professionali interessati a simulazioni intelligence, crisis management e valutazione del processo analitico.'
+  : 'Per collaborazioni, sperimentazioni didattiche, iniziative culturali o approfondimenti progettuali è possibile avviare un confronto diretto.';
+const projectCtaPrimaryLabel = isIntelSimProject ? 'Proponi una sperimentazione' : 'Proponi una collaborazione';
 ---
 <BaseLayout title={`${progetto.data.title} — Progetti`} description={progetto.data.description}>
   <article class="article-page">
@@ -20,5 +28,56 @@ const { Content } = await render(progetto);
     <div class="prose">
       <Content />
     </div>
+
+    <section class="panel page-cta project-cta" aria-labelledby="project-cta-title">
+      <div>
+        <p class="card-meta">Collaborazioni</p>
+        <h2 id="project-cta-title">{projectCtaTitle}</h2>
+        <p>{projectCtaText}</p>
+      </div>
+      <div class="page-cta-actions">
+        <a class="button primary" href="/contatti/">{projectCtaPrimaryLabel}</a>
+        <a class="button secondary" href="/progetti/">Torna ai progetti</a>
+      </div>
+    </section>
+
+    <style>
+      .page-cta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1.25rem;
+        margin-top: 2.5rem;
+      }
+
+      .page-cta h2 {
+        font-size: clamp(1.6rem, 3vw, 2.2rem);
+        margin-bottom: 0.55rem;
+      }
+
+      .page-cta p {
+        max-width: 760px;
+        margin: 0;
+        color: var(--text-muted);
+      }
+
+      .page-cta-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.65rem;
+        justify-content: flex-end;
+      }
+
+      @media (max-width: 860px) {
+        .page-cta {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .page-cta-actions {
+          justify-content: flex-start;
+        }
+      }
+    </style>
   </article>
 </BaseLayout>

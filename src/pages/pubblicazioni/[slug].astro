@@ -24,6 +24,12 @@ const availability = pubblicazione.data.sourceStatus || (isPublisherOffline ? 'I
 const manualPreviewIndexPdf = pubblicazione.data.previewIndexPdf;
 const manualPreviewSamplePdf = pubblicazione.data.previewSamplePdf;
 const hasManualPreview = isManuale && (manualPreviewIndexPdf || manualPreviewSamplePdf);
+const publicationCtaTitle = isManuale
+  ? 'Usare il Manuale in un corso, evento o percorso formativo'
+  : 'Approfondire o discutere questa pubblicazione';
+const publicationCtaText = isManuale
+  ? 'Il volume può essere presentato in contesti universitari, seminari specialistici, incontri culturali o percorsi di formazione dedicati all’analisi intelligence.'
+  : 'Per commenti, richieste di approfondimento, citazioni, presentazioni o iniziative collegate a questo contributo è possibile inviare una richiesta diretta.';
 
 const formatCommentDate = (date: Date) =>
   new Intl.DateTimeFormat('it-IT', {
@@ -104,6 +110,29 @@ const commentiManualeRenderizzati = await Promise.all(
     <div class="prose">
       <PublicationContent />
     </div>
+
+
+    <section class="panel publication-cta" aria-labelledby="publication-cta-title">
+      <div>
+        <p class="card-meta">{isManuale ? 'Manuale' : 'Approfondimento'}</p>
+        <h2 id="publication-cta-title">{publicationCtaTitle}</h2>
+        <p>{publicationCtaText}</p>
+      </div>
+      <div class="publication-cta-actions">
+        {isManuale && pubblicazione.data.link && (
+          <a class="button primary" href={pubblicazione.data.link} target="_blank" rel="noopener noreferrer">Acquista il volume</a>
+        )}
+        {isManuale && hasManualPreview && (
+          <a class="button secondary" href="#estratto-manuale">Sfoglia l’estratto</a>
+        )}
+        {isManuale && (
+          <a class="button secondary" href="/commenti-manuale/">Lascia un commento</a>
+        )}
+        <a class:list={['button', isManuale ? 'secondary' : 'primary']} href="/contatti/">
+          {isManuale ? 'Richiedi una presentazione' : 'Invia una richiesta'}
+        </a>
+      </div>
+    </section>
 
     {hasManualPreview && (
       <section class="manual-preview-section" id="estratto-manuale" aria-labelledby="manual-preview-title">
@@ -199,6 +228,44 @@ const commentiManualeRenderizzati = await Promise.all(
     )}
 
     <style>
+
+
+      .publication-cta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1.25rem;
+        margin-top: 2.5rem;
+      }
+
+      .publication-cta h2 {
+        font-size: clamp(1.6rem, 3vw, 2.2rem);
+        margin-bottom: 0.55rem;
+      }
+
+      .publication-cta p {
+        max-width: 760px;
+        margin: 0;
+        color: var(--text-muted);
+      }
+
+      .publication-cta-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.65rem;
+        justify-content: flex-end;
+      }
+
+      @media (max-width: 880px) {
+        .publication-cta {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .publication-cta-actions {
+          justify-content: flex-start;
+        }
+      }
 
       .manual-preview-section {
         margin-top: 3rem;

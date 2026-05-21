@@ -44,6 +44,59 @@ import SectionHeading from '../components/SectionHeading.astro';
     </div>
   </section>
 
+
+  <section class="page-section compact-section">
+    <SectionHeading eyebrow="Per un primo contatto efficace" title="Informazioni utili da indicare" />
+    <div class="panel contact-briefing">
+      <p>
+        Per rendere più rapido l’inquadramento della richiesta, è utile indicare fin dal primo messaggio
+        alcuni elementi essenziali.
+      </p>
+      <ul>
+        <li><strong>Tipo di attività:</strong> docenza, seminario, workshop, simulazione, presentazione, collaborazione o progetto.</li>
+        <li><strong>Destinatari:</strong> studenti, professionisti, ente, centro studi, associazione, gruppo aziendale o pubblico misto.</li>
+        <li><strong>Durata indicativa:</strong> incontro breve, modulo di alcune ore, giornata formativa, percorso articolato o simulazione 4+4 / 8 ore.</li>
+        <li><strong>Modalità preferita:</strong> presenza, online, formato ibrido o laboratorio controllato.</li>
+        <li><strong>Obiettivo:</strong> sensibilizzazione culturale, formazione metodologica, addestramento analitico, esercitazione o approfondimento editoriale.</li>
+      </ul>
+      <div class="contact-briefing-actions">
+        <a class="button primary" href="mailto:info@lab4int.com">Invia una richiesta</a>
+        <a class="button secondary" href="/didattica/">Vedi i percorsi didattici</a>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .contact-briefing {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .contact-briefing p {
+      max-width: 840px;
+      margin: 0;
+      color: var(--text-muted);
+    }
+
+    .contact-briefing ul {
+      display: grid;
+      gap: 0.75rem;
+      margin: 0;
+      padding-left: 1.15rem;
+      color: var(--text-muted);
+    }
+
+    .contact-briefing strong {
+      color: var(--primary);
+    }
+
+    .contact-briefing-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      margin-top: 0.25rem;
+    }
+  </style>
   <section class="page-section">
     <SectionHeading eyebrow="Disponibilità" title="Aree di collaborazione" />
     <ul class="contact-list">

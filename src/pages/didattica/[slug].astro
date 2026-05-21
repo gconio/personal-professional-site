@@ -9,6 +9,14 @@ export async function getStaticPaths() {
 
 const { corso } = Astro.props;
 const { Content } = await render(corso);
+const isSimulationCourse = corso.id === 'simulazioni-intelligence';
+const courseCtaTitle = isSimulationCourse
+  ? 'Progettare una simulazione intelligence o crisis management'
+  : 'Adattare questo modulo a un percorso formativo';
+const courseCtaText = isSimulationCourse
+  ? 'Possiamo definire insieme scenario, durata, ruoli, inject, RFI, output attesi e criteri di valutazione per un corso universitario, un centro studi o un gruppo professionale.'
+  : 'Il modulo può essere calibrato per corsi universitari, workshop specialistici, seminari brevi o percorsi formativi interni, adattando durata, livello, destinatari e obiettivi didattici.';
+const courseCtaPrimaryLabel = isSimulationCourse ? 'Richiedi una simulazione' : 'Richiedi una proposta formativa';
 ---
 <BaseLayout title={`${corso.data.title} — Didattica`} description={corso.data.description}>
   <article class="article-page">
@@ -20,5 +28,56 @@ const { Content } = await render(corso);
     <div class="prose">
       <Content />
     </div>
+
+    <section class="panel page-cta course-cta" aria-labelledby="course-cta-title">
+      <div>
+        <p class="card-meta">Proposta formativa</p>
+        <h2 id="course-cta-title">{courseCtaTitle}</h2>
+        <p>{courseCtaText}</p>
+      </div>
+      <div class="page-cta-actions">
+        <a class="button primary" href="/contatti/">{courseCtaPrimaryLabel}</a>
+        <a class="button secondary" href="/didattica/">Torna alla didattica</a>
+      </div>
+    </section>
+
+    <style>
+      .page-cta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1.25rem;
+        margin-top: 2.5rem;
+      }
+
+      .page-cta h2 {
+        font-size: clamp(1.6rem, 3vw, 2.2rem);
+        margin-bottom: 0.55rem;
+      }
+
+      .page-cta p {
+        max-width: 760px;
+        margin: 0;
+        color: var(--text-muted);
+      }
+
+      .page-cta-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.65rem;
+        justify-content: flex-end;
+      }
+
+      @media (max-width: 860px) {
+        .page-cta {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .page-cta-actions {
+          justify-content: flex-start;
+        }
+      }
+    </style>
   </article>
 </BaseLayout>

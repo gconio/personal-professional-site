@@ -28,4 +28,59 @@ const progetti = (await getCollection('progetto')).sort((a, b) => a.data.order -
       ))}
     </div>
   </section>
+
+  <section class="page-section compact-section">
+    <div class="panel index-cta">
+      <div>
+        <p class="card-meta">Collaborazioni progettuali</p>
+        <h2>Vuoi sviluppare o sperimentare un progetto Lab4Int?</h2>
+        <p>
+          Le iniziative possono essere adattate a contesti universitari, centri studi, percorsi formativi,
+          gruppi professionali e attività culturali dedicate all’analisi intelligence.
+        </p>
+      </div>
+      <div class="index-cta-actions">
+        <a class="button primary" href="/contatti/">Proponi una collaborazione</a>
+        <a class="button secondary" href="/didattica/">Collega alla didattica</a>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .index-cta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .index-cta h2 {
+      font-size: clamp(1.55rem, 3vw, 2.15rem);
+      margin-bottom: 0.55rem;
+    }
+
+    .index-cta p {
+      max-width: 780px;
+      margin: 0;
+      color: var(--text-muted);
+    }
+
+    .index-cta-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      justify-content: flex-end;
+    }
+
+    @media (max-width: 860px) {
+      .index-cta {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .index-cta-actions {
+        justify-content: flex-start;
+      }
+    }
+  </style>
 </BaseLayout>
