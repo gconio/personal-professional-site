@@ -206,12 +206,3 @@ Al termine dell’attività, i partecipanti avranno sperimentato un ciclo analit
 
 Il valore formativo della simulazione risiede nella possibilità di osservare concretamente come un gruppo ragiona, decide, comunica e corregge le proprie valutazioni in condizioni di incertezza.
 
-<div style="margin: 2rem 0 0; padding: 1.25rem; border-radius: 16px; background: rgba(11, 31, 51, 0.055); border: 1px solid rgba(11, 31, 51, 0.10);">
-  <h2 style="margin-top: 0;">Richiedere una simulazione</h2>
-  <p>
-    Il format può essere adattato a corsi universitari, workshop specialistici, attività associative, percorsi professionali o giornate formative dedicate all’intelligence analysis e al crisis management.
-  </p>
-  <p style="margin-bottom: 0;">
-    <a href="/contatti/" style="font-weight: 700;">Contattami per definire scenario, durata, destinatari e obiettivi formativi →</a>
-  </p>
-</div>
