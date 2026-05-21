@@ -4,34 +4,26 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Hero from '../../components/Hero.astro';
 import Card from '../../components/Card.astro';
 
-const corsi = (await getCollection('corso')).sort((a, b) => a.data.order - b.data.order);
+const progetti = (await getCollection('progetto')).sort((a, b) => a.data.order - b.data.order);
 ---
-<BaseLayout title="Didattica — Lab4Int - Intelligence Analysis Laboratory" description="Corsi, seminari, workshop e simulazioni didattiche.">
+<BaseLayout title="Progetti — Lab4Int - Intelligence Analysis Laboratory" description="Progetti didattici, culturali e digitali.">
   <Hero
-    eyebrow="Didattica"
-    title="Corsi, seminari e workshop per l’analisi intelligence"
-    description="Un catalogo modulare di attività formative adattabili a università, centri studi, enti pubblici, organizzazioni e comunità professionali."
+    eyebrow="Progetti"
+    title="Piattaforme, simulazioni e iniziative metodologiche"
+    description="Una sezione dedicata ai progetti in sviluppo, attivi o proposti: strumenti didattici, suite analitiche, simulazioni e percorsi culturali."
     primaryHref="/contatti/"
-    primaryLabel="Richiedi informazioni"
-    secondaryHref="/progetti/"
-    secondaryLabel="Vedi i progetti"
+    primaryLabel="Proponi una collaborazione"
+    secondaryHref="/analisi/"
+    secondaryLabel="Leggi le analisi"
   />
-  <section class="page-section compact-section">
-    <div class="panel didattica-intro">
-      <p>
-        Le attività formative di Lab4Int sono progettate per sviluppare competenze analitiche, metodologiche e operative nel campo dell’intelligence analysis, dell’OSINT, delle tecniche analitiche strutturate e della produzione intelligence. I percorsi possono essere adattati a contesti universitari, specialistici, istituzionali e professionali.
-      </p>
-    </div>
-  </section>
-
   <section class="page-section">
     <div class="grid-three">
-      {corsi.map((corso) => (
+      {progetti.map((progetto) => (
         <Card
-          href={`/didattica/${corso.id}/`}
-          title={corso.data.title}
-          meta={`${corso.data.level} · ${corso.data.duration} · ${corso.data.format}`}
-          description={corso.data.description}
+          href={`/progetti/${progetto.id}/`}
+          title={progetto.data.title}
+          meta={`${progetto.data.status} · ${progetto.data.category}`}
+          description={progetto.data.description}
         />
       ))}
     </div>
