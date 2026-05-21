@@ -19,10 +19,94 @@ const pubblicazioni = (await getCollection('pubblicazione'))
   .filter((entry) => entry.data.featured)
   .sort((a, b) => a.data.order - b.data.order)
   .slice(0, 3);
+
+const siteUrl = 'https://giovanni.conio.lab4int.com';
+const homeTitle = 'Giovanni CONIO — Lab4Int | Intelligence Analysis Laboratory';
+const homeDescription = 'Sito personale e professionale dedicato a intelligence analysis, formazione avanzata, tecniche analitiche strutturate, simulazioni, pubblicazioni e cultura strategica.';
+const homeImage = '/images/brand/lab4int-logo-visual.png';
+
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Lab4Int - Intelligence Analysis Laboratory',
+    alternateName: 'Lab4Int',
+    url: siteUrl,
+    inLanguage: 'it-IT',
+    description: homeDescription,
+    publisher: {
+      '@type': 'Organization',
+      name: 'Lab4Int - Intelligence Analysis Laboratory',
+      url: siteUrl,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${siteUrl}/images/logo-gc.png`
+      }
+    },
+    creator: {
+      '@type': 'Person',
+      name: 'Giovanni CONIO',
+      url: `${siteUrl}/chi-sono/`
+    }
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Lab4Int - Intelligence Analysis Laboratory',
+    alternateName: 'Lab4Int',
+    url: siteUrl,
+    logo: `${siteUrl}/images/logo-gc.png`,
+    description: 'Laboratorio professionale e culturale dedicato ad analisi intelligence, formazione avanzata, simulazioni e cultura strategica.',
+    founder: {
+      '@type': 'Person',
+      name: 'Giovanni CONIO',
+      url: `${siteUrl}/chi-sono/`
+    }
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Giovanni CONIO',
+    url: `${siteUrl}/chi-sono/`,
+    image: `${siteUrl}/images/profile/giovanni-conio.png`,
+    jobTitle: 'Intelligence analyst e formatore',
+    description: 'Esperto di intelligence analysis, OSINT, tecniche analitiche strutturate, formazione specialistica, simulazioni e cultura strategica.',
+    worksFor: {
+      '@type': 'Organization',
+      name: 'Lab4Int - Intelligence Analysis Laboratory',
+      url: siteUrl
+    },
+    knowsAbout: [
+      'Intelligence analysis',
+      'OSINT',
+      'Structured Analytic Techniques',
+      'Analysis of Competing Hypotheses',
+      'Intelligence production',
+      'Crisis management',
+      'Cultura strategica'
+    ]
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: `${siteUrl}/`
+      }
+    ]
+  }
+];
 ---
 <BaseLayout
-  title="Giovanni CONIO — Lab4Int - Intelligence Analysis Laboratory"
-  description="Analisi intelligence, formazione avanzata, pubblicazioni e progetti dedicati alla cultura strategica."
+  title={homeTitle}
+  description={homeDescription}
+  image={homeImage}
+  type="website"
+  canonical="/"
+  structuredData={structuredData}
 >
   <Hero
     eyebrow="Formazione · Analisi · Cultura strategica"
