@@ -4,28 +4,103 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Hero from '../../components/Hero.astro';
 import Card from '../../components/Card.astro';
 
-const progetti = (await getCollection('progetto')).sort((a, b) => a.data.order - b.data.order);
+const corsi = (await getCollection('corso')).sort((a, b) => a.data.order - b.data.order);
+
+const siteUrl = 'https://giovanni.conio.lab4int.com';
+const pageTitle = 'Didattica — Lab4Int | Intelligence Analysis Laboratory';
+const pageDescription = 'Percorsi formativi su intelligence analysis, OSINT, tecniche analitiche strutturate, conflict analysis, intelligence production e simulazioni intelligence.';
+
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Didattica',
+    url: `${siteUrl}/didattica/`,
+    inLanguage: 'it-IT',
+    description: pageDescription,
+    isPartOf: {
+      '@type': 'WebSite',
+      name: 'Lab4Int - Intelligence Analysis Laboratory',
+      url: siteUrl
+    },
+    about: [
+      'Intelligence analysis',
+      'OSINT',
+      'Structured Analytic Techniques',
+      'Conflict analysis',
+      'Intelligence production',
+      'Simulazioni intelligence'
+    ]
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: `${siteUrl}/`
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Didattica',
+        item: `${siteUrl}/didattica/`
+      }
+    ]
+  }
+];
 ---
-<BaseLayout title="Progetti — Lab4Int - Intelligence Analysis Laboratory" description="Progetti didattici, culturali e digitali.">
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonical="/didattica/"
+  image="/images/brand/lab4int-logo-visual.png"
+  type="website"
+  structuredData={structuredData}
+>
   <Hero
-    eyebrow="Progetti"
-    title="Piattaforme, simulazioni e iniziative metodologiche"
-    description="Una sezione dedicata ai progetti in sviluppo, attivi o proposti: strumenti didattici, suite analitiche, simulazioni e percorsi culturali."
+    eyebrow="Didattica"
+    title="Percorsi formativi intelligence"
+    description="Corsi, seminari, workshop e simulazioni dedicati all’intelligence analysis, alle tecniche analitiche strutturate, alla produzione intelligence e alla gestione dell’incertezza in scenari complessi."
     primaryHref="/contatti/"
-    primaryLabel="Proponi una collaborazione"
-    secondaryHref="/analisi/"
-    secondaryLabel="Leggi le analisi"
+    primaryLabel="Richiedi una proposta formativa"
+    secondaryHref="/pubblicazioni/"
+    secondaryLabel="Consulta le pubblicazioni"
   />
+
   <section class="page-section">
+    <div class="section-heading">
+      <p class="eyebrow">Catalogo formativo</p>
+      <h2>Moduli, corsi e laboratori</h2>
+      <p>
+        Le schede sono pensate per lezioni universitarie, seminari specialistici, workshop operativi e attività formative
+        adattabili a durata, livello dei partecipanti e obiettivi dell’ente richiedente.
+      </p>
+    </div>
+
     <div class="grid-three">
-      {progetti.map((progetto) => (
+      {corsi.map((corso) => (
         <Card
-          href={`/progetti/${progetto.id}/`}
-          title={progetto.data.title}
-          meta={`${progetto.data.status} · ${progetto.data.category}`}
-          description={progetto.data.description}
+          href={`/didattica/${corso.id}/`}
+          title={corso.data.title}
+          meta={`${corso.data.level} · ${corso.data.duration} · ${corso.data.format}`}
+          description={corso.data.description}
         />
       ))}
     </div>
+  </section>
+
+  <section class="page-section">
+    <article class="card">
+      <p class="card-meta">Proposte su misura</p>
+      <h3>Adattare un modulo a un corso, workshop o seminario</h3>
+      <p>
+        I percorsi possono essere calibrati per università, centri studi, associazioni, gruppi professionali o iniziative
+        culturali dedicate all’intelligence analysis e alla cultura strategica.
+      </p>
+      <a class="card-link" href="/contatti/">Contattami per definire obiettivi, durata e formato</a>
+    </article>
   </section>
 </BaseLayout>
