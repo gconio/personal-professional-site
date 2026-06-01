@@ -15,9 +15,23 @@ const progetti = (await getCollection('progetto'))
   .sort((a, b) => a.data.order - b.data.order)
   .slice(0, 3);
 
+const normalize = (value = '') => value.toLowerCase();
+
+const isRecentPublicationCandidate = (pubblicazione) => {
+  const type = normalize(pubblicazione.data.type);
+  const publisher = normalize(pubblicazione.data.publisher || '');
+
+  return (
+    type.includes('articolo online') ||
+    type.includes('contributo online') ||
+    (type.includes('articolo') && publisher.includes('lab4int')) ||
+    (pubblicazione.data.pdfUrl && publisher.includes('lab4int'))
+  );
+};
+
 const pubblicazioni = (await getCollection('pubblicazione'))
-  .filter((entry) => entry.data.featured)
-  .sort((a, b) => a.data.order - b.data.order)
+  .filter(isRecentPublicationCandidate)
+  .sort((a, b) => a.data.order - b.data.order || b.data.year - a.data.year || a.data.title.localeCompare(b.data.title, 'it'))
   .slice(0, 3);
 
 const siteUrl = 'https://giovanni.conio.lab4int.com';
@@ -184,24 +198,49 @@ const structuredData = [
     </div>
   </section>
 
-  <section class="page-section">
-    <SectionHeading
-      eyebrow="Pubblicazioni"
-      title="Libri, paper e contributi online"
-      description="Una selezione di pubblicazioni e materiali dedicati all’analisi intelligence, alla metodologia e alla cultura strategica."
-    />
-    <div class="grid-three">
-      {pubblicazioni.map((pubblicazione) => (
-        <Card
-          href={`/pubblicazioni/${pubblicazione.id}/`}
-          title={pubblicazione.data.title}
-          meta={`${pubblicazione.data.type} · ${pubblicazione.data.year}`}
-          description={pubblicazione.data.description}
-          cta="Apri scheda"
-        />
-      ))}
-    </div>
-  </section>
+  {pubblicazioni.length > 0 && (
+    <section class="page-section home-latest-publications" aria-labelledby="home-latest-publications-title">
+      <SectionHeading
+        eyebrow="Ultime pubblicazioni"
+        title="Gli ultimi contributi pubblicati"
+        description="Articoli, paper e materiali PDF recenti dedicati all’analisi intelligence, alla formazione avanzata e alla cultura strategica."
+      />
+
+      <div class="home-latest-publications-grid">
+        {pubblicazioni.map((pubblicazione, index) => (
+          <article class={`home-latest-publication-card panel ${index === 0 ? 'is-primary' : ''}`}>
+            <a class="home-latest-publication-media" href={`/pubblicazioni/${pubblicazione.id}/`} aria-label={`Apri la scheda ${pubblicazione.data.title}`}>
+              {pubblicazione.data.cover ? (
+                <img
+                  src={pubblicazione.data.cover}
+                  alt={`Copertina di ${pubblicazione.data.title}`}
+                  loading={index === 0 ? 'eager' : 'lazy'}
+                  decoding="async"
+                />
+              ) : (
+                <span class="home-publication-placeholder" aria-hidden="true">
+                  <strong>{pubblicazione.data.type}</strong>
+                  <small>{pubblicazione.data.year}</small>
+                </span>
+              )}
+            </a>
+
+            <div class="home-latest-publication-body">
+              <div class="home-publication-kicker">
+                {index === 0 && <span>Nuovo</span>}
+                <span>{pubblicazione.data.type}</span>
+                <span>{pubblicazione.data.year}</span>
+                {pubblicazione.data.pdfUrl && <span>PDF</span>}
+              </div>
+              <h3><a href={`/pubblicazioni/${pubblicazione.id}/`}>{pubblicazione.data.title}</a></h3>
+              <p>{pubblicazione.data.description}</p>
+              <a class="card-link" href={`/pubblicazioni/${pubblicazione.id}/`}>Apri scheda</a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  )}
 
   <section class="page-section">
     <article class="card">
@@ -211,4 +250,125 @@ const structuredData = [
       <a class="card-link" href="/contatti/">Vai ai contatti</a>
     </article>
   </section>
+
+  <style>
+    .home-latest-publications {
+      display: grid;
+      gap: 1.35rem;
+    }
+
+    .home-latest-publications-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .home-latest-publication-card {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 0.95rem;
+      padding: 1rem;
+      overflow: hidden;
+    }
+
+    .home-latest-publication-card.is-primary {
+      border-color: rgba(184, 155, 94, 0.48);
+      background: linear-gradient(135deg, rgba(184, 155, 94, 0.12), rgba(255, 255, 255, 0.86));
+      box-shadow: 0 18px 42px rgba(11, 31, 51, 0.12);
+    }
+
+    .home-latest-publication-media {
+      display: block;
+      color: var(--primary);
+    }
+
+    .home-latest-publication-media img {
+      display: block;
+      width: 100%;
+      height: 220px;
+      object-fit: contain;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: var(--surface-muted);
+      box-shadow: 0 14px 34px rgba(11, 31, 51, 0.12);
+    }
+
+    .home-latest-publication-body {
+      display: grid;
+      gap: 0.7rem;
+      align-content: start;
+    }
+
+    .home-latest-publication-body h3 {
+      font-size: clamp(1.18rem, 2vw, 1.65rem);
+      line-height: 1.08;
+    }
+
+    .home-latest-publication-body h3 a:hover {
+      color: var(--secondary);
+    }
+
+    .home-latest-publication-body p {
+      margin: 0;
+      color: var(--text-muted);
+    }
+
+    .home-publication-kicker {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      align-items: center;
+    }
+
+    .home-publication-kicker span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      background: rgba(184, 155, 94, 0.12);
+      color: var(--accent);
+      font-size: 0.75rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .home-publication-placeholder {
+      display: flex;
+      min-height: 180px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(184, 155, 94, 0.18), rgba(47, 72, 88, 0.08));
+      text-align: center;
+      box-shadow: 0 12px 30px rgba(11, 31, 51, 0.08);
+    }
+
+    .home-publication-placeholder strong {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--primary);
+    }
+
+    .home-publication-placeholder small {
+      color: var(--text-muted);
+      font-weight: 800;
+    }
+
+    @media (max-width: 820px) {
+      .home-latest-publications-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .home-latest-publication-media img {
+        height: auto;
+        max-height: 320px;
+      }
+    }
+  </style>
 </BaseLayout>
