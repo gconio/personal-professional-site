@@ -60,6 +60,23 @@ const getAvailability = (pubblicazione) => {
   return '';
 };
 
+
+const isRecentArticleCandidate = (pubblicazione) => {
+  const type = normalize(pubblicazione.data.type);
+  const publisher = normalize(pubblicazione.data.publisher || '');
+  return (
+    type.includes('articolo online') ||
+    type.includes('contributo online') ||
+    (type.includes('articolo') && publisher.includes('lab4int')) ||
+    (pubblicazione.data.pdfUrl && publisher.includes('lab4int'))
+  );
+};
+
+const latestPublications = pubblicazioni
+  .filter(isRecentArticleCandidate)
+  .sort((a, b) => a.data.order - b.data.order || b.data.year - a.data.year || a.data.title.localeCompare(b.data.title, 'it'))
+  .slice(0, 3);
+
 const siteUrl = 'https://giovanni.conio.lab4int.com';
 const pageTitle = 'Pubblicazioni — Lab4Int - Intelligence Analysis Laboratory';
 const pageDescription = 'Libri, paper, contributi dottrinali e articoli online di Giovanni CONIO dedicati ad analisi intelligence, metodologia, OSINT, SAT e cultura strategica.';
@@ -108,6 +125,48 @@ const publicationsStructuredData = [
     secondaryHref="/didattica/"
     secondaryLabel="Scopri la didattica"
   />
+
+
+  {latestPublications.length > 0 && (
+    <section class="page-section latest-publications" aria-labelledby="latest-publications-title">
+      <header class="latest-publications-header">
+        <p class="eyebrow">Ultime pubblicazioni</p>
+        <div>
+          <h2 id="latest-publications-title">Gli ultimi contributi pubblicati</h2>
+          <p>Articoli, paper e materiali PDF recenti dedicati all’analisi intelligence, alla formazione avanzata e alla cultura strategica.</p>
+        </div>
+      </header>
+
+      <div class="latest-publications-grid">
+        {latestPublications.map((pubblicazione, index) => (
+          <article class={`latest-publication-card panel ${index === 0 ? 'is-primary' : ''}`}>
+            <a class="latest-publication-media" href={`/pubblicazioni/${pubblicazione.id}/`} aria-label={`Apri la scheda ${pubblicazione.data.title}`}>
+              {pubblicazione.data.cover ? (
+                <img src={pubblicazione.data.cover} alt={`Copertina di ${pubblicazione.data.title}`} loading={index === 0 ? 'eager' : 'lazy'} decoding="async" />
+              ) : (
+                <span class="publication-placeholder" aria-hidden="true">
+                  <strong>{pubblicazione.data.type}</strong>
+                  <small>{pubblicazione.data.year}</small>
+                </span>
+              )}
+            </a>
+
+            <div class="latest-publication-body">
+              <div class="publication-kicker">
+                {index === 0 && <span>Nuovo</span>}
+                <span>{pubblicazione.data.type}</span>
+                <span>{pubblicazione.data.year}</span>
+                {pubblicazione.data.pdfUrl && <span>PDF</span>}
+              </div>
+              <h3><a href={`/pubblicazioni/${pubblicazione.id}/`}>{pubblicazione.data.title}</a></h3>
+              <p>{pubblicazione.data.description}</p>
+              <a class="publication-button" href={`/pubblicazioni/${pubblicazione.id}/`}>Apri scheda</a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  )}
 
   <section class="page-section publications-catalog">
     {groups.map((group) => (
@@ -169,6 +228,94 @@ const publicationsStructuredData = [
   </section>
 
   <style>
+
+    .latest-publications {
+      display: grid;
+      gap: 1.25rem;
+      padding-top: 2.5rem;
+    }
+
+    .latest-publications-header {
+      display: grid;
+      grid-template-columns: minmax(120px, 0.22fr) minmax(0, 1fr);
+      gap: 1rem;
+      align-items: start;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .latest-publications-header h2 {
+      margin-bottom: 0.45rem;
+      font-size: clamp(1.85rem, 3.4vw, 2.85rem);
+    }
+
+    .latest-publications-header p:last-child {
+      max-width: 780px;
+      margin: 0;
+      color: var(--text-muted);
+    }
+
+    .latest-publications-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .latest-publication-card {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 0.95rem;
+      padding: 1rem;
+      overflow: hidden;
+    }
+
+    .latest-publication-card.is-primary {
+      border-color: rgba(184, 155, 94, 0.48);
+      background: linear-gradient(135deg, rgba(184, 155, 94, 0.12), rgba(255, 255, 255, 0.86));
+      box-shadow: 0 18px 42px rgba(11, 31, 51, 0.12);
+    }
+
+    .latest-publication-media {
+      display: block;
+      color: var(--primary);
+    }
+
+    .latest-publication-media img {
+      display: block;
+      width: 100%;
+      height: 220px;
+      object-fit: contain;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: var(--surface-muted);
+      box-shadow: 0 14px 34px rgba(11, 31, 51, 0.12);
+    }
+
+    .latest-publication-body {
+      display: grid;
+      gap: 0.7rem;
+      align-content: start;
+    }
+
+    .latest-publication-body h3 {
+      font-size: clamp(1.25rem, 2.2vw, 1.85rem);
+      line-height: 1.08;
+    }
+
+    .latest-publication-body h3 a:hover {
+      color: var(--secondary);
+    }
+
+    .latest-publication-body p {
+      margin: 0;
+      color: var(--text-muted);
+    }
+
+    .latest-publication-body .publication-button {
+      justify-self: start;
+      margin-top: 0.25rem;
+    }
+
     .publications-catalog {
       display: grid;
       gap: 3rem;
@@ -348,6 +495,19 @@ const publicationsStructuredData = [
     }
 
     @media (max-width: 760px) {
+      .latest-publications-header {
+        grid-template-columns: 1fr;
+      }
+
+      .latest-publications-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .latest-publication-media img {
+        height: auto;
+        max-height: 320px;
+      }
+
       .publication-section-header {
         grid-template-columns: 1fr;
       }
