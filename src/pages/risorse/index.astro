@@ -5,11 +5,34 @@ import Hero from '../../components/Hero.astro';
 
 const risorse = await getCollection('risorsa');
 
+const toDateValue = (value) => {
+  if (!value) return 0;
+  const date = value instanceof Date ? value : new Date(value);
+  const time = date.getTime();
+  return Number.isNaN(time) ? 0 : time;
+};
+
+const getResourceDateValue = (risorsa) => Math.max(
+  toDateValue(risorsa.data.dateAdded),
+  toDateValue(risorsa.data.addedAt),
+  toDateValue(risorsa.data.createdAt),
+  toDateValue(risorsa.data.updatedAt),
+  toDateValue(risorsa.data.date),
+  toDateValue(risorsa.data.pubDate)
+);
+
 const sortResources = (items) =>
   items.sort((a, b) =>
     Number(b.data.featured) - Number(a.data.featured)
     || Number(a.data.order ?? 999) - Number(b.data.order ?? 999)
     || a.data.title.localeCompare(b.data.title, 'it')
+  );
+
+const sortLatestResources = (items) =>
+  items.sort((a, b) =>
+    getResourceDateValue(b) - getResourceDateValue(a)
+    || Number(b.data.order ?? 0) - Number(a.data.order ?? 0)
+    || b.id.localeCompare(a.id, 'it')
   );
 
 const hasCategory = (risorsa, categories) => categories.includes(risorsa.data.category);
@@ -22,9 +45,11 @@ const categoryDefinitions = [
   {
     id: 'in-evidenza',
     title: 'In evidenza',
-    description: 'Risorse prioritarie e trasversali per metodo, formazione e pratica analitica.',
+    description: 'Le ultime 5 risorse inserite, ordinate dalla più recente alla meno recente.',
     open: true,
-    match: (risorsa) => Boolean(risorsa.data.featured)
+    latest: true,
+    limit: 5,
+    match: () => true
   },
   {
     id: 'intelligence-analysis-sats',
@@ -71,7 +96,13 @@ const categoryDefinitions = [
 
 const groups = categoryDefinitions
   .map((category) => {
-    const items = sortResources(risorse.filter(category.match));
+    const matchedItems = risorse.filter(category.match);
+    const sortedItems = category.latest
+      ? sortLatestResources(matchedItems)
+      : sortResources(matchedItems);
+    const items = typeof category.limit === 'number'
+      ? sortedItems.slice(0, category.limit)
+      : sortedItems;
     return { ...category, items };
   })
   .filter((category) => category.items.length > 0);
@@ -83,10 +114,7 @@ const getMeta = (risorsa) => [
   risorsa.data.year ? String(risorsa.data.year) : ''
 ].filter(Boolean).join(' · ');
 
-const getCategoryLabel = (risorsa) => {
-  if (risorsa.data.featured) return 'In evidenza';
-  return risorsa.data.category;
-};
+const getCategoryLabel = (risorsa) => risorsa.data.category;
 ---
 <BaseLayout title="Risorse consigliate — Lab4Int - Intelligence Analysis Laboratory" description="Bibliografia ragionata, siti, report, toolkit e risorse utili per approfondire intelligence analysis, OSINT, geopolitica, cyber e disinformazione.">
   <Hero
