@@ -5,56 +5,73 @@ import Hero from '../../components/Hero.astro';
 
 const risorse = await getCollection('risorsa');
 
+const sortResources = (items) =>
+  items.sort((a, b) =>
+    Number(b.data.featured) - Number(a.data.featured)
+    || Number(a.data.order ?? 999) - Number(b.data.order ?? 999)
+    || a.data.title.localeCompare(b.data.title, 'it')
+  );
+
+const hasCategory = (risorsa, categories) => categories.includes(risorsa.data.category);
+const hasType = (risorsa, terms) => {
+  const type = String(risorsa.data.type ?? '').toLowerCase();
+  return terms.some((term) => type.includes(term.toLowerCase()));
+};
+
 const categoryDefinitions = [
   {
-    id: 'fondamenti',
-    title: 'Fondamenti di intelligence',
-    description: 'Testi e archivi utili per costruire una base culturale solida sul mestiere intelligence, sul ciclo informativo e sul rapporto tra analisi e decisione.',
-    match: 'Fondamenti di intelligence'
+    id: 'in-evidenza',
+    title: 'In evidenza',
+    description: 'Risorse prioritarie e trasversali per metodo, formazione e pratica analitica.',
+    open: true,
+    match: (risorsa) => Boolean(risorsa.data.featured)
   },
   {
-    id: 'analisi-metodo',
-    title: 'Analisi intelligence e SAT',
-    description: 'Risorse dedicate a tradecraft, standard analitici, tecniche analitiche strutturate, qualità del giudizio e disciplina argomentativa.',
-    match: 'Analisi intelligence e SAT'
+    id: 'intelligence-analysis-sats',
+    title: 'Intelligence Analysis / SATs',
+    description: 'Metodo intelligence, tecniche analitiche strutturate, bias cognitivi, tradecraft, standard analitici e qualità del giudizio.',
+    open: false,
+    match: (risorsa) => hasCategory(risorsa, [
+      'Fondamenti di intelligence',
+      'Analisi intelligence e SAT'
+    ])
   },
   {
-    id: 'studiare-intelligence',
-    title: 'Studiare intelligence',
-    description: 'Atenei, scuole, centri studi e percorsi formativi utili per approfondire intelligence, analisi geopolitica, OSINT, security studies e cultura strategica.',
-    match: 'Studiare intelligence'
+    id: 'osint-tools',
+    title: 'OSINT Tools',
+    description: 'Toolkit, directory operative, laboratori e strumenti per ricerca, verifica, geolocalizzazione, archiviazione e analisi da fonti aperte.',
+    open: false,
+    match: (risorsa) => hasCategory(risorsa, [
+      'OSINT e ambiente informativo'
+    ])
   },
   {
-    id: 'osint',
-    title: 'OSINT e ambiente informativo',
-    description: 'Toolkit, laboratori e fonti utili per l’analisi di fonti aperte, la verifica dei contenuti digitali e la ricerca online strutturata.',
-    match: 'OSINT e ambiente informativo'
+    id: 'think-tank-centri-studi',
+    title: 'Think tank e centri studi',
+    description: 'Istituti, osservatori, centri di ricerca e piattaforme di analisi su geopolitica, sicurezza internazionale e cultura strategica.',
+    open: false,
+    match: (risorsa) =>
+      hasCategory(risorsa, ['Geopolitica e sicurezza internazionale'])
+      || hasType(risorsa, ['think tank', 'centro studi'])
   },
   {
-    id: 'geopolitica',
-    title: 'Geopolitica e sicurezza internazionale',
-    description: 'Think tank, riviste e piattaforme di analisi utili per seguire conflitti, crisi regionali, sicurezza internazionale e competizione strategica.',
-    match: 'Geopolitica e sicurezza internazionale'
-  },
-  {
-    id: 'cyber',
-    title: 'Cyber, tecnologia e minacce digitali',
-    description: 'Report e fonti per comprendere minacce cyber, criminalità digitale, cyber threat intelligence e impatti delle tecnologie emergenti.',
-    match: 'Cyber, tecnologia e minacce digitali'
-  },
-  {
-    id: 'influenza',
-    title: 'Disinformazione, influenza e comunicazione strategica',
-    description: 'Risorse su propaganda, operazioni informative, influenza, comunicazione strategica e resilienza dell’ambiente informativo.',
-    match: 'Disinformazione, influenza e comunicazione strategica'
+    id: 'manuali-formazione-dataset',
+    title: 'Manuali, formazione e dataset',
+    description: 'Manuali, corsi, scuole, syllabus, report, archivi, dataset e materiali utili per studio, didattica o esercitazioni.',
+    open: false,
+    match: (risorsa) =>
+      hasCategory(risorsa, [
+        'Studiare intelligence',
+        'Cyber, tecnologia e minacce digitali',
+        'Disinformazione, influenza e comunicazione strategica'
+      ])
+      || hasType(risorsa, ['libro', 'manuale', 'documento', 'scuola', 'formazione', 'archivio', 'report', 'dataset'])
   }
 ];
 
 const groups = categoryDefinitions
   .map((category) => {
-    const items = risorse
-      .filter((risorsa) => risorsa.data.category === category.match)
-      .sort((a, b) => Number(b.data.featured) - Number(a.data.featured) || a.data.order - b.data.order || a.data.title.localeCompare(b.data.title, 'it'));
+    const items = sortResources(risorse.filter(category.match));
     return { ...category, items };
   })
   .filter((category) => category.items.length > 0);
@@ -65,6 +82,11 @@ const getMeta = (risorsa) => [
   risorsa.data.language,
   risorsa.data.year ? String(risorsa.data.year) : ''
 ].filter(Boolean).join(' · ');
+
+const getCategoryLabel = (risorsa) => {
+  if (risorsa.data.featured) return 'In evidenza';
+  return risorsa.data.category;
+};
 ---
 <BaseLayout title="Risorse consigliate — Lab4Int - Intelligence Analysis Laboratory" description="Bibliografia ragionata, siti, report, toolkit e risorse utili per approfondire intelligence analysis, OSINT, geopolitica, cyber e disinformazione.">
   <Hero
@@ -82,29 +104,32 @@ const getMeta = (risorsa) => [
       <p class="eyebrow">Criterio editoriale</p>
       <h2>Una selezione non esaustiva, ma ragionata</h2>
       <p>
-        Questa pagina non intende sostituire una bibliografia accademica completa. Raccoglie piuttosto risorse selezionate per utilità formativa, qualità metodologica e rilevanza pratica per chi studia o insegna intelligence analysis, geopolitica, OSINT, sicurezza e crisis management.
+        Questa pagina non intende sostituire una bibliografia accademica completa. Raccoglie risorse selezionate per utilità formativa, qualità metodologica e rilevanza pratica per chi studia o insegna intelligence analysis, geopolitica, OSINT, sicurezza e crisis management.
       </p>
     </div>
   </section>
 
-  <section class="page-section resources-catalog">
+  <section class="page-section resources-catalog" aria-label="Catalogo risorse">
     {groups.map((group) => (
-      <section class="resource-section" aria-labelledby={`resource-section-${group.id}`}>
-        <header class="resource-section-header">
-          <p class="eyebrow">{group.items.length} {group.items.length === 1 ? 'risorsa' : 'risorse'}</p>
-          <div>
+      <details class="resource-section panel" open={group.open}>
+        <summary class="resource-section-header">
+          <div class="resource-section-count">
+            <p class="eyebrow">{group.items.length} {group.items.length === 1 ? 'risorsa' : 'risorse'}</p>
+          </div>
+          <div class="resource-section-title">
             <h2 id={`resource-section-${group.id}`}>{group.title}</h2>
             <p>{group.description}</p>
           </div>
-        </header>
+        </summary>
 
-        <div class="resource-list">
+        <div class="resource-list" aria-labelledby={`resource-section-${group.id}`}>
           {group.items.map((risorsa) => (
-            <article class="resource-card panel">
+            <article class="resource-card">
               <div class="resource-card-main">
                 <div class="resource-kicker">
                   <span>{getMeta(risorsa)}</span>
                   {risorsa.data.featured && <span>Essenziale</span>}
+                  <span>{getCategoryLabel(risorsa)}</span>
                 </div>
 
                 <h3>{risorsa.data.title}</h3>
@@ -136,10 +161,9 @@ const getMeta = (risorsa) => [
             </article>
           ))}
         </div>
-      </section>
+      </details>
     ))}
   </section>
-
 
   <section class="page-section compact-section">
     <div class="panel resources-cta">
@@ -218,27 +242,67 @@ const getMeta = (risorsa) => [
 
     .resources-catalog {
       display: grid;
-      gap: 3rem;
+      gap: 1rem;
       padding-top: 2.5rem;
     }
 
     .resource-section {
       display: grid;
-      gap: 1.15rem;
+      gap: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .resource-section summary {
+      list-style: none;
+    }
+
+    .resource-section summary::-webkit-details-marker {
+      display: none;
     }
 
     .resource-section-header {
+      position: relative;
       display: grid;
       grid-template-columns: minmax(120px, 0.22fr) minmax(0, 1fr);
       gap: 1rem;
       align-items: start;
-      padding-bottom: 0.75rem;
-      border-bottom: 1px solid var(--border);
+      padding: 1.25rem 4rem 1.25rem 1.35rem;
+      cursor: pointer;
+      border-bottom: 1px solid transparent;
+    }
+
+    .resource-section[open] .resource-section-header {
+      border-bottom-color: var(--border);
+    }
+
+    .resource-section-header::after {
+      content: "+";
+      position: absolute;
+      top: 50%;
+      right: 1.35rem;
+      transform: translateY(-50%);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.25rem;
+      height: 2.25rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--surface-muted);
+      color: var(--primary);
+      font-size: 1.35rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .resource-section[open] .resource-section-header::after {
+      content: "−";
     }
 
     .resource-section-header h2 {
       margin-bottom: 0.45rem;
-      font-size: clamp(1.65rem, 3vw, 2.45rem);
+      font-size: clamp(1.55rem, 3vw, 2.25rem);
     }
 
     .resource-section-header p:last-child {
@@ -250,6 +314,7 @@ const getMeta = (risorsa) => [
     .resource-list {
       display: grid;
       gap: 0.95rem;
+      padding: 1.15rem;
     }
 
     .resource-card {
@@ -258,6 +323,9 @@ const getMeta = (risorsa) => [
       gap: 1.25rem;
       align-items: start;
       padding: 1.15rem;
+      border: 1px solid var(--border);
+      border-radius: calc(var(--radius) - 4px);
+      background: var(--surface);
     }
 
     .resource-card-main {
@@ -355,6 +423,10 @@ const getMeta = (risorsa) => [
       .resource-section-header,
       .resource-card {
         grid-template-columns: 1fr;
+      }
+
+      .resource-section-header {
+        padding-right: 3.5rem;
       }
 
       .resource-card-action {
