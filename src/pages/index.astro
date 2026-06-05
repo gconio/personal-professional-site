@@ -34,6 +34,11 @@ const pubblicazioni = (await getCollection('pubblicazione'))
   .sort((a, b) => a.data.order - b.data.order || b.data.year - a.data.year || a.data.title.localeCompare(b.data.title, 'it'))
   .slice(0, 3);
 
+const mediaItems = (await getCollection('media'))
+  .filter((entry) => entry.data.featured)
+  .sort((a, b) => a.data.order - b.data.order || b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 2);
+
 const siteUrl = 'https://giovanni.conio.lab4int.com';
 const homeTitle = 'Giovanni CONIO — Lab4Int | Intelligence Analysis Laboratory';
 const homeDescription = 'Sito personale e professionale dedicato a intelligence analysis, formazione avanzata, tecniche analitiche strutturate, simulazioni, pubblicazioni e cultura strategica.';
@@ -157,6 +162,12 @@ const structuredData = [
         <p>Progetti digitali, simulazioni geopolitiche, strumenti metodologici e iniziative dedicate alla formazione avanzata degli analisti.</p>
         <a class="card-link" href="/progetti/">Vedi i progetti</a>
       </article>
+      <article class="card">
+        <p class="card-meta">Media</p>
+        <h3>Interventi e contenuti multimediali</h3>
+        <p>Interviste, video, dialoghi, audio e documenti pubblici dedicati a intelligence analysis, formazione e cultura strategica.</p>
+        <a class="card-link" href="/media/">Vedi i media</a>
+      </article>
     </div>
   </section>
 
@@ -236,6 +247,27 @@ const structuredData = [
               <p>{pubblicazione.data.description}</p>
               <a class="card-link" href={`/pubblicazioni/${pubblicazione.id}/`}>Apri scheda</a>
             </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  )}
+
+  {mediaItems.length > 0 && (
+    <section class="page-section home-media-section" aria-labelledby="home-media-title">
+      <SectionHeading
+        eyebrow="Media"
+        title="Interventi e contenuti multimediali"
+        description="Una selezione di interviste, video, dialoghi e documenti pubblici dedicati a intelligence analysis, formazione avanzata e cultura strategica."
+      />
+
+      <div class="grid-two">
+        {mediaItems.map((item) => (
+          <article class="card home-media-card">
+            <p class="card-meta">{item.data.category} · {item.data.format}</p>
+            <h3>{item.data.title}</h3>
+            <p>{item.data.description}</p>
+            <a class="card-link" href="/media/">Apri sezione media</a>
           </article>
         ))}
       </div>

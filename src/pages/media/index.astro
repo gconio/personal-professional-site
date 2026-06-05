@@ -1,0 +1,154 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+
+const mediaItems = (await getCollection('media'))
+  .sort((a, b) => a.data.order - b.data.order || b.data.date.getTime() - a.data.date.getTime());
+
+const featuredItems = mediaItems.filter((item) => item.data.featured).slice(0, 2);
+const regularItems = mediaItems.filter((item) => !featuredItems.includes(item));
+
+const pageTitle = 'Media e interventi — Giovanni CONIO | Lab4Int';
+const pageDescription = 'Interviste, video, dialoghi, documenti, registrazioni audio e contenuti multimediali dedicati a intelligence analysis, formazione avanzata e cultura strategica.';
+
+const getPrimaryHref = (item) =>
+  item.data.youtubeId
+    ? `https://www.youtube.com/watch?v=${item.data.youtubeId}`
+    : item.data.pdfUrl || item.data.publicationUrl || item.data.externalUrl || '#';
+
+const getActionLabel = (item) => {
+  const type = item.data.type.toLowerCase();
+
+  if (type.includes('video') || item.data.youtubeId) return 'Guarda il video';
+  if (type.includes('audio')) return 'Ascolta';
+  if (type.includes('pdf') || item.data.pdfUrl) return 'Leggi il documento';
+  return 'Apri contenuto';
+};
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Media e interventi',
+  url: 'https://giovanni.conio.lab4int.com/media/',
+  description: pageDescription,
+  inLanguage: 'it-IT',
+  author: {
+    '@type': 'Person',
+    name: 'Giovanni CONIO',
+    url: 'https://giovanni.conio.lab4int.com/chi-sono/'
+  }
+};
+---
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonical="/media/"
+  structuredData={jsonLd}
+>
+  <section class="article-page media-page">
+    <header class="article-header">
+      <p class="eyebrow">Media</p>
+      <h1>Interventi e contenuti multimediali</h1>
+      <p class="article-meta">
+        Una raccolta di interviste, video, dialoghi, documenti PDF, registrazioni e materiali pubblici collegati ad analisi intelligence, formazione avanzata e cultura strategica.
+      </p>
+    </header>
+
+    {featuredItems.length > 0 && (
+      <section class="media-featured" aria-labelledby="media-featured-title">
+        <SectionHeading
+          eyebrow="In evidenza"
+          title="Contenuti principali"
+          description="I contenuti più recenti o maggiormente rappresentativi."
+        />
+
+        <div class="media-featured-grid">
+          {featuredItems.map((item) => (
+            <article class="panel media-featured-card">
+              <div class="media-card-kicker">
+                <span>{item.data.category}</span>
+                <span>{item.data.format}</span>
+              </div>
+
+              <h2>{item.data.title}</h2>
+              <p>{item.data.description}</p>
+
+              {item.data.youtubeId && (
+                <div class="video-embed">
+                  <iframe
+                    src={`https://www.youtube-nocookie.com/embed/${item.data.youtubeId}`}
+                    title={item.data.title}
+                    loading="lazy"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen
+                  ></iframe>
+                </div>
+              )}
+
+              <dl class="media-facts">
+                <div>
+                  <dt>Data</dt>
+                  <dd>{item.data.date.toLocaleDateString('it-IT', { year: 'numeric', month: 'long', day: 'numeric' })}</dd>
+                </div>
+                {item.data.source && (
+                  <div>
+                    <dt>Fonte</dt>
+                    <dd>{item.data.source}</dd>
+                  </div>
+                )}
+                {item.data.duration && (
+                  <div>
+                    <dt>Durata</dt>
+                    <dd>{item.data.duration}</dd>
+                  </div>
+                )}
+              </dl>
+
+              <div class="inline-actions">
+                <a class="button primary" href={getPrimaryHref(item)} target={item.data.youtubeId || item.data.externalUrl ? '_blank' : undefined} rel={item.data.youtubeId || item.data.externalUrl ? 'noopener noreferrer' : undefined}>
+                  {getActionLabel(item)}
+                </a>
+
+                {item.data.publicationUrl && (
+                  <a class="button secondary" href={item.data.publicationUrl}>Apri scheda pubblicazione</a>
+                )}
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {regularItems.length > 0 && (
+      <section class="media-archive" aria-labelledby="media-archive-title">
+        <SectionHeading
+          eyebrow="Archivio"
+          title="Altri contenuti"
+          description="Ulteriori materiali multimediali e documentali."
+        />
+
+        <div class="media-list">
+          {regularItems.map((item) => (
+            <article class="card media-list-card">
+              <div>
+                <p class="card-meta">{item.data.category} · {item.data.format}</p>
+                <h3>{item.data.title}</h3>
+                <p>{item.data.description}</p>
+              </div>
+
+              <div class="inline-actions">
+                <a class="button secondary" href={getPrimaryHref(item)} target={item.data.youtubeId || item.data.externalUrl ? '_blank' : undefined} rel={item.data.youtubeId || item.data.externalUrl ? 'noopener noreferrer' : undefined}>
+                  {getActionLabel(item)}
+                </a>
+                {item.data.publicationUrl && (
+                  <a class="button secondary" href={item.data.publicationUrl}>Scheda</a>
+                )}
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+    )}
+  </section>
+</BaseLayout>
