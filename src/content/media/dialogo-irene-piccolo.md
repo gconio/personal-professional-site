@@ -6,6 +6,8 @@ type: "documento"
 format: "PDF"
 category: "Dialoghi"
 source: "Lab4Int"
+sourceLabel: "Documento PDF"
+thumbnail: "/images/media/formazione-analisti-dialogo-irene-piccolo-cover.png"
 publicationUrl: "/pubblicazioni/linkedin-formazione-analisti-dialogo-irene-piccolo/"
 tags:
   - formazione analisti

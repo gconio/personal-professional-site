@@ -86,4 +86,27 @@ const risorsa = defineCollection({
   })
 });
 
-export const collections = { corso, progetto, pubblicazione, commentiManuale, risorsa };
+const media = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/media' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    date: z.coerce.date(),
+    type: z.string(),
+    format: z.string(),
+    category: z.string(),
+    source: z.string().optional().default(''),
+    sourceLabel: z.string().optional().default(''),
+    thumbnail: z.string().optional().default(''),
+    duration: z.string().optional().default(''),
+    youtubeId: z.string().optional(),
+    externalUrl: z.string().url().optional(),
+    pdfUrl: z.string().optional(),
+    publicationUrl: z.string().optional(),
+    tags: z.array(z.string()).default([]),
+    featured: z.boolean().default(false),
+    order: z.number().default(99)
+  })
+});
+
+export const collections = { corso, progetto, pubblicazione, commentiManuale, risorsa, media };

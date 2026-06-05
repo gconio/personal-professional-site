@@ -1,0 +1,206 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+
+const mediaItems = (await getCollection('media'))
+  .sort((a, b) => a.data.order - b.data.order || b.data.date.getTime() - a.data.date.getTime());
+
+const featuredItems = mediaItems.filter((item) => item.data.featured).slice(0, 2);
+const regularItems = mediaItems.filter((item) => !featuredItems.includes(item));
+
+const pageTitle = 'Interviste — Giovanni CONIO | Lab4Int';
+const pageDescription = 'Una raccolta di interviste, dialoghi, registrazioni audio e materiali pubblici direttamente collegati ad analisi intelligence e formazione.';
+
+const getPrimaryHref = (item) =>
+  item.data.youtubeId
+    ? `https://www.youtube.com/watch?v=${item.data.youtubeId}`
+    : item.data.pdfUrl || item.data.publicationUrl || item.data.externalUrl || '#';
+
+const getActionLabel = (item) => {
+  const type = item.data.type.toLowerCase();
+
+  if (type.includes('video') || item.data.youtubeId) return 'Guarda il video';
+  if (type.includes('audio')) return 'Ascolta';
+  if (type.includes('pdf') || item.data.pdfUrl) return 'Leggi il documento';
+  if (item.data.publicationUrl) return 'Apri scheda';
+  return 'Apri contenuto';
+};
+
+const isExternalTarget = (href) => href.startsWith('http');
+
+const getSourceLabel = (item) =>
+  item.data.sourceLabel || item.data.format || item.data.type;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Interviste',
+  url: 'https://giovanni.conio.lab4int.com/interviste/',
+  description: pageDescription,
+  inLanguage: 'it-IT',
+  author: {
+    '@type': 'Person',
+    name: 'Giovanni CONIO',
+    url: 'https://giovanni.conio.lab4int.com/chi-sono/'
+  }
+};
+---
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonical="/interviste/"
+  structuredData={jsonLd}
+>
+  <section class="article-page media-page">
+    <header class="article-header">
+      <p class="eyebrow">Interviste</p>
+      <h1>Interviste</h1>
+      <p class="article-meta">
+        Una raccolta di interviste, dialoghi, registrazioni audio e materiali pubblici direttamente collegati ad analisi intelligence e formazione.
+      </p>
+    </header>
+
+    {featuredItems.length > 0 && (
+      <section class="media-featured" aria-labelledby="media-featured-title">
+        <SectionHeading
+          eyebrow="In evidenza"
+          title="Interviste e dialoghi in evidenza"
+          description="I contenuti più recenti o maggiormente rappresentativi."
+        />
+
+        <div class="media-featured-grid">
+          {featuredItems.map((item) => {
+            const primaryHref = getPrimaryHref(item);
+            const external = isExternalTarget(primaryHref);
+
+            return (
+              <article class="panel media-featured-card">
+                <div class="media-card-kicker">
+                  <span>{item.data.category}</span>
+                  <span>{item.data.format}</span>
+                </div>
+
+                <h2>{item.data.title}</h2>
+                <p>{item.data.description}</p>
+
+                {item.data.youtubeId ? (
+                  <div class="video-embed">
+                    <iframe
+                      src={`https://www.youtube-nocookie.com/embed/${item.data.youtubeId}`}
+                      title={item.data.title}
+                      loading="lazy"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowfullscreen
+                    ></iframe>
+                  </div>
+                ) : item.data.thumbnail ? (
+                  <a
+                    class="media-source-preview media-source-preview-featured"
+                    href={primaryHref}
+                    target={external ? '_blank' : undefined}
+                    rel={external ? 'noopener noreferrer' : undefined}
+                    aria-label={`Apri ${item.data.title}`}
+                  >
+                    <img src={item.data.thumbnail} alt={`Anteprima: ${item.data.title}`} loading="lazy" decoding="async" />
+                    <span>{getSourceLabel(item)}</span>
+                  </a>
+                ) : null}
+
+                <dl class="media-facts">
+                  <div>
+                    <dt>Data</dt>
+                    <dd>{item.data.date.toLocaleDateString('it-IT', { year: 'numeric', month: 'long', day: 'numeric' })}</dd>
+                  </div>
+                  {item.data.source && (
+                    <div>
+                      <dt>Fonte</dt>
+                      <dd>{item.data.source}</dd>
+                    </div>
+                  )}
+                  {item.data.duration && (
+                    <div>
+                      <dt>Durata</dt>
+                      <dd>{item.data.duration}</dd>
+                    </div>
+                  )}
+                </dl>
+
+                <div class="inline-actions">
+                  <a
+                    class="button primary"
+                    href={primaryHref}
+                    target={external ? '_blank' : undefined}
+                    rel={external ? 'noopener noreferrer' : undefined}
+                  >
+                    {getActionLabel(item)}
+                  </a>
+
+                  {item.data.publicationUrl && primaryHref !== item.data.publicationUrl && (
+                    <a class="button secondary" href={item.data.publicationUrl}>Apri scheda pubblicazione</a>
+                  )}
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+    )}
+
+    {regularItems.length > 0 && (
+      <section class="media-archive" aria-labelledby="media-archive-title">
+        <SectionHeading
+          eyebrow="Archivio"
+          title="Archivio"
+          description="Ulteriori interviste, dialoghi, registrazioni e materiali pubblici."
+        />
+
+        <div class="media-list">
+          {regularItems.map((item) => {
+            const primaryHref = getPrimaryHref(item);
+            const external = isExternalTarget(primaryHref);
+
+            return (
+              <article class={`card media-list-card ${item.data.thumbnail && !item.data.youtubeId ? 'has-thumbnail' : ''}`}>
+                {item.data.thumbnail && !item.data.youtubeId && (
+                  <a
+                    class="media-list-thumb"
+                    href={primaryHref}
+                    target={external ? '_blank' : undefined}
+                    rel={external ? 'noopener noreferrer' : undefined}
+                    aria-label={`Apri ${item.data.title}`}
+                  >
+                    <img src={item.data.thumbnail} alt={`Anteprima: ${item.data.title}`} loading="lazy" decoding="async" />
+                    <span>{getSourceLabel(item)}</span>
+                  </a>
+                )}
+
+                <div class="media-list-body">
+                  <div>
+                    <p class="card-meta">{item.data.category} · {item.data.format}</p>
+                    <h3>{item.data.title}</h3>
+                    <p>{item.data.description}</p>
+                  </div>
+
+                  <div class="inline-actions">
+                    <a
+                      class="button secondary"
+                      href={primaryHref}
+                      target={external ? '_blank' : undefined}
+                      rel={external ? 'noopener noreferrer' : undefined}
+                    >
+                      {getActionLabel(item)}
+                    </a>
+                    {item.data.publicationUrl && primaryHref !== item.data.publicationUrl && (
+                      <a class="button secondary" href={item.data.publicationUrl}>Scheda</a>
+                    )}
+                  </div>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+    )}
+  </section>
+</BaseLayout>
