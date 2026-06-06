@@ -13,11 +13,12 @@ const { Content: PublicationContent } = await render(pubblicazione);
 const visibleFrom = pubblicazione.data.visibleFrom || '';
 const isScheduledPublication = Boolean(visibleFrom);
 const visibleFromDate = visibleFrom ? new Date(`${visibleFrom}T00:00:00+02:00`) : null;
-const visibleFromLabel = visibleFromDate
+const visibleFromLabel = visibleFrom
   ? new Intl.DateTimeFormat('it-IT', {
       day: '2-digit',
       month: 'long',
-      year: 'numeric'
+      year: 'numeric',
+      timeZone: 'Europe/Rome'
     }).format(visibleFromDate)
   : '';
 

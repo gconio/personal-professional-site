@@ -7,6 +7,16 @@ const pubblicazioni = await getCollection('pubblicazione');
 
 const normalize = (value = '') => value.toLowerCase();
 
+const getVisibleFromDate = (entry) => {
+  if (!entry.data.visibleFrom) return null;
+  return new Date(`${entry.data.visibleFrom}T00:00:00+02:00`);
+};
+
+const getPublicationSortTime = (entry) => {
+  const visibleFrom = getVisibleFromDate(entry);
+  return visibleFrom ? visibleFrom.getTime() : Date.UTC(entry.data.year, 0, 1);
+};
+
 const categoryDefinitions = [
   {
     id: 'libri',
@@ -36,7 +46,7 @@ const groups = categoryDefinitions
         if (usedIds.has(pubblicazione.id)) return false;
         return category.match(pubblicazione.data.type);
       })
-      .sort((a, b) => a.data.order - b.data.order || b.data.year - a.data.year || a.data.title.localeCompare(b.data.title, 'it'));
+      .sort((a, b) => getPublicationSortTime(b) - getPublicationSortTime(a) || a.data.order - b.data.order || a.data.title.localeCompare(b.data.title, 'it'));
 
     items.forEach((item) => usedIds.add(item.id));
     return { ...category, items };
@@ -74,8 +84,8 @@ const isRecentArticleCandidate = (pubblicazione) => {
 
 const latestPublications = pubblicazioni
   .filter(isRecentArticleCandidate)
-  .sort((a, b) => a.data.order - b.data.order || b.data.year - a.data.year || a.data.title.localeCompare(b.data.title, 'it'))
-  .slice(0, 3);
+  .sort((a, b) => getPublicationSortTime(b) - getPublicationSortTime(a) || a.data.order - b.data.order || a.data.title.localeCompare(b.data.title, 'it'))
+  .slice(0, 4);
 
 const siteUrl = 'https://giovanni.conio.lab4int.com';
 const pageTitle = 'Pubblicazioni — Lab4Int - Intelligence Analysis Laboratory';
@@ -139,7 +149,12 @@ const publicationsStructuredData = [
 
       <div class="latest-publications-grid">
         {latestPublications.map((pubblicazione, index) => (
-          <article class={`latest-publication-card panel ${index === 0 ? 'is-primary' : ''}`}>
+          <article
+            class={`latest-publication-card panel ${index === 0 ? 'is-primary' : ''}`}
+            data-latest-publication
+            data-scheduled-publication={pubblicazione.data.visibleFrom || undefined}
+            hidden={Boolean(pubblicazione.data.visibleFrom)}
+          >
             <a class="latest-publication-media" href={`/pubblicazioni/${pubblicazione.id}/`} aria-label={`Apri la scheda ${pubblicazione.data.title}`}>
               {pubblicazione.data.cover ? (
                 <img src={pubblicazione.data.cover} alt={`Copertina di ${pubblicazione.data.title}`} loading={index === 0 ? 'eager' : 'lazy'} decoding="async" />
@@ -153,7 +168,7 @@ const publicationsStructuredData = [
 
             <div class="latest-publication-body">
               <div class="publication-kicker">
-                {index === 0 && <span>Nuovo</span>}
+                {index === 0 && <span data-new-badge>Nuovo</span>}
                 <span>{pubblicazione.data.type}</span>
                 <span>{pubblicazione.data.year}</span>
                 {pubblicazione.data.pdfUrl && <span>PDF</span>}
@@ -183,7 +198,11 @@ const publicationsStructuredData = [
           {group.items.map((pubblicazione) => {
             const availability = getAvailability(pubblicazione);
             return (
-              <article class="publication-item panel">
+              <article
+                class="publication-item panel"
+                data-scheduled-publication={pubblicazione.data.visibleFrom || undefined}
+                hidden={Boolean(pubblicazione.data.visibleFrom)}
+              >
                 <a class="publication-media" href={`/pubblicazioni/${pubblicazione.id}/`} aria-label={`Apri la scheda ${pubblicazione.data.title}`}>
                   {pubblicazione.data.cover ? (
                     <img src={pubblicazione.data.cover} alt={`Copertina di ${pubblicazione.data.title}`} loading="lazy" decoding="async" />
@@ -226,6 +245,40 @@ const publicationsStructuredData = [
       </section>
     ))}
   </section>
+
+  <script is:inline>
+    (() => {
+      const parseVisibleFrom = (value) => {
+        if (!value) return null;
+        return new Date(`${value}T00:00:00+02:00`);
+      };
+
+      const updateScheduledPublications = () => {
+        const now = new Date();
+
+        document.querySelectorAll('[data-scheduled-publication]').forEach((item) => {
+          const visibleFrom = parseVisibleFrom(item.getAttribute('data-scheduled-publication'));
+          item.hidden = Boolean(visibleFrom && now < visibleFrom);
+        });
+
+        const visibleLatestCards = Array.from(document.querySelectorAll('[data-latest-publication]'))
+          .filter((card) => !card.hidden);
+
+        visibleLatestCards.forEach((card, index) => {
+          const shouldShow = index < 3;
+          card.hidden = !shouldShow;
+          card.classList.toggle('is-primary', shouldShow && index === 0);
+
+          const badge = card.querySelector('[data-new-badge]');
+          if (badge) {
+            badge.hidden = !(shouldShow && index === 0);
+          }
+        });
+      };
+
+      updateScheduledPublications();
+    })();
+  </script>
 
   <style>
 
