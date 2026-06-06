@@ -17,6 +17,16 @@ const progetti = (await getCollection('progetto'))
 
 const normalize = (value = '') => value.toLowerCase();
 
+const getVisibleFromDate = (entry) => {
+  if (!entry.data.visibleFrom) return null;
+  return new Date(`${entry.data.visibleFrom}T00:00:00+02:00`);
+};
+
+const getPublicationSortTime = (entry) => {
+  const visibleFrom = getVisibleFromDate(entry);
+  return visibleFrom ? visibleFrom.getTime() : Date.UTC(entry.data.year, 0, 1);
+};
+
 const isRecentPublicationCandidate = (pubblicazione) => {
   const type = normalize(pubblicazione.data.type);
   const publisher = normalize(pubblicazione.data.publisher || '');
@@ -31,8 +41,8 @@ const isRecentPublicationCandidate = (pubblicazione) => {
 
 const pubblicazioni = (await getCollection('pubblicazione'))
   .filter(isRecentPublicationCandidate)
-  .sort((a, b) => a.data.order - b.data.order || b.data.year - a.data.year || a.data.title.localeCompare(b.data.title, 'it'))
-  .slice(0, 3);
+  .sort((a, b) => getPublicationSortTime(b) - getPublicationSortTime(a) || a.data.order - b.data.order || a.data.title.localeCompare(b.data.title, 'it'))
+  .slice(0, 4);
 
 const latestInterview = (await getCollection('media'))
   .filter((entry) => entry.data.youtubeId && `${entry.data.category} ${entry.data.type}`.toLowerCase().includes('intervist'))
@@ -218,7 +228,12 @@ const structuredData = [
 
       <div class="home-latest-publications-grid">
         {pubblicazioni.map((pubblicazione, index) => (
-          <article class={`home-latest-publication-card panel ${index === 0 ? 'is-primary' : ''}`}>
+          <article
+            class={`home-latest-publication-card panel ${index === 0 ? 'is-primary' : ''}`}
+            data-home-latest-publication
+            data-scheduled-publication={pubblicazione.data.visibleFrom || undefined}
+            hidden={Boolean(pubblicazione.data.visibleFrom)}
+          >
             <a class="home-latest-publication-media" href={`/pubblicazioni/${pubblicazione.id}/`} aria-label={`Apri la scheda ${pubblicazione.data.title}`}>
               {pubblicazione.data.cover ? (
                 <img
@@ -237,7 +252,7 @@ const structuredData = [
 
             <div class="home-latest-publication-body">
               <div class="home-publication-kicker">
-                {index === 0 && <span>Nuovo</span>}
+                {index === 0 && <span data-new-badge>Nuovo</span>}
                 <span>{pubblicazione.data.type}</span>
                 <span>{pubblicazione.data.year}</span>
                 {pubblicazione.data.pdfUrl && <span>PDF</span>}
@@ -251,6 +266,40 @@ const structuredData = [
       </div>
     </section>
   )}
+
+  <script is:inline>
+    (() => {
+      const parseVisibleFrom = (value) => {
+        if (!value) return null;
+        return new Date(`${value}T00:00:00+02:00`);
+      };
+
+      const updateScheduledPublications = () => {
+        const now = new Date();
+
+        document.querySelectorAll('[data-scheduled-publication]').forEach((card) => {
+          const visibleFrom = parseVisibleFrom(card.getAttribute('data-scheduled-publication'));
+          card.hidden = Boolean(visibleFrom && now < visibleFrom);
+        });
+
+        const visibleHomeCards = Array.from(document.querySelectorAll('[data-home-latest-publication]'))
+          .filter((card) => !card.hidden);
+
+        visibleHomeCards.forEach((card, index) => {
+          const shouldShow = index < 3;
+          card.hidden = !shouldShow;
+          card.classList.toggle('is-primary', shouldShow && index === 0);
+
+          const badge = card.querySelector('[data-new-badge]');
+          if (badge) {
+            badge.hidden = !(shouldShow && index === 0);
+          }
+        });
+      };
+
+      updateScheduledPublications();
+    })();
+  </script>
 
   {latestInterview && (
     <section class="page-section home-interview-section" aria-labelledby="home-interview-title">

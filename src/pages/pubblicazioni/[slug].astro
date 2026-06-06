@@ -10,6 +10,17 @@ export async function getStaticPaths() {
 const { pubblicazione } = Astro.props;
 const { Content: PublicationContent } = await render(pubblicazione);
 
+const visibleFrom = pubblicazione.data.visibleFrom || '';
+const isScheduledPublication = Boolean(visibleFrom);
+const visibleFromDate = visibleFrom ? new Date(`${visibleFrom}T00:00:00+02:00`) : null;
+const visibleFromLabel = visibleFromDate
+  ? new Intl.DateTimeFormat('it-IT', {
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric'
+    }).format(visibleFromDate)
+  : '';
+
 const hasFacts = pubblicazione.data.publisher || pubblicazione.data.theme || pubblicazione.data.isbnPrint || pubblicazione.data.isbnEbook || pubblicazione.data.link || pubblicazione.data.pdfUrl || pubblicazione.data.sourceStatus || pubblicazione.data.license;
 const publisherName = (pubblicazione.data.publisher || '').toLowerCase();
 const isPublisherOffline = publisherName.includes('alpha institute') || publisherName.includes('analytica');
@@ -123,6 +134,29 @@ const publicationStructuredData = [
       <h1>{pubblicazione.data.title}</h1>
       <p class="article-meta">{pubblicazione.data.type} · {pubblicazione.data.year}</p>
     </header>
+
+    {isScheduledPublication && (
+      <section
+        class="panel scheduled-publication-notice"
+        data-scheduled-notice
+        data-visible-from={visibleFrom}
+        aria-live="polite"
+      >
+        <p class="card-meta">Pubblicazione programmata</p>
+        <h2>Documento disponibile dal {visibleFromLabel}</h2>
+        <p>
+          La scheda è già predisposta nel sito, ma il contenuto dell’articolo e il PDF saranno mostrati automaticamente
+          dalla data programmata.
+        </p>
+      </section>
+    )}
+
+    <div
+      class="scheduled-publication-content"
+      data-scheduled-content
+      data-visible-from={visibleFrom || undefined}
+      hidden={isScheduledPublication}
+    >
 
     {(pubblicazione.data.cover || hasFacts) && (
       <section class="publication-detail-grid" aria-label="Dati principali della pubblicazione">
@@ -288,6 +322,29 @@ const publicationStructuredData = [
         </div>
       </section>
     )}
+
+    </div>
+
+    <script is:inline>
+      (() => {
+        const content = document.querySelector('[data-scheduled-content]');
+        const notice = document.querySelector('[data-scheduled-notice]');
+        const visibleFromValue = content?.getAttribute('data-visible-from');
+
+        if (!content || !visibleFromValue) return;
+
+        const visibleFrom = new Date(`${visibleFromValue}T00:00:00+02:00`);
+        const now = new Date();
+
+        if (now >= visibleFrom) {
+          content.hidden = false;
+          if (notice) notice.hidden = true;
+        } else {
+          content.hidden = true;
+          if (notice) notice.hidden = false;
+        }
+      })();
+    </script>
 
     <style>
 

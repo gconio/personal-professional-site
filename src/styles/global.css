@@ -882,3 +882,29 @@ h3 { font-size: 1.35rem; }
     height: auto;
   }
 }
+
+
+/* Scheduled publications */
+.scheduled-publication-notice {
+  display: grid;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  border-left: 4px solid var(--accent);
+  background: linear-gradient(135deg, rgba(184, 155, 94, 0.12), rgba(255, 255, 255, 0.88));
+}
+
+.scheduled-publication-notice h2 {
+  font-size: clamp(1.45rem, 2.5vw, 2rem);
+}
+
+.scheduled-publication-notice p {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.scheduled-publication-content[hidden],
+[data-scheduled-publication][hidden],
+[data-scheduled-content][hidden],
+[data-scheduled-notice][hidden] {
+  display: none !important;
+}
