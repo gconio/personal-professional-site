@@ -16,6 +16,8 @@ const progetti = (await getCollection('progetto'))
   .slice(0, 3);
 
 const normalize = (value = '') => value.toLowerCase();
+const latestPublicationsVisibleLimit = 3;
+const latestPublicationsCandidateLimit = 8;
 
 const getVisibleFromDate = (entry) => {
   if (!entry.data.visibleFrom) return null;
@@ -42,7 +44,7 @@ const isRecentPublicationCandidate = (pubblicazione) => {
 const pubblicazioni = (await getCollection('pubblicazione'))
   .filter(isRecentPublicationCandidate)
   .sort((a, b) => getPublicationSortTime(b) - getPublicationSortTime(a) || a.data.order - b.data.order || a.data.title.localeCompare(b.data.title, 'it'))
-  .slice(0, 4);
+  .slice(0, latestPublicationsCandidateLimit);
 
 const latestInterview = (await getCollection('media'))
   .filter((entry) => entry.data.youtubeId && `${entry.data.category} ${entry.data.type}`.toLowerCase().includes('intervist'))
@@ -226,7 +228,7 @@ const structuredData = [
         description="Articoli, paper e materiali PDF recenti dedicati all’analisi intelligence, alla formazione avanzata e alla cultura strategica."
       />
 
-      <div class="home-latest-publications-grid">
+      <div class="home-latest-publications-grid" data-home-latest-publications-grid data-visible-limit={latestPublicationsVisibleLimit}>
         {pubblicazioni.map((pubblicazione, index) => (
           <article
             class={`home-latest-publication-card panel ${index === 0 ? 'is-primary' : ''}`}
@@ -282,11 +284,14 @@ const structuredData = [
           card.hidden = Boolean(visibleFrom && now < visibleFrom);
         });
 
+        const latestGrid = document.querySelector('[data-home-latest-publications-grid]');
+        const latestLimit = Number.parseInt(latestGrid?.getAttribute('data-visible-limit') || '3', 10);
+
         const visibleHomeCards = Array.from(document.querySelectorAll('[data-home-latest-publication]'))
           .filter((card) => !card.hidden);
 
         visibleHomeCards.forEach((card, index) => {
-          const shouldShow = index < 3;
+          const shouldShow = index < latestLimit;
           card.hidden = !shouldShow;
           card.classList.toggle('is-primary', shouldShow && index === 0);
 
