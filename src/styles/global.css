@@ -908,3 +908,8 @@ h3 { font-size: 1.35rem; }
 [data-scheduled-notice][hidden] {
   display: none !important;
 }
+
+/* Visibility guard for scheduled and client-filtered elements */
+[hidden] {
+  display: none !important;
+}
