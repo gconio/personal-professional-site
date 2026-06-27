@@ -6,6 +6,8 @@ import Hero from '../../components/Hero.astro';
 const pubblicazioni = await getCollection('pubblicazione');
 
 const normalize = (value = '') => value.toLowerCase();
+const latestPublicationsVisibleLimit = 3;
+const latestPublicationsCandidateLimit = 8;
 
 const getVisibleFromDate = (entry) => {
   if (!entry.data.visibleFrom) return null;
@@ -85,7 +87,7 @@ const isRecentArticleCandidate = (pubblicazione) => {
 const latestPublications = pubblicazioni
   .filter(isRecentArticleCandidate)
   .sort((a, b) => getPublicationSortTime(b) - getPublicationSortTime(a) || a.data.order - b.data.order || a.data.title.localeCompare(b.data.title, 'it'))
-  .slice(0, 4);
+  .slice(0, latestPublicationsCandidateLimit);
 
 const siteUrl = 'https://giovanni.conio.lab4int.com';
 const pageTitle = 'Pubblicazioni — Lab4Int - Intelligence Analysis Laboratory';
@@ -147,7 +149,7 @@ const publicationsStructuredData = [
         </div>
       </header>
 
-      <div class="latest-publications-grid">
+      <div class="latest-publications-grid" data-latest-publications-grid data-visible-limit={latestPublicationsVisibleLimit}>
         {latestPublications.map((pubblicazione, index) => (
           <article
             class={`latest-publication-card panel ${index === 0 ? 'is-primary' : ''}`}
@@ -261,11 +263,14 @@ const publicationsStructuredData = [
           item.hidden = Boolean(visibleFrom && now < visibleFrom);
         });
 
+        const latestGrid = document.querySelector('[data-latest-publications-grid]');
+        const latestLimit = Number.parseInt(latestGrid?.getAttribute('data-visible-limit') || '3', 10);
+
         const visibleLatestCards = Array.from(document.querySelectorAll('[data-latest-publication]'))
           .filter((card) => !card.hidden);
 
         visibleLatestCards.forEach((card, index) => {
-          const shouldShow = index < 3;
+          const shouldShow = index < latestLimit;
           card.hidden = !shouldShow;
           card.classList.toggle('is-primary', shouldShow && index === 0);
 
