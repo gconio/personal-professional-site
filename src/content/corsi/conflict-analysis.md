@@ -88,9 +88,9 @@ Contenuti principali:
 
 ## Case study
 
-Il corso prevede l’impiego della disputa territoriale delle **isole Spratly**, nel Mar Cinese Meridionale, come caso di studio.
+Il corso prevede l’esame di un **caso reale** come base applicativa per collegare strumenti metodologici, dinamiche geopolitiche, interessi degli attori e possibili strategie di gestione.
 
-La disputa coinvolge diversi attori regionali, tra cui Cina, Vietnam, Filippine, Malaysia, Taiwan e Brunei, e costituisce un esempio di conflitto complesso che richiede analisi delle cause, degli interessi, degli attori e delle possibili strategie di gestione.
+Il caso sarà utilizzato per esercitare l’analisi delle cause, la mappatura degli attori, la valutazione dei fattori alimentanti, l’individuazione delle linee di evoluzione e la formulazione di possibili opzioni di gestione o risoluzione.
 
 ## Metodologia didattica
 
@@ -99,12 +99,6 @@ Il corso combina lezioni teoriche frontali, discussioni di gruppo, esame di case
 ## Requisiti consigliati
 
 Per una più completa visione delle tematiche proposte è consigliata, ove disponibile, la frequenza preventiva di moduli dedicati a sovranità degli Stati e risorse, regole e attori internazionali, scenari d’analisi nelle relazioni internazionali.
-
-## Attestato e riconoscimenti
-
-Ai partecipanti che, nell’elaborato finale realizzato nel corso delle attività pratiche, avranno ottenuto un giudizio almeno pari a “sufficiente”, potrà essere rilasciato un attestato di partecipazione.
-
-Il corso è indicato come compatibile con il riconoscimento di **8,5 CFU AIAIG**, adatto ai livelli di attestazione A1, A2 e B.
 
 ## Output formativo
 
