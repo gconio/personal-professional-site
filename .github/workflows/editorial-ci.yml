@@ -44,6 +44,9 @@ jobs:
       - name: Validate content, duplicates and local assets
         run: npm run editorial:validate
 
+      - name: Generate editorial quality report
+        run: npm run editorial:quality
+
       - name: Generate editorial knowledge index
         run: npm run editorial:inventory
 
