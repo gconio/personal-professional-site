@@ -1,4 +1,4 @@
-# Lab4Int Editorial Pipeline v0.2.1
+﻿# Lab4Int Editorial Pipeline v0.2.1
 
 ## Contenuto della patch
 
@@ -44,7 +44,7 @@ git diff --check
 ## Branch
 
 ```text
-chore/editorial-pipeline-v0.2.1.1
+chore/editorial-pipeline-v0.2.1
 ```
 
 ## Commit suggerito
@@ -60,3 +60,4 @@ Add controlled editorial validation engine v0.2.1
 - recupero sicuro da branch residui senza commit;
 - rollback compatibile con Windows PowerShell;
 - pulizia delle directory vuote generate dal tentativo fallito.
+
