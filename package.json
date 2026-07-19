@@ -11,7 +11,8 @@
     "editorial:inventory": "node scripts/editorial/generate-inventory.mjs",
     "editorial:links": "node scripts/editorial/check-generated-links.mjs",
     "editorial:scope": "node scripts/editorial/check-change-scope.mjs",
-    "editorial:check": "npm run editorial:validate && npm run editorial:inventory && npm run build && npm run editorial:links"
+    "editorial:check": "npm run editorial:validate && npm run editorial:quality && npm run editorial:inventory && npm run build && npm run editorial:links",
+    "editorial:quality": "node scripts/editorial/quality-report.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.2",
