@@ -3,3 +3,6 @@ dist/
 .astro/
 .env
 .DS_Store
+
+# Generated editorial validation artifacts
+artifacts/editorial/

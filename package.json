@@ -6,7 +6,12 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "editorial:validate": "node scripts/editorial/validate-content.mjs",
+    "editorial:inventory": "node scripts/editorial/generate-inventory.mjs",
+    "editorial:links": "node scripts/editorial/check-generated-links.mjs",
+    "editorial:scope": "node scripts/editorial/check-change-scope.mjs",
+    "editorial:check": "npm run editorial:validate && npm run editorial:inventory && npm run build && npm run editorial:links"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.2",

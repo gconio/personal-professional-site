@@ -14,14 +14,16 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
-    name: Install and build Astro site
+  validate:
+    name: Validate editorial content
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Configure Node.js
         uses: actions/setup-node@v4
@@ -32,8 +34,24 @@ jobs:
       - name: Install locked dependencies
         run: npm ci
 
+      - name: Check editorial branch scope
+        if: startsWith(github.head_ref, 'editorial/')
+        env:
+          EDITORIAL_SCOPE_ENFORCE: "true"
+          EDITORIAL_BASE_REF: ${{ github.base_ref }}
+        run: npm run editorial:scope
+
+      - name: Validate content, duplicates and local assets
+        run: npm run editorial:validate
+
+      - name: Generate editorial knowledge index
+        run: npm run editorial:inventory
+
       - name: Build site
         run: npm run build
+
+      - name: Check generated internal links
+        run: npm run editorial:links
 
       - name: Verify essential generated pages
         shell: bash
@@ -60,9 +78,11 @@ jobs:
 
           exit "$missing"
 
-      - name: Upload generated site for inspection
+      - name: Upload generated site and editorial reports
         uses: actions/upload-artifact@v4
         with:
-          name: editorial-preview-dist
-          path: dist
+          name: editorial-validation-artifacts
+          path: |
+            dist
+            artifacts/editorial
           retention-days: 7
