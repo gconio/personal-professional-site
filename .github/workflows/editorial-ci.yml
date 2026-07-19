@@ -50,6 +50,9 @@ jobs:
       - name: Generate editorial knowledge index
         run: npm run editorial:inventory
 
+      - name: Generate editorial governance report
+        run: npm run editorial:governance
+
       - name: Build site
         run: npm run build
 
