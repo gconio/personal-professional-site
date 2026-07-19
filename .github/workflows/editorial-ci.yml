@@ -53,6 +53,9 @@ jobs:
       - name: Generate editorial governance report
         run: npm run editorial:governance
 
+      - name: Generate editorial dashboard
+        run: npm run editorial:dashboard
+
       - name: Build site
         run: npm run build
 
