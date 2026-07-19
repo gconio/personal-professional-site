@@ -111,9 +111,40 @@ const html = `<!doctype html>
 :root{--bg:#0b1220;--panel:#121c2e;--panel2:#18243a;--text:#eef4ff;--muted:#a7b4c8;--line:#2b3a54;--accent:#75a7ff;--ok:#50c878;--warn:#f0bd4f;--bad:#f27878;--neutral:#8fa1b8;--shadow:0 14px 36px rgba(0,0,0,.22)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(160deg,#08101d 0%,var(--bg) 50%,#10192a 100%);color:var(--text);font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
 a{color:var(--accent)}.shell{width:min(1440px,calc(100% - 32px));margin:auto;padding:30px 0 60px}.masthead{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:24px}.eyebrow{text-transform:uppercase;letter-spacing:.13em;color:var(--accent);font-weight:750;font-size:.76rem}.masthead h1{font-size:clamp(2rem,4vw,3.5rem);line-height:1.04;margin:.25rem 0}.masthead p{color:var(--muted);margin:0;max-width:760px}.meta{text-align:right;color:var(--muted);font-size:.86rem}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}.card{background:rgba(18,28,46,.9);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:20px}.kpi{grid-column:span 2;min-height:132px}.kpi strong{display:block;font-size:2.05rem;line-height:1.1;margin-top:13px}.kpi span{color:var(--muted)}.wide{grid-column:span 8}.side{grid-column:span 4}.full{grid-column:1/-1}h2{margin:0 0 14px;font-size:1.15rem}h3{font-size:1rem}.statusbar{height:18px;border-radius:999px;overflow:hidden;display:flex;background:#26344c;margin:18px 0}.segment{height:100%}.current{background:var(--ok)}.review-due{background:var(--warn)}.stale{background:var(--bad)}.undated{background:var(--neutral)}.legend{display:flex;gap:16px;flex-wrap:wrap;color:var(--muted)}.dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:6px}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px}table{border-collapse:collapse;width:100%;min-width:700px}th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line)}thead th{position:sticky;top:0;background:var(--panel2);z-index:1;font-size:.8rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}tbody tr:last-child>*{border-bottom:0}tbody tr:hover{background:rgba(117,167,255,.06)}td small{display:block;color:var(--muted);margin-top:2px}.badge{display:inline-block;border:1px solid currentColor;border-radius:999px;padding:2px 8px;font-size:.76rem;font-weight:700}.priority-p1,.status-stale{color:var(--bad)}.priority-p2,.status-review-due{color:var(--warn)}.priority-p3,.status-current{color:var(--ok)}.status-undated{color:var(--neutral)}.controls{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}.controls input,.controls select,.controls button{background:#0e1727;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:9px 11px;font:inherit}.controls button{cursor:pointer}.controls button:hover{border-color:var(--accent)}.controls input{flex:1;min-width:220px}.empty{display:none;color:var(--muted);padding:18px}.note{color:var(--muted);font-size:.9rem}.mini{min-width:0}.mini table{min-width:0}.footer{color:var(--muted);margin-top:22px;font-size:.82rem;text-align:center}@media(max-width:1050px){.kpi{grid-column:span 4}.wide,.side{grid-column:1/-1}}@media(max-width:680px){.shell{width:min(100% - 20px,1440px);padding-top:18px}.masthead{align-items:flex-start;flex-direction:column}.meta{text-align:left}.kpi{grid-column:span 6}.card{padding:15px}}@media print{body{background:#fff;color:#111}.card{box-shadow:none;background:#fff;border-color:#bbb}.controls{display:none}.shell{width:100%}.meta,.note,.legend{color:#444}}
+.console-topbar{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:12px 24px;background:rgba(10,17,29,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
+.console-brand{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none}
+.console-brand img{width:34px;height:34px;object-fit:contain;border-radius:10px;background:rgba(255,255,255,.08);padding:3px}
+.console-brand span{display:grid;line-height:1.15}
+.console-brand strong{font-size:1rem}
+.console-brand small{color:var(--muted);font-size:.76rem}
+.console-nav{display:flex;gap:.55rem;flex-wrap:wrap;align-items:center;justify-content:flex-end;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.10);border-radius:999px;padding:.34rem .46rem;box-shadow:0 8px 22px rgba(0,0,0,.16)}
+.console-nav a{color:#f5f7fb;text-decoration:none;font-size:.95rem;font-weight:700;line-height:1;letter-spacing:.01em;padding:.46rem .72rem;border-radius:999px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.08)}
+.console-nav a:hover,.console-nav a:focus-visible{background:rgba(255,255,255,.10);border-color:rgba(255,255,255,.18);color:#fff;outline:none}
+.console-nav a.active,.console-nav a[aria-current="page"]{background:rgba(212,175,55,.14);border-color:rgba(212,175,55,.34);color:#f3d06b}
+@media(max-width:680px){
+  .console-topbar{align-items:flex-start;flex-direction:column;padding:12px 14px}
+  .console-nav{width:100%;justify-content:flex-start;border-radius:18px;padding:.48rem}
+  .console-nav a{font-size:.88rem}
+}
 </style>
 </head>
 <body>
+<header class="console-topbar">
+  <a class="console-brand" href="../../index.html">
+    <img src="../../logo-Lab4Int.png" alt="Lab4Int logo">
+    <span>
+      <strong>Lab4Int</strong>
+      <small>Agent Console</small>
+    </span>
+  </a>
+  <nav class="console-nav" aria-label="Primary navigation">
+    <a href="../../index.html">Dashboard</a>
+    <a href="../../operations.html">Operations</a>
+    <a href="../../status.html">Status</a>
+    <a href="../../policy.html">Policy</a>
+    <a class="active" aria-current="page" href="./index.html">Editorial</a>
+  </nav>
+</header>
 <main class="shell">
 <header class="masthead"><div><div class="eyebrow">Lab4Int · Editorial Pipeline v0.6</div><h1>Editorial Dashboard</h1><p>Vista decisionale consolidata dei report editoriali, con separazione tra revisioni sostanziali e completamento dei metadati. Nessun dato viene inviato a servizi esterni.</p></div><div class="meta">Generato: ${escapeHtml(data.generatedAt)}<br>Data governance: ${escapeHtml(governance.asOfDate ?? "—")}</div></header>
 <section class="grid" aria-label="Indicatori principali">
