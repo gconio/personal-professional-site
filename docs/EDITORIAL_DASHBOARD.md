@@ -1,6 +1,6 @@
-# Lab4Int Editorial Dashboard
+# Editorial Dashboard
 
-La dashboard v0.5 trasforma i report JSON della pipeline in una vista HTML statica e consultabile localmente.
+La dashboard aggrega inventario, quality report e governance report in un artefatto HTML locale.
 
 ## Comando
 
@@ -8,32 +8,37 @@ La dashboard v0.5 trasforma i report JSON della pipeline in una vista HTML stati
 npm run editorial:dashboard
 ```
 
-Il comando richiede che siano già presenti:
+Output:
 
-- `artifacts/editorial/editorial-index.json`;
-- `artifacts/editorial/editorial-quality-report.json`;
-- `artifacts/editorial/editorial-governance-report.json`.
+```text
+artifacts/editorial/dashboard/index.html
+artifacts/editorial/dashboard/dashboard-data.json
+```
 
-L'esecuzione di `npm run editorial:check` genera questi report nell'ordine corretto.
+## Consolidamento v0.6
 
-## Output
+La v0.6 distingue due tipi di lavoro:
 
-- `artifacts/editorial/dashboard/index.html`;
-- `artifacts/editorial/dashboard/dashboard-data.json`.
+- **revisioni sostanziali**: contenuti `stale` o `review-due`;
+- **completamento metadati**: contenuti `undated`.
 
-La pagina HTML è autonoma: non carica librerie, font, script o risorse da servizi esterni. Può essere aperta direttamente dal filesystem oppure scaricata dagli artefatti della GitHub Action.
+Questa separazione evita di attribuire la stessa urgenza editoriale a problemi diversi.
 
-## Contenuti visualizzati
+La coda operativa include inoltre:
 
-- KPI complessivi;
-- distribuzione `current`, `review-due`, `stale` e `undated`;
-- priorità P1, P2 e P3;
-- stato per collezione;
-- coda operativa P1/P2 con ricerca e filtri;
-- warning di qualità raggruppati per codice;
-- copertura per categoria;
-- timestamp dei report sorgente.
+- filtro per tipo di intervento;
+- filtro per priorità e stato;
+- ricerca estesa alla motivazione;
+- conteggio dinamico degli elementi visibili;
+- collegamento diretto al file sorgente Markdown;
+- esportazione CSV della vista filtrata;
+- stampa della dashboard.
 
-## Perimetro e sicurezza
+## Vincoli
 
-La dashboard è un artefatto diagnostico, non una pagina pubblica del sito. Non modifica contenuti, non interroga URL esterni e non trasmette dati. La cartella `artifacts/editorial/` resta esclusa dal versionamento Git.
+La dashboard:
+
+- non modifica i contenuti;
+- non invia dati a servizi esterni;
+- non richiede dipendenze aggiuntive;
+- viene rigenerata dalla pipeline editoriale.
