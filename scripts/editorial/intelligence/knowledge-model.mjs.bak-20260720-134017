@@ -1,0 +1,194 @@
+import fs from "node:fs";
+import path from "node:path";
+import crypto from "node:crypto";
+
+const ROOT = process.cwd();
+const INPUT = path.join(ROOT, "artifacts", "editorial", "editorial-index.json");
+const OUTPUT_DIR = path.join(ROOT, "artifacts", "editorial", "intelligence");
+const OUTPUT = path.join(OUTPUT_DIR, "knowledge-model.json");
+const TAXONOMY_FILE = path.join(ROOT, "config", "editorial", "cae-taxonomy.json");
+const REQUIREMENTS_FILE = path.join(ROOT, "config", "editorial", "cae-requirements.json");
+
+function fail(message) {
+  console.error(`[CAE knowledge model] ${message}`);
+  process.exit(1);
+}
+
+function readJson(file, label) {
+  if (!fs.existsSync(file)) fail(`${label} non trovato: ${path.relative(ROOT, file)}`);
+  try {
+    return JSON.parse(fs.readFileSync(file, "utf8"));
+  } catch (error) {
+    fail(`${label} non valido: ${error.message}`);
+  }
+}
+
+function array(value) {
+  return Array.isArray(value) ? value : [];
+}
+
+function text(value) {
+  return typeof value === "string" ? value.trim() : "";
+}
+
+function slugify(value) {
+  return text(value)
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function stableId(prefix, seed) {
+  const digest = crypto.createHash("sha256").update(seed).digest("hex").slice(0, 12);
+  return `${prefix}-${digest}`;
+}
+
+function inferAssetType(record) {
+  const collection = text(record.collection).toLowerCase();
+  const file = text(record.file).toLowerCase();
+  const type = text(record.type).toLowerCase();
+
+  if (type) return type;
+  if (collection.includes("articol") || file.includes("/articoli/")) return "article";
+  if (collection.includes("paper") || collection.includes("pubblic") || file.includes("/pubblicazioni/")) return "paper";
+  if (collection.includes("risors") || file.includes("/risorse/")) return "resource";
+  if (collection.includes("cors") || collection.includes("didatt") || file.includes("/corsi/")) return "course";
+  if (collection.includes("intervist") || file.includes("/interviste/")) return "interview";
+  if (collection.includes("progett") || file.includes("/progetti/")) return "project";
+  return "page";
+}
+
+function inferTopics(record, taxonomy) {
+  const haystack = [
+    record.title,
+    record.description,
+    record.summary,
+    record.slug,
+    ...(array(record.tags))
+  ].filter(Boolean).join(" ").toLowerCase();
+
+  const found = [];
+  for (const topic of array(taxonomy.topics)) {
+    const terms = [topic.label, topic.id, ...array(topic.aliases)]
+      .filter(Boolean)
+      .map((item) => String(item).toLowerCase());
+    if (terms.some((term) => haystack.includes(term))) found.push(topic.id);
+  }
+  return [...new Set(found)];
+}
+
+function inferProducts(assetType) {
+  const map = {
+    article: ["website-article", "linkedin-post"],
+    paper: ["website-paper", "linkedin-post", "teaching-update"],
+    resource: ["resources-entry"],
+    course: ["teaching-material"],
+    interview: ["website-interview", "linkedin-post"],
+    project: ["website-project"],
+    page: ["website-page"]
+  };
+  return map[assetType] ?? ["website-page"];
+}
+
+function normalizeRecord(record, taxonomy) {
+  const sourceKey = text(record.file) || text(record.slug) || text(record.title);
+  const assetType = inferAssetType(record);
+  const title = text(record.title) || text(record.slug) || sourceKey || "Untitled";
+  const slug = text(record.slug) || slugify(title);
+  const topics = inferTopics(record, taxonomy);
+
+  return {
+    id: stableId("ka", `${assetType}|${sourceKey}|${title}`),
+    kind: "knowledge-asset",
+    assetType,
+    title,
+    slug,
+    status: text(record.status) || "unknown",
+    priority: text(record.priority) || null,
+    collection: text(record.collection) || null,
+    source: {
+      repository: "personal-professional-site-starter",
+      file: text(record.file) || null,
+      url: text(record.url) || null
+    },
+    dates: {
+      published: record.date ?? record.publishedAt ?? null,
+      updated: record.updatedAt ?? record.lastmod ?? null,
+      reviewed: record.reviewedAt ?? null
+    },
+    topics,
+    tags: array(record.tags),
+    intendedProducts: inferProducts(assetType),
+    relationships: [],
+    provenance: {
+      generatedFrom: "editorial-index.json",
+      sourceRecordId: record.id ?? null
+    }
+  };
+}
+
+const inventory = readJson(INPUT, "Editorial inventory");
+const taxonomy = readJson(TAXONOMY_FILE, "CAE taxonomy");
+const requirements = readJson(REQUIREMENTS_FILE, "CAE requirements");
+
+const records =
+  array(inventory.records).length ? array(inventory.records) :
+  array(inventory.items).length ? array(inventory.items) :
+  array(inventory.content).length ? array(inventory.content) :
+  [];
+
+if (!records.length) {
+  fail("L'inventory non contiene records/items/content utilizzabili.");
+}
+
+const assets = records.map((record) => normalizeRecord(record, taxonomy));
+
+const byType = {};
+const byTopic = {};
+for (const asset of assets) {
+  byType[asset.assetType] = (byType[asset.assetType] ?? 0) + 1;
+  for (const topic of asset.topics) byTopic[topic] = (byTopic[topic] ?? 0) + 1;
+}
+
+const orphanAssets = assets
+  .filter((asset) => asset.topics.length === 0)
+  .map((asset) => ({ id: asset.id, title: asset.title, assetType: asset.assetType }));
+
+const model = {
+  generatedAt: new Date().toISOString(),
+  schemaVersion: "0.2.0",
+  product: {
+    id: "lab4int-cae",
+    name: "Lab4Int — Centro di Analisi Editoriale",
+    module: "Knowledge Model",
+    release: "v0.2"
+  },
+  mission: requirements.mission,
+  editorialRequirements: requirements.requirements,
+  taxonomy,
+  summary: {
+    assets: assets.length,
+    byType,
+    byTopic,
+    orphanAssets: orphanAssets.length
+  },
+  assets,
+  diagnostics: {
+    orphanAssets,
+    notes: [
+      "Le relazioni sono inizialmente vuote e saranno popolate nei cicli successivi.",
+      "Gli asset senza topic sono candidati prioritari per classificazione manuale.",
+      "Il modello non modifica i contenuti sorgente."
+    ]
+  }
+};
+
+fs.mkdirSync(OUTPUT_DIR, { recursive: true });
+fs.writeFileSync(OUTPUT, JSON.stringify(model, null, 2) + "\n", "utf8");
+
+console.log(`[CAE knowledge model] Output: ${path.relative(ROOT, OUTPUT)}`);
+console.log(`[CAE knowledge model] Asset: ${assets.length}`);
+console.log(`[CAE knowledge model] Tipi: ${Object.keys(byType).length}`);
+console.log(`[CAE knowledge model] Asset senza topic: ${orphanAssets.length}`);

@@ -1,0 +1,73 @@
+# ADR-003 — Knowledge Model del Centro di Analisi Editoriale
+
+- **Stato:** Accepted
+- **Versione:** 0.2
+- **Ambito:** `personal-professional-site-starter`
+
+## Contesto
+
+La precedente Editorial Dashboard è stata rifocalizzata come **Lab4Int — Centro di Analisi Editoriale (CAE)**. Il CAE deve sostenere soprattutto la gestione e la produzione di:
+
+1. articoli;
+2. paper;
+3. suggerimenti per la sezione Risorse.
+
+I report esistenti descrivono file, qualità e governance, ma non rappresentano ancora il patrimonio come insieme coerente di asset di conoscenza.
+
+## Decisione
+
+Si introduce un modello build-time denominato **Knowledge Model**.
+
+L'unità logica principale è `KnowledgeAsset`.
+
+Ogni asset contiene almeno:
+
+- identità stabile;
+- tipo editoriale;
+- titolo e slug;
+- sorgente nel repository;
+- stato e priorità;
+- date;
+- topic;
+- prodotti editoriali potenziali;
+- relazioni;
+- provenienza.
+
+Il modello viene generato da `editorial-index.json` e scritto in:
+
+```text
+artifacts/editorial/intelligence/knowledge-model.json
+```
+
+## Principi
+
+- nessuna modifica automatica ai contenuti sorgente;
+- nessun backend;
+- tassonomia versionata nel repository;
+- requisiti editoriali espliciti e versionati;
+- identificatori deterministici;
+- compatibilità con i report esistenti;
+- introduzione progressiva delle relazioni.
+
+## Conseguenze
+
+### Positive
+
+- base comune per Opportunity Radar, Mission Planner e Knowledge Graph;
+- classificazione coerente di articoli, paper e risorse;
+- possibilità di individuare asset non classificati;
+- riduzione delle future rifattorizzazioni.
+
+### Negative
+
+- la classificazione automatica iniziale sarà incompleta;
+- alcuni topic richiederanno revisione manuale;
+- le relazioni restano vuote nella prima release.
+
+## Non obiettivi della v0.2
+
+- crawling del web;
+- generazione automatica di missioni;
+- scoring delle opportunità;
+- interfaccia grafica del Knowledge Graph;
+- pubblicazione automatica.
