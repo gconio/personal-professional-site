@@ -1,0 +1,66 @@
+{
+  "version": "0.4.0",
+  "selection": {
+    "maximumMissions": 6,
+    "missionTypeQuotas": {
+      "strategic-domain-development": 3,
+      "asset-repurposing": 2,
+      "knowledge-maintenance": 1
+    }
+  },
+  "classificationMission": {
+    "maximumAssets": 4
+  },
+  "productSequence": [
+    "classification-review",
+    "website-paper",
+    "website-article",
+    "teaching-update",
+    "newsletter-entry",
+    "linkedin-post",
+    "resources-entry"
+  ],
+  "effortHoursByProduct": {
+    "classification-review": 2,
+    "website-paper": 8,
+    "website-article": 5,
+    "teaching-update": 4,
+    "newsletter-entry": 2,
+    "linkedin-post": 1,
+    "resources-entry": 1
+  },
+  "domainLabels": [
+    {
+      "id": "intelligence-analysis",
+      "label": "Intelligence Analysis"
+    },
+    {
+      "id": "geopolitics",
+      "label": "Geopolitica"
+    },
+    {
+      "id": "osint",
+      "label": "OSINT"
+    },
+    {
+      "id": "intelligence-training",
+      "label": "Intelligence Training"
+    },
+    {
+      "id": "artificial-intelligence",
+      "label": "Artificial Intelligence"
+    },
+    {
+      "id": "conflict-analysis",
+      "label": "Conflict Analysis"
+    },
+    {
+      "id": "humint",
+      "label": "HUMINT"
+    },
+    {
+      "id": "crisis-management",
+      "label": "Crisis Management"
+    }
+  ]
+}
