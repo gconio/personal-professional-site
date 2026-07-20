@@ -1,0 +1,19 @@
+{
+  "version": "0.4.1",
+  "sources": {
+    "inventory": "artifacts/editorial/editorial-index.json",
+    "knowledge": "artifacts/editorial/intelligence/knowledge-index.json",
+    "radar": "artifacts/editorial/intelligence/opportunity-radar.json",
+    "missionPlan": "artifacts/editorial/intelligence/mission-plan.json"
+  },
+  "domainLabels": {
+    "intelligence-analysis": "Intelligence Analysis",
+    "geopolitics": "Geopolitica",
+    "osint": "OSINT",
+    "intelligence-training": "Intelligence Training",
+    "artificial-intelligence": "Artificial Intelligence",
+    "conflict-analysis": "Conflict Analysis",
+    "humint": "HUMINT",
+    "crisis-management": "Crisis Management"
+  }
+}

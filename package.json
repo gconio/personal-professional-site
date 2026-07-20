@@ -18,7 +18,8 @@
     "editorial:dashboard:console": "node scripts/editorial/dashboard-report.mjs --console",
     "editorial:knowledge-model": "node scripts/editorial/intelligence/knowledge-model.mjs",
     "editorial:opportunity-radar": "node scripts/editorial/intelligence/opportunity-radar.mjs",
-    "editorial:mission-planner": "node scripts/editorial/intelligence/mission-planner.mjs"
+    "editorial:mission-planner": "node scripts/editorial/intelligence/mission-planner.mjs",
+    "editorial:cae-dashboard": "node scripts/editorial/intelligence/executive-dashboard.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.2",
