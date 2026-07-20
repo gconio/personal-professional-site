@@ -1,0 +1,98 @@
+{
+  "version": "0.3.1",
+  "rules": {
+    "maximumCandidates": 15,
+    "candidateQuotas": {
+      "discipline-coverage-gap": 4,
+      "editorial-product-gap": 3,
+      "content-repurposing": 4,
+      "classification-gap": 4
+    },
+    "repurposingByAssetType": {
+      "paper": ["website-article", "linkedin-post", "newsletter-entry"],
+      "book": ["website-article", "linkedin-post", "newsletter-entry", "teaching-update"],
+      "course": ["website-article", "linkedin-post", "newsletter-entry"]
+    }
+  },
+  "scoring": {
+    "priorityThresholds": {
+      "high": 75,
+      "medium": 50
+    },
+    "weights": {
+      "classificationGap": 60,
+      "classificationPublicationBonus": 8,
+      "coverageBase": 45,
+      "coverageGapRatio": 30,
+      "strategicPriorityHigh": 20,
+      "strategicPriorityMedium": 10,
+      "productDiversification": 42,
+      "missingProduct": 7,
+      "matureDomainBonus": 8,
+      "repurposing": 48,
+      "paperBonus": 12,
+      "bookBonus": 15,
+      "courseBonus": 5,
+      "strategicDomainBonus": 8
+    }
+  },
+  "strategicDomains": [
+    {
+      "id": "intelligence-analysis",
+      "label": "Intelligence Analysis",
+      "strategicPriority": "high",
+      "targetAssets": 20,
+      "preferredProducts": ["website-article", "website-paper", "linkedin-post", "newsletter-entry", "teaching-update"]
+    },
+    {
+      "id": "geopolitics",
+      "label": "Geopolitica",
+      "strategicPriority": "high",
+      "targetAssets": 10,
+      "preferredProducts": ["website-article", "website-paper", "linkedin-post", "newsletter-entry"]
+    },
+    {
+      "id": "osint",
+      "label": "OSINT",
+      "strategicPriority": "high",
+      "targetAssets": 10,
+      "preferredProducts": ["website-article", "website-paper", "resources-entry", "linkedin-post", "newsletter-entry"]
+    },
+    {
+      "id": "intelligence-training",
+      "label": "Intelligence Training",
+      "strategicPriority": "high",
+      "targetAssets": 6,
+      "preferredProducts": ["website-article", "teaching-update", "linkedin-post", "newsletter-entry"]
+    },
+    {
+      "id": "artificial-intelligence",
+      "label": "Artificial Intelligence",
+      "strategicPriority": "high",
+      "targetAssets": 6,
+      "preferredProducts": ["website-article", "website-paper", "linkedin-post", "newsletter-entry"]
+    },
+    {
+      "id": "conflict-analysis",
+      "label": "Conflict Analysis",
+      "strategicPriority": "high",
+      "targetAssets": 4,
+      "preferredProducts": ["website-article", "website-paper", "teaching-update", "newsletter-entry"]
+    },
+    {
+      "id": "humint",
+      "label": "HUMINT",
+      "strategicPriority": "high",
+      "targetAssets": 3,
+      "preferredProducts": ["website-article", "website-paper", "linkedin-post", "teaching-update"]
+    },
+    {
+      "id": "crisis-management",
+      "label": "Crisis Management",
+      "strategicPriority": "medium",
+      "targetAssets": 3,
+      "preferredProducts": ["website-article", "teaching-update", "newsletter-entry"]
+    }
+  ],
+  "taxonomyOnlyDomains": ["sigint", "geoint", "imint", "socmint", "cogint"]
+}

@@ -16,7 +16,8 @@
     "editorial:governance": "node scripts/editorial/governance-report.mjs",
     "editorial:dashboard": "node scripts/editorial/dashboard-report.mjs",
     "editorial:dashboard:console": "node scripts/editorial/dashboard-report.mjs --console",
-    "editorial:knowledge-model": "node scripts/editorial/intelligence/knowledge-model.mjs"
+    "editorial:knowledge-model": "node scripts/editorial/intelligence/knowledge-model.mjs",
+    "editorial:opportunity-radar": "node scripts/editorial/intelligence/opportunity-radar.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.2",
