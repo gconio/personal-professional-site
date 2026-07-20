@@ -14,7 +14,8 @@
     "editorial:check": "npm run editorial:validate && npm run editorial:quality && npm run editorial:inventory && npm run editorial:governance && npm run editorial:dashboard && npm run build && npm run editorial:links",
     "editorial:quality": "node scripts/editorial/quality-report.mjs",
     "editorial:governance": "node scripts/editorial/governance-report.mjs",
-    "editorial:dashboard": "node scripts/editorial/dashboard-report.mjs"
+    "editorial:dashboard": "node scripts/editorial/dashboard-report.mjs",
+    "editorial:dashboard:console": "node scripts/editorial/dashboard-report.mjs --console"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.2",
