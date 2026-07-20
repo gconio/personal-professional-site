@@ -1,0 +1,315 @@
+{
+  "version": "0.2.1",
+  "model": {
+    "levels": [
+      "domain",
+      "discipline",
+      "area",
+      "method",
+      "technique",
+      "concept"
+    ]
+  },
+  "domains": [
+    {
+      "id": "security-intelligence",
+      "label": "Security & Intelligence",
+      "aliases": [
+        "sicurezza e intelligence"
+      ],
+      "disciplines": [
+        {
+          "id": "intelligence-analysis",
+          "label": "Intelligence Analysis",
+          "aliases": [
+            "analisi intelligence"
+          ],
+          "areas": [
+            {
+              "id": "structured-analytic-techniques",
+              "label": "Structured Analytic Techniques",
+              "aliases": [
+                "SATs",
+                "tecniche analitiche strutturate"
+              ],
+              "methods": [
+                {
+                  "id": "hypothesis-testing",
+                  "label": "Hypothesis Testing",
+                  "aliases": [
+                    "valutazione delle ipotesi"
+                  ],
+                  "techniques": [
+                    {
+                      "id": "ach",
+                      "label": "Analysis of Competing Hypotheses",
+                      "aliases": [
+                        "ACH",
+                        "ipotesi concorrenti"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "indicator-based-analysis",
+                  "label": "Indicator Based Analysis",
+                  "aliases": [
+                    "indicatori"
+                  ],
+                  "techniques": []
+                },
+                {
+                  "id": "assumptions-review",
+                  "label": "Assumptions Review",
+                  "aliases": [
+                    "assunzioni",
+                    "ipotesi di base"
+                  ],
+                  "techniques": [
+                    {
+                      "id": "key-assumptions-check",
+                      "label": "Key Assumptions Check",
+                      "aliases": [
+                        "KAC"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "challenge-analysis",
+                  "label": "Challenge Analysis",
+                  "aliases": [],
+                  "techniques": [
+                    {
+                      "id": "red-teaming",
+                      "label": "Red Teaming",
+                      "aliases": [
+                        "red team"
+                      ]
+                    },
+                    {
+                      "id": "devils-advocacy",
+                      "label": "Devil's Advocacy",
+                      "aliases": [
+                        "avvocato del diavolo"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "cognitive-bias",
+              "label": "Bias cognitivi",
+              "aliases": [
+                "cognitive bias",
+                "bias"
+              ],
+              "methods": []
+            },
+            {
+              "id": "decision-analysis",
+              "label": "Decision Analysis",
+              "aliases": [
+                "supporto decisionale",
+                "decision support",
+                "decisore"
+              ],
+              "methods": []
+            },
+            {
+              "id": "scenario-analysis",
+              "label": "Scenario Analysis",
+              "aliases": [
+                "costruzione scenari",
+                "scenario planning"
+              ],
+              "methods": []
+            },
+            {
+              "id": "intelligence-failure",
+              "label": "Intelligence Failure",
+              "aliases": [
+                "fallimento dell intelligence"
+              ],
+              "methods": []
+            }
+          ]
+        },
+        {
+          "id": "osint",
+          "label": "OSINT",
+          "aliases": [
+            "open source intelligence",
+            "fonti aperte",
+            "contro-osint",
+            "counter-osint"
+          ],
+          "areas": []
+        },
+        {
+          "id": "humint",
+          "label": "HUMINT",
+          "aliases": [
+            "human intelligence"
+          ],
+          "areas": []
+        },
+        {
+          "id": "sigint",
+          "label": "SIGINT",
+          "aliases": [
+            "signals intelligence"
+          ],
+          "areas": []
+        },
+        {
+          "id": "geoint",
+          "label": "GEOINT",
+          "aliases": [
+            "geospatial intelligence"
+          ],
+          "areas": []
+        },
+        {
+          "id": "imint",
+          "label": "IMINT",
+          "aliases": [
+            "imagery intelligence"
+          ],
+          "areas": []
+        },
+        {
+          "id": "masint",
+          "label": "MASINT",
+          "aliases": [
+            "measurement and signature intelligence"
+          ],
+          "areas": []
+        },
+        {
+          "id": "socmint",
+          "label": "SOCMINT",
+          "aliases": [
+            "social media intelligence"
+          ],
+          "areas": []
+        },
+        {
+          "id": "finint",
+          "label": "FININT",
+          "aliases": [
+            "financial intelligence"
+          ],
+          "areas": []
+        },
+        {
+          "id": "cybint",
+          "label": "CYBINT",
+          "aliases": [
+            "cyber intelligence"
+          ],
+          "areas": []
+        },
+        {
+          "id": "techint",
+          "label": "TECHINT",
+          "aliases": [
+            "technical intelligence"
+          ],
+          "areas": []
+        },
+        {
+          "id": "medint",
+          "label": "MEDINT",
+          "aliases": [
+            "medical intelligence"
+          ],
+          "areas": []
+        },
+        {
+          "id": "cogint",
+          "label": "COGINT",
+          "aliases": [
+            "intelligence cognitiva",
+            "cognitive intelligence"
+          ],
+          "areas": []
+        }
+      ]
+    },
+    {
+      "id": "international-security",
+      "label": "International Security",
+      "aliases": [
+        "sicurezza internazionale"
+      ],
+      "disciplines": [
+        {
+          "id": "geopolitics",
+          "label": "Geopolitica",
+          "aliases": [
+            "geopolitics"
+          ],
+          "areas": []
+        },
+        {
+          "id": "conflict-analysis",
+          "label": "Conflict Analysis",
+          "aliases": [
+            "analisi dei conflitti"
+          ],
+          "areas": []
+        },
+        {
+          "id": "crisis-management",
+          "label": "Crisis Management",
+          "aliases": [
+            "gestione delle crisi",
+            "simulazione di crisi"
+          ],
+          "areas": []
+        }
+      ]
+    },
+    {
+      "id": "education-training",
+      "label": "Education & Training",
+      "aliases": [
+        "formazione"
+      ],
+      "disciplines": [
+        {
+          "id": "intelligence-training",
+          "label": "Intelligence Training",
+          "aliases": [
+            "formazione intelligence",
+            "didattica",
+            "simint"
+          ],
+          "areas": []
+        }
+      ]
+    },
+    {
+      "id": "technology-ai",
+      "label": "Technology & AI",
+      "aliases": [
+        "tecnologia"
+      ],
+      "disciplines": [
+        {
+          "id": "artificial-intelligence",
+          "label": "Artificial Intelligence",
+          "aliases": [
+            "intelligenza artificiale",
+            "AI",
+            "LLM",
+            "agent"
+          ],
+          "areas": []
+        }
+      ]
+    }
+  ]
+}
