@@ -2,6 +2,9 @@ import fs from "node:fs";
 import path from "node:path";
 import { ROOT } from "./lib.mjs";
 
+const BUILD_TARGET = process.argv.includes("--console") ? "console" : "standalone";
+const IS_CONSOLE = BUILD_TARGET === "console";
+
 const OUTPUT_DIR = path.join(ROOT, "artifacts", "editorial");
 const DASHBOARD_DIR = path.join(OUTPUT_DIR, "dashboard");
 const HTML_OUTPUT = path.join(DASHBOARD_DIR, "index.html");
@@ -100,17 +103,11 @@ const statusSegments = [
   ["undated", status.undated ?? 0]
 ].map(([name, count]) => `<span class="segment ${name}" style="width:${total ? (count / total) * 100 : 0}%" title="${name}: ${count}"></span>`).join("");
 
-const html = `<!doctype html>
-<html lang="it">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light dark">
-<title>Lab4Int Editorial Dashboard</title>
-<style>
-:root{--bg:#0b1220;--panel:#121c2e;--panel2:#18243a;--text:#eef4ff;--muted:#a7b4c8;--line:#2b3a54;--accent:#75a7ff;--ok:#50c878;--warn:#f0bd4f;--bad:#f27878;--neutral:#8fa1b8;--shadow:0 14px 36px rgba(0,0,0,.22)}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(160deg,#08101d 0%,var(--bg) 50%,#10192a 100%);color:var(--text);font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
-a{color:var(--accent)}.shell{width:min(1440px,calc(100% - 32px));margin:auto;padding:30px 0 60px}.masthead{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:24px}.eyebrow{text-transform:uppercase;letter-spacing:.13em;color:var(--accent);font-weight:750;font-size:.76rem}.masthead h1{font-size:clamp(2rem,4vw,3.5rem);line-height:1.04;margin:.25rem 0}.masthead p{color:var(--muted);margin:0;max-width:760px}.meta{text-align:right;color:var(--muted);font-size:.86rem}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}.card{background:rgba(18,28,46,.9);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:20px}.kpi{grid-column:span 2;min-height:132px}.kpi strong{display:block;font-size:2.05rem;line-height:1.1;margin-top:13px}.kpi span{color:var(--muted)}.wide{grid-column:span 8}.side{grid-column:span 4}.full{grid-column:1/-1}h2{margin:0 0 14px;font-size:1.15rem}h3{font-size:1rem}.statusbar{height:18px;border-radius:999px;overflow:hidden;display:flex;background:#26344c;margin:18px 0}.segment{height:100%}.current{background:var(--ok)}.review-due{background:var(--warn)}.stale{background:var(--bad)}.undated{background:var(--neutral)}.legend{display:flex;gap:16px;flex-wrap:wrap;color:var(--muted)}.dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:6px}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px}table{border-collapse:collapse;width:100%;min-width:700px}th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line)}thead th{position:sticky;top:0;background:var(--panel2);z-index:1;font-size:.8rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}tbody tr:last-child>*{border-bottom:0}tbody tr:hover{background:rgba(117,167,255,.06)}td small{display:block;color:var(--muted);margin-top:2px}.badge{display:inline-block;border:1px solid currentColor;border-radius:999px;padding:2px 8px;font-size:.76rem;font-weight:700}.priority-p1,.status-stale{color:var(--bad)}.priority-p2,.status-review-due{color:var(--warn)}.priority-p3,.status-current{color:var(--ok)}.status-undated{color:var(--neutral)}.controls{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}.controls input,.controls select,.controls button{background:#0e1727;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:9px 11px;font:inherit}.controls button{cursor:pointer}.controls button:hover{border-color:var(--accent)}.controls input{flex:1;min-width:220px}.empty{display:none;color:var(--muted);padding:18px}.note{color:var(--muted);font-size:.9rem}.mini{min-width:0}.mini table{min-width:0}.footer{color:var(--muted);margin-top:22px;font-size:.82rem;text-align:center}@media(max-width:1050px){.kpi{grid-column:span 4}.wide,.side{grid-column:1/-1}}@media(max-width:680px){.shell{width:min(100% - 20px,1440px);padding-top:18px}.masthead{align-items:flex-start;flex-direction:column}.meta{text-align:left}.kpi{grid-column:span 6}.card{padding:15px}}@media print{body{background:#fff;color:#111}.card{box-shadow:none;background:#fff;border-color:#bbb}.controls{display:none}.shell{width:100%}.meta,.note,.legend{color:#444}}
+
+function renderConsoleCss() {
+  if (!IS_CONSOLE) return "";
+
+  return `
 .console-topbar{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:12px 24px;background:rgba(10,17,29,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
 .console-brand{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none}
 .console-brand img{width:34px;height:34px;object-fit:contain;border-radius:10px;background:rgba(255,255,255,.08);padding:3px}
@@ -121,14 +118,25 @@ a{color:var(--accent)}.shell{width:min(1440px,calc(100% - 32px));margin:auto;pad
 .console-nav a{color:#f5f7fb;text-decoration:none;font-size:.95rem;font-weight:700;line-height:1;letter-spacing:.01em;padding:.46rem .72rem;border-radius:999px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.08)}
 .console-nav a:hover,.console-nav a:focus-visible{background:rgba(255,255,255,.10);border-color:rgba(255,255,255,.18);color:#fff;outline:none}
 .console-nav a.active,.console-nav a[aria-current="page"]{background:rgba(212,175,55,.14);border-color:rgba(212,175,55,.34);color:#f3d06b}
+.console-context{width:min(1440px,calc(100% - 32px));margin:16px auto 0;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.console-breadcrumb{color:var(--muted);font-size:.86rem}
+.console-breadcrumb a{color:var(--muted);text-decoration:none}
+.console-breadcrumb a:hover,.console-breadcrumb a:focus-visible{color:var(--text);outline:none}
+.console-back{display:inline-flex;align-items:center;gap:.4rem;color:#f5f7fb;text-decoration:none;font-size:.88rem;font-weight:700;padding:.46rem .72rem;border-radius:999px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.10)}
+.console-back:hover,.console-back:focus-visible{background:rgba(255,255,255,.10);border-color:rgba(255,255,255,.18);color:#fff;outline:none}
 @media(max-width:680px){
   .console-topbar{align-items:flex-start;flex-direction:column;padding:12px 14px}
   .console-nav{width:100%;justify-content:flex-start;border-radius:18px;padding:.48rem}
   .console-nav a{font-size:.88rem}
+  .console-context{width:min(100% - 20px,1440px);align-items:flex-start;flex-direction:column}
 }
-</style>
-</head>
-<body>
+`;
+}
+
+function renderConsoleChrome() {
+  if (!IS_CONSOLE) return "";
+
+  return `
 <header class="console-topbar">
   <a class="console-brand" href="../../index.html">
     <img src="../../logo-Lab4Int.png" alt="Lab4Int logo">
@@ -145,8 +153,36 @@ a{color:var(--accent)}.shell{width:min(1440px,calc(100% - 32px));margin:auto;pad
     <a class="active" aria-current="page" href="./index.html">Editorial</a>
   </nav>
 </header>
+<section class="console-context" aria-label="Contesto di navigazione">
+  <nav class="console-breadcrumb" aria-label="Breadcrumb">
+    <a href="../../index.html">Agent Console</a>
+    <span aria-hidden="true"> / </span>
+    <span>Editorial</span>
+    <span aria-hidden="true"> / </span>
+    <strong>Dashboard</strong>
+  </nav>
+  <a class="console-back" href="../../index.html">&larr; Agent Console</a>
+</section>`;
+}
+
+const html = `<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Lab4Int Editorial Dashboard</title>
+<style>
+:root{--bg:#0b1220;--panel:#121c2e;--panel2:#18243a;--text:#eef4ff;--muted:#a7b4c8;--line:#2b3a54;--accent:#75a7ff;--ok:#50c878;--warn:#f0bd4f;--bad:#f27878;--neutral:#8fa1b8;--shadow:0 14px 36px rgba(0,0,0,.22)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(160deg,#08101d 0%,var(--bg) 50%,#10192a 100%);color:var(--text);font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:var(--accent)}.shell{width:min(1440px,calc(100% - 32px));margin:auto;padding:30px 0 60px}.masthead{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:24px}.eyebrow{text-transform:uppercase;letter-spacing:.13em;color:var(--accent);font-weight:750;font-size:.76rem}.masthead h1{font-size:clamp(2rem,4vw,3.5rem);line-height:1.04;margin:.25rem 0}.masthead p{color:var(--muted);margin:0;max-width:760px}.meta{text-align:right;color:var(--muted);font-size:.86rem}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}.card{background:rgba(18,28,46,.9);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:20px}.kpi{grid-column:span 2;min-height:132px}.kpi strong{display:block;font-size:2.05rem;line-height:1.1;margin-top:13px}.kpi span{color:var(--muted)}.wide{grid-column:span 8}.side{grid-column:span 4}.full{grid-column:1/-1}h2{margin:0 0 14px;font-size:1.15rem}h3{font-size:1rem}.statusbar{height:18px;border-radius:999px;overflow:hidden;display:flex;background:#26344c;margin:18px 0}.segment{height:100%}.current{background:var(--ok)}.review-due{background:var(--warn)}.stale{background:var(--bad)}.undated{background:var(--neutral)}.legend{display:flex;gap:16px;flex-wrap:wrap;color:var(--muted)}.dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:6px}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px}table{border-collapse:collapse;width:100%;min-width:700px}th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line)}thead th{position:sticky;top:0;background:var(--panel2);z-index:1;font-size:.8rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}tbody tr:last-child>*{border-bottom:0}tbody tr:hover{background:rgba(117,167,255,.06)}td small{display:block;color:var(--muted);margin-top:2px}.badge{display:inline-block;border:1px solid currentColor;border-radius:999px;padding:2px 8px;font-size:.76rem;font-weight:700}.priority-p1,.status-stale{color:var(--bad)}.priority-p2,.status-review-due{color:var(--warn)}.priority-p3,.status-current{color:var(--ok)}.status-undated{color:var(--neutral)}.controls{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}.controls input,.controls select,.controls button{background:#0e1727;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:9px 11px;font:inherit}.controls button{cursor:pointer}.controls button:hover{border-color:var(--accent)}.controls input{flex:1;min-width:220px}.empty{display:none;color:var(--muted);padding:18px}.note{color:var(--muted);font-size:.9rem}.mini{min-width:0}.mini table{min-width:0}.footer{color:var(--muted);margin-top:22px;font-size:.82rem;text-align:center}@media(max-width:1050px){.kpi{grid-column:span 4}.wide,.side{grid-column:1/-1}}@media(max-width:680px){.shell{width:min(100% - 20px,1440px);padding-top:18px}.masthead{align-items:flex-start;flex-direction:column}.meta{text-align:left}.kpi{grid-column:span 6}.card{padding:15px}}@media print{body{background:#fff;color:#111}.card{box-shadow:none;background:#fff;border-color:#bbb}.controls{display:none}.shell{width:100%}.meta,.note,.legend{color:#444}}
+${renderConsoleCss()}
+</style>
+</head>
+<body>
+${renderConsoleChrome()}
 <main class="shell">
-<header class="masthead"><div><div class="eyebrow">Lab4Int · Editorial Pipeline v0.6</div><h1>Editorial Dashboard</h1><p>Vista decisionale consolidata dei report editoriali, con separazione tra revisioni sostanziali e completamento dei metadati. Nessun dato viene inviato a servizi esterni.</p></div><div class="meta">Generato: ${escapeHtml(data.generatedAt)}<br>Data governance: ${escapeHtml(governance.asOfDate ?? "—")}</div></header>
+<header class="masthead"><div><div class="eyebrow">Lab4Int · Editorial Pipeline v0.6 · ${escapeHtml(BUILD_TARGET)}</div><h1>Editorial Dashboard</h1><p>Vista decisionale consolidata dei report editoriali, con separazione tra revisioni sostanziali e completamento dei metadati. Nessun dato viene inviato a servizi esterni.</p></div><div class="meta">Generato: ${escapeHtml(data.generatedAt)}<br>Data governance: ${escapeHtml(governance.asOfDate ?? "—")}</div></header>
 <section class="grid" aria-label="Indicatori principali">
 <div class="card kpi"><span>Contenuti</span><strong>${total}</strong><span>${governance.summary?.collections ?? 0} collezioni</span></div>
 <div class="card kpi"><span>Current</span><strong>${status.current ?? 0}</strong><span>${total ? Math.round((status.current ?? 0)/total*100) : 0}% del totale</span></div>
@@ -162,7 +198,7 @@ a{color:var(--accent)}.shell{width:min(1440px,calc(100% - 32px));margin:auto;pad
 <div class="card side mini"><h2>Copertura per categoria</h2><div class="table-wrap"><table><thead><tr><th>Categoria</th><th>Totale</th></tr></thead><tbody>${coverageRows || '<tr><td colspan="2">Nessuna categoria</td></tr>'}</tbody></table></div></div>
 <div class="card side"><h2>Provenienza dati</h2><p class="note">Inventory: ${escapeHtml(inventory.generatedAt ?? "—")}</p><p class="note">Quality: ${escapeHtml(quality.generatedAt ?? "—")}</p><p class="note">Governance: ${escapeHtml(governance.generatedAt ?? "—")}</p><p class="note">File dati: <code>dashboard-data.json</code></p></div>
 </section>
-<p class="footer">Lab4Int Editorial Dashboard v0.6 · artefatto locale generato automaticamente</p>
+<p class="footer">Lab4Int Editorial Dashboard v0.6 · target ${escapeHtml(BUILD_TARGET)} · artefatto generato automaticamente</p>
 </main>
 <script id="dashboard-data" type="application/json">${safeJson(data)}</script>
 <script>
@@ -181,4 +217,5 @@ fs.writeFileSync(HTML_OUTPUT, html, "utf8");
 
 console.log(`Dashboard HTML: ${path.relative(ROOT, HTML_OUTPUT)}`);
 console.log(`Dashboard data: ${path.relative(ROOT, DATA_OUTPUT)}`);
+console.log(`Build target: ${BUILD_TARGET}`);
 console.log(`Esito: ${total} contenuti, ${revisionQueue.length} revisioni, ${metadataQueue.length} interventi metadati, ${qualitySummary.warnings ?? 0} warning.`);
