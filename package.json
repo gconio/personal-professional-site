@@ -21,7 +21,12 @@
     "editorial:dashboard:console": "node scripts/editorial/dashboard-report.mjs --console",
     "editorial:knowledge-model": "node scripts/editorial/intelligence/knowledge-model.mjs",
     "editorial:opportunity-radar": "node scripts/editorial/intelligence/opportunity-radar.mjs",
-    "editorial:mission-planner": "node scripts/editorial/intelligence/mission-planner.mjs"
+    "editorial:mission-planner": "node scripts/editorial/intelligence/mission-planner.mjs",
+    "editorial:prepare": "node scripts/editorial/pipeline/prepare.mjs",
+    "editorial:verify": "node scripts/editorial/pipeline/verify.mjs",
+    "editorial:preview": "node scripts/editorial/pipeline/preview.mjs",
+    "editorial:publish-plan": "node scripts/editorial/pipeline/publish-plan.mjs",
+    "editorial:status": "node scripts/editorial/pipeline/status.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.2",
