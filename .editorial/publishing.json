@@ -1,0 +1,112 @@
+{
+  "defaultTheme": "Intelligence analysis e metodologia",
+  "requiredTags": [
+    "intelligence analysis",
+    "metodologia intelligence",
+    "Lab4Int"
+  ],
+  "taxonomy": [
+    {
+      "theme": "Structured Analytic Techniques (SATs)",
+      "keywords": [
+        "ACH",
+        "ipotesi concorrenti",
+        "SAT",
+        "tecniche di analisi strutturata",
+        "devil advocacy",
+        "what if"
+      ],
+      "tags": [
+        "structured analytic techniques",
+        "SATs",
+        "analisi strutturata"
+      ]
+    },
+    {
+      "theme": "Indicator Based Analysis, scenari, warning e monitoraggio intelligence",
+      "keywords": [
+        "indicatore",
+        "indicatori",
+        "warning",
+        "scenario",
+        "scenari",
+        "monitoraggio",
+        "driver"
+      ],
+      "tags": [
+        "indicator based analysis",
+        "scenario analysis",
+        "warning intelligence"
+      ]
+    },
+    {
+      "theme": "OSINT, ambiente informativo e deception",
+      "keywords": [
+        "OSINT",
+        "deception",
+        "disinformazione",
+        "ambiente informativo",
+        "fonti aperte"
+      ],
+      "tags": [
+        "OSINT",
+        "deception",
+        "information environment"
+      ]
+    },
+    {
+      "theme": "Bias cognitivi e rigore analitico",
+      "keywords": [
+        "bias",
+        "pregiudizio",
+        "precision bias",
+        "pensiero critico",
+        "rigore analitico"
+      ],
+      "tags": [
+        "bias cognitivi",
+        "pensiero critico",
+        "rigore analitico"
+      ]
+    },
+    {
+      "theme": "Formazione e simulazione intelligence",
+      "keywords": [
+        "formazione",
+        "simulazione",
+        "laboratorio",
+        "didattica",
+        "analisti sotto pressione"
+      ],
+      "tags": [
+        "formazione intelligence",
+        "simulazione",
+        "didattica"
+      ]
+    },
+    {
+      "theme": "Intelligenza artificiale e analisi intelligence",
+      "keywords": [
+        "intelligenza artificiale",
+        "AI",
+        "agenti",
+        "algoritmo",
+        "machine learning"
+      ],
+      "tags": [
+        "intelligenza artificiale",
+        "AI agents",
+        "analisi intelligence"
+      ]
+    }
+  ],
+  "focusByTheme": {
+    "Structured Analytic Techniques (SATs)": "Il contributo esamina come strutturare il ragionamento analitico, rendere esplicite le ipotesi e sottoporre i giudizi a un processo verificabile e replicabile.",
+    "Indicator Based Analysis, scenari, warning e monitoraggio intelligence": "Il contributo collega eventi osservabili, ipotesi, driver e scenari, trasformando l'osservazione in un sistema di monitoraggio aggiornabile e utile al warning.",
+    "OSINT, ambiente informativo e deception": "Il contributo affronta il rapporto tra raccolta da fonti aperte, valutazione dell'affidabilità, ambiente informativo e rischio di manipolazione intenzionale.",
+    "Bias cognitivi e rigore analitico": "Il contributo approfondisce i meccanismi che possono alterare il giudizio analitico e le pratiche utili a rendere più trasparente, disciplinato e controllabile il processo di analisi.",
+    "Formazione e simulazione intelligence": "Il contributo considera la formazione come esercizio applicato del ragionamento analitico, con particolare attenzione a simulazione, pressione decisionale e verifica delle competenze.",
+    "Intelligenza artificiale e analisi intelligence": "Il contributo analizza opportunità, limiti e requisiti di controllo dell'impiego dell'intelligenza artificiale nel ciclo analitico."
+  },
+  "defaultFocus": "Il contributo sviluppa un problema metodologico rilevante per l'analisi intelligence e ne chiarisce le implicazioni per il processo analitico e per il supporto al decisore."
+}
