@@ -53,6 +53,7 @@ const state = {
   stage: "prepared",
   createdAt: new Date().toISOString(),
   updatedAt: new Date().toISOString(),
+  slug,
   inboxFolder: rel(folder),
   inputs: {
     source: rel(inputs.source),
