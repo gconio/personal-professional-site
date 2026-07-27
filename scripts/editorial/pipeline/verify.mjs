@@ -66,6 +66,12 @@ ${topics.map((topic) => `- ${topic}`).join("\n")}
 ## Focus metodologico
 
 ${data.focus}
+
+## Disponibilità
+
+Il contributo è disponibile in formato PDF.
+
+[Scarica il PDF](${pdfUrl})
 `;
 
 fs.writeFileSync(markdownDestination, markdown, "utf8");

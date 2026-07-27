@@ -29,12 +29,19 @@ function readDocx(file) {
   fs.copyFileSync(file, zipPath);
 
   const result = spawnSync("powershell.exe", [
+    "-NoLogo",
     "-NoProfile",
+    "-NonInteractive",
+    "-WindowStyle",
+    "Hidden",
     "-ExecutionPolicy",
     "Bypass",
     "-Command",
     `Expand-Archive -LiteralPath '${zipPath.replaceAll("'", "''")}' -DestinationPath '${temp.replaceAll("'", "''")}' -Force`,
-  ], { encoding: "utf8" });
+  ], {
+    encoding: "utf8",
+    windowsHide: true,
+  });
 
   if (result.status !== 0) {
     fail(`Impossibile estrarre il DOCX:\n${result.stderr || result.stdout}`);
