@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 2,
+  "application": "Lab4Int Editorial Studio",
+  "applicationVersion": "0.5.2",
+  "status": "repository-prepared",
+  "importedAt": "2026-07-27T06:49:52.130Z",
+  "title": "Dalla guerra cognitiva alla contro-OSINT",
+  "description": "Nel precedente articolo, Contro-OSINT: la nuova frontiera della deception, ho esaminato la vulnerabilità delle fonti aperte, distinguendo la deception analitica dalla disinformazione e proponendo domande, indicatori e presìdi metodologici per riconoscere un ambiente informativo manipolato.",
+  "author": "Giovanni Conio",
+  "category": "Articolo online / contributo online",
+  "slug": "dalla-guerra-cognitiva-alla-contro-osint",
+  "files": {
+    "docx": "source.docx",
+    "pdf": "document.pdf",
+    "image": "cover.jpeg"
+  },
+  "preparedAt": "2026-07-27T06:53:04.769Z",
+  "copiedFiles": [
+    {
+      "name": "source.docx",
+      "size": 2608320,
+      "sha256": "6b4b0a1469177cb89e64a1ba60c6444ffaa05058b74dfd3ad8d35ebd62d1dbcc"
+    },
+    {
+      "name": "document.pdf",
+      "size": 349233,
+      "sha256": "2327a9943fef4dfbd6bd06dd21f9599369d2beb0f21b06a2d0fde2b95a9b5b4b"
+    },
+    {
+      "name": "metadata.json",
+      "size": 774,
+      "sha256": "78de9292c58e95e95b625865d1311dacd622c866c51bfca8583551c1b9e8bdc8"
+    },
+    {
+      "name": "cover.jpeg",
+      "size": 223435,
+      "sha256": "57a9ca3c4f9786b7b546d673bf8b1558a0eb050ab3a131a6e5300a0b4630e093"
+    }
+  ]
+}
