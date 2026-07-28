@@ -29,12 +29,19 @@ function readDocx(file) {
   fs.copyFileSync(file, zipPath);
 
   const result = spawnSync("powershell.exe", [
+    "-NoLogo",
     "-NoProfile",
+    "-NonInteractive",
+    "-WindowStyle",
+    "Hidden",
     "-ExecutionPolicy",
     "Bypass",
     "-Command",
     `Expand-Archive -LiteralPath '${zipPath.replaceAll("'", "''")}' -DestinationPath '${temp.replaceAll("'", "''")}' -Force`,
-  ], { encoding: "utf8" });
+  ], {
+    encoding: "utf8",
+    windowsHide: true,
+  });
 
   if (result.status !== 0) {
     fail(`Impossibile estrarre il DOCX:\n${result.stderr || result.stdout}`);
@@ -57,10 +64,19 @@ export function readSource(file) {
   fail(`Formato sorgente non supportato: ${ext}`);
 }
 
+function cleanExtractedLine(line) {
+  return String(line)
+    .trim()
+    // Rimuove artefatti di posizionamento Word/PDF eventualmente inglobati
+    // all'inizio del testo, ad esempio: left244275400left2540682Titolo.
+    .replace(/^(?:(?:left|top|right|bottom)-?\d+)+/i, "")
+    .trim();
+}
+
 export function normalizeLines(text) {
   return text
     .replace(/\r/g, "")
     .split("\n")
-    .map((line) => line.trim())
+    .map(cleanExtractedLine)
     .filter(Boolean);
 }
