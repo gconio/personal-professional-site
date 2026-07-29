@@ -36,13 +36,18 @@ const title = arg("title", extractedTitle);
 const slug = arg("slug", slugify(title));
 const description = arg("description", detectDescription(lines, title));
 const classification = classifyText(raw, config);
-const theme = arg("theme", classification.theme);
-const tags = arg("tags")
-  ? arg("tags").split(",").map((item) => item.trim()).filter(Boolean)
+const approvedTheme = arg("theme");
+const approvedTags = arg("tags");
+const approvedFocus = arg("focus");
+
+const suggestedFocus = config.focusByTheme[classification.theme] || config.defaultFocus;
+const theme = approvedTheme || classification.theme;
+const tags = approvedTags
+  ? approvedTags.split(",").map((item) => item.trim()).filter(Boolean)
   : classification.tags;
 const visibleFrom = arg("visible-from", new Date().toISOString().slice(0, 10));
 const topics = detectTopics(lines, title);
-const focus = config.focusByTheme[theme] || config.defaultFocus;
+const focus = approvedFocus || config.focusByTheme[theme] || config.defaultFocus;
 
 if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
   fail(`Slug non valido: ${slug}`);
@@ -60,6 +65,20 @@ const state = {
     pdf: rel(inputs.pdf),
     image: inputs.image ? rel(inputs.image) : null,
   },
+  suggested: {
+    theme: classification.theme,
+    tags: classification.tags,
+    focus: suggestedFocus,
+    classificationConfidence: classification.confidence,
+  },
+  approved: {
+    theme: approvedTheme || null,
+    tags: approvedTags ? tags : null,
+    focus: approvedFocus || null,
+    source: (approvedTheme || approvedTags || approvedFocus)
+      ? "editorial-studio"
+      : null,
+  },
   extracted: {
     title,
     slug,
@@ -69,7 +88,12 @@ const state = {
     visibleFrom,
     topics,
     focus,
-    classificationConfidence: classification.confidence,
+    classificationSource: approvedTheme
+      ? "approved"
+      : "automatic",
+    classificationConfidence: approvedTheme
+      ? null
+      : classification.confidence,
   },
   outputs: {},
   checks: {},
@@ -82,7 +106,8 @@ console.log(`Titolo        : ${title}`);
 console.log(`Slug          : ${slug}`);
 console.log(`Descrizione   : ${description}`);
 console.log(`Tema          : ${theme}`);
-console.log(`Confidenza    : ${Math.round(classification.confidence * 100)}%`);
+console.log(`Origine tema  : ${approvedTheme ? "approvazione editoriale" : "classificazione automatica"}`);
+console.log(`Confidenza    : ${approvedTheme ? "non applicabile - tema approvato" : `${Math.round(classification.confidence * 100)}%`}`);
 console.log(`Data          : ${visibleFrom}`);
 console.log(`Tag           : ${tags.join(", ")}`);
 console.log(`PDF           : ${state.inputs.pdf}`);
