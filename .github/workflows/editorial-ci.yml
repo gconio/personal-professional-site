@@ -35,7 +35,7 @@ jobs:
         run: npm ci
 
       - name: Check editorial branch scope
-        if: startsWith(github.head_ref, 'editorial/')
+        if: startsWith(github.head_ref, 'editorial/') || startsWith(github.head_ref, 'content/')
         env:
           EDITORIAL_SCOPE_ENFORCE: "true"
           EDITORIAL_BASE_REF: ${{ github.base_ref }}
