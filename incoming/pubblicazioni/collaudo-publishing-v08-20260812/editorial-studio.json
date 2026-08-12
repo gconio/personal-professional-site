@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 3,
+  "application": "Lab4Int Editorial Studio",
+  "applicationVersion": "0.8.0-alpha.1",
+  "status": "repository-prepared",
+  "importedAt": "2026-08-12T14:19:10.542Z",
+  "title": "Segnali deboli e indicatori: esercizio controllato v0.8",
+  "description": "Un breve esercizio metodologico, privo di riferimenti operativi o fattuali, creato esclusivamente per verificare il flusso tecnico di pubblicazione della versione 0.8.",
+  "author": "Giovanni Conio",
+  "category": "Articolo online / contributo online",
+  "slug": "collaudo-publishing-v08-20260812",
+  "theme": "Formazione e simulazione intelligence",
+  "tags": [
+    "formazione intelligence",
+    "simulazione",
+    "didattica",
+    "intelligence analysis",
+    "metodologia intelligence",
+    "Lab4Int"
+  ],
+  "focus": "Esercizio metodologico fittizio sul passaggio dal segnale debole all'indicatore osservabile, predisposto esclusivamente per il collaudo tecnico della pipeline.",
+  "classificationApproval": {
+    "status": "approved",
+    "source": "editorial-studio",
+    "approvedAt": "2026-08-12T14:19:10.542Z"
+  },
+  "files": {
+    "docx": "source.docx",
+    "pdf": "document.pdf",
+    "image": "cover.png"
+  },
+  "preparedAt": "2026-08-12T14:48:48.537Z",
+  "copiedFiles": [
+    {
+      "name": "source.docx",
+      "size": 40002,
+      "sha256": "24dd99004da679d765fb78ee7fa66a796f2543b5253b78829de2420f418e6a38"
+    },
+    {
+      "name": "document.pdf",
+      "size": 101624,
+      "sha256": "9509c24660a235203b0070c6b2b7f9fa2d4be2a317dbb2f9694ea28ef51a8868"
+    },
+    {
+      "name": "metadata.json",
+      "size": 1188,
+      "sha256": "febe3d1cd000492019ff018a6d8733220f50e0d4708a228792dd66bceeb630c9"
+    },
+    {
+      "name": "cover.png",
+      "size": 49776,
+      "sha256": "3e39151247fd4595c833591d4ce22882ca49db4d1889b694be2792d93f7e6547"
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "version": "1.0",
+  "stage": "previewed",
+  "createdAt": "2026-08-12T14:49:03.198Z",
+  "updatedAt": "2026-08-12T14:51:49.903Z",
+  "slug": "collaudo-publishing-v08-20260812",
+  "inboxFolder": "incoming/pubblicazioni/collaudo-publishing-v08-20260812",
+  "inputs": {
+    "source": "incoming/pubblicazioni/collaudo-publishing-v08-20260812/source.docx",
+    "pdf": "incoming/pubblicazioni/collaudo-publishing-v08-20260812/document.pdf",
+    "image": "incoming/pubblicazioni/collaudo-publishing-v08-20260812/cover.png"
+  },
+  "suggested": {
+    "theme": "Indicator Based Analysis, scenari, warning e monitoraggio intelligence",
+    "tags": [
+      "indicator based analysis",
+      "scenario analysis",
+      "warning intelligence",
+      "intelligence analysis",
+      "metodologia intelligence",
+      "Lab4Int"
+    ],
+    "focus": "Il contributo collega eventi osservabili, ipotesi, driver e scenari, trasformando l'osservazione in un sistema di monitoraggio aggiornabile e utile al warning.",
+    "classificationConfidence": 0.8500000000000001
+  },
+  "approved": {
+    "theme": "Formazione e simulazione intelligence",
+    "tags": [
+      "formazione intelligence",
+      "simulazione",
+      "didattica",
+      "intelligence analysis",
+      "metodologia intelligence",
+      "Lab4Int"
+    ],
+    "focus": "Esercizio metodologico fittizio sul passaggio dal segnale debole all'indicatore osservabile, predisposto esclusivamente per il collaudo tecnico della pipeline.",
+    "source": "editorial-studio"
+  },
+  "extracted": {
+    "title": "Segnali deboli e indicatori: esercizio controllato v0.8",
+    "slug": "collaudo-publishing-v08-20260812",
+    "description": "Un breve esercizio metodologico, privo di riferimenti operativi o fattuali, creato esclusivamente per verificare il flusso tecnico di pubblicazione della versione 0.8.",
+    "theme": "Formazione e simulazione intelligence",
+    "tags": [
+      "formazione intelligence",
+      "simulazione",
+      "didattica",
+      "intelligence analysis",
+      "metodologia intelligence",
+      "Lab4Int"
+    ],
+    "visibleFrom": "2026-08-12",
+    "topics": [
+      "Contenuto fittizio per il collaudo end-to-end di Lab4Int Editorial Studio",
+      "Un breve esercizio metodologico, privo di riferimenti operativi o fattuali, creato esclusivamente per verificare il flusso tecnico di pubblicazione della versione 0.8.",
+      "Definire l'osservabile: descrivere cosa dovrebbe essere rilevato senza incorporare il giudizio.",
+      "Stabilire la direzione: indicare quale sviluppo renderebbe il segnale più o meno coerente.",
+      "Fissare la verifica: specificare fonte, frequenza di controllo e soglia di aggiornamento."
+    ],
+    "focus": "Esercizio metodologico fittizio sul passaggio dal segnale debole all'indicatore osservabile, predisposto esclusivamente per il collaudo tecnico della pipeline.",
+    "classificationSource": "approved",
+    "classificationConfidence": null
+  },
+  "outputs": {
+    "markdown": "src/content/pubblicazioni/collaudo-publishing-v08-20260812.md",
+    "pdf": "public/documenti/collaudo-publishing-v08-20260812.pdf",
+    "image": "public/images/publications/articoli/collaudo-publishing-v08-20260812-thumbnail.png",
+    "pageUrl": "/pubblicazioni/collaudo-publishing-v08-20260812/"
+  },
+  "checks": {
+    "publicationProfile": "passed",
+    "astroBuild": "passed",
+    "thumbnail": "present"
+  }
+}
