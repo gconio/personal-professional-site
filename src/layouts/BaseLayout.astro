@@ -1,6 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import MasterclassPopup from '../components/MasterclassPopup.astro';
 import '../styles/global.css';
 
 const siteUrl = 'https://giovanni.conio.lab4int.com';
@@ -65,5 +66,6 @@ const jsonLdItems = Array.isArray(structuredData)
       <slot />
     </main>
     <Footer />
+    <MasterclassPopup />
   </body>
 </html>
