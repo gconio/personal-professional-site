@@ -1,5 +1,6 @@
 ---
 const registrationUrl = 'https://forms.gle/Ku4o7kFFtJsC1JdF9';
+const landingUrl = '/masterclass/pensare-per-scenari/';
 const posterUrl = '/images/masterclass/masterclass-pensare-per-scenari-2026.png';
 ---
 
@@ -20,7 +21,7 @@ const posterUrl = '/images/masterclass/masterclass-pensare-per-scenari-2026.png'
       ×
     </button>
 
-    <a class="masterclass-popup-media" href={registrationUrl} target="_blank" rel="noopener noreferrer">
+    <a class="masterclass-popup-media" href={landingUrl} aria-label="Apri la pagina informativa della Masterclass Pensare per scenari">
       <img
         src={posterUrl}
         alt="Locandina della Masterclass Lab4Int Pensare per scenari"
@@ -35,9 +36,12 @@ const posterUrl = '/images/masterclass/masterclass-pensare-per-scenari-2026.png'
       <p id="masterclass-popup-description">
         Dall’incertezza agli indicatori: laboratorio online di intelligence analysis.
       </p>
-      <a class="masterclass-popup-button" href={registrationUrl} target="_blank" rel="noopener noreferrer">
-        Iscriviti
-      </a>
+      <div class="masterclass-popup-actions">
+        <a class="masterclass-popup-button" href={landingUrl}>Scopri il programma</a>
+        <a class="masterclass-popup-button is-secondary" href={registrationUrl} target="_blank" rel="noopener noreferrer">
+          Iscriviti
+        </a>
+      </div>
     </div>
   </div>
 </aside>
@@ -187,6 +191,12 @@ const posterUrl = '/images/masterclass/masterclass-pensare-per-scenari-2026.png'
     line-height: 1.45;
   }
 
+  .masterclass-popup-actions {
+    display: flex;
+    gap: 0.55rem;
+    flex-wrap: wrap;
+  }
+
   .masterclass-popup-button {
     display: inline-flex;
     align-items: center;
@@ -200,9 +210,13 @@ const posterUrl = '/images/masterclass/masterclass-pensare-per-scenari-2026.png'
     font-weight: 900;
   }
 
+  .masterclass-popup-button.is-secondary {
+    background: var(--accent);
+  }
+
   .masterclass-popup-button:hover {
     color: #fff;
-    background: var(--accent);
+    background: var(--secondary);
   }
 
   @media (max-width: 640px) {
@@ -216,11 +230,6 @@ const posterUrl = '/images/masterclass/masterclass-pensare-per-scenari-2026.png'
   @media (prefers-reduced-motion: reduce) {
     .masterclass-popup {
       transition: none;
-      transform: none;
-    }
-
-    .masterclass-popup.is-visible,
-    .masterclass-popup.is-leaving {
       transform: none;
     }
   }
