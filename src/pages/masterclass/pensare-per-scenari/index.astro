@@ -26,7 +26,14 @@ const structuredData = {
     name: 'Giovanni CONIO',
     url: 'https://giovanni.conio.lab4int.com/chi-sono/'
   },
-  url: 'https://giovanni.conio.lab4int.com/masterclass/pensare-per-scenari/'
+  url: 'https://giovanni.conio.lab4int.com/masterclass/pensare-per-scenari/',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'EUR',
+    availability: 'https://schema.org/LimitedAvailability',
+    url: registrationUrl
+  }
 };
 
 const learningPoints = [
@@ -75,11 +82,20 @@ const faqs = [
         <p class="eyebrow">Masterclass Lab4Int · Settembre 2026</p>
         <h1>Pensare per scenari</h1>
         <p class="masterclass-subtitle">Dall’incertezza agli indicatori: laboratorio di intelligence analysis</p>
+        <div class="masterclass-hero-badges" aria-label="Informazioni essenziali sulla partecipazione">
+          <span>Masterclass gratuita</span>
+          <span>Online</span>
+          <span>Posti limitati</span>
+        </div>
         <p class="masterclass-claim">Il futuro non si indovina. Si esplora, si struttura e si monitora.</p>
         <p>
           Quando le informazioni sono incomplete e le fonti contraddittorie, il compito dell’analista non è indovinare il futuro.
           È costruire alternative plausibili, riconoscere i segnali che le distinguono e preparare decisioni robuste.
         </p>
+        <aside class="masterclass-free-notice" aria-label="Partecipazione gratuita">
+          <strong>Attività gratuita con posti limitati</strong>
+          <span>La partecipazione alla masterclass è gratuita. È richiesta la registrazione tramite modulo online per ricevere le istruzioni operative, il link di accesso e i materiali preparatori.</span>
+        </aside>
         <div class="inline-actions">
           <a class="button primary" href={registrationUrl} target="_blank" rel="noopener noreferrer">Iscriviti alla Masterclass</a>
           <a class="button secondary" href="#programma">Vedi programma</a>
@@ -98,6 +114,7 @@ const faqs = [
       <div><strong>Durata</strong><span>3 ore</span><small>Laboratorio intensivo</small></div>
       <div><strong>Partecipanti</strong><span>25–30</span><small>Numero indicativo</small></div>
       <div><strong>Formato</strong><span>Online</span><small>Dettagli agli iscritti</small></div>
+      <div><strong>Partecipazione</strong><span>Gratuita</span><small>Previa registrazione</small></div>
     </section>
 
     <section class="page-section compact-section masterclass-section">
@@ -151,7 +168,7 @@ const faqs = [
         <p class="eyebrow">Registrazione</p>
         <h2>Richiedi informazioni o registra il tuo interesse</h2>
         <p>
-          I dettagli organizzativi e il link definitivo saranno comunicati agli iscritti.
+          La registrazione non comporta alcun costo. I dettagli organizzativi e il link definitivo saranno comunicati agli iscritti.
           Per informazioni: <a class="text-link" href="mailto:info@lab4int.com">info@lab4int.com</a>.
         </p>
         <div class="inline-actions">
@@ -224,6 +241,47 @@ const faqs = [
       font-size: clamp(1.2rem, 2.5vw, 1.65rem) !important;
     }
 
+    .masterclass-hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .masterclass-hero-badges span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0.3rem 0.75rem;
+      border: 1px solid rgba(184, 155, 94, 0.35);
+      border-radius: 999px;
+      background: rgba(184, 155, 94, 0.14);
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .masterclass-free-notice {
+      display: grid;
+      gap: 0.35rem;
+      padding: 1rem;
+      border: 1px solid rgba(184, 155, 94, 0.38);
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(184, 155, 94, 0.16), rgba(255, 255, 255, 0.84));
+      box-shadow: 0 14px 34px rgba(11, 31, 51, 0.08);
+    }
+
+    .masterclass-free-notice strong {
+      color: var(--primary);
+      font-size: 1.02rem;
+    }
+
+    .masterclass-free-notice span {
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
     .masterclass-claim {
       color: var(--accent) !important;
       font-weight: 900;
@@ -247,7 +305,7 @@ const faqs = [
 
     .masterclass-facts {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(5, minmax(0, 1fr));
       gap: 1rem;
       margin-top: 1.5rem;
     }
