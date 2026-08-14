@@ -51,29 +51,23 @@ const posterUrl = '/images/masterclass/masterclass-pensare-per-scenari-2026.png'
     var popup = document.getElementById('masterclass-popup');
     if (!popup) return;
 
-    var storageKey = 'lab4intMasterclassPopupClosed';
+    var landingPath = '/masterclass/pensare-per-scenari/';
+    var currentPath = window.location.pathname;
     var closeButton = popup.querySelector('[data-masterclass-close]');
+
+    if (currentPath === landingPath || currentPath === landingPath.replace(/\/$/, '')) {
+      popup.remove();
+      return;
+    }
 
     function closePopup() {
       popup.classList.remove('is-visible');
       popup.classList.add('is-leaving');
 
-      try {
-        window.sessionStorage.setItem(storageKey, 'true');
-      } catch (error) {
-        // sessionStorage non disponibile: la chiusura resta valida per la pagina corrente.
-      }
-
       window.setTimeout(function () {
         popup.setAttribute('hidden', '');
         popup.classList.remove('is-leaving');
       }, 220);
-    }
-
-    try {
-      if (window.sessionStorage.getItem(storageKey) === 'true') return;
-    } catch (error) {
-      // Se sessionStorage non è disponibile, il popup viene comunque mostrato.
     }
 
     window.setTimeout(function () {
