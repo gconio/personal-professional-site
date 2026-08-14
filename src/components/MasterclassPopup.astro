@@ -1,0 +1,227 @@
+---
+const registrationUrl = 'https://forms.gle/Ku4o7kFFtJsC1JdF9';
+const posterUrl = '/images/masterclass/masterclass-pensare-per-scenari-2026.png';
+---
+
+<aside
+  id="masterclass-popup"
+  class="masterclass-popup"
+  aria-labelledby="masterclass-popup-title"
+  aria-describedby="masterclass-popup-description"
+  hidden
+>
+  <div class="masterclass-popup-card" role="dialog" aria-modal="false">
+    <button
+      class="masterclass-popup-close"
+      type="button"
+      aria-label="Chiudi avviso Masterclass"
+      data-masterclass-close
+    >
+      ×
+    </button>
+
+    <a class="masterclass-popup-media" href={registrationUrl} target="_blank" rel="noopener noreferrer">
+      <img
+        src={posterUrl}
+        alt="Locandina della Masterclass Lab4Int Pensare per scenari"
+        loading="lazy"
+        decoding="async"
+      />
+    </a>
+
+    <div class="masterclass-popup-body">
+      <p class="masterclass-popup-kicker">Masterclass · 17 settembre 2026</p>
+      <h2 id="masterclass-popup-title">Pensare per scenari</h2>
+      <p id="masterclass-popup-description">
+        Dall’incertezza agli indicatori: laboratorio online di intelligence analysis.
+      </p>
+      <a class="masterclass-popup-button" href={registrationUrl} target="_blank" rel="noopener noreferrer">
+        Iscriviti
+      </a>
+    </div>
+  </div>
+</aside>
+
+<script>
+  (function () {
+    var popup = document.getElementById('masterclass-popup');
+    if (!popup) return;
+
+    var storageKey = 'lab4intMasterclassPopupClosed';
+    var closeButton = popup.querySelector('[data-masterclass-close]');
+
+    function closePopup() {
+      popup.classList.remove('is-visible');
+      popup.classList.add('is-leaving');
+
+      try {
+        window.sessionStorage.setItem(storageKey, 'true');
+      } catch (error) {
+        // sessionStorage non disponibile: la chiusura resta valida per la pagina corrente.
+      }
+
+      window.setTimeout(function () {
+        popup.setAttribute('hidden', '');
+        popup.classList.remove('is-leaving');
+      }, 220);
+    }
+
+    try {
+      if (window.sessionStorage.getItem(storageKey) === 'true') return;
+    } catch (error) {
+      // Se sessionStorage non è disponibile, il popup viene comunque mostrato.
+    }
+
+    window.setTimeout(function () {
+      popup.removeAttribute('hidden');
+      window.requestAnimationFrame(function () {
+        popup.classList.add('is-visible');
+      });
+    }, 850);
+
+    if (closeButton) {
+      closeButton.addEventListener('click', closePopup);
+    }
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && popup.classList.contains('is-visible')) {
+        closePopup();
+      }
+    });
+  })();
+</script>
+
+<style>
+  .masterclass-popup[hidden] {
+    display: none;
+  }
+
+  .masterclass-popup {
+    position: fixed;
+    right: clamp(1rem, 3vw, 2rem);
+    bottom: clamp(1rem, 3vw, 2rem);
+    z-index: 80;
+    width: min(420px, calc(100vw - 2rem));
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+    transition: opacity 220ms ease, transform 220ms ease;
+  }
+
+  .masterclass-popup.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  .masterclass-popup.is-leaving {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+
+  .masterclass-popup-card {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(184, 155, 94, 0.45);
+    border-radius: 24px;
+    background: var(--surface);
+    box-shadow: 0 24px 70px rgba(11, 31, 51, 0.28);
+  }
+
+  .masterclass-popup-close {
+    position: absolute;
+    top: 0.65rem;
+    right: 0.65rem;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border: 1px solid rgba(255, 255, 255, 0.48);
+    border-radius: 999px;
+    background: rgba(11, 31, 51, 0.72);
+    color: #fff;
+    font-size: 1.35rem;
+    line-height: 1;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+  }
+
+  .masterclass-popup-close:hover {
+    background: rgba(11, 31, 51, 0.92);
+  }
+
+  .masterclass-popup-media {
+    display: block;
+    background: var(--primary);
+  }
+
+  .masterclass-popup-media img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .masterclass-popup-body {
+    display: grid;
+    gap: 0.65rem;
+    padding: 1rem;
+  }
+
+  .masterclass-popup-kicker {
+    margin: 0;
+    color: var(--accent);
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .masterclass-popup-body h2 {
+    margin: 0;
+    font-size: clamp(1.35rem, 4vw, 1.9rem);
+  }
+
+  .masterclass-popup-body p {
+    margin: 0;
+    color: var(--text-muted);
+    line-height: 1.45;
+  }
+
+  .masterclass-popup-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    min-height: 44px;
+    padding: 0.7rem 1.05rem;
+    border-radius: 999px;
+    background: var(--primary);
+    color: #fff;
+    font-weight: 900;
+  }
+
+  .masterclass-popup-button:hover {
+    color: #fff;
+    background: var(--accent);
+  }
+
+  @media (max-width: 640px) {
+    .masterclass-popup {
+      right: 1rem;
+      bottom: 1rem;
+      width: calc(100vw - 2rem);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .masterclass-popup {
+      transition: none;
+      transform: none;
+    }
+
+    .masterclass-popup.is-visible,
+    .masterclass-popup.is-leaving {
+      transform: none;
+    }
+  }
+</style>
