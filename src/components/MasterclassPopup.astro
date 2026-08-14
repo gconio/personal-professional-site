@@ -1,7 +1,7 @@
 ---
-const registrationUrl = 'https://forms.gle/Ku4o7kFFtJsC1JdF9';
 const landingUrl = '/masterclass/pensare-per-scenari/';
 const posterUrl = '/images/masterclass/masterclass-pensare-per-scenari-2026.png';
+const popupEndDate = '2026-09-14';
 ---
 
 <aside
@@ -9,6 +9,7 @@ const posterUrl = '/images/masterclass/masterclass-pensare-per-scenari-2026.png'
   class="masterclass-popup"
   aria-labelledby="masterclass-popup-title"
   aria-describedby="masterclass-popup-description"
+  data-popup-end-date={popupEndDate}
   hidden
 >
   <div class="masterclass-popup-card" role="dialog" aria-modal="false">
@@ -38,9 +39,6 @@ const posterUrl = '/images/masterclass/masterclass-pensare-per-scenari-2026.png'
       </p>
       <div class="masterclass-popup-actions">
         <a class="masterclass-popup-button" href={landingUrl}>Scopri il programma</a>
-        <a class="masterclass-popup-button is-secondary" href={registrationUrl} target="_blank" rel="noopener noreferrer">
-          Iscriviti
-        </a>
       </div>
     </div>
   </div>
@@ -54,8 +52,21 @@ const posterUrl = '/images/masterclass/masterclass-pensare-per-scenari-2026.png'
     var landingPath = '/masterclass/pensare-per-scenari/';
     var currentPath = window.location.pathname;
     var closeButton = popup.querySelector('[data-masterclass-close]');
+    var popupEndDate = popup.getAttribute('data-popup-end-date') || '2026-09-14';
 
     if (currentPath === landingPath || currentPath === landingPath.replace(/\/$/, '')) {
+      popup.remove();
+      return;
+    }
+
+    var today = new Date();
+    var todayKey = [
+      today.getFullYear(),
+      String(today.getMonth() + 1).padStart(2, '0'),
+      String(today.getDate()).padStart(2, '0')
+    ].join('-');
+
+    if (todayKey >= popupEndDate) {
       popup.remove();
       return;
     }
@@ -202,10 +213,6 @@ const posterUrl = '/images/masterclass/masterclass-pensare-per-scenari-2026.png'
     background: var(--primary);
     color: #fff;
     font-weight: 900;
-  }
-
-  .masterclass-popup-button.is-secondary {
-    background: var(--accent);
   }
 
   .masterclass-popup-button:hover {
