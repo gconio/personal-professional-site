@@ -21,19 +21,6 @@ const structuredData = {
     name: 'Lab4Int - Intelligence Analysis Laboratory',
     url: 'https://giovanni.conio.lab4int.com/'
   },
-  sponsor: [
-    {
-      '@type': 'Organization',
-      name: 'Associazione Italiana Analisti di Intelligence e Geopolitica',
-      alternateName: 'AIAIG',
-      url: 'https://aiaig.it/wp/'
-    },
-    {
-      '@type': 'Organization',
-      name: 'Domìni - Scuola di analisi geopolitica',
-      url: 'https://www.scuoladigeopolitica.it/'
-    }
-  ],
   performer: {
     '@type': 'Person',
     name: 'Giovanni CONIO',
@@ -130,43 +117,41 @@ const faqs = [
       <div><strong>Partecipazione</strong><span>Gratuita</span><small>Previa registrazione</small></div>
     </section>
 
+    <div class="masterclass-partners-line" aria-label="Patrocini della Masterclass">
+      <span class="masterclass-partners-label">Attività organizzata con il patrocinio di</span>
 
-    <section class="masterclass-patronage-line" aria-label="Patrocini della Masterclass">
-      <span class="masterclass-patronage-text">Attività organizzata con il patrocinio di</span>
       <a
-        class="masterclass-patronage-link"
+        class="masterclass-partner-logo-link"
         href="https://aiaig.it/wp/"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Visita il sito dell’Associazione Italiana Analisti di Intelligence e Geopolitica"
+        aria-label="Associazione Italiana Analisti di Intelligence e Geopolitica"
       >
         <img
           src="/images/partners/aiaig.png"
-          alt="Associazione Italiana Analisti di Intelligence e Geopolitica (AIAIG)"
-          class="masterclass-patronage-logo masterclass-patronage-logo-aiaig"
+          alt="Associazione Italiana Analisti di Intelligence e Geopolitica"
+          class="masterclass-partner-logo masterclass-partner-logo-aiaig"
           loading="lazy"
           decoding="async"
         />
-        <span>Associazione Italiana Analisti di Intelligence e Geopolitica (AIAIG)</span>
       </a>
-      <span class="masterclass-patronage-separator">e</span>
+
       <a
-        class="masterclass-patronage-link"
+        class="masterclass-partner-logo-link"
         href="https://www.scuoladigeopolitica.it/"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Visita il sito di Domìni - Scuola di analisi geopolitica"
+        aria-label="Domìni - Scuola di analisi geopolitica"
       >
         <img
           src="/images/partners/domini.png"
           alt="Domìni - Scuola di analisi geopolitica"
-          class="masterclass-patronage-logo masterclass-patronage-logo-domini"
+          class="masterclass-partner-logo masterclass-partner-logo-domini"
           loading="lazy"
           decoding="async"
         />
-        <span>Domìni - Scuola di analisi geopolitica</span>
       </a>
-    </section>
+    </div>
 
     <section class="page-section compact-section masterclass-section">
       <div class="grid-two masterclass-intro-grid">
@@ -385,57 +370,55 @@ const faqs = [
       color: var(--text-muted);
     }
 
-
-    .masterclass-patronage-line {
+    .masterclass-partners-line {
       display: flex;
-      flex-wrap: wrap;
       align-items: center;
-      gap: 0.75rem 1rem;
+      justify-content: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
       margin-top: 1rem;
-      padding: 0.8rem 1rem;
-      border: 1px solid rgba(184, 155, 94, 0.28);
+      padding: 0.95rem 1.15rem;
+      border: 1px solid var(--border);
       border-radius: 18px;
-      background: rgba(255, 255, 255, 0.72);
-      box-shadow: 0 12px 28px rgba(11, 31, 51, 0.06);
+      background: var(--surface);
+      box-shadow: 0 12px 30px rgba(11, 31, 51, 0.07);
     }
 
-    .masterclass-patronage-text {
-      color: var(--primary);
-      font-weight: 900;
+    .masterclass-partners-label {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      font-weight: 800;
     }
 
-    .masterclass-patronage-link {
+    .masterclass-partner-logo-link {
       display: inline-flex;
       align-items: center;
-      gap: 0.55rem;
-      min-height: 52px;
-      color: var(--text-muted);
-      font-weight: 800;
+      justify-content: center;
+      padding: 0.25rem 0.35rem;
+      border-radius: 12px;
+      transition: transform 0.15s ease, opacity 0.15s ease, background 0.15s ease;
     }
 
-    .masterclass-patronage-link:hover {
-      color: var(--accent);
+    .masterclass-partner-logo-link:hover {
+      transform: translateY(-1px);
+      background: rgba(184, 155, 94, 0.08);
+      opacity: 0.88;
     }
 
-    .masterclass-patronage-logo {
+    .masterclass-partner-logo {
       display: block;
-      width: auto;
-      max-width: 100%;
+      height: auto;
       object-fit: contain;
-      flex: 0 0 auto;
     }
 
-    .masterclass-patronage-logo-aiaig {
-      max-height: 52px;
+    .masterclass-partner-logo-aiaig {
+      width: 150px;
+      max-width: 34vw;
     }
 
-    .masterclass-patronage-logo-domini {
-      max-height: 44px;
-    }
-
-    .masterclass-patronage-separator {
-      color: var(--text-muted);
-      font-weight: 800;
+    .masterclass-partner-logo-domini {
+      width: 126px;
+      max-width: 30vw;
     }
 
     .masterclass-section {
@@ -543,21 +526,17 @@ const faqs = [
         grid-template-columns: 1fr;
       }
 
-      .masterclass-patronage-line {
-        align-items: flex-start;
-        flex-direction: column;
+      .masterclass-partners-line {
+        justify-content: flex-start;
+        gap: 0.85rem;
       }
 
-      .masterclass-patronage-link {
-        align-items: flex-start;
+      .masterclass-partner-logo-aiaig {
+        width: 132px;
       }
 
-      .masterclass-patronage-logo-aiaig {
-        max-height: 46px;
-      }
-
-      .masterclass-patronage-logo-domini {
-        max-height: 40px;
+      .masterclass-partner-logo-domini {
+        width: 112px;
       }
     }
   </style>
