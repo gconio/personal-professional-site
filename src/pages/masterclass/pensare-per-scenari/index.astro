@@ -21,6 +21,19 @@ const structuredData = {
     name: 'Lab4Int - Intelligence Analysis Laboratory',
     url: 'https://giovanni.conio.lab4int.com/'
   },
+  sponsor: [
+    {
+      '@type': 'Organization',
+      name: 'Associazione Italiana Analisti di Intelligence e Geopolitica',
+      alternateName: 'AIAIG',
+      url: 'https://aiaig.it/wp/'
+    },
+    {
+      '@type': 'Organization',
+      name: 'Domìni - Scuola di analisi geopolitica',
+      url: 'https://www.scuoladigeopolitica.it/'
+    }
+  ],
   performer: {
     '@type': 'Person',
     name: 'Giovanni CONIO',
@@ -115,6 +128,44 @@ const faqs = [
       <div><strong>Partecipanti</strong><span>25–30</span><small>Numero indicativo</small></div>
       <div><strong>Formato</strong><span>Online</span><small>Dettagli agli iscritti</small></div>
       <div><strong>Partecipazione</strong><span>Gratuita</span><small>Previa registrazione</small></div>
+    </section>
+
+
+    <section class="masterclass-patronage-line" aria-label="Patrocini della Masterclass">
+      <span class="masterclass-patronage-text">Attività organizzata con il patrocinio di</span>
+      <a
+        class="masterclass-patronage-link"
+        href="https://aiaig.it/wp/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Visita il sito dell’Associazione Italiana Analisti di Intelligence e Geopolitica"
+      >
+        <img
+          src="/images/partners/aiaig.png"
+          alt="Associazione Italiana Analisti di Intelligence e Geopolitica (AIAIG)"
+          class="masterclass-patronage-logo masterclass-patronage-logo-aiaig"
+          loading="lazy"
+          decoding="async"
+        />
+        <span>Associazione Italiana Analisti di Intelligence e Geopolitica (AIAIG)</span>
+      </a>
+      <span class="masterclass-patronage-separator">e</span>
+      <a
+        class="masterclass-patronage-link"
+        href="https://www.scuoladigeopolitica.it/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Visita il sito di Domìni - Scuola di analisi geopolitica"
+      >
+        <img
+          src="/images/partners/domini.png"
+          alt="Domìni - Scuola di analisi geopolitica"
+          class="masterclass-patronage-logo masterclass-patronage-logo-domini"
+          loading="lazy"
+          decoding="async"
+        />
+        <span>Domìni - Scuola di analisi geopolitica</span>
+      </a>
     </section>
 
     <section class="page-section compact-section masterclass-section">
@@ -334,6 +385,59 @@ const faqs = [
       color: var(--text-muted);
     }
 
+
+    .masterclass-patronage-line {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem 1rem;
+      margin-top: 1rem;
+      padding: 0.8rem 1rem;
+      border: 1px solid rgba(184, 155, 94, 0.28);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.72);
+      box-shadow: 0 12px 28px rgba(11, 31, 51, 0.06);
+    }
+
+    .masterclass-patronage-text {
+      color: var(--primary);
+      font-weight: 900;
+    }
+
+    .masterclass-patronage-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      min-height: 52px;
+      color: var(--text-muted);
+      font-weight: 800;
+    }
+
+    .masterclass-patronage-link:hover {
+      color: var(--accent);
+    }
+
+    .masterclass-patronage-logo {
+      display: block;
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
+      flex: 0 0 auto;
+    }
+
+    .masterclass-patronage-logo-aiaig {
+      max-height: 52px;
+    }
+
+    .masterclass-patronage-logo-domini {
+      max-height: 44px;
+    }
+
+    .masterclass-patronage-separator {
+      color: var(--text-muted);
+      font-weight: 800;
+    }
+
     .masterclass-section {
       margin-top: 3.5rem;
     }
@@ -437,6 +541,23 @@ const faqs = [
       .masterclass-facts,
       .masterclass-checklist {
         grid-template-columns: 1fr;
+      }
+
+      .masterclass-patronage-line {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .masterclass-patronage-link {
+        align-items: flex-start;
+      }
+
+      .masterclass-patronage-logo-aiaig {
+        max-height: 46px;
+      }
+
+      .masterclass-patronage-logo-domini {
+        max-height: 40px;
       }
     }
   </style>
