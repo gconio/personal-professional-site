@@ -1,0 +1,75 @@
+{
+  "version": "1.0",
+  "stage": "previewed",
+  "createdAt": "2026-08-18T10:30:02.137Z",
+  "updatedAt": "2026-08-18T10:50:17.409Z",
+  "slug": "collaudo-governed-publishing-20260818",
+  "inboxFolder": "incoming/pubblicazioni/collaudo-governed-publishing-20260818",
+  "inputs": {
+    "source": "incoming/pubblicazioni/collaudo-governed-publishing-20260818/source.docx",
+    "pdf": "incoming/pubblicazioni/collaudo-governed-publishing-20260818/document.pdf",
+    "image": "incoming/pubblicazioni/collaudo-governed-publishing-20260818/cover.png"
+  },
+  "suggested": {
+    "theme": "Intelligenza artificiale e analisi intelligence",
+    "tags": [
+      "intelligenza artificiale",
+      "AI agents",
+      "analisi intelligence",
+      "intelligence analysis",
+      "metodologia intelligence",
+      "Lab4Int"
+    ],
+    "focus": "Il contributo analizza opportunità, limiti e requisiti di controllo dell'impiego dell'intelligenza artificiale nel ciclo analitico.",
+    "classificationConfidence": 0.75
+  },
+  "approved": {
+    "theme": "Intelligenza artificiale e analisi intelligence",
+    "tags": [
+      "intelligenza artificiale",
+      "AI agents",
+      "analisi intelligence",
+      "intelligence analysis",
+      "metodologia intelligence",
+      "Lab4Int"
+    ],
+    "focus": "Il contributo analizza opportunità, limiti e requisiti di controllo dell'impiego dell'intelligenza artificiale nel ciclo analitico.",
+    "source": "editorial-studio"
+  },
+  "extracted": {
+    "title": "Collaudo governed publishing - controllo dell’AI nel processo analitico",
+    "slug": "collaudo-governed-publishing-20260818",
+    "description": "Documento sintetico creato esclusivamente per il collaudo end-to-end del workflow governato di Lab4Int Editorial Studio, con verifica di branch, commit, push, pull request draft e required status check GitHub.",
+    "theme": "Intelligenza artificiale e analisi intelligence",
+    "tags": [
+      "intelligenza artificiale",
+      "AI agents",
+      "analisi intelligence",
+      "intelligence analysis",
+      "metodologia intelligence",
+      "Lab4Int"
+    ],
+    "visibleFrom": "2026-08-18",
+    "topics": [
+      "FIXTURE TEMPORANEA DI COLLAUDO - NON DESTINATA ALLA PUBBLICAZIONE",
+      "Verificare che l’applicazione mantenga lo slug deterministico e il perimetro esatto dei file della pubblicazione.",
+      "Verificare che branch, commit e push siano vincolati allo stato persistito e al manifest immutabile.",
+      "Verificare che la pull request venga aperta in modalità Draft e che l’esecuzione si arresti prima del merge.",
+      "Verificare che GitHub richieda il check Validate editorial content prima di consentire il merge."
+    ],
+    "focus": "Il contributo analizza opportunità, limiti e requisiti di controllo dell'impiego dell'intelligenza artificiale nel ciclo analitico.",
+    "classificationSource": "approved",
+    "classificationConfidence": null
+  },
+  "outputs": {
+    "markdown": "src/content/pubblicazioni/collaudo-governed-publishing-20260818.md",
+    "pdf": "public/documenti/collaudo-governed-publishing-20260818.pdf",
+    "image": "public/images/publications/articoli/collaudo-governed-publishing-20260818-thumbnail.png",
+    "pageUrl": "/pubblicazioni/collaudo-governed-publishing-20260818/"
+  },
+  "checks": {
+    "publicationProfile": "passed",
+    "astroBuild": "passed",
+    "thumbnail": "present"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 3,
+  "application": "Lab4Int Editorial Studio",
+  "applicationVersion": "0.8.0-rc.1",
+  "status": "repository-prepared",
+  "importedAt": "2026-08-18T09:40:14.211Z",
+  "title": "Collaudo governed publishing - controllo dell’AI nel processo analitico",
+  "description": "Documento sintetico creato esclusivamente per il collaudo end-to-end del workflow governato di Lab4Int Editorial Studio, con verifica di branch, commit, push, pull request draft e required status check GitHub.",
+  "author": "Giovanni Conio",
+  "category": "Articolo online / contributo online",
+  "slug": "collaudo-governed-publishing-20260818",
+  "theme": "Intelligenza artificiale e analisi intelligence",
+  "tags": [
+    "intelligenza artificiale",
+    "AI agents",
+    "analisi intelligence",
+    "intelligence analysis",
+    "metodologia intelligence",
+    "Lab4Int"
+  ],
+  "focus": "Il contributo analizza opportunità, limiti e requisiti di controllo dell'impiego dell'intelligenza artificiale nel ciclo analitico.",
+  "classificationApproval": {
+    "status": "approved",
+    "source": "editorial-studio",
+    "approvedAt": "2026-08-18T09:40:14.211Z"
+  },
+  "files": {
+    "docx": "source.docx",
+    "pdf": "document.pdf",
+    "image": "cover.png"
+  },
+  "preparedAt": "2026-08-18T10:18:02.180Z",
+  "copiedFiles": [
+    {
+      "name": "source.docx",
+      "size": 38243,
+      "sha256": "95ea72003360eee13e0df317c62b075a39a187e5897973283a38923a9a611596"
+    },
+    {
+      "name": "document.pdf",
+      "size": 44891,
+      "sha256": "a0a7cc6d2ca52f328b476d8b466bdd662d09cd09ad950e714633908b81a9ed81"
+    },
+    {
+      "name": "metadata.json",
+      "size": 1243,
+      "sha256": "c4e38c7865621600a1b4d946fc9e9818416d490674f0f98f6151a5bfcd381a0c"
+    },
+    {
+      "name": "cover.png",
+      "size": 27532,
+      "sha256": "4f180e9affc708cc3342b6eca577ebbac9cc42b8a550fa94f162093181aea758"
+    }
+  ]
+}
