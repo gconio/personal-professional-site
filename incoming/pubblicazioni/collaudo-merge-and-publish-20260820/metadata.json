@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 3,
+  "application": "Lab4Int Editorial Studio",
+  "applicationVersion": "0.8.0-rc.1",
+  "status": "imported",
+  "importedAt": "2026-08-20T05:29:00.000Z",
+  "title": "Collaudo MERGE_AND_PUBLISH 2.4 - pubblicazione sintetica",
+  "description": "Fixture sintetica creata esclusivamente per il collaudo end-to-end del gate MERGE_AND_PUBLISH di Lab4Int Editorial Studio v0.8. Non costituisce contenuto editoriale reale.",
+  "author": "Giovanni Conio",
+  "category": "Articolo online / contributo online",
+  "slug": "collaudo-merge-and-publish-20260820",
+  "theme": "Collaudo tecnico del workflow editoriale governato",
+  "tags": [
+    "Lab4Int",
+    "collaudo E2E",
+    "governed automation",
+    "MERGE_AND_PUBLISH",
+    "fixture sintetica"
+  ],
+  "focus": "Verificare in modo end-to-end il gate MERGE_AND_PUBLISH 2.4 senza utilizzare una pubblicazione editoriale reale.",
+  "classificationApproval": {
+    "status": "approved",
+    "source": "fixture-synthetic-test",
+    "approvedAt": "2026-08-20T05:29:00.000Z"
+  },
+  "files": {
+    "docx": "source.docx",
+    "pdf": "document.pdf",
+    "image": "cover.png"
+  }
+}
