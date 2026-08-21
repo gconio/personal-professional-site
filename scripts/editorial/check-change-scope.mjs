@@ -62,15 +62,89 @@ const files = output
 
 if (contentMatch) {
   const slug = contentMatch[1];
+  const allowedImageExtensions = ["png", "jpg", "jpeg", "webp"];
+  const coverPrefix = `incoming/pubblicazioni/${slug}/cover.`;
+  const thumbnailPrefix =
+    `public/images/publications/articoli/${slug}-thumbnail.`;
+
+  const coverCandidates = files.filter(
+    (file) => file.startsWith(coverPrefix)
+  );
+  const thumbnailCandidates = files.filter(
+    (file) => file.startsWith(thumbnailPrefix)
+  );
+
+  const imageErrors = [];
+
+  if (coverCandidates.length !== 1) {
+    imageErrors.push(
+      `attesa esattamente una cover per content/${slug}; rilevate: ${coverCandidates.length}`
+    );
+  }
+
+  if (thumbnailCandidates.length !== 1) {
+    imageErrors.push(
+      `attesa esattamente una thumbnail per content/${slug}; rilevate: ${thumbnailCandidates.length}`
+    );
+  }
+
+  const coverExtension =
+    coverCandidates.length === 1
+      ? coverCandidates[0].slice(coverPrefix.length)
+      : "";
+
+  const thumbnailExtension =
+    thumbnailCandidates.length === 1
+      ? thumbnailCandidates[0].slice(thumbnailPrefix.length)
+      : "";
+
+  if (
+    coverCandidates.length === 1 &&
+    !allowedImageExtensions.includes(coverExtension)
+  ) {
+    imageErrors.push(
+      `estensione cover non supportata per content/${slug}: .${coverExtension || "(vuota)"}`
+    );
+  }
+
+  if (
+    thumbnailCandidates.length === 1 &&
+    !allowedImageExtensions.includes(thumbnailExtension)
+  ) {
+    imageErrors.push(
+      `estensione thumbnail non supportata per content/${slug}: .${thumbnailExtension || "(vuota)"}`
+    );
+  }
+
+  if (
+    coverCandidates.length === 1 &&
+    thumbnailCandidates.length === 1 &&
+    allowedImageExtensions.includes(coverExtension) &&
+    allowedImageExtensions.includes(thumbnailExtension) &&
+    coverExtension !== thumbnailExtension
+  ) {
+    imageErrors.push(
+      `estensioni immagine non coerenti per content/${slug}: cover .${coverExtension}, thumbnail .${thumbnailExtension}`
+    );
+  }
+
+  if (imageErrors.length) {
+    failWith(
+      imageErrors,
+      "Controllo perimetro content fallito"
+    );
+    process.exit();
+  }
+
   const expected = [
     `.editorial/state/${slug}.json`,
-    `incoming/pubblicazioni/${slug}/cover.png`,
+    coverCandidates[0],
     `incoming/pubblicazioni/${slug}/document.pdf`,
     `incoming/pubblicazioni/${slug}/editorial-studio.json`,
     `incoming/pubblicazioni/${slug}/metadata.json`,
     `incoming/pubblicazioni/${slug}/source.docx`,
     `public/documenti/${slug}.pdf`,
-    `public/images/publications/articoli/${slug}-thumbnail.png`,
+    thumbnailCandidates[0],
     `src/content/pubblicazioni/${slug}.md`
   ].sort();
 
