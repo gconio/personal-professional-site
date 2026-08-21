@@ -1,0 +1,75 @@
+{
+  "version": "1.0",
+  "stage": "previewed",
+  "createdAt": "2026-08-21T05:40:31.611Z",
+  "updatedAt": "2026-08-21T05:49:46.227Z",
+  "slug": "un-indicatore-non-e-una-previsione",
+  "inboxFolder": "incoming/pubblicazioni/un-indicatore-non-e-una-previsione",
+  "inputs": {
+    "source": "incoming/pubblicazioni/un-indicatore-non-e-una-previsione/source.docx",
+    "pdf": "incoming/pubblicazioni/un-indicatore-non-e-una-previsione/document.pdf",
+    "image": "incoming/pubblicazioni/un-indicatore-non-e-una-previsione/cover.jpeg"
+  },
+  "suggested": {
+    "theme": "Indicator Based Analysis, scenari, warning e monitoraggio intelligence",
+    "tags": [
+      "indicator based analysis",
+      "scenario analysis",
+      "warning intelligence",
+      "intelligence analysis",
+      "metodologia intelligence",
+      "Lab4Int"
+    ],
+    "focus": "Il contributo collega eventi osservabili, ipotesi, driver e scenari, trasformando l'osservazione in un sistema di monitoraggio aggiornabile e utile al warning.",
+    "classificationConfidence": 0.95
+  },
+  "approved": {
+    "theme": "Indicator Based Analysis, scenari, warning e monitoraggio intelligence",
+    "tags": [
+      "indicator based analysis",
+      "scenario analysis",
+      "warning intelligence",
+      "intelligence analysis",
+      "metodologia intelligence",
+      "Lab4Int"
+    ],
+    "focus": "Il contributo collega eventi osservabili, ipotesi, driver e scenari, trasformando l'osservazione in un sistema di monitoraggio aggiornabile e utile al warning.",
+    "source": "editorial-studio"
+  },
+  "extracted": {
+    "title": "Un indicatore non è una previsione",
+    "slug": "un-indicatore-non-e-una-previsione",
+    "description": "Dal segnale al warning: come distinguere ciò che osserviamo da ciò che possiamo concludere",
+    "theme": "Indicator Based Analysis, scenari, warning e monitoraggio intelligence",
+    "tags": [
+      "indicator based analysis",
+      "scenario analysis",
+      "warning intelligence",
+      "intelligence analysis",
+      "metodologia intelligence",
+      "Lab4Int"
+    ],
+    "visibleFrom": "2026-08-21",
+    "topics": [
+      "Dal segnale al warning: come distinguere ciò che osserviamo da ciò che possiamo concludere",
+      "Nell’analisi intelligence uno degli errori più insidiosi consiste nel confondere ciò che osserviamo con ciò che possiamo concludere.",
+      "Sono tutti elementi potenzialmente significativi. Possono segnalare che qualcosa sta cambiando e, in determinate circostanze, contribuire alla costruzione di un quadro di warning.",
+      "Ma nessuno di essi, considerato isolatamente, ci dice necessariamente che cosa accadrà.",
+      "La distinzione è fondamentale: un indicatore non è una previsione."
+    ],
+    "focus": "Il contributo collega eventi osservabili, ipotesi, driver e scenari, trasformando l'osservazione in un sistema di monitoraggio aggiornabile e utile al warning.",
+    "classificationSource": "approved",
+    "classificationConfidence": null
+  },
+  "outputs": {
+    "markdown": "src/content/pubblicazioni/un-indicatore-non-e-una-previsione.md",
+    "pdf": "public/documenti/un-indicatore-non-e-una-previsione.pdf",
+    "image": "public/images/publications/articoli/un-indicatore-non-e-una-previsione-thumbnail.jpeg",
+    "pageUrl": "/pubblicazioni/un-indicatore-non-e-una-previsione/"
+  },
+  "checks": {
+    "publicationProfile": "passed",
+    "astroBuild": "passed",
+    "thumbnail": "present"
+  }
+}

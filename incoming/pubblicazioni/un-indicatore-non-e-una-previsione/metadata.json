@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 3,
+  "application": "Lab4Int Editorial Studio",
+  "applicationVersion": "0.8.0-rc.1",
+  "status": "imported",
+  "importedAt": "2026-08-21T05:26:38.455Z",
+  "title": "Un indicatore non è una previsione",
+  "description": "Dal segnale al warning: come distinguere ciò che osserviamo da ciò che possiamo concludere",
+  "author": "Giovanni Conio",
+  "category": "Articolo online / contributo online",
+  "slug": "un-indicatore-non-e-una-previsione",
+  "theme": "Indicator Based Analysis, scenari, warning e monitoraggio intelligence",
+  "tags": [
+    "indicator based analysis",
+    "scenario analysis",
+    "warning intelligence",
+    "intelligence analysis",
+    "metodologia intelligence",
+    "Lab4Int"
+  ],
+  "focus": "Il contributo collega eventi osservabili, ipotesi, driver e scenari, trasformando l'osservazione in un sistema di monitoraggio aggiornabile e utile al warning.",
+  "classificationApproval": {
+    "status": "approved",
+    "source": "editorial-studio",
+    "approvedAt": "2026-08-21T05:26:38.455Z"
+  },
+  "files": {
+    "docx": "source.docx",
+    "pdf": "document.pdf",
+    "image": "cover.jpeg"
+  }
+}
