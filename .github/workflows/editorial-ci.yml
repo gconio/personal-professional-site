@@ -1,16 +1,46 @@
 name: Editorial CI
+run-name: ${{ github.event_name == 'workflow_dispatch' && format('Editorial CI rebind pr={0} base={1} request={2}', inputs.pr, inputs.base_sha, inputs.request_id) || github.event.pull_request.title }}
 
 on:
   pull_request:
     branches:
       - main
   workflow_dispatch:
+    inputs:
+      mode:
+        description: Governed dispatch mode
+        required: true
+        type: string
+      pr:
+        description: Pull request number
+        required: true
+        type: string
+      base_sha:
+        description: Effective base SHA
+        required: true
+        type: string
+      head_sha:
+        description: Immutable publication head SHA
+        required: true
+        type: string
+      merge_sha:
+        description: Synthetic merge SHA
+        required: true
+        type: string
+      head_branch:
+        description: Governed publication source branch
+        required: true
+        type: string
+      request_id:
+        description: Deterministic governed rebind request id
+        required: true
+        type: string
 
 permissions:
   contents: read
 
 concurrency:
-  group: editorial-ci-${{ github.event.pull_request.number || github.ref }}
+  group: editorial-ci-${{ github.event.pull_request.number || inputs.pr || github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -25,8 +55,105 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: LAB4INT_GOVERNED_CI_BINDING pr=${{ github.event.pull_request.number }} base=${{ github.event.pull_request.base.sha }} head=${{ github.event.pull_request.head.sha }} merge=${{ github.sha }} run=${{ github.run_id }} attempt=${{ github.run_attempt }}
-        if: github.event_name == 'pull_request'
+      - name: Resolve governed CI binding
+        id: governed
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PR_NUMBER: ${{ github.event.pull_request.number || inputs.pr }}
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          PR_HEAD_BRANCH: ${{ github.event.pull_request.head.ref }}
+          PR_BASE_BRANCH: ${{ github.event.pull_request.base.ref }}
+          INPUT_MODE: ${{ inputs.mode }}
+          INPUT_BASE_SHA: ${{ inputs.base_sha }}
+          INPUT_HEAD_SHA: ${{ inputs.head_sha }}
+          INPUT_MERGE_SHA: ${{ inputs.merge_sha }}
+          INPUT_HEAD_BRANCH: ${{ inputs.head_branch }}
+          INPUT_REQUEST_ID: ${{ inputs.request_id }}
+        run: |
+          set -euo pipefail
+
+          if [[ ! "${PR_NUMBER}" =~ ^[1-9][0-9]*$ ]]; then
+            echo "Invalid pull request number." >&2
+            exit 1
+          fi
+
+          if [[ "${EVENT_NAME}" == "pull_request" ]]; then
+            HEAD="${PR_HEAD_SHA}"
+            HEAD_BRANCH="${PR_HEAD_BRANCH}"
+            BASE_BRANCH="${PR_BASE_BRANCH}"
+            MERGE="${GITHUB_SHA}"
+          elif [[ "${EVENT_NAME}" == "workflow_dispatch" ]]; then
+            if [[ "${INPUT_MODE}" != "governed-rebind" ]]; then
+              echo "workflow_dispatch is restricted to governed-rebind." >&2
+              exit 1
+            fi
+            for value in "${INPUT_BASE_SHA}" "${INPUT_HEAD_SHA}" "${INPUT_MERGE_SHA}"; do
+              if [[ ! "${value}" =~ ^[0-9a-f]{40}$ ]]; then
+                echo "Invalid governed SHA input." >&2
+                exit 1
+              fi
+            done
+            if [[ ! "${INPUT_REQUEST_ID}" =~ ^[0-9a-f]{64}$ ]]; then
+              echo "Invalid governed request id." >&2
+              exit 1
+            fi
+            if [[ ! "${INPUT_HEAD_BRANCH}" =~ ^content/[a-z0-9]+(-[a-z0-9]+)*$ ]]; then
+              echo "Invalid governed source branch." >&2
+              exit 1
+            fi
+            if [[ "${GITHUB_SHA}" != "${INPUT_HEAD_SHA}" || "${GITHUB_REF_NAME}" != "${INPUT_HEAD_BRANCH}" ]]; then
+              echo "Dispatch ref is not bound to the immutable publication head." >&2
+              exit 1
+            fi
+
+            HEAD="${INPUT_HEAD_SHA}"
+            HEAD_BRANCH="${INPUT_HEAD_BRANCH}"
+            BASE_BRANCH="main"
+            git fetch --no-tags origin "+refs/pull/${PR_NUMBER}/merge:refs/remotes/origin/lab4int-pr-${PR_NUMBER}-merge"
+            MERGE="$(git rev-parse "refs/remotes/origin/lab4int-pr-${PR_NUMBER}-merge")"
+            if [[ "${MERGE}" != "${INPUT_MERGE_SHA}" ]]; then
+              echo "Synthetic merge ref changed before governed CI execution." >&2
+              exit 1
+            fi
+          else
+            echo "Unsupported Editorial CI event: ${EVENT_NAME}" >&2
+            exit 1
+          fi
+
+          if [[ ! "${HEAD}" =~ ^[0-9a-f]{40}$ || ! "${MERGE}" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "Invalid resolved head or merge SHA." >&2
+            exit 1
+          fi
+
+          read -r -a PARENTS <<< "$(git show -s --format='%P' "${MERGE}")"
+          if [[ "${#PARENTS[@]}" -ne 2 ]]; then
+            echo "Synthetic merge commit must expose exactly two parents." >&2
+            exit 1
+          fi
+
+          BASE="${PARENTS[0]}"
+          MERGE_HEAD="${PARENTS[1]}"
+
+          if [[ "${MERGE_HEAD}" != "${HEAD}" ]]; then
+            echo "Synthetic merge second parent does not match the immutable publication head." >&2
+            exit 1
+          fi
+          if [[ "${EVENT_NAME}" == "workflow_dispatch" && "${BASE}" != "${INPUT_BASE_SHA}" ]]; then
+            echo "Synthetic merge first parent does not match the authorized effective base." >&2
+            exit 1
+          fi
+
+          git checkout --detach "${MERGE}"
+
+          echo "pr=${PR_NUMBER}" >> "${GITHUB_OUTPUT}"
+          echo "base=${BASE}" >> "${GITHUB_OUTPUT}"
+          echo "head=${HEAD}" >> "${GITHUB_OUTPUT}"
+          echo "merge=${MERGE}" >> "${GITHUB_OUTPUT}"
+          echo "head_branch=${HEAD_BRANCH}" >> "${GITHUB_OUTPUT}"
+          echo "base_branch=${BASE_BRANCH}" >> "${GITHUB_OUTPUT}"
+
+      - name: LAB4INT_GOVERNED_CI_BINDING pr=${{ steps.governed.outputs.pr }} base=${{ steps.governed.outputs.base }} head=${{ steps.governed.outputs.head }} merge=${{ steps.governed.outputs.merge }} run=${{ github.run_id }} attempt=${{ github.run_attempt }}
         run: echo "Governed CI binding recorded."
 
       - name: Configure Node.js
@@ -39,10 +166,11 @@ jobs:
         run: npm ci
 
       - name: Check editorial branch scope
-        if: startsWith(github.head_ref, 'editorial/') || startsWith(github.head_ref, 'content/')
+        if: startsWith(steps.governed.outputs.head_branch, 'editorial/') || startsWith(steps.governed.outputs.head_branch, 'content/')
         env:
+          BRANCH_NAME: ${{ steps.governed.outputs.head_branch }}
           EDITORIAL_SCOPE_ENFORCE: "true"
-          EDITORIAL_BASE_REF: ${{ github.base_ref }}
+          EDITORIAL_BASE_REF: ${{ steps.governed.outputs.base_branch }}
         run: npm run editorial:scope
 
       - name: Validate content, duplicates and local assets
