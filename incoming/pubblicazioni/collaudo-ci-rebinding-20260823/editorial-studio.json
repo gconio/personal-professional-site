@@ -1,0 +1,52 @@
+{
+    "schemaVersion":  3,
+    "application":  "Lab4Int Editorial Studio",
+    "applicationVersion":  "0.8.0-rc.1",
+    "status":  "repository-prepared",
+    "importedAt":  "2026-08-23T05:32:33.1565083Z",
+    "title":  "Collaudo CI Rebinding 20260823",
+    "description":  "Fixture sintetica E2E per il collaudo governato del CI rebinding.",
+    "author":  "Giovanni Conio",
+    "category":  "Articolo online / contributo online",
+    "slug":  "collaudo-ci-rebinding-20260823",
+    "theme":  "Collaudo tecnico Lab4Int",
+    "tags":  [
+                 "Lab4Int",
+                 "collaudo",
+                 "CI rebinding"
+             ],
+    "focus":  "Verifica del rebinding della CI dopo avanzamento sicuro della base, senza pubblicazione della fixture.",
+    "classificationApproval":  {
+                                   "status":  "approved",
+                                   "source":  "editorial-studio",
+                                   "approvedAt":  "2026-08-23T05:32:33.1565083Z"
+                               },
+    "files":  {
+                  "docx":  "source.docx",
+                  "pdf":  "document.pdf",
+                  "image":  "cover.png"
+              },
+    "preparedAt":  "2026-08-23T05:32:33.2328036Z",
+    "copiedFiles":  [
+                        {
+                            "name":  "source.docx",
+                            "size":  992,
+                            "sha256":  "f52a4d7d0a1c2616dc283bccddc3d085a2439f95259d372563e8e3830cb2071a"
+                        },
+                        {
+                            "name":  "document.pdf",
+                            "size":  629,
+                            "sha256":  "709f0880fc041fabfb92ebae09bdd3381aeda0889e0e55a670edb5ae3c54f818"
+                        },
+                        {
+                            "name":  "metadata.json",
+                            "size":  1207,
+                            "sha256":  "9941a63dcb9afe1cf290892208bd8d3bc9f5898fd645e903059797d5491eeac9"
+                        },
+                        {
+                            "name":  "cover.png",
+                            "size":  68,
+                            "sha256":  "431ced6916a2a21a156e38701afe55bbd7f88969fbbfc56d7fe099d47f265460"
+                        }
+                    ]
+}
