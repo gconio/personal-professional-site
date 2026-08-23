@@ -1,0 +1,55 @@
+{
+    "schemaVersion":  3,
+    "application":  "Lab4Int Editorial Studio",
+    "applicationVersion":  "0.8.0-rc.1",
+    "status":  "repository-prepared",
+    "importedAt":  "2026-08-23T07:47:00.7318844Z",
+    "title":  "Collaudo CI Rebinding 2 20260823",
+    "description":  "Fixture sintetica E2E per il secondo collaudo governato del CI rebinding.",
+    "author":  "Giovanni Conio",
+    "category":  "Articolo online / contributo online",
+    "slug":  "collaudo-ci-rebinding-2-20260823",
+    "visibleFrom":  "2099-12-31",
+    "theme":  "Collaudo tecnico Lab4Int",
+    "tags":  [
+                 "Lab4Int",
+                 "collaudo",
+                 "CI rebinding",
+                 "E2E",
+                 "GitHub Actions"
+             ],
+    "focus":  "Verifica del rebinding della CI dopo avanzamento sicuro della base, senza pubblicazione della fixture.",
+    "classificationApproval":  {
+                                   "status":  "approved",
+                                   "source":  "editorial-studio",
+                                   "approvedAt":  "2026-08-23T07:47:00.7318844Z"
+                               },
+    "files":  {
+                  "docx":  "source.docx",
+                  "pdf":  "document.pdf",
+                  "image":  "cover.png"
+              },
+    "preparedAt":  "2026-08-23T07:47:00.7821245Z",
+    "copiedFiles":  [
+                        {
+                            "name":  "source.docx",
+                            "size":  992,
+                            "sha256":  "f52a4d7d0a1c2616dc283bccddc3d085a2439f95259d372563e8e3830cb2071a"
+                        },
+                        {
+                            "name":  "document.pdf",
+                            "size":  629,
+                            "sha256":  "709f0880fc041fabfb92ebae09bdd3381aeda0889e0e55a670edb5ae3c54f818"
+                        },
+                        {
+                            "name":  "metadata.json",
+                            "size":  1315,
+                            "sha256":  "b085fb6be52e2bf5d3486ade4fc61995b3052618518a121379b5cf7eb0ef9fab"
+                        },
+                        {
+                            "name":  "cover.png",
+                            "size":  68,
+                            "sha256":  "431ced6916a2a21a156e38701afe55bbd7f88969fbbfc56d7fe099d47f265460"
+                        }
+                    ]
+}

@@ -1,0 +1,66 @@
+{
+  "version": "1.0",
+  "stage": "verified",
+  "createdAt": "2026-08-23T07:56:05.963Z",
+  "updatedAt": "2026-08-23T07:56:25.745Z",
+  "slug": "collaudo-ci-rebinding-2-20260823",
+  "inboxFolder": "incoming/pubblicazioni/collaudo-ci-rebinding-2-20260823",
+  "inputs": {
+    "source": "incoming/pubblicazioni/collaudo-ci-rebinding-2-20260823/source.docx",
+    "pdf": "incoming/pubblicazioni/collaudo-ci-rebinding-2-20260823/document.pdf",
+    "image": "incoming/pubblicazioni/collaudo-ci-rebinding-2-20260823/cover.png"
+  },
+  "suggested": {
+    "theme": "Intelligence analysis e metodologia",
+    "tags": [
+      "intelligence analysis",
+      "metodologia intelligence",
+      "Lab4Int"
+    ],
+    "focus": "Il contributo sviluppa un problema metodologico rilevante per l'analisi intelligence e ne chiarisce le implicazioni per il processo analitico e per il supporto al decisore.",
+    "classificationConfidence": 0.35
+  },
+  "approved": {
+    "theme": "Collaudo tecnico Lab4Int",
+    "tags": [
+      "Lab4Int",
+      "collaudo",
+      "CI rebinding",
+      "E2E",
+      "GitHub Actions"
+    ],
+    "focus": "Verifica del rebinding della CI dopo avanzamento sicuro della base, senza pubblicazione della fixture.",
+    "source": "editorial-studio"
+  },
+  "extracted": {
+    "title": "Collaudo CI Rebinding 2 20260823",
+    "slug": "collaudo-ci-rebinding-2-20260823",
+    "description": "Fixture sintetica E2E per il secondo collaudo governato del CI rebinding.",
+    "theme": "Collaudo tecnico Lab4Int",
+    "tags": [
+      "Lab4Int",
+      "collaudo",
+      "CI rebinding",
+      "E2E",
+      "GitHub Actions"
+    ],
+    "visibleFrom": "2099-12-31",
+    "topics": [
+      "Documento sintetico per test E2E governato. Non destinato alla pubblicazione."
+    ],
+    "focus": "Verifica del rebinding della CI dopo avanzamento sicuro della base, senza pubblicazione della fixture.",
+    "classificationSource": "approved",
+    "classificationConfidence": null
+  },
+  "outputs": {
+    "markdown": "src/content/pubblicazioni/collaudo-ci-rebinding-2-20260823.md",
+    "pdf": "public/documenti/collaudo-ci-rebinding-2-20260823.pdf",
+    "image": "public/images/publications/articoli/collaudo-ci-rebinding-2-20260823-thumbnail.png",
+    "pageUrl": "/pubblicazioni/collaudo-ci-rebinding-2-20260823/"
+  },
+  "checks": {
+    "publicationProfile": "passed",
+    "astroBuild": "passed",
+    "thumbnail": "present"
+  }
+}

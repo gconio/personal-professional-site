@@ -1,0 +1,32 @@
+{
+    "schemaVersion":  3,
+    "application":  "Lab4Int Editorial Studio",
+    "applicationVersion":  "0.8.0-rc.1",
+    "status":  "imported",
+    "importedAt":  "2026-08-23T07:47:00.7318844Z",
+    "title":  "Collaudo CI Rebinding 2 20260823",
+    "description":  "Fixture sintetica E2E per il secondo collaudo governato del CI rebinding.",
+    "author":  "Giovanni Conio",
+    "category":  "Articolo online / contributo online",
+    "slug":  "collaudo-ci-rebinding-2-20260823",
+    "visibleFrom":  "2099-12-31",
+    "theme":  "Collaudo tecnico Lab4Int",
+    "tags":  [
+                 "Lab4Int",
+                 "collaudo",
+                 "CI rebinding",
+                 "E2E",
+                 "GitHub Actions"
+             ],
+    "focus":  "Verifica del rebinding della CI dopo avanzamento sicuro della base, senza pubblicazione della fixture.",
+    "classificationApproval":  {
+                                   "status":  "approved",
+                                   "source":  "editorial-studio",
+                                   "approvedAt":  "2026-08-23T07:47:00.7318844Z"
+                               },
+    "files":  {
+                  "docx":  "source.docx",
+                  "pdf":  "document.pdf",
+                  "image":  "cover.png"
+              }
+}
