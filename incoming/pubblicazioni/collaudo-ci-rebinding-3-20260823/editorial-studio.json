@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 3,
+  "application": "Lab4Int Editorial Studio",
+  "applicationVersion": "0.8.0-rc.1",
+  "status": "repository-prepared",
+  "importedAt": "2026-08-24T19:24:18.907Z",
+  "title": "Collaudo CI Rebinding 3 20260823",
+  "description": "Fixture sintetica E2E per il terzo collaudo governato del CI rebinding.",
+  "author": "Giovanni Conio",
+  "category": "Articolo online / contributo online",
+  "slug": "collaudo-ci-rebinding-3-20260823",
+  "visibleFrom": "2099-12-31",
+  "theme": "Collaudo tecnico Lab4Int",
+  "tags": [
+    "Lab4Int",
+    "collaudo",
+    "CI rebinding",
+    "E2E",
+    "GitHub Actions"
+  ],
+  "focus": "Verifica byte-exact del rebinding CI governato su Windows, senza pubblicazione della fixture.",
+  "classificationApproval": {
+    "status": "approved",
+    "source": "editorial-studio",
+    "approvedAt": "2026-08-24T19:24:18.907Z"
+  },
+  "files": {
+    "docx": "source.docx",
+    "pdf": "document.pdf",
+    "image": "cover.png"
+  },
+  "preparedAt": "2026-08-24T19:24:18.931Z",
+  "copiedFiles": [
+    {
+      "name": "source.docx",
+      "size": 992,
+      "sha256": "f52a4d7d0a1c2616dc283bccddc3d085a2439f95259d372563e8e3830cb2071a"
+    },
+    {
+      "name": "document.pdf",
+      "size": 629,
+      "sha256": "709f0880fc041fabfb92ebae09bdd3381aeda0889e0e55a670edb5ae3c54f818"
+    },
+    {
+      "name": "metadata.json",
+      "size": 959,
+      "sha256": "0a6690e55714d6169d6be5d5c76d261c92fe54109451c622924026e6c3cf40d4"
+    },
+    {
+      "name": "cover.png",
+      "size": 68,
+      "sha256": "431ced6916a2a21a156e38701afe55bbd7f88969fbbfc56d7fe099d47f265460"
+    }
+  ]
+}
