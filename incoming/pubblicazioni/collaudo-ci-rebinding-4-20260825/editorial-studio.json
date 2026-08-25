@@ -1,0 +1,55 @@
+{
+    "schemaVersion":  3,
+    "application":  "Lab4Int Editorial Studio",
+    "applicationVersion":  "0.8.0-rc.1",
+    "status":  "repository-prepared",
+    "importedAt":  "2026-08-25T05:52:54.4744998Z",
+    "title":  "Collaudo CI Rebinding 4 20260825",
+    "description":  "Fixture sintetica E2E per il quarto collaudo governato del CI rebinding, predisposta per validare il ciclo senza pubblicazione reale.",
+    "author":  "Giovanni Conio",
+    "category":  "Articolo online / contributo online",
+    "slug":  "collaudo-ci-rebinding-4-20260825",
+    "visibleFrom":  "2027-12-31",
+    "theme":  "Collaudo tecnico Lab4Int",
+    "tags":  [
+                 "Lab4Int",
+                 "collaudo",
+                 "CI rebinding",
+                 "E2E",
+                 "GitHub Actions"
+             ],
+    "focus":  "Verifica end-to-end del rebinding CI governato su base immutabile, con contenuto sintetico non destinato alla pubblicazione.",
+    "classificationApproval":  {
+                                   "status":  "approved",
+                                   "source":  "editorial-studio",
+                                   "approvedAt":  "2026-08-25T05:52:54.4744998Z"
+                               },
+    "files":  {
+                  "docx":  "source.docx",
+                  "pdf":  "document.pdf",
+                  "image":  "cover.png"
+              },
+    "preparedAt":  "2026-08-25T05:52:54.5248926Z",
+    "copiedFiles":  [
+                        {
+                            "name":  "source.docx",
+                            "size":  1120,
+                            "sha256":  "3ccaf7d332b6d389cfb4da49986869d4bfdf511780b25127f3ae835aed197567"
+                        },
+                        {
+                            "name":  "document.pdf",
+                            "size":  766,
+                            "sha256":  "e3bae939ff753fab7df7bc163aaaad5d86efe1385636d501eae4bd4c0e6c37d0"
+                        },
+                        {
+                            "name":  "metadata.json",
+                            "size":  1397,
+                            "sha256":  "d924aa0df0ea47b5295dce8584c4e8992e331be498c825c83251714160abcc42"
+                        },
+                        {
+                            "name":  "cover.png",
+                            "size":  68,
+                            "sha256":  "431ced6916a2a21a156e38701afe55bbd7f88969fbbfc56d7fe099d47f265460"
+                        }
+                    ]
+}

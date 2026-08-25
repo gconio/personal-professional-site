@@ -1,0 +1,68 @@
+{
+  "version": "1.0",
+  "stage": "verified",
+  "createdAt": "2026-08-25T05:52:57.450Z",
+  "updatedAt": "2026-08-25T05:53:20.929Z",
+  "slug": "collaudo-ci-rebinding-4-20260825",
+  "inboxFolder": "incoming/pubblicazioni/collaudo-ci-rebinding-4-20260825",
+  "inputs": {
+    "source": "incoming/pubblicazioni/collaudo-ci-rebinding-4-20260825/source.docx",
+    "pdf": "incoming/pubblicazioni/collaudo-ci-rebinding-4-20260825/document.pdf",
+    "image": "incoming/pubblicazioni/collaudo-ci-rebinding-4-20260825/cover.png"
+  },
+  "suggested": {
+    "theme": "Intelligence analysis e metodologia",
+    "tags": [
+      "intelligence analysis",
+      "metodologia intelligence",
+      "Lab4Int"
+    ],
+    "focus": "Il contributo sviluppa un problema metodologico rilevante per l'analisi intelligence e ne chiarisce le implicazioni per il processo analitico e per il supporto al decisore.",
+    "classificationConfidence": 0.35
+  },
+  "approved": {
+    "theme": "Collaudo tecnico Lab4Int",
+    "tags": [
+      "Lab4Int",
+      "collaudo",
+      "CI rebinding",
+      "E2E",
+      "GitHub Actions"
+    ],
+    "focus": "Verifica end-to-end del rebinding CI governato su base immutabile, con contenuto sintetico non destinato alla pubblicazione.",
+    "source": "editorial-studio"
+  },
+  "extracted": {
+    "title": "Collaudo CI Rebinding 4 20260825",
+    "slug": "collaudo-ci-rebinding-4-20260825",
+    "description": "Fixture sintetica E2E per il quarto collaudo governato del CI rebinding, predisposta per validare il ciclo senza pubblicazione reale.",
+    "theme": "Collaudo tecnico Lab4Int",
+    "tags": [
+      "Lab4Int",
+      "collaudo",
+      "CI rebinding",
+      "E2E",
+      "GitHub Actions"
+    ],
+    "visibleFrom": "2027-12-31",
+    "topics": [
+      "Fixture sintetica E2E per il quarto collaudo governato del CI rebinding, predisposta per validare il ciclo senza pubblicazione reale.",
+      "Documento sintetico per test E2E governato del CI rebinding. Non destinato alla pubblicazione.",
+      "Verifica end-to-end del rebinding CI governato su base immutabile, con contenuto sintetico non destinato alla pubblicazione."
+    ],
+    "focus": "Verifica end-to-end del rebinding CI governato su base immutabile, con contenuto sintetico non destinato alla pubblicazione.",
+    "classificationSource": "approved",
+    "classificationConfidence": null
+  },
+  "outputs": {
+    "markdown": "src/content/pubblicazioni/collaudo-ci-rebinding-4-20260825.md",
+    "pdf": "public/documenti/collaudo-ci-rebinding-4-20260825.pdf",
+    "image": "public/images/publications/articoli/collaudo-ci-rebinding-4-20260825-thumbnail.png",
+    "pageUrl": "/pubblicazioni/collaudo-ci-rebinding-4-20260825/"
+  },
+  "checks": {
+    "publicationProfile": "passed",
+    "astroBuild": "passed",
+    "thumbnail": "present"
+  }
+}
