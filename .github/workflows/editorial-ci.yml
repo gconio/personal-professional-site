@@ -23,10 +23,6 @@ on:
         description: Immutable publication head SHA
         required: true
         type: string
-      merge_sha:
-        description: Synthetic merge SHA
-        required: true
-        type: string
       head_branch:
         description: Governed publication source branch
         required: true
@@ -67,7 +63,6 @@ jobs:
           INPUT_MODE: ${{ inputs.mode }}
           INPUT_BASE_SHA: ${{ inputs.base_sha }}
           INPUT_HEAD_SHA: ${{ inputs.head_sha }}
-          INPUT_MERGE_SHA: ${{ inputs.merge_sha }}
           INPUT_HEAD_BRANCH: ${{ inputs.head_branch }}
           INPUT_REQUEST_ID: ${{ inputs.request_id }}
         run: |
@@ -88,7 +83,7 @@ jobs:
               echo "workflow_dispatch is restricted to governed-rebind." >&2
               exit 1
             fi
-            for value in "${INPUT_BASE_SHA}" "${INPUT_HEAD_SHA}" "${INPUT_MERGE_SHA}"; do
+            for value in "${INPUT_BASE_SHA}" "${INPUT_HEAD_SHA}"; do
               if [[ ! "${value}" =~ ^[0-9a-f]{40}$ ]]; then
                 echo "Invalid governed SHA input." >&2
                 exit 1
@@ -102,20 +97,28 @@ jobs:
               echo "Invalid governed source branch." >&2
               exit 1
             fi
-            if [[ "${GITHUB_SHA}" != "${INPUT_HEAD_SHA}" || "${GITHUB_REF_NAME}" != "${INPUT_HEAD_BRANCH}" ]]; then
-              echo "Dispatch ref is not bound to the immutable publication head." >&2
+            if [[ "${GITHUB_REF_NAME}" != "main" || "${GITHUB_SHA}" != "${INPUT_BASE_SHA}" ]]; then
+              echo "Dispatch ref is not bound to the authorized effective base." >&2
               exit 1
             fi
 
+            BASE="${INPUT_BASE_SHA}"
             HEAD="${INPUT_HEAD_SHA}"
             HEAD_BRANCH="${INPUT_HEAD_BRANCH}"
             BASE_BRANCH="main"
-            git fetch --no-tags origin "+refs/pull/${PR_NUMBER}/merge:refs/remotes/origin/lab4int-pr-${PR_NUMBER}-merge"
-            MERGE="$(git rev-parse "refs/remotes/origin/lab4int-pr-${PR_NUMBER}-merge")"
-            if [[ "${MERGE}" != "${INPUT_MERGE_SHA}" ]]; then
-              echo "Synthetic merge ref changed before governed CI execution." >&2
+
+            git fetch --no-tags origin "+refs/heads/${INPUT_HEAD_BRANCH}:refs/remotes/origin/lab4int-head-${PR_NUMBER}"
+            FETCHED_HEAD="$(git rev-parse "refs/remotes/origin/lab4int-head-${PR_NUMBER}")"
+            if [[ "${FETCHED_HEAD}" != "${HEAD}" ]]; then
+              echo "Governed source branch no longer exposes the immutable publication head." >&2
               exit 1
             fi
+
+            git checkout --detach "${BASE}"
+            git merge --no-ff --no-commit "${HEAD}"
+            git -c user.name="Lab4Int Governed CI" -c user.email="ci@lab4int.local" \
+              commit -m "LAB4INT governed CI synthetic merge pr=${PR_NUMBER}"
+            MERGE="$(git rev-parse HEAD)"
           else
             echo "Unsupported Editorial CI event: ${EVENT_NAME}" >&2
             exit 1
