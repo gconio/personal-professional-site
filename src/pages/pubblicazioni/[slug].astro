@@ -12,15 +12,18 @@ const { Content: PublicationContent } = await render(pubblicazione);
 
 const visibleFrom = pubblicazione.data.visibleFrom || '';
 const isScheduledPublication = Boolean(visibleFrom);
-const visibleFromDate = visibleFrom ? new Date(`${visibleFrom}T00:00:00+02:00`) : null;
-const visibleFromLabel = visibleFrom
-  ? new Intl.DateTimeFormat('it-IT', {
-      day: '2-digit',
-      month: 'long',
-      year: 'numeric',
-      timeZone: 'Europe/Rome'
-    }).format(visibleFromDate)
-  : '';
+const formatDateOnlyInRome = (value) => {
+  const [year, month, day] = value.split('-').map(Number);
+  const safeDate = new Date(Date.UTC(year, month - 1, day, 12));
+
+  return new Intl.DateTimeFormat('it-IT', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric',
+    timeZone: 'Europe/Rome'
+  }).format(safeDate);
+};
+const visibleFromLabel = visibleFrom ? formatDateOnlyInRome(visibleFrom) : '';
 
 const hasFacts = pubblicazione.data.publisher || pubblicazione.data.theme || pubblicazione.data.isbnPrint || pubblicazione.data.isbnEbook || pubblicazione.data.link || pubblicazione.data.pdfUrl || pubblicazione.data.sourceStatus || pubblicazione.data.license;
 const publisherName = (pubblicazione.data.publisher || '').toLowerCase();
@@ -334,10 +337,20 @@ const publicationStructuredData = [
 
         if (!content || !visibleFromValue) return;
 
-        const visibleFrom = new Date(`${visibleFromValue}T00:00:00+02:00`);
-        const now = new Date();
+        const parts = new Intl.DateTimeFormat('en', {
+          timeZone: 'Europe/Rome',
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit'
+        }).formatToParts(new Date());
+        const values = Object.fromEntries(
+          parts
+            .filter(({ type }) => type !== 'literal')
+            .map(({ type, value }) => [type, value])
+        );
+        const todayInRome = `${values.year}-${values.month}-${values.day}`;
 
-        if (now >= visibleFrom) {
+        if (todayInRome >= visibleFromValue) {
           content.hidden = false;
           if (notice) notice.hidden = true;
         } else {
