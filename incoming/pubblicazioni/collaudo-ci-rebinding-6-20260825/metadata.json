@@ -1,0 +1,35 @@
+{
+    "schemaVersion":  3,
+    "application":  "Lab4Int Editorial Studio",
+    "applicationVersion":  "0.8.0-rc.1",
+    "status":  "imported",
+    "importedAt":  "2026-08-25T12:38:47.2129721Z",
+    "title":  "Collaudo CI Rebinding 6 20260825",
+    "description":  "Fixture sintetica E2E per il sesto collaudo governato del CI rebinding, dedicata alla verifica del self-synthesized merge su base SITE avanzata in modo sicuro.",
+    "author":  "Giovanni Conio",
+    "category":  "Articolo online / contributo online",
+    "slug":  "collaudo-ci-rebinding-6-20260825",
+    "visibleFrom":  "2027-12-31",
+    "theme":  "Formazione e simulazione intelligence",
+    "tags":  [
+                 "Lab4Int",
+                 "collaudo",
+                 "CI rebinding",
+                 "E2E",
+                 "GitHub Actions",
+                 "self-synthesized merge",
+                 "intelligence analysis",
+                 "metodologia intelligence"
+             ],
+    "focus":  "Verifica end-to-end del self-synthesized governed CI rebinding: approvazione vincolata al nuovo effective base SHA, singolo workflow_dispatch da main e merge base/head sintetizzato localmente dal runner.",
+    "classificationApproval":  {
+                                   "status":  "approved",
+                                   "source":  "editorial-studio",
+                                   "approvedAt":  "2026-08-25T12:38:47.2129721Z"
+                               },
+    "files":  {
+                  "docx":  "source.docx",
+                  "pdf":  "document.pdf",
+                  "image":  "cover.png"
+              }
+}
