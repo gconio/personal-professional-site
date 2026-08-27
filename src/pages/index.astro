@@ -19,14 +19,17 @@ const normalize = (value = '') => value.toLowerCase();
 const latestPublicationsVisibleLimit = 3;
 const latestPublicationsCandidateLimit = 8;
 
-const getVisibleFromDate = (entry) => {
-  if (!entry.data.visibleFrom) return null;
-  return new Date(`${entry.data.visibleFrom}T00:00:00+02:00`);
+const getVisibleFromSortTime = (entry) => {
+  const value = entry.data.visibleFrom;
+  if (!value) return null;
+
+  const [year, month, day] = value.split('-').map(Number);
+  return Date.UTC(year, month - 1, day);
 };
 
 const getPublicationSortTime = (entry) => {
-  const visibleFrom = getVisibleFromDate(entry);
-  return visibleFrom ? visibleFrom.getTime() : Date.UTC(entry.data.year, 0, 1);
+  const visibleFromSortTime = getVisibleFromSortTime(entry);
+  return visibleFromSortTime ?? Date.UTC(entry.data.year, 0, 1);
 };
 
 const isRecentPublicationCandidate = (pubblicazione) => {
@@ -271,17 +274,27 @@ const structuredData = [
 
   <script is:inline>
     (() => {
-      const parseVisibleFrom = (value) => {
-        if (!value) return null;
-        return new Date(`${value}T00:00:00+02:00`);
+      const getRomeDateKey = () => {
+        const parts = new Intl.DateTimeFormat('en', {
+          timeZone: 'Europe/Rome',
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit'
+        }).formatToParts(new Date());
+        const values = Object.fromEntries(
+          parts
+            .filter(({ type }) => type !== 'literal')
+            .map(({ type, value }) => [type, value])
+        );
+        return `${values.year}-${values.month}-${values.day}`;
       };
 
       const updateScheduledPublications = () => {
-        const now = new Date();
+        const todayInRome = getRomeDateKey();
 
         document.querySelectorAll('[data-scheduled-publication]').forEach((card) => {
-          const visibleFrom = parseVisibleFrom(card.getAttribute('data-scheduled-publication'));
-          card.hidden = Boolean(visibleFrom && now < visibleFrom);
+          const visibleFrom = card.getAttribute('data-scheduled-publication');
+          card.hidden = Boolean(visibleFrom && todayInRome < visibleFrom);
         });
 
         const latestGrid = document.querySelector('[data-home-latest-publications-grid]');
