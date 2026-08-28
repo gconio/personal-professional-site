@@ -115,7 +115,8 @@ jobs:
             fi
 
             git checkout --detach "${BASE}"
-            git merge --no-ff --no-commit "${HEAD}"
+            git -c user.name="Lab4Int Governed CI" -c user.email="ci@lab4int.local" \
+              merge --no-ff --no-commit "${HEAD}"
             git -c user.name="Lab4Int Governed CI" -c user.email="ci@lab4int.local" \
               commit -m "LAB4INT governed CI synthetic merge pr=${PR_NUMBER}"
             MERGE="$(git rev-parse HEAD)"
