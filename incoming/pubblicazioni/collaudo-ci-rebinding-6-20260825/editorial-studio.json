@@ -1,0 +1,58 @@
+{
+    "schemaVersion":  3,
+    "application":  "Lab4Int Editorial Studio",
+    "applicationVersion":  "0.8.0-rc.1",
+    "status":  "repository-prepared",
+    "importedAt":  "2026-08-25T12:38:47.2129721Z",
+    "title":  "Collaudo CI Rebinding 6 20260825",
+    "description":  "Fixture sintetica E2E per il sesto collaudo governato del CI rebinding, dedicata alla verifica del self-synthesized merge su base SITE avanzata in modo sicuro.",
+    "author":  "Giovanni Conio",
+    "category":  "Articolo online / contributo online",
+    "slug":  "collaudo-ci-rebinding-6-20260825",
+    "visibleFrom":  "2027-12-31",
+    "theme":  "Formazione e simulazione intelligence",
+    "tags":  [
+                 "Lab4Int",
+                 "collaudo",
+                 "CI rebinding",
+                 "E2E",
+                 "GitHub Actions",
+                 "self-synthesized merge",
+                 "intelligence analysis",
+                 "metodologia intelligence"
+             ],
+    "focus":  "Verifica end-to-end del self-synthesized governed CI rebinding: approvazione vincolata al nuovo effective base SHA, singolo workflow_dispatch da main e merge base/head sintetizzato localmente dal runner.",
+    "classificationApproval":  {
+                                   "status":  "approved",
+                                   "source":  "editorial-studio",
+                                   "approvedAt":  "2026-08-25T12:38:47.2129721Z"
+                               },
+    "files":  {
+                  "docx":  "source.docx",
+                  "pdf":  "document.pdf",
+                  "image":  "cover.png"
+              },
+    "preparedAt":  "2026-08-27T05:05:16.4334752Z",
+    "copiedFiles":  [
+                        {
+                            "name":  "source.docx",
+                            "size":  2153,
+                            "sha256":  "5b6ce2959d99d88062464b53ea997fedd26d999246ceb95bff2c0cf6384e35c0"
+                        },
+                        {
+                            "name":  "document.pdf",
+                            "size":  820,
+                            "sha256":  "1748875195f129c681d8a5e4f46a9befd21dde4e9fa8cb9a3c68377030bad014"
+                        },
+                        {
+                            "name":  "metadata.json",
+                            "size":  1648,
+                            "sha256":  "af6ee3f9bf9f7420e67e68f9e0ade7132a3fd3b906fbd3635de88b36bd87cb9c"
+                        },
+                        {
+                            "name":  "cover.png",
+                            "size":  24529,
+                            "sha256":  "35d10c6b831108df730a848a330716a16431387157b903ccf67d43ca8eb46c79"
+                        }
+                    ]
+}

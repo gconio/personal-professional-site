@@ -1,0 +1,77 @@
+{
+  "version": "1.0",
+  "stage": "previewed",
+  "createdAt": "2026-08-27T05:25:55.0089911Z",
+  "updatedAt": "2026-08-27T05:31:18.758Z",
+  "slug": "collaudo-ci-rebinding-6-20260825",
+  "inboxFolder": "incoming/pubblicazioni/collaudo-ci-rebinding-6-20260825",
+  "inputs": {
+    "source": "incoming/pubblicazioni/collaudo-ci-rebinding-6-20260825/source.docx",
+    "pdf": "incoming/pubblicazioni/collaudo-ci-rebinding-6-20260825/document.pdf",
+    "image": "incoming/pubblicazioni/collaudo-ci-rebinding-6-20260825/cover.png"
+  },
+  "suggested": {
+    "theme": "Structured Analytic Techniques (SATs)",
+    "tags": [
+      "structured analytic techniques",
+      "SATs",
+      "analisi strutturata",
+      "intelligence analysis",
+      "metodologia intelligence",
+      "Lab4Int"
+    ],
+    "focus": "Il contributo esamina come strutturare il ragionamento analitico, rendere esplicite le ipotesi e sottoporre i giudizi a un processo verificabile e replicabile.",
+    "classificationConfidence": 0.55
+  },
+  "approved": {
+    "theme": "Formazione e simulazione intelligence",
+    "tags": [
+      "Lab4Int",
+      "collaudo",
+      "CI rebinding",
+      "E2E",
+      "GitHub Actions",
+      "self-synthesized merge",
+      "intelligence analysis",
+      "metodologia intelligence"
+    ],
+    "focus": "Verifica end-to-end del self-synthesized governed CI rebinding: approvazione vincolata al nuovo effective base SHA, singolo workflow_dispatch da main e merge base/head sintetizzato localmente dal runner.",
+    "source": "editorial-studio"
+  },
+  "extracted": {
+    "title": "Collaudo CI Rebinding 6 20260825",
+    "slug": "collaudo-ci-rebinding-6-20260825",
+    "description": "Fixture sintetica E2E per il sesto collaudo governato del CI rebinding, dedicata alla verifica del self-synthesized merge su base SITE avanzata in modo sicuro.",
+    "theme": "Formazione e simulazione intelligence",
+    "tags": [
+      "Lab4Int",
+      "collaudo",
+      "CI rebinding",
+      "E2E",
+      "GitHub Actions",
+      "self-synthesized merge",
+      "intelligence analysis",
+      "metodologia intelligence"
+    ],
+    "visibleFrom": "2027-12-31",
+    "topics": [
+      "Fixture sintetica E2E per Lab4Int Editorial Studio.",
+      "Obiettivo: verificare il self-synthesized governed CI rebinding dell'Incremento 2.5.1.",
+      "Contenuto sintetico privo di valore editoriale o operativo."
+    ],
+    "focus": "Verifica end-to-end del self-synthesized governed CI rebinding: approvazione vincolata al nuovo effective base SHA, singolo workflow_dispatch da main e merge base/head sintetizzato localmente dal runner.",
+    "classificationSource": "approved",
+    "classificationConfidence": null
+  },
+  "outputs": {
+    "markdown": "src/content/pubblicazioni/collaudo-ci-rebinding-6-20260825.md",
+    "pdf": "public/documenti/collaudo-ci-rebinding-6-20260825.pdf",
+    "image": "public/images/publications/articoli/collaudo-ci-rebinding-6-20260825-thumbnail.png",
+    "pageUrl": "/pubblicazioni/collaudo-ci-rebinding-6-20260825/"
+  },
+  "checks": {
+    "publicationProfile": "passed",
+    "astroBuild": "passed",
+    "thumbnail": "present"
+  }
+}
