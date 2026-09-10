@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 3,
+  "application": "Lab4Int Editorial Studio",
+  "applicationVersion": "0.8.0-rc.2",
+  "status": "repository-prepared",
+  "importedAt": "2026-09-10T09:46:07.690Z",
+  "title": "La sindrome di Cassandra nell’intelligence: quando vedere non basta",
+  "description": "La sindrome di Cassandra offre una chiave di lettura dei fallimenti dell’intelligence warning: segnali disponibili e comunicati che non riescono a produrre una decisione.",
+  "author": "Giovanni Conio",
+  "category": "Articolo online / contributo online",
+  "slug": "sindrome-di-cassandra-geopolitica-intelligence",
+  "theme": "Indicator Based Analysis, scenari, warning e monitoraggio intelligence",
+  "tags": [
+    "indicator based analysis",
+    "scenario analysis",
+    "warning intelligence",
+    "intelligence analysis",
+    "metodologia intelligence",
+    "Lab4Int"
+  ],
+  "focus": "Il contributo collega eventi osservabili, ipotesi, driver e scenari, trasformando l'osservazione in un sistema di monitoraggio aggiornabile e utile al warning.",
+  "classificationApproval": {
+    "status": "approved",
+    "source": "editorial-studio",
+    "approvedAt": "2026-09-10T09:46:07.690Z"
+  },
+  "files": {
+    "docx": "source.docx",
+    "pdf": "document.pdf",
+    "image": "cover.png"
+  },
+  "preparedAt": "2026-09-10T09:53:07.618Z",
+  "copiedFiles": [
+    {
+      "name": "source.docx",
+      "size": 2886166,
+      "sha256": "2eaf5c41b7ba0d4ac6d4c0959d041250446bf94c69d30a557e3176047a0850dc"
+    },
+    {
+      "name": "document.pdf",
+      "size": 442361,
+      "sha256": "c3f3a92799e842006edcc6577b457c2f66796ef6da0c6c8ff02304ec69d3ab88"
+    },
+    {
+      "name": "metadata.json",
+      "size": 1269,
+      "sha256": "dae03ebbd5c06237b3c8b2d2ac97da7d3938547cf7841b7863ffbf70d88c61c7"
+    },
+    {
+      "name": "cover.png",
+      "size": 401139,
+      "sha256": "4c4fcc3209387013ebfbae7fb2fcbef1c882b7e206d94ba1e918f844070d79a2"
+    }
+  ]
+}

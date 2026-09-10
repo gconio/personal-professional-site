@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 3,
+  "application": "Lab4Int Editorial Studio",
+  "applicationVersion": "0.8.0-rc.2",
+  "status": "imported",
+  "importedAt": "2026-09-10T09:46:07.690Z",
+  "title": "La sindrome di Cassandra nell’intelligence: quando vedere non basta",
+  "description": "La sindrome di Cassandra offre una chiave di lettura dei fallimenti dell’intelligence warning: segnali disponibili e comunicati che non riescono a produrre una decisione.",
+  "author": "Giovanni Conio",
+  "category": "Articolo online / contributo online",
+  "slug": "sindrome-di-cassandra-geopolitica-intelligence",
+  "theme": "Indicator Based Analysis, scenari, warning e monitoraggio intelligence",
+  "tags": [
+    "indicator based analysis",
+    "scenario analysis",
+    "warning intelligence",
+    "intelligence analysis",
+    "metodologia intelligence",
+    "Lab4Int"
+  ],
+  "focus": "Il contributo collega eventi osservabili, ipotesi, driver e scenari, trasformando l'osservazione in un sistema di monitoraggio aggiornabile e utile al warning.",
+  "classificationApproval": {
+    "status": "approved",
+    "source": "editorial-studio",
+    "approvedAt": "2026-09-10T09:46:07.690Z"
+  },
+  "files": {
+    "docx": "source.docx",
+    "pdf": "document.pdf",
+    "image": "cover.png"
+  }
+}

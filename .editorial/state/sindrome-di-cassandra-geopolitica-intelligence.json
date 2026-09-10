@@ -1,0 +1,74 @@
+{
+  "version": "1.0",
+  "stage": "previewed",
+  "createdAt": "2026-09-10T10:02:49.086Z",
+  "updatedAt": "2026-09-10T10:53:39.213Z",
+  "slug": "sindrome-di-cassandra-geopolitica-intelligence",
+  "inboxFolder": "incoming/pubblicazioni/sindrome-di-cassandra-geopolitica-intelligence",
+  "inputs": {
+    "source": "incoming/pubblicazioni/sindrome-di-cassandra-geopolitica-intelligence/source.docx",
+    "pdf": "incoming/pubblicazioni/sindrome-di-cassandra-geopolitica-intelligence/document.pdf",
+    "image": "incoming/pubblicazioni/sindrome-di-cassandra-geopolitica-intelligence/cover.png"
+  },
+  "suggested": {
+    "theme": "Indicator Based Analysis, scenari, warning e monitoraggio intelligence",
+    "tags": [
+      "indicator based analysis",
+      "scenario analysis",
+      "warning intelligence",
+      "intelligence analysis",
+      "metodologia intelligence",
+      "Lab4Int"
+    ],
+    "focus": "Il contributo collega eventi osservabili, ipotesi, driver e scenari, trasformando l'osservazione in un sistema di monitoraggio aggiornabile e utile al warning.",
+    "classificationConfidence": 0.95
+  },
+  "approved": {
+    "theme": "Indicator Based Analysis, scenari, warning e monitoraggio intelligence",
+    "tags": [
+      "indicator based analysis",
+      "scenario analysis",
+      "warning intelligence",
+      "intelligence analysis",
+      "metodologia intelligence",
+      "Lab4Int"
+    ],
+    "focus": "Il contributo collega eventi osservabili, ipotesi, driver e scenari, trasformando l'osservazione in un sistema di monitoraggio aggiornabile e utile al warning.",
+    "source": "editorial-studio"
+  },
+  "extracted": {
+    "title": "La sindrome di Cassandra nell’intelligence: quando vedere non basta",
+    "slug": "sindrome-di-cassandra-geopolitica-intelligence",
+    "description": "La sindrome di Cassandra offre una chiave di lettura dei fallimenti dell’intelligence warning: segnali disponibili e comunicati che non riescono a produrre una decisione.",
+    "theme": "Indicator Based Analysis, scenari, warning e monitoraggio intelligence",
+    "tags": [
+      "indicator based analysis",
+      "scenario analysis",
+      "warning intelligence",
+      "intelligence analysis",
+      "metodologia intelligence",
+      "Lab4Int"
+    ],
+    "visibleFrom": "2026-09-10",
+    "topics": [
+      "La sindrome di Cassandra nell’intelligence e il problema del warning",
+      "Il caso Ceuta e il difficile passaggio dal segnale al warning",
+      "Il rapporto tra informazione, allerta e decisione",
+      "Indicatori, ricezione del warning e rischio di intelligence failure"
+    ],
+    "focus": "Il contributo collega eventi osservabili, ipotesi, driver e scenari, trasformando l'osservazione in un sistema di monitoraggio aggiornabile e utile al warning.",
+    "classificationSource": "approved",
+    "classificationConfidence": null
+  },
+  "outputs": {
+    "markdown": "src/content/pubblicazioni/sindrome-di-cassandra-geopolitica-intelligence.md",
+    "pdf": "public/documenti/sindrome-di-cassandra-geopolitica-intelligence.pdf",
+    "image": "public/images/publications/articoli/sindrome-di-cassandra-geopolitica-intelligence-thumbnail.png",
+    "pageUrl": "/pubblicazioni/sindrome-di-cassandra-geopolitica-intelligence/"
+  },
+  "checks": {
+    "publicationProfile": "passed",
+    "astroBuild": "passed",
+    "thumbnail": "present"
+  }
+}
