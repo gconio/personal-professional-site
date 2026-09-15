@@ -1,0 +1,32 @@
+{
+    "schemaVersion":  3,
+    "application":  "Lab4Int Editorial Studio",
+    "applicationVersion":  "0.8.0-rc.1",
+    "status":  "imported",
+    "importedAt":  "2026-08-25T06:58:46.2877791Z",
+    "title":  "Collaudo CI Rebinding 5 20260825",
+    "description":  "Fixture sintetica E2E per il quinto collaudo governato del CI rebinding, predisposta con PDF binary-safe e verifica Git byte-exact.",
+    "author":  "Giovanni Conio",
+    "category":  "Articolo online / contributo online",
+    "slug":  "collaudo-ci-rebinding-5-20260825",
+    "visibleFrom":  "2027-12-31",
+    "theme":  "Collaudo tecnico Lab4Int",
+    "tags":  [
+                 "Lab4Int",
+                 "collaudo",
+                 "CI rebinding",
+                 "E2E",
+                 "GitHub Actions"
+             ],
+    "focus":  "Verifica end-to-end del CI rebinding governato con identita byte-exact tra worktree, staging e commit Git.",
+    "classificationApproval":  {
+                                   "status":  "approved",
+                                   "source":  "editorial-studio",
+                                   "approvedAt":  "2026-08-25T06:58:46.2877791Z"
+                               },
+    "files":  {
+                  "docx":  "source.docx",
+                  "pdf":  "document.pdf",
+                  "image":  "cover.png"
+              }
+}
