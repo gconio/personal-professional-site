@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 3,
+  "application": "Lab4Int Editorial Studio",
+  "applicationVersion": "0.8.0-rc.2",
+  "status": "imported",
+  "importedAt": "2026-09-21T08:28:41.857Z",
+  "title": "Un segnale debole non è ancora un warning",
+  "description": "Dal weak signal allo strategic warning: come riconoscere il cambiamento senza trasformare ogni anomalia in un allarme",
+  "author": "Giovanni Conio",
+  "category": "Articolo online / contributo online",
+  "slug": "un-segnale-debole-non-e-ancora-un-warning",
+  "theme": "Indicator Based Analysis, scenari, warning e monitoraggio intelligence",
+  "tags": [
+    "indicator based analysis",
+    "scenario analysis",
+    "warning intelligence",
+    "intelligence analysis",
+    "metodologia intelligence",
+    "Lab4Int"
+  ],
+  "focus": "Il contributo distingue weak signal, indicatore, trigger e warning e analizza come la capacità discriminante degli indicatori consenta di trasformare segnali ambigui in strategic warning utile al decisore.",
+  "classificationApproval": {
+    "status": "approved",
+    "source": "editorial-studio",
+    "approvedAt": "2026-09-21T08:28:41.857Z"
+  },
+  "files": {
+    "docx": "source.docx",
+    "pdf": "document.pdf",
+    "image": "cover.png"
+  }
+}
