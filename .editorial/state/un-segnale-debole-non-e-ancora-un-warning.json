@@ -1,0 +1,75 @@
+{
+  "version": "1.0",
+  "stage": "previewed",
+  "createdAt": "2026-09-22T07:44:07.510Z",
+  "updatedAt": "2026-09-22T09:17:47.992Z",
+  "slug": "un-segnale-debole-non-e-ancora-un-warning",
+  "inboxFolder": "incoming/pubblicazioni/un-segnale-debole-non-e-ancora-un-warning",
+  "inputs": {
+    "source": "incoming/pubblicazioni/un-segnale-debole-non-e-ancora-un-warning/source.docx",
+    "pdf": "incoming/pubblicazioni/un-segnale-debole-non-e-ancora-un-warning/document.pdf",
+    "image": "incoming/pubblicazioni/un-segnale-debole-non-e-ancora-un-warning/cover.png"
+  },
+  "suggested": {
+    "theme": "Indicator Based Analysis, scenari, warning e monitoraggio intelligence",
+    "tags": [
+      "indicator based analysis",
+      "scenario analysis",
+      "warning intelligence",
+      "intelligence analysis",
+      "metodologia intelligence",
+      "Lab4Int"
+    ],
+    "focus": "Il contributo collega eventi osservabili, ipotesi, driver e scenari, trasformando l'osservazione in un sistema di monitoraggio aggiornabile e utile al warning.",
+    "classificationConfidence": 0.95
+  },
+  "approved": {
+    "theme": "Indicator Based Analysis, scenari, warning e monitoraggio intelligence",
+    "tags": [
+      "indicator based analysis",
+      "scenario analysis",
+      "warning intelligence",
+      "intelligence analysis",
+      "metodologia intelligence",
+      "Lab4Int"
+    ],
+    "focus": "Il contributo distingue weak signal, indicatore, trigger e warning e analizza come la capacità discriminante degli indicatori consenta di trasformare segnali ambigui in strategic warning utile al decisore.",
+    "source": "editorial-studio"
+  },
+  "extracted": {
+    "title": "Un segnale debole non è ancora un warning",
+    "slug": "un-segnale-debole-non-e-ancora-un-warning",
+    "description": "Dal weak signal allo strategic warning: come riconoscere il cambiamento senza trasformare ogni anomalia in un allarme",
+    "theme": "Indicator Based Analysis, scenari, warning e monitoraggio intelligence",
+    "tags": [
+      "indicator based analysis",
+      "scenario analysis",
+      "warning intelligence",
+      "intelligence analysis",
+      "metodologia intelligence",
+      "Lab4Int"
+    ],
+    "visibleFrom": "2026-09-22",
+    "topics": [
+      "Dal weak signal allo strategic warning: come riconoscere il cambiamento senza trasformare ogni anomalia in un allarme",
+      "Nelle crisi strategiche il problema raramente è la mancanza di segnali. Più spesso è il contrario.",
+      "E soprattutto non significa che debba essere immediatamente emesso un warning.",
+      "Tra il segnale e l'allarme esiste un processo analitico ed è proprio la qualità di questo processo a determinare il valore dello strategic warning.",
+      "Il tema è tornato recentemente al centro della riflessione sullo strategic foresight."
+    ],
+    "focus": "Il contributo distingue weak signal, indicatore, trigger e warning e analizza come la capacità discriminante degli indicatori consenta di trasformare segnali ambigui in strategic warning utile al decisore.",
+    "classificationSource": "approved",
+    "classificationConfidence": null
+  },
+  "outputs": {
+    "markdown": "src/content/pubblicazioni/un-segnale-debole-non-e-ancora-un-warning.md",
+    "pdf": "public/documenti/un-segnale-debole-non-e-ancora-un-warning.pdf",
+    "image": "public/images/publications/articoli/un-segnale-debole-non-e-ancora-un-warning-thumbnail.png",
+    "pageUrl": "/pubblicazioni/un-segnale-debole-non-e-ancora-un-warning/"
+  },
+  "checks": {
+    "publicationProfile": "passed",
+    "astroBuild": "passed",
+    "thumbnail": "present"
+  }
+}

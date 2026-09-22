@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 3,
+  "application": "Lab4Int Editorial Studio",
+  "applicationVersion": "0.8.0-rc.2",
+  "status": "repository-prepared",
+  "importedAt": "2026-09-21T08:28:41.857Z",
+  "title": "Un segnale debole non è ancora un warning",
+  "description": "Dal weak signal allo strategic warning: come riconoscere il cambiamento senza trasformare ogni anomalia in un allarme",
+  "author": "Giovanni Conio",
+  "category": "Articolo online / contributo online",
+  "slug": "un-segnale-debole-non-e-ancora-un-warning",
+  "theme": "Indicator Based Analysis, scenari, warning e monitoraggio intelligence",
+  "tags": [
+    "indicator based analysis",
+    "scenario analysis",
+    "warning intelligence",
+    "intelligence analysis",
+    "metodologia intelligence",
+    "Lab4Int"
+  ],
+  "focus": "Il contributo distingue weak signal, indicatore, trigger e warning e analizza come la capacità discriminante degli indicatori consenta di trasformare segnali ambigui in strategic warning utile al decisore.",
+  "classificationApproval": {
+    "status": "approved",
+    "source": "editorial-studio",
+    "approvedAt": "2026-09-21T08:28:41.857Z"
+  },
+  "files": {
+    "docx": "source.docx",
+    "pdf": "document.pdf",
+    "image": "cover.png"
+  },
+  "preparedAt": "2026-09-22T05:53:03.232Z",
+  "copiedFiles": [
+    {
+      "name": "source.docx",
+      "size": 2058422,
+      "sha256": "54fb0045ebb79d140ed6e13c69b48421acb2c1abbca213b8adf457f8d2fd869f"
+    },
+    {
+      "name": "document.pdf",
+      "size": 333915,
+      "sha256": "7ddfc09e501f56d2af7be6b9193574abed145a5b84c11ea62d74dd6c2f733b6b"
+    },
+    {
+      "name": "metadata.json",
+      "size": 1229,
+      "sha256": "009afda41a27ca0646f607212bd410c3ad8097fa466cd1d4829cb5587aa7dc67"
+    },
+    {
+      "name": "cover.png",
+      "size": 382834,
+      "sha256": "6f404818668838df2d022bf10aaddb3230d6ceb761607c20e4adabc18b535fb5"
+    }
+  ]
+}
