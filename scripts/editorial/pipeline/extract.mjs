@@ -69,7 +69,7 @@ function cleanExtractedLine(line) {
     .trim()
     // Rimuove artefatti di posizionamento Word/PDF eventualmente inglobati
     // all'inizio del testo, ad esempio: left244275400left2540682Titolo.
-    .replace(/^(?:(?:left|top|right|bottom)-?\d+)+/i, "")
+    .replace(/^(?:(?:left|top|right|bottom|center)-?\d+)+/i, "")
     .trim();
 }
 
