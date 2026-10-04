@@ -1,0 +1,68 @@
+{
+    "version":  "1.0",
+    "stage":  "verified",
+    "createdAt":  "2026-08-25T06:58:46.2877791Z",
+    "updatedAt":  "2026-08-25T06:58:46.2877791Z",
+    "slug":  "collaudo-ci-rebinding-5-20260825",
+    "inboxFolder":  "incoming/pubblicazioni/collaudo-ci-rebinding-5-20260825",
+    "inputs":  {
+                   "source":  "incoming/pubblicazioni/collaudo-ci-rebinding-5-20260825/source.docx",
+                   "pdf":  "incoming/pubblicazioni/collaudo-ci-rebinding-5-20260825/document.pdf",
+                   "image":  "incoming/pubblicazioni/collaudo-ci-rebinding-5-20260825/cover.png"
+               },
+    "suggested":  {
+                      "theme":  "Intelligence analysis e metodologia",
+                      "tags":  [
+                                   "intelligence analysis",
+                                   "metodologia intelligence",
+                                   "Lab4Int"
+                               ],
+                      "focus":  "Il contributo sviluppa un problema metodologico rilevante per l\u0027analisi intelligence e ne chiarisce le implicazioni per il processo analitico e per il supporto al decisore.",
+                      "classificationConfidence":  0.35
+                  },
+    "approved":  {
+                     "theme":  "Collaudo tecnico Lab4Int",
+                     "tags":  [
+                                  "Lab4Int",
+                                  "collaudo",
+                                  "CI rebinding",
+                                  "E2E",
+                                  "GitHub Actions"
+                              ],
+                     "focus":  "Verifica end-to-end del CI rebinding governato con identita byte-exact tra worktree, staging e commit Git.",
+                     "source":  "editorial-studio"
+                 },
+    "extracted":  {
+                      "title":  "Collaudo CI Rebinding 5 20260825",
+                      "slug":  "collaudo-ci-rebinding-5-20260825",
+                      "description":  "Fixture sintetica E2E per il quinto collaudo governato del CI rebinding, predisposta con PDF binary-safe e verifica Git byte-exact.",
+                      "theme":  "Collaudo tecnico Lab4Int",
+                      "tags":  [
+                                   "Lab4Int",
+                                   "collaudo",
+                                   "CI rebinding",
+                                   "E2E",
+                                   "GitHub Actions"
+                               ],
+                      "visibleFrom":  "2027-12-31",
+                      "topics":  [
+                                     "Fixture sintetica E2E per il quinto collaudo governato del CI rebinding.",
+                                     "PDF binary-safe con protezione dalla normalizzazione EOL di Git.",
+                                     "Verifica byte-exact tra worktree, blob filtrato, staging e commit."
+                                 ],
+                      "focus":  "Verifica end-to-end del CI rebinding governato con identita byte-exact tra worktree, staging e commit Git.",
+                      "classificationSource":  "approved",
+                      "classificationConfidence":  null
+                  },
+    "outputs":  {
+                    "markdown":  "src/content/pubblicazioni/collaudo-ci-rebinding-5-20260825.md",
+                    "pdf":  "public/documenti/collaudo-ci-rebinding-5-20260825.pdf",
+                    "image":  "public/images/publications/articoli/collaudo-ci-rebinding-5-20260825-thumbnail.png",
+                    "pageUrl":  "/pubblicazioni/collaudo-ci-rebinding-5-20260825/"
+                },
+    "checks":  {
+                   "publicationProfile":  "passed",
+                   "astroBuild":  "passed",
+                   "thumbnail":  "present"
+               }
+}
