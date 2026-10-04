@@ -1,0 +1,77 @@
+{
+  "version": "1.0",
+  "stage": "previewed",
+  "createdAt": "2026-10-04T11:14:12.105Z",
+  "updatedAt": "2026-10-04T11:34:14.528Z",
+  "slug": "ach-e-intelligenza-artificiale",
+  "inboxFolder": "incoming/pubblicazioni/ach-e-intelligenza-artificiale",
+  "inputs": {
+    "source": "incoming/pubblicazioni/ach-e-intelligenza-artificiale/source.docx",
+    "pdf": "incoming/pubblicazioni/ach-e-intelligenza-artificiale/document.pdf",
+    "image": "incoming/pubblicazioni/ach-e-intelligenza-artificiale/cover.png"
+  },
+  "suggested": {
+    "theme": "Structured Analytic Techniques (SATs)",
+    "tags": [
+      "structured analytic techniques",
+      "SATs",
+      "analisi strutturata",
+      "intelligence analysis",
+      "metodologia intelligence",
+      "Lab4Int"
+    ],
+    "focus": "Il contributo esamina come strutturare il ragionamento analitico, rendere esplicite le ipotesi e sottoporre i giudizi a un processo verificabile e replicabile.",
+    "classificationConfidence": 0.75
+  },
+  "approved": {
+    "theme": "Intelligenza artificiale e analisi intelligence",
+    "tags": [
+      "intelligenza artificiale",
+      "ACH",
+      "analisi di ipotesi concorrenti",
+      "Structured Analytic Techniques",
+      "intelligence analysis",
+      "metodologia intelligence",
+      "Lab4Int"
+    ],
+    "focus": "Il contributo analizza il rapporto tra ACH e intelligenza artificiale, distinguendo le attività analitiche che possono essere supportate o delegate alla macchina dalle responsabilità epistemiche che devono rimanere attribuibili all'analista.",
+    "source": "editorial-studio"
+  },
+  "extracted": {
+    "title": "ACH e Intelligenza Artificiale: quali parti del ragionamento analitico possiamo delegare?",
+    "slug": "ach-e-intelligenza-artificiale",
+    "description": "L'AI non elimina il tradecraft. Potrebbe costringerci a renderlo più esplicito.",
+    "theme": "Intelligenza artificiale e analisi intelligence",
+    "tags": [
+      "intelligenza artificiale",
+      "ACH",
+      "analisi di ipotesi concorrenti",
+      "Structured Analytic Techniques",
+      "intelligence analysis",
+      "metodologia intelligence",
+      "Lab4Int"
+    ],
+    "visibleFrom": "2026-10-04",
+    "topics": [
+      "Dall'automazione alla delega",
+      "Il problema non è se l'AI sappia costruire una matrice ACH",
+      "L'AI può amplificare anche i nostri bias",
+      "AI e generazione delle ipotesi",
+      "AI e valutazione delle evidenze"
+    ],
+    "focus": "Il contributo analizza il rapporto tra ACH e intelligenza artificiale, distinguendo le attività analitiche che possono essere supportate o delegate alla macchina dalle responsabilità epistemiche che devono rimanere attribuibili all'analista.",
+    "classificationSource": "approved",
+    "classificationConfidence": null
+  },
+  "outputs": {
+    "markdown": "src/content/pubblicazioni/ach-e-intelligenza-artificiale.md",
+    "pdf": "public/documenti/ach-e-intelligenza-artificiale.pdf",
+    "image": "public/images/publications/articoli/ach-e-intelligenza-artificiale-thumbnail.png",
+    "pageUrl": "/pubblicazioni/ach-e-intelligenza-artificiale/"
+  },
+  "checks": {
+    "publicationProfile": "passed",
+    "astroBuild": "passed",
+    "thumbnail": "present"
+  }
+}

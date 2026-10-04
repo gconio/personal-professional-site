@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 3,
+  "application": "Lab4Int Editorial Studio",
+  "applicationVersion": "0.8.0-rc.2",
+  "status": "imported",
+  "importedAt": "2026-10-04T10:07:39.421Z",
+  "title": "ACH e Intelligenza Artificiale: quali parti del ragionamento analitico possiamo delegare?",
+  "description": "L'AI non elimina il tradecraft. Potrebbe costringerci a renderlo più esplicito.",
+  "author": "Giovanni Conio",
+  "category": "Articolo online / contributo online",
+  "slug": "ach-e-intelligenza-artificiale",
+  "theme": "Intelligenza artificiale e analisi intelligence",
+  "tags": [
+    "intelligenza artificiale",
+    "ACH",
+    "analisi di ipotesi concorrenti",
+    "Structured Analytic Techniques",
+    "intelligence analysis",
+    "metodologia intelligence",
+    "Lab4Int"
+  ],
+  "focus": "Il contributo analizza il rapporto tra ACH e intelligenza artificiale, distinguendo le attività analitiche che possono essere supportate o delegate alla macchina dalle responsabilità epistemiche che devono rimanere attribuibili all’analista.",
+  "classificationApproval": {
+    "status": "approved",
+    "source": "editorial-studio",
+    "approvedAt": "2026-10-04T10:07:39.421Z"
+  },
+  "files": {
+    "docx": "source.docx",
+    "pdf": "document.pdf",
+    "image": "cover.png"
+  }
+}
