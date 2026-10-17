@@ -1,0 +1,75 @@
+{
+  "version": "1.0",
+  "stage": "previewed",
+  "createdAt": "2026-10-17T12:25:44.521Z",
+  "updatedAt": "2026-10-17T12:29:12.959Z",
+  "slug": "fermati-sette-passaggi-per-difendere-il-pensiero-critico-nell-era-dell-intelligenza-artificiale",
+  "inboxFolder": "incoming/pubblicazioni/fermati-sette-passaggi-per-difendere-il-pensiero-critico-nell-era-dell-intelligenza-artificiale",
+  "inputs": {
+    "source": "incoming/pubblicazioni/fermati-sette-passaggi-per-difendere-il-pensiero-critico-nell-era-dell-intelligenza-artificiale/source.docx",
+    "pdf": "incoming/pubblicazioni/fermati-sette-passaggi-per-difendere-il-pensiero-critico-nell-era-dell-intelligenza-artificiale/document.pdf",
+    "image": "incoming/pubblicazioni/fermati-sette-passaggi-per-difendere-il-pensiero-critico-nell-era-dell-intelligenza-artificiale/cover.png"
+  },
+  "suggested": {
+    "theme": "Structured Analytic Techniques (SATs)",
+    "tags": [
+      "structured analytic techniques",
+      "SATs",
+      "analisi strutturata",
+      "intelligence analysis",
+      "metodologia intelligence",
+      "Lab4Int"
+    ],
+    "focus": "Il contributo esamina come strutturare il ragionamento analitico, rendere esplicite le ipotesi e sottoporre i giudizi a un processo verificabile e replicabile.",
+    "classificationConfidence": 0.75
+  },
+  "approved": {
+    "theme": "Intelligenza artificiale e analisi intelligence",
+    "tags": [
+      "intelligenza artificiale",
+      "AI agents",
+      "analisi intelligence",
+      "intelligence analysis",
+      "metodologia intelligence",
+      "Lab4Int"
+    ],
+    "focus": "Difendere il giudizio analitico dalle influenze informative e dall’automazione cognitiva attraverso una sequenza strutturata di controllo critico.",
+    "source": "editorial-studio"
+  },
+  "extracted": {
+    "title": "FERMATI - Sette passaggi per difendere il pensiero critico nell'era dell'intelligenza artificiale",
+    "slug": "fermati-sette-passaggi-per-difendere-il-pensiero-critico-nell-era-dell-intelligenza-artificiale",
+    "description": "Dalla sicurezza cognitiva all'analisi intelligence: una proposta metodologica per riconoscere le influenze informative, valutare le evidenze e preservare l'autonomia di giudizio.",
+    "theme": "Intelligenza artificiale e analisi intelligence",
+    "tags": [
+      "intelligenza artificiale",
+      "AI agents",
+      "analisi intelligence",
+      "intelligence analysis",
+      "metodologia intelligence",
+      "Lab4Int"
+    ],
+    "visibleFrom": "2026-10-17",
+    "topics": [
+      "Il problema non è soltanto la disinformazione",
+      "Dalla sicurezza informativa alla sicurezza cognitiva",
+      "FERMATI: un adattamento orientato all'analisi",
+      "FERMATI si articola in sette passaggi:",
+      "Le sette fasi del protocollo"
+    ],
+    "focus": "Difendere il giudizio analitico dalle influenze informative e dall’automazione cognitiva attraverso una sequenza strutturata di controllo critico.",
+    "classificationSource": "approved",
+    "classificationConfidence": null
+  },
+  "outputs": {
+    "markdown": "src/content/pubblicazioni/fermati-sette-passaggi-per-difendere-il-pensiero-critico-nell-era-dell-intelligenza-artificiale.md",
+    "pdf": "public/documenti/fermati-sette-passaggi-per-difendere-il-pensiero-critico-nell-era-dell-intelligenza-artificiale.pdf",
+    "image": "public/images/publications/articoli/fermati-sette-passaggi-per-difendere-il-pensiero-critico-nell-era-dell-intelligenza-artificiale-thumbnail.png",
+    "pageUrl": "/pubblicazioni/fermati-sette-passaggi-per-difendere-il-pensiero-critico-nell-era-dell-intelligenza-artificiale/"
+  },
+  "checks": {
+    "publicationProfile": "passed",
+    "astroBuild": "passed",
+    "thumbnail": "present"
+  }
+}

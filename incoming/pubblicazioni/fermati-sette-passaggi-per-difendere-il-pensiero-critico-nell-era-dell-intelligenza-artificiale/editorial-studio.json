@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 3,
+  "application": "Lab4Int Editorial Studio",
+  "applicationVersion": "0.8.0-rc.2",
+  "status": "repository-prepared",
+  "importedAt": "2026-10-17T12:14:41.854Z",
+  "title": "FERMATI - Sette passaggi per difendere il pensiero critico nell'era dell'intelligenza artificiale",
+  "description": "Dalla sicurezza cognitiva all'analisi intelligence: una proposta metodologica per riconoscere le influenze informative, valutare le evidenze e preservare l'autonomia di giudizio.",
+  "author": "Giovanni Conio",
+  "category": "Articolo online / contributo online",
+  "slug": "fermati-sette-passaggi-per-difendere-il-pensiero-critico-nell-era-dell-intelligenza-artificiale",
+  "theme": "Intelligenza artificiale e analisi intelligence",
+  "tags": [
+    "intelligenza artificiale",
+    "AI agents",
+    "analisi intelligence",
+    "intelligence analysis",
+    "metodologia intelligence",
+    "Lab4Int"
+  ],
+  "focus": "Difendere il giudizio analitico dalle influenze informative e dall’automazione cognitiva attraverso una sequenza strutturata di controllo critico.",
+  "classificationApproval": {
+    "status": "approved",
+    "source": "editorial-studio",
+    "approvedAt": "2026-10-17T12:14:41.854Z"
+  },
+  "files": {
+    "docx": "source.docx",
+    "pdf": "document.pdf",
+    "image": "cover.png"
+  },
+  "preparedAt": "2026-10-17T12:20:16.379Z",
+  "copiedFiles": [
+    {
+      "name": "source.docx",
+      "size": 3156473,
+      "sha256": "e80a1ab35042fc45919fbdaa949981e46989cb589b57f97b2b956b76de73d473"
+    },
+    {
+      "name": "document.pdf",
+      "size": 607634,
+      "sha256": "2585bd2d9a88ba97d16c5fd3d60157083fbbbc4722a74b8a8b4568d9b6874d60"
+    },
+    {
+      "name": "metadata.json",
+      "size": 1310,
+      "sha256": "6a945c4b81fa774f652cf8e64c9d0abe4c222bc4919e5b7af8fe1ae35dca27a9"
+    },
+    {
+      "name": "cover.png",
+      "size": 329370,
+      "sha256": "d6d6adaffb2b82f973f65102c3078e5d906c9c25d343e1253d92b640e5877364"
+    }
+  ]
+}
