@@ -1,0 +1,75 @@
+{
+  "version": "1.0",
+  "stage": "previewed",
+  "createdAt": "2026-11-06T07:41:54.095Z",
+  "updatedAt": "2026-11-06T07:45:35.808Z",
+  "slug": "il-dato-non-e-ancora-intelligence",
+  "inboxFolder": "incoming/pubblicazioni/il-dato-non-e-ancora-intelligence",
+  "inputs": {
+    "source": "incoming/pubblicazioni/il-dato-non-e-ancora-intelligence/source.docx",
+    "pdf": "incoming/pubblicazioni/il-dato-non-e-ancora-intelligence/document.pdf",
+    "image": "incoming/pubblicazioni/il-dato-non-e-ancora-intelligence/cover.png"
+  },
+  "suggested": {
+    "theme": "Indicator Based Analysis, scenari, warning e monitoraggio intelligence",
+    "tags": [
+      "indicator based analysis",
+      "scenario analysis",
+      "warning intelligence",
+      "intelligence analysis",
+      "metodologia intelligence",
+      "Lab4Int"
+    ],
+    "focus": "Il contributo collega eventi osservabili, ipotesi, driver e scenari, trasformando l'osservazione in un sistema di monitoraggio aggiornabile e utile al warning.",
+    "classificationConfidence": 0.75
+  },
+  "approved": {
+    "theme": "Structured Analytic Techniques (SATs)",
+    "tags": [
+      "structured analytic techniques",
+      "SATs",
+      "analisi strutturata",
+      "intelligence analysis",
+      "metodologia intelligence",
+      "Lab4Int"
+    ],
+    "focus": "Il contributo esamina come strutturare il ragionamento analitico, rendere esplicite le ipotesi e sottoporre i giudizi a un processo verificabile e replicabile.",
+    "source": "editorial-studio"
+  },
+  "extracted": {
+    "title": "IL DATO NON È ANCORA INTELLIGENCE",
+    "slug": "il-dato-non-e-ancora-intelligence",
+    "description": "Perché la superiorità informativa non garantisce un vantaggio decisionale",
+    "theme": "Structured Analytic Techniques (SATs)",
+    "tags": [
+      "structured analytic techniques",
+      "SATs",
+      "analisi strutturata",
+      "intelligence analysis",
+      "metodologia intelligence",
+      "Lab4Int"
+    ],
+    "visibleFrom": "2026-11-06",
+    "topics": [
+      "Il dato come asset strategico",
+      "Data superiority non significa information superiority",
+      "Dal dato all’informazione",
+      "Dall’informazione alla conoscenza",
+      "Il problema della rilevanza"
+    ],
+    "focus": "Il contributo esamina come strutturare il ragionamento analitico, rendere esplicite le ipotesi e sottoporre i giudizi a un processo verificabile e replicabile.",
+    "classificationSource": "approved",
+    "classificationConfidence": null
+  },
+  "outputs": {
+    "markdown": "src/content/pubblicazioni/il-dato-non-e-ancora-intelligence.md",
+    "pdf": "public/documenti/il-dato-non-e-ancora-intelligence.pdf",
+    "image": "public/images/publications/articoli/il-dato-non-e-ancora-intelligence-thumbnail.png",
+    "pageUrl": "/pubblicazioni/il-dato-non-e-ancora-intelligence/"
+  },
+  "checks": {
+    "publicationProfile": "passed",
+    "astroBuild": "passed",
+    "thumbnail": "present"
+  }
+}

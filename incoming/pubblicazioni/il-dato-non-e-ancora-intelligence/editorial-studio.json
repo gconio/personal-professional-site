@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 3,
+  "application": "Lab4Int Editorial Studio",
+  "applicationVersion": "0.8.0-rc.2",
+  "status": "repository-prepared",
+  "importedAt": "2026-11-06T07:40:55.909Z",
+  "title": "IL DATO NON È ANCORA INTELLIGENCE",
+  "description": "Perché la superiorità informativa non garantisce un vantaggio decisionale",
+  "author": "Giovanni Conio",
+  "category": "Articolo online / contributo online",
+  "slug": "il-dato-non-e-ancora-intelligence",
+  "theme": "Structured Analytic Techniques (SATs)",
+  "tags": [
+    "structured analytic techniques",
+    "SATs",
+    "analisi strutturata",
+    "intelligence analysis",
+    "metodologia intelligence",
+    "Lab4Int"
+  ],
+  "focus": "Il contributo esamina come strutturare il ragionamento analitico, rendere esplicite le ipotesi e sottoporre i giudizi a un processo verificabile e replicabile.",
+  "classificationApproval": {
+    "status": "approved",
+    "source": "editorial-studio",
+    "approvedAt": "2026-11-06T07:40:55.909Z"
+  },
+  "files": {
+    "docx": "source.docx",
+    "pdf": "document.pdf",
+    "image": "cover.png"
+  },
+  "preparedAt": "2026-11-06T07:41:37.679Z",
+  "copiedFiles": [
+    {
+      "name": "source.docx",
+      "size": 2381644,
+      "sha256": "108d0fe89f064e973c2d11bcb149e42a8034edc922a53a3dee9920e92ed937fd"
+    },
+    {
+      "name": "document.pdf",
+      "size": 450251,
+      "sha256": "fb0a24cceeee40aa530d2e082620ffd3d6d2b4d9e46a5164d84ef6725f0fcd42"
+    },
+    {
+      "name": "metadata.json",
+      "size": 1083,
+      "sha256": "ca8b460889acc4eaf5221e2c419d05e656ac9a0e2a4493c2e354ffd8848825b1"
+    },
+    {
+      "name": "cover.png",
+      "size": 395004,
+      "sha256": "f13eb61d1378c64b3ba5f51dbac2217a54f4b8bbef124971b296cef3eb961913"
+    }
+  ]
+}
