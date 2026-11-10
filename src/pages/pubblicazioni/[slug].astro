@@ -3,27 +3,12 @@ import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 export async function getStaticPaths() {
-  const pubblicazioni = await getCollection('pubblicazione');
+  const pubblicazioni = await getCollection('pubblicazione', ({ data }) => data.public);
   return pubblicazioni.map((pubblicazione) => ({ params: { slug: pubblicazione.id }, props: { pubblicazione } }));
 }
 
 const { pubblicazione } = Astro.props;
 const { Content: PublicationContent } = await render(pubblicazione);
-
-const visibleFrom = pubblicazione.data.visibleFrom || '';
-const isScheduledPublication = Boolean(visibleFrom);
-const formatDateOnlyInRome = (value) => {
-  const [year, month, day] = value.split('-').map(Number);
-  const safeDate = new Date(Date.UTC(year, month - 1, day, 12));
-
-  return new Intl.DateTimeFormat('it-IT', {
-    day: '2-digit',
-    month: 'long',
-    year: 'numeric',
-    timeZone: 'Europe/Rome'
-  }).format(safeDate);
-};
-const visibleFromLabel = visibleFrom ? formatDateOnlyInRome(visibleFrom) : '';
 
 const hasFacts = pubblicazione.data.publisher || pubblicazione.data.theme || pubblicazione.data.isbnPrint || pubblicazione.data.isbnEbook || pubblicazione.data.link || pubblicazione.data.pdfUrl || pubblicazione.data.sourceStatus || pubblicazione.data.license;
 const publisherName = (pubblicazione.data.publisher || '').toLowerCase();
@@ -139,28 +124,7 @@ const publicationStructuredData = [
       <p class="article-meta">{pubblicazione.data.type} · {pubblicazione.data.year}</p>
     </header>
 
-    {isScheduledPublication && (
-      <section
-        class="panel scheduled-publication-notice"
-        data-scheduled-notice
-        data-visible-from={visibleFrom}
-        aria-live="polite"
-      >
-        <p class="card-meta">Pubblicazione programmata</p>
-        <h2>Documento disponibile dal {visibleFromLabel}</h2>
-        <p>
-          La scheda è già predisposta nel sito, ma il contenuto dell’articolo e il PDF saranno mostrati automaticamente
-          dalla data programmata.
-        </p>
-      </section>
-    )}
-
-    <div
-      class="scheduled-publication-content"
-      data-scheduled-content
-      data-visible-from={visibleFrom || undefined}
-      hidden={isScheduledPublication}
-    >
+    <div>
 
     {(pubblicazione.data.cover || hasFacts) && (
       <section class="publication-detail-grid" aria-label="Dati principali della pubblicazione">
@@ -329,36 +293,6 @@ const publicationStructuredData = [
 
     </div>
 
-    <script is:inline>
-      (() => {
-        const content = document.querySelector('[data-scheduled-content]');
-        const notice = document.querySelector('[data-scheduled-notice]');
-        const visibleFromValue = content?.getAttribute('data-visible-from');
-
-        if (!content || !visibleFromValue) return;
-
-        const parts = new Intl.DateTimeFormat('en', {
-          timeZone: 'Europe/Rome',
-          year: 'numeric',
-          month: '2-digit',
-          day: '2-digit'
-        }).formatToParts(new Date());
-        const values = Object.fromEntries(
-          parts
-            .filter(({ type }) => type !== 'literal')
-            .map(({ type, value }) => [type, value])
-        );
-        const todayInRome = `${values.year}-${values.month}-${values.day}`;
-
-        if (todayInRome >= visibleFromValue) {
-          content.hidden = false;
-          if (notice) notice.hidden = true;
-        } else {
-          content.hidden = true;
-          if (notice) notice.hidden = false;
-        }
-      })();
-    </script>
 
     <style>
 

@@ -3,11 +3,10 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Hero from '../../components/Hero.astro';
 
-const pubblicazioni = await getCollection('pubblicazione');
+const pubblicazioni = await getCollection('pubblicazione', ({ data }) => data.public);
 
 const normalize = (value = '') => value.toLowerCase();
 const latestPublicationsVisibleLimit = 3;
-const latestPublicationsCandidateLimit = 8;
 
 const getVisibleFromSortTime = (entry) => {
   const value = entry.data.visibleFrom;
@@ -90,7 +89,7 @@ const isRecentArticleCandidate = (pubblicazione) => {
 const latestPublications = pubblicazioni
   .filter(isRecentArticleCandidate)
   .sort((a, b) => getPublicationSortTime(b) - getPublicationSortTime(a) || a.data.order - b.data.order || a.data.title.localeCompare(b.data.title, 'it'))
-  .slice(0, latestPublicationsCandidateLimit);
+  .slice(0, latestPublicationsVisibleLimit);
 
 const siteUrl = 'https://giovanni.conio.lab4int.com';
 const pageTitle = 'Pubblicazioni — Lab4Int - Intelligence Analysis Laboratory';
@@ -152,13 +151,11 @@ const publicationsStructuredData = [
         </div>
       </header>
 
-      <div class="latest-publications-grid" data-latest-publications-grid data-visible-limit={latestPublicationsVisibleLimit}>
+      <div class="latest-publications-grid" data-latest-publications-grid>
         {latestPublications.map((pubblicazione, index) => (
           <article
             class={`latest-publication-card panel ${index === 0 ? 'is-primary' : ''}`}
             data-latest-publication
-            data-scheduled-publication={pubblicazione.data.visibleFrom || undefined}
-            hidden={Boolean(pubblicazione.data.visibleFrom)}
           >
             <a class="latest-publication-media" href={`/pubblicazioni/${pubblicazione.id}/`} aria-label={`Apri la scheda ${pubblicazione.data.title}`}>
               {pubblicazione.data.cover ? (
@@ -205,8 +202,6 @@ const publicationsStructuredData = [
             return (
               <article
                 class="publication-item panel"
-                data-scheduled-publication={pubblicazione.data.visibleFrom || undefined}
-                hidden={Boolean(pubblicazione.data.visibleFrom)}
               >
                 <a class="publication-media" href={`/pubblicazioni/${pubblicazione.id}/`} aria-label={`Apri la scheda ${pubblicazione.data.title}`}>
                   {pubblicazione.data.cover ? (
@@ -251,52 +246,6 @@ const publicationsStructuredData = [
     ))}
   </section>
 
-  <script is:inline>
-    (() => {
-      const getRomeDateKey = () => {
-        const parts = new Intl.DateTimeFormat('en', {
-          timeZone: 'Europe/Rome',
-          year: 'numeric',
-          month: '2-digit',
-          day: '2-digit'
-        }).formatToParts(new Date());
-        const values = Object.fromEntries(
-          parts
-            .filter(({ type }) => type !== 'literal')
-            .map(({ type, value }) => [type, value])
-        );
-        return `${values.year}-${values.month}-${values.day}`;
-      };
-
-      const updateScheduledPublications = () => {
-        const todayInRome = getRomeDateKey();
-
-        document.querySelectorAll('[data-scheduled-publication]').forEach((item) => {
-          const visibleFrom = item.getAttribute('data-scheduled-publication');
-          item.hidden = Boolean(visibleFrom && todayInRome < visibleFrom);
-        });
-
-        const latestGrid = document.querySelector('[data-latest-publications-grid]');
-        const latestLimit = Number.parseInt(latestGrid?.getAttribute('data-visible-limit') || '3', 10);
-
-        const visibleLatestCards = Array.from(document.querySelectorAll('[data-latest-publication]'))
-          .filter((card) => !card.hidden);
-
-        visibleLatestCards.forEach((card, index) => {
-          const shouldShow = index < latestLimit;
-          card.hidden = !shouldShow;
-          card.classList.toggle('is-primary', shouldShow && index === 0);
-
-          const badge = card.querySelector('[data-new-badge]');
-          if (badge) {
-            badge.hidden = !(shouldShow && index === 0);
-          }
-        });
-      };
-
-      updateScheduledPublications();
-    })();
-  </script>
 
   <style>
 
