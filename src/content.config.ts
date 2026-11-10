@@ -35,6 +35,7 @@ const pubblicazione = defineCollection({
     description: z.string(),
     year: z.number(),
     visibleFrom: z.string().optional(),
+    public: z.boolean().default(true),
     type: z.string(),
     publisher: z.string().optional(),
     theme: z.string().optional(),

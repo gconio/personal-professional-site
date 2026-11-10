@@ -44,6 +44,7 @@ const isRecentPublicationCandidate = (pubblicazione) => {
 };
 
 const pubblicazioni = (await getCollection('pubblicazione'))
+  .filter((entry) => entry.data.public)
   .filter(isRecentPublicationCandidate)
   .sort((a, b) => getPublicationSortTime(b) - getPublicationSortTime(a) || a.data.order - b.data.order || a.data.title.localeCompare(b.data.title, 'it'))
   .slice(0, latestPublicationsVisibleLimit);

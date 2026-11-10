@@ -4,6 +4,7 @@ description: "Fixture sintetica E2E per il sesto collaudo governato del CI rebin
 type: "Articolo online / contributo online"
 year: 2027
 visibleFrom: "2027-12-31"
+public: false
 publisher: "Giovanni Conio - Lab4Int"
 cover: "/images/publications/articoli/collaudo-ci-rebinding-6-20260825-thumbnail.png"
 theme: "Formazione e simulazione intelligence"

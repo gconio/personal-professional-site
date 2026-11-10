@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Hero from '../../components/Hero.astro';
 
-const pubblicazioni = await getCollection('pubblicazione');
+const pubblicazioni = await getCollection('pubblicazione', ({ data }) => data.public);
 
 const normalize = (value = '') => value.toLowerCase();
 const latestPublicationsVisibleLimit = 3;
