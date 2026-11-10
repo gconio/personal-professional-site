@@ -1,34 +1,38 @@
 ---
-const publicationFiles = import.meta.glob('/src/content/pubblicazioni/**/*.{md,mdx}', {
-  eager: true,
-  query: '?raw',
-  import: 'default',
-}) as Record<string, string>;
+import { getCollection } from 'astro:content';
 
-const today = new Date();
-today.setHours(23, 59, 59, 999);
+// Ultima data editoriale pubblica, non il giorno della build o del deploy.
+// visibleFrom resta un campo storico per le vecchie pubblicazioni.
+const publications = await getCollection('pubblicazione', ({ data }) => data.public);
+const resources = await getCollection('risorsa');
 
-const visibleDates = Object.values(publicationFiles)
-  .map((content) => content.match(/^visibleFrom\s*:\s*["']?([^"'\r\n]+)["']?\s*$/m)?.[1]?.trim())
-  .filter((value): value is string => Boolean(value))
-  .map((value) => new Date(`${value}T00:00:00`))
-  .filter((date) => !Number.isNaN(date.getTime()) && date <= today)
-  .sort((a, b) => b.getTime() - a.getTime());
+const todayParts = new Intl.DateTimeFormat('en', {
+  timeZone: 'Europe/Rome', year: 'numeric', month: '2-digit', day: '2-digit'
+}).formatToParts(new Date());
+const todayMap = Object.fromEntries(todayParts.filter(({ type }) => type !== 'literal').map(({ type, value }) => [type, value]));
+const todayRome = `${todayMap.year}-${todayMap.month}-${todayMap.day}`;
 
-const lastUpdate = visibleDates[0] ?? new Date();
-const formattedLastUpdate = new Intl.DateTimeFormat('it-IT', {
-  day: 'numeric',
-  month: 'long',
-  year: 'numeric',
-}).format(lastUpdate);
+const parsePublicationDate = (value: unknown): Date | null => {
+  if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value) || value > todayRome) return null;
+  const date = new Date(`${value}T12:00:00Z`);
+  return Number.isNaN(date.getTime()) || date.toISOString().slice(0, 10) !== value ? null : date;
+};
+
+const dates = [
+  ...publications.map(({ data }) => parsePublicationDate(data.publishedAt ?? data.visibleFrom)),
+  ...resources.map(({ data }) => parsePublicationDate(data.publishedAt)),
+].filter((date): date is Date => date !== null);
+const lastDate = dates.length ? new Date(Math.max(...dates.map((date) => date.getTime()))) : null;
+const formattedLastUpdate = lastDate
+  ? new Intl.DateTimeFormat('it-IT', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Rome' }).format(lastDate)
+  : null;
 ---
-
 <footer class="site-footer">
   <div>
     <strong>Giovanni CONIO — Lab4Int - Intelligence Analysis Laboratory</strong>
     <p>Analisi intelligence, formazione avanzata e cultura strategica.</p>
     <p class="footer-legal-note">Sito personale/professionale.</p>
-    <p class="footer-update-note">Contenuti aggiornati al {formattedLastUpdate}.</p>
+    {formattedLastUpdate && <p class="footer-update-note">Contenuti aggiornati al {formattedLastUpdate}.</p>}
   </div>
   <div class="footer-links" aria-label="Link principali e legali">
     <a href="/didattica/">Didattica</a>

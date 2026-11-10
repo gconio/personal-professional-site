@@ -35,6 +35,7 @@ const pubblicazione = defineCollection({
     description: z.string(),
     year: z.number(),
     visibleFrom: z.string().optional(),
+    publishedAt: z.string().optional(),
     public: z.boolean().default(true),
     type: z.string(),
     publisher: z.string().optional(),
@@ -74,6 +75,7 @@ const risorsa = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
+    publishedAt: z.string().optional(),
     type: z.string(),
     author: z.string().optional().default(''),
     institution: z.string().optional().default(''),
