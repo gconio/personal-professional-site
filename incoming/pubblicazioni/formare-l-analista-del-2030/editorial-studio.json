@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 3,
+  "application": "Lab4Int Editorial Studio",
+  "applicationVersion": "0.8.0-rc.2",
+  "status": "repository-prepared",
+  "importedAt": "2026-11-20T11:29:39.505Z",
+  "title": "FORMARE L’ANALISTA DEL 2030",
+  "description": "Nell’era dell’intelligenza artificiale, insegnare strumenti non basta: occorre insegnare a governare il ragionamento.",
+  "author": "Giovanni Conio",
+  "category": "Articolo online / contributo online",
+  "slug": "formare-l-analista-del-2030",
+  "theme": "Formazione e simulazione intelligence",
+  "tags": [
+    "formazione intelligence",
+    "simulazione",
+    "didattica",
+    "intelligence analysis",
+    "metodologia intelligence",
+    "Lab4Int"
+  ],
+  "focus": "Il contributo considera la formazione come esercizio applicato del ragionamento analitico, con particolare attenzione a simulazione, pressione decisionale e verifica delle competenze.",
+  "classificationApproval": {
+    "status": "approved",
+    "source": "editorial-studio",
+    "approvedAt": "2026-11-20T11:29:39.505Z"
+  },
+  "files": {
+    "docx": "source.docx",
+    "pdf": "document.pdf",
+    "image": "cover.png"
+  },
+  "preparedAt": "2026-11-22T09:48:12.691Z",
+  "copiedFiles": [
+    {
+      "name": "source.docx",
+      "size": 1992565,
+      "sha256": "ea38084946340be307e057132d8d1fa4cd87c7b1c00c9bdcf6ebb179a496b651"
+    },
+    {
+      "name": "document.pdf",
+      "size": 378772,
+      "sha256": "8fd0a2ef8667956fe450ace93da3cddd204d639ee3ef29ea46deb818d8760774"
+    },
+    {
+      "name": "metadata.json",
+      "size": 1132,
+      "sha256": "c63906d970c5e6f36aa3f0ec33c684c50b5296ad5aabe60889e1fa75ef4ba415"
+    },
+    {
+      "name": "cover.png",
+      "size": 340478,
+      "sha256": "758558347eaffa0cacc27e4ab012cb2af36e8ce63e70cc09beb2e78594767c5d"
+    }
+  ]
+}
