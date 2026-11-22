@@ -1,0 +1,75 @@
+{
+  "version": "1.0",
+  "stage": "previewed",
+  "createdAt": "2026-11-22T09:50:50.891Z",
+  "updatedAt": "2026-11-22T09:54:08.535Z",
+  "slug": "formare-l-analista-del-2030",
+  "inboxFolder": "incoming/pubblicazioni/formare-l-analista-del-2030",
+  "inputs": {
+    "source": "incoming/pubblicazioni/formare-l-analista-del-2030/source.docx",
+    "pdf": "incoming/pubblicazioni/formare-l-analista-del-2030/document.pdf",
+    "image": "incoming/pubblicazioni/formare-l-analista-del-2030/cover.png"
+  },
+  "suggested": {
+    "theme": "Structured Analytic Techniques (SATs)",
+    "tags": [
+      "structured analytic techniques",
+      "SATs",
+      "analisi strutturata",
+      "intelligence analysis",
+      "metodologia intelligence",
+      "Lab4Int"
+    ],
+    "focus": "Il contributo esamina come strutturare il ragionamento analitico, rendere esplicite le ipotesi e sottoporre i giudizi a un processo verificabile e replicabile.",
+    "classificationConfidence": 0.8500000000000001
+  },
+  "approved": {
+    "theme": "Formazione e simulazione intelligence",
+    "tags": [
+      "formazione intelligence",
+      "simulazione",
+      "didattica",
+      "intelligence analysis",
+      "metodologia intelligence",
+      "Lab4Int"
+    ],
+    "focus": "Il contributo considera la formazione come esercizio applicato del ragionamento analitico, con particolare attenzione a simulazione, pressione decisionale e verifica delle competenze.",
+    "source": "editorial-studio"
+  },
+  "extracted": {
+    "title": "FORMARE L’ANALISTA DEL 2030",
+    "slug": "formare-l-analista-del-2030",
+    "description": "Nell’era dell’intelligenza artificiale, insegnare strumenti non basta: occorre insegnare a governare il ragionamento.",
+    "theme": "Formazione e simulazione intelligence",
+    "tags": [
+      "formazione intelligence",
+      "simulazione",
+      "didattica",
+      "intelligence analysis",
+      "metodologia intelligence",
+      "Lab4Int"
+    ],
+    "visibleFrom": "2026-11-22",
+    "topics": [
+      "Dalla ricerca dell’informazione al governo del processo analitico",
+      "La prima competenza: definire il problema",
+      "La seconda competenza: scomporre la complessità",
+      "La terza competenza: generare vere alternative",
+      "La quarta competenza: distinguere informazione, evidenza e inferenza"
+    ],
+    "focus": "Il contributo considera la formazione come esercizio applicato del ragionamento analitico, con particolare attenzione a simulazione, pressione decisionale e verifica delle competenze.",
+    "classificationSource": "approved",
+    "classificationConfidence": null
+  },
+  "outputs": {
+    "markdown": "src/content/pubblicazioni/formare-l-analista-del-2030.md",
+    "pdf": "public/documenti/formare-l-analista-del-2030.pdf",
+    "image": "public/images/publications/articoli/formare-l-analista-del-2030-thumbnail.png",
+    "pageUrl": "/pubblicazioni/formare-l-analista-del-2030/"
+  },
+  "checks": {
+    "publicationProfile": "passed",
+    "astroBuild": "passed",
+    "thumbnail": "present"
+  }
+}
